@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import StyledWrapper from "elements/layout/StyledWrapper";
 import Logo from "elements/Navbar/Logo";
-import Circles from "elements/Navbar/Circles";
+import Notifications from "elements/Navbar/Notifications";
 
 const StyledNavbar = styled.div`
   background-color: ${(props) => props.theme.colors.bgc};
@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
     <StyledNavbar>
       <StyledWrapper className="navbarWrapper">
         <Logo />
-        <Circles />
+        <Notifications />
       </StyledWrapper>
     </StyledNavbar>
   );
