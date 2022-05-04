@@ -1,7 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const StyledContainer = styled.div``;
+const StyledContainer = styled.div`
+  position: relative;
+  margin-left: auto;
+`;
 
 const StyledBtn = styled.button`
   width: 40px;
@@ -16,7 +19,7 @@ const StyledBtn = styled.button`
   cursor: pointer;
   transition: background-color 0.3s;
   i {
-    font-size: 16px;
+    font-size: ${(props) => props.theme.typography.size_normal};
   }
   &:hover {
     background-color: ${(props) => props.theme.colors.main};
@@ -24,7 +27,18 @@ const StyledBtn = styled.button`
   }
 `;
 
-const StyledNotifications = styled.div``;
+const StyledNotifications = styled.div`
+  position: absolute;
+  top: 60px;
+  right: 0;
+  z-index: 99;
+  padding: 14px;
+  width: 85vw;
+  max-width: 360px;
+  background-color: ${(props) => props.theme.colors.bgc};
+  border-radius: ${(props) => props.theme.radius};
+  box-shadow: ${(props) => props.theme.shadow};
+`;
 
 const Notifications: React.FC = () => {
   const [showNotifications, setShowNotifications] = useState<boolean>(false);
