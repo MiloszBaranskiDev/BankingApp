@@ -5,6 +5,7 @@ import Notifications from "elements/Navbar/Notifications";
 
 const StyledNavbar = styled.div`
   background-color: ${(props) => props.theme.colors.bgc};
+  box-shadow: ${(props) => props.theme.shadow};
   padding: 10px 0;
   .navbarWrapper {
     display: flex;

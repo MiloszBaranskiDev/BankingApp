@@ -6,7 +6,7 @@ const StyledContainer = styled.div`
   margin-left: auto;
 `;
 
-const StyledBtn = styled.button`
+const StyledIcon = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -17,6 +17,7 @@ const StyledBtn = styled.button`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  outline: none;
   transition: background-color 0.3s;
   i {
     font-size: ${(props) => props.theme.typography.size_normal};
@@ -32,12 +33,77 @@ const StyledNotifications = styled.div`
   top: 60px;
   right: 0;
   z-index: 99;
-  padding: 14px;
   width: 85vw;
   max-width: 360px;
   background-color: ${(props) => props.theme.colors.bgc};
   border-radius: ${(props) => props.theme.radius};
   box-shadow: ${(props) => props.theme.shadow};
+  .top,
+  .notification,
+  .bottom {
+    padding: 14px;
+    border-bottom: 1px solid ${(props) => props.theme.colors.bgc_dark};
+  }
+  .top {
+    display: flex;
+    align-items: center;
+    h3 {
+      padding-right: 10px;
+      margin-right: auto;
+      font-size: ${(props) => props.theme.typography.size_normal};
+      color: ${(props) => props.theme.colors.typography_dark};
+    }
+    p {
+      background-color: ${(props) => props.theme.colors.main};
+      color: white;
+      border-radius: ${(props) => props.theme.radius};
+      padding: 3px 6px;
+      font-size: ${(props) => props.theme.typography.size_extra_small};
+      font-weight: ${(props) => props.theme.typography.weight_bold};
+    }
+  }
+  .list {
+    .notification {
+      display: flex;
+      align-items: center;
+      transition: background-color 0.3s;
+      &__icon {
+        flex-basis: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        color: white;
+        background-color: ${(props) => props.theme.colors.main};
+        i {
+          font-size: ${(props) => props.theme.typography.size_small};
+        }
+      }
+      &__content {
+        padding: 0 18px;
+        flex-basis: calc(100% - 38px - 60px);
+        p {
+          font-size: ${(props) => props.theme.typography.size_extra_small};
+        }
+        p:first-child {
+          font-weight: ${(props) => props.theme.typography.weight_bold};
+          font-size: ${(props) => props.theme.typography.size_small};
+        }
+      }
+      &__date {
+        width: 60px;
+        flex-basis: 60px;
+        font-size: ${(props) => props.theme.typography.size_extra_small};
+        text-align: end;
+        overflow-wrap: break-word;
+        opacity: 0.8;
+      }
+      &:hover {
+        background-color: ${(props) => props.theme.colors.bgc_dark};
+      }
+    }
+  }
 `;
 
 const Notifications: React.FC = () => {
@@ -45,13 +111,13 @@ const Notifications: React.FC = () => {
 
   return (
     <StyledContainer>
-      <StyledBtn
+      <StyledIcon
         onClick={() =>
           setShowNotifications((showNotifications) => !showNotifications)
         }
       >
         <i className="fas fa-bell"></i>
-      </StyledBtn>
+      </StyledIcon>
       {showNotifications ? (
         <StyledNotifications>
           <div className="top">
@@ -60,14 +126,28 @@ const Notifications: React.FC = () => {
           </div>
           <ul className="list">
             <li>
-              <div className="notification">
-                <div className="notification__icon"></div>
+              <a href="#" className="notification">
+                <div className="notification__icon">
+                  <i className="fas fa-arrow-down"></i>
+                </div>
                 <div className="notification__content">
                   <p>Received Payment</p>
                   <p>Your account has been credited with 100$</p>
                 </div>
                 <p className="notification__date">Today</p>
-              </div>
+              </a>
+            </li>
+            <li style={{ opacity: 0.5 }}>
+              <a href="#" className="notification">
+                <div className="notification__icon">
+                  <i className="fas fa-arrow-down"></i>
+                </div>
+                <div className="notification__content">
+                  <p>Received Payment</p>
+                  <p>Your account has been credited with 100$</p>
+                </div>
+                <p className="notification__date">Today</p>
+              </a>
             </li>
           </ul>
           <div className="bottom">

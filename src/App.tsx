@@ -3,7 +3,7 @@ import Navbar from "parts/Navbar";
 
 const theme = {
   colors: {
-    main: "#3867d6",
+    main: "#3b37c5",
     bgc: "white",
     bgc_dark: "#f7f9fb",
     typography: "#a6afc0",
