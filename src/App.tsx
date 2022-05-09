@@ -1,5 +1,15 @@
 import { ThemeProvider } from "styled-components";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "parts/Navbar";
+import Home from "views/Home";
+import Wallet from "views/Wallet";
+import Transactions from "views/Transactions";
+import Transfer from "views/Transfer";
+import Currencies from "views/Currencies";
+import Card from "views/Card";
+import Help from "views/Help";
+import Settings from "views/Settings";
+import User from "views/User";
 
 const theme = {
   colors: {
@@ -24,11 +34,24 @@ const theme = {
 
 const App: React.FC = () => {
   return (
-    <div className="App" style={{ backgroundColor: theme.colors.bgc_dark }}>
-      <ThemeProvider theme={theme}>
-        <Navbar />
-      </ThemeProvider>
-    </div>
+    <BrowserRouter>
+      <div className="App" style={{ backgroundColor: theme.colors.bgc_dark }}>
+        <ThemeProvider theme={theme}>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/transactions" element={<Transactions />} />
+            <Route path="/transfer" element={<Transfer />} />
+            <Route path="/currencies" element={<Currencies />} />
+            <Route path="/card" element={<Card />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/user" element={<User />} />
+          </Routes>
+        </ThemeProvider>
+      </div>
+    </BrowserRouter>
   );
 };
 

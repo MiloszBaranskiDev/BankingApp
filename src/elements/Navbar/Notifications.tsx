@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import StyledButton from "elements/layout/StyledButton";
 
 const StyledContainer = styled.div`
   position: relative;
@@ -151,7 +152,7 @@ const Notifications: React.FC = () => {
             </li>
           </ul>
           <div className="bottom">
-            <a href="#">Read all notifications</a>
+            <StyledButton href="#">Read all notifications</StyledButton>
           </div>
         </StyledNotifications>
       ) : null}
