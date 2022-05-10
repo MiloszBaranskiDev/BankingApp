@@ -10,6 +10,7 @@ import Card from "views/Card";
 import Help from "views/Help";
 import Settings from "views/Settings";
 import User from "views/User";
+import StyledWrapper from "elements/layout/StyledWrapper";
 
 const theme = {
   colors: {
@@ -38,17 +39,19 @@ const App: React.FC = () => {
       <div className="App" style={{ backgroundColor: theme.colors.bgc_dark }}>
         <ThemeProvider theme={theme}>
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/wallet" element={<Wallet />} />
-            <Route path="/transactions" element={<Transactions />} />
-            <Route path="/transfer" element={<Transfer />} />
-            <Route path="/currencies" element={<Currencies />} />
-            <Route path="/card" element={<Card />} />
-            <Route path="/help" element={<Help />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/user" element={<User />} />
-          </Routes>
+          <StyledWrapper>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/transactions" element={<Transactions />} />
+              <Route path="/transfer" element={<Transfer />} />
+              <Route path="/currencies" element={<Currencies />} />
+              <Route path="/card" element={<Card />} />
+              <Route path="/help" element={<Help />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/user" element={<User />} />
+            </Routes>
+          </StyledWrapper>
         </ThemeProvider>
       </div>
     </BrowserRouter>
