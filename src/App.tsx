@@ -31,6 +31,7 @@ const theme = {
   },
   radius: "10px",
   shadow: "rgb(58 53 65 / 10%) 0px 2px 10px 0px",
+  tilePadding: "25px",
 };
 
 const App: React.FC = () => {

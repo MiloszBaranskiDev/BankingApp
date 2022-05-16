@@ -1,8 +1,15 @@
+import styled from "styled-components";
+import Tiles from "parts/Help/Tiles";
+
+const StyledHelp = styled.div`
+  padding: 60px 0;
+`;
+
 const Help: React.FC = () => {
   return (
-    <div>
-      <p>Help</p>
-    </div>
+    <StyledHelp>
+      <Tiles />
+    </StyledHelp>
   );
 };
 
