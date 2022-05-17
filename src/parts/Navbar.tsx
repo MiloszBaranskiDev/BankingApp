@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import StyledWrapper from "elements/layout/StyledWrapper";
 import Logo from "elements/Navbar/Logo";
+import User from "elements/Navbar/User";
 import Links from "elements/Navbar/Links";
 import Notifications from "elements/Navbar/Notifications";
 
@@ -22,6 +23,7 @@ const Navbar: React.FC = () => {
         <Logo />
         <Links />
         <Notifications />
+        <User />
       </StyledWrapper>
     </StyledNavbar>
   );

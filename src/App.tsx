@@ -1,5 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import StyledWrapper from "elements/layout/StyledWrapper";
 import Navbar from "parts/Navbar";
 import Home from "views/Home";
 import Wallet from "views/Wallet";
@@ -10,7 +11,8 @@ import Card from "views/Card";
 import Help from "views/Help";
 import Settings from "views/Settings";
 import User from "views/User";
-import StyledWrapper from "elements/layout/StyledWrapper";
+import Faq from "views/Faq";
+import Chat from "views/Chat";
 
 const theme = {
   colors: {
@@ -56,6 +58,8 @@ const App: React.FC = () => {
               <Route path="/help" element={<Help />} />
               <Route path="/settings" element={<Settings />} />
               <Route path="/user" element={<User />} />
+              <Route path="/faq" element={<Faq />} />
+              <Route path="/chat" element={<Chat />} />
             </Routes>
           </StyledWrapper>
         </ThemeProvider>
