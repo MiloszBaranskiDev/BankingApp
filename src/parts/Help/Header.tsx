@@ -3,10 +3,10 @@ import Text from "elements/Help/Text";
 
 const Header: React.FC = () => {
   return (
-    <div>
+    <header>
       <StyledPageTitle>Help</StyledPageTitle>
       <Text />
-    </div>
+    </header>
   );
 };
 

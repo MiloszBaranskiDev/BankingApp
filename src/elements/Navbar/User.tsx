@@ -1,6 +1,6 @@
-import { url } from "inspector";
 import { useState } from "react";
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const StyledContainer = styled.div`
   position: relative;
@@ -29,11 +29,42 @@ const StyledUserMenu = styled.div`
   top: 60px;
   right: 0;
   z-index: 99;
-  width: 85vw;
-  max-width: 240px;
+  width: 240px;
   background-color: ${(props) => props.theme.colors.bgc};
   border-radius: ${(props) => props.theme.radius};
   box-shadow: ${(props) => props.theme.shadow};
+  .top {
+    padding: 14px;
+    border-bottom: 2px solid ${(props) => props.theme.colors.bgc_dark};
+    p {
+      font-size: ${(props) => props.theme.typography.size_small};
+    }
+  }
+  ul {
+    li {
+      a {
+        display: block;
+        padding: 7px 14px;
+        transition: color 0.3s;
+        &:hover {
+          color: ${(props) => props.theme.colors.main};
+        }
+        i {
+          margin-right: 6px;
+        }
+      }
+      &:first-child {
+        a {
+          padding-top: 14px;
+        }
+      }
+      &:last-child {
+        a {
+          padding-bottom: 14px;
+        }
+      }
+    }
+  }
 `;
 
 const User: React.FC = () => {
@@ -50,7 +81,30 @@ const User: React.FC = () => {
       />
       {showUserMenu ? (
         <StyledUserMenu>
-          <p>user</p>
+          <div className="top">
+            <h3>Name</h3>
+            <p>Bank account</p>
+          </div>
+          <ul>
+            <li>
+              <NavLink to="/user">
+                <i className="fas fa-user"></i>
+                Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/notifications">
+                <i className="fas fa-bell"></i>
+                Notifications
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/settings">
+                <i className="fas fa-cog"></i>
+                Settings
+              </NavLink>
+            </li>
+          </ul>
         </StyledUserMenu>
       ) : null}
     </StyledContainer>

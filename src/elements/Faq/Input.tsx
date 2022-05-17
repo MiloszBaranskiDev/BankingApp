@@ -26,7 +26,6 @@ const StyledInput = styled.input`
 
 const Input: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>();
-  console.log(inputValue);
 
   return (
     <StyledInput

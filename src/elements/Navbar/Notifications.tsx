@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import StyledButton from "elements/layout/StyledButton";
 
@@ -43,7 +44,7 @@ const StyledNotifications = styled.div`
   .notification,
   .bottom {
     padding: 14px;
-    border-bottom: 1px solid ${(props) => props.theme.colors.bgc_dark};
+    border-bottom: 2px solid ${(props) => props.theme.colors.bgc_dark};
   }
   .top {
     display: flex;
@@ -55,15 +56,15 @@ const StyledNotifications = styled.div`
       color: ${(props) => props.theme.colors.typography_dark};
     }
     p {
-      background-color: ${(props) => props.theme.colors.main};
-      color: white;
-      border-radius: ${(props) => props.theme.radius};
       padding: 3px 6px;
+      color: white;
+      background-color: ${(props) => props.theme.colors.main};
+      border-radius: ${(props) => props.theme.radius};
       font-size: ${(props) => props.theme.typography.size_extra_small};
       font-weight: ${(props) => props.theme.typography.weight_bold};
     }
   }
-  .list {
+  ul {
     .notification {
       display: flex;
       align-items: center;
@@ -95,10 +96,10 @@ const StyledNotifications = styled.div`
       &__date {
         width: 60px;
         flex-basis: 60px;
-        font-size: ${(props) => props.theme.typography.size_extra_small};
         text-align: end;
         overflow-wrap: break-word;
         opacity: 0.8;
+        font-size: ${(props) => props.theme.typography.size_extra_small};
       }
       &:hover {
         background-color: ${(props) => props.theme.colors.bgc_dark};
@@ -125,7 +126,7 @@ const Notifications: React.FC = () => {
             <h3>Notifications</h3>
             <p>8 new</p>
           </div>
-          <ul className="list">
+          <ul>
             <li>
               <a href="#" className="notification">
                 <div className="notification__icon">
@@ -152,7 +153,9 @@ const Notifications: React.FC = () => {
             </li>
           </ul>
           <div className="bottom">
-            <StyledButton href="#">Read all notifications</StyledButton>
+            <StyledButton as={NavLink} to="/notifications">
+              Read all notifications
+            </StyledButton>
           </div>
         </StyledNotifications>
       ) : null}

@@ -1,5 +1,6 @@
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import theme from "Theme";
 import StyledWrapper from "elements/layout/StyledWrapper";
 import Navbar from "parts/Navbar";
 import Home from "views/Home";
@@ -13,33 +14,7 @@ import Settings from "views/Settings";
 import User from "views/User";
 import Faq from "views/Faq";
 import Chat from "views/Chat";
-
-const theme = {
-  colors: {
-    main: "#3b37c5",
-    bgc: "white",
-    bgc_dark: "#f7f9fb",
-    typography: "#a6afc0",
-    typography_dark: "#101b3f",
-  },
-  typography: {
-    size_small: "14px",
-    size_normal: "16px",
-    size_big: "18px",
-    size_extra_small: "12px",
-    size_extra_big: "24px",
-    size_title: "32px",
-    weight_normal: 400,
-    weight_bold: 600,
-  },
-  breakpoints: {
-    tablet: "768px",
-    desktop: "1260px",
-  },
-  radius: "10px",
-  shadow: "rgb(58 53 65 / 10%) 0px 2px 10px 0px",
-  tilePadding: "30px",
-};
+import Notifications from "views/Notifications";
 
 const App: React.FC = () => {
   return (
@@ -60,6 +35,7 @@ const App: React.FC = () => {
               <Route path="/user" element={<User />} />
               <Route path="/faq" element={<Faq />} />
               <Route path="/chat" element={<Chat />} />
+              <Route path="/notifications" element={<Notifications />} />
             </Routes>
           </StyledWrapper>
         </ThemeProvider>
