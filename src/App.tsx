@@ -11,7 +11,7 @@ import Currencies from "views/Currencies";
 import Card from "views/Card";
 import Help from "views/Help";
 import Settings from "views/Settings";
-import User from "views/User";
+import Profile from "views/Profile";
 import Faq from "views/Faq";
 import Chat from "views/Chat";
 import Notifications from "views/Notifications";
@@ -32,7 +32,7 @@ const App: React.FC = () => {
               <Route path="/card" element={<Card />} />
               <Route path="/help" element={<Help />} />
               <Route path="/settings" element={<Settings />} />
-              <Route path="/user" element={<User />} />
+              <Route path="/profile" element={<Profile />} />
               <Route path="/faq" element={<Faq />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/notifications" element={<Notifications />} />

@@ -87,7 +87,7 @@ const User: React.FC = () => {
           </div>
           <ul>
             <li>
-              <NavLink to="/user">
+              <NavLink to="/profile">
                 <i className="fas fa-user"></i>
                 Profile
               </NavLink>
