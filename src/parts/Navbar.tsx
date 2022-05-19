@@ -6,9 +6,9 @@ import Links from "elements/Navbar/Links";
 import Notifications from "elements/Navbar/Notifications";
 
 const StyledNavbar = styled.div`
+  padding: 10px 0;
   background-color: ${(props) => props.theme.colors.bgc};
   box-shadow: ${(props) => props.theme.shadow};
-  padding: 10px 0;
   .navbarWrapper {
     display: flex;
     flex-wrap: wrap;

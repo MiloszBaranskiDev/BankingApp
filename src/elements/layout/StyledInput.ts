@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 const StyledInput = styled.input`
   border: none;
@@ -19,21 +18,6 @@ const StyledInput = styled.input`
   &::placeholder {
     color: ${(props) => props.theme.colors.typography};
   }
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    padding: 25px;
-  }
 `;
 
-const Input: React.FC = () => {
-  const [inputValue, setInputValue] = useState<string>();
-
-  return (
-    <StyledInput
-      type="text"
-      placeholder="Enter your problem to find question more easily."
-      onChange={(e) => setInputValue(e.target.value)}
-    />
-  );
-};
-
-export default Input;
+export default StyledInput;
