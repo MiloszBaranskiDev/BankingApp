@@ -3,10 +3,12 @@ import styled from "styled-components";
 const StyledButton = styled.a`
   color: white;
   cursor: pointer;
+  user-select: none;
   display: block;
   text-align: center;
   letter-spacing: 0.5px;
   padding: 13px 9px;
+  border: none;
   transition: border-radius 0.3s;
   background-color: ${(props) => props.theme.colors.main};
   border-radius: ${(props) => props.theme.radius};

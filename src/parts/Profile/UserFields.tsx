@@ -20,14 +20,14 @@ const StyledUserFields = styled.div`
   }
 `;
 
-interface FieldsInterface {
+interface IFields {
   label: string;
   type: string;
   value: string | number;
 }
 
 const UserFields: React.FC = () => {
-  const fields: FieldsInterface[] = [
+  const fields: IFields[] = [
     {
       label: "Login",
       type: "string",

@@ -7,7 +7,7 @@ const StyledImageButtons = styled.div`
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     flex-direction: row;
   }
-  a {
+  button {
     display: inline-block;
     &:last-child {
       margin-top: 10px;
@@ -24,8 +24,8 @@ const StyledImageButtons = styled.div`
 const ImageButtons: React.FC = () => {
   return (
     <StyledImageButtons>
-      <StyledButton role="button">Upload new photo</StyledButton>
-      <StyledButton role="button">Remove</StyledButton>
+      <StyledButton as="button">Upload new photo</StyledButton>
+      <StyledButton as="button">Remove</StyledButton>
     </StyledImageButtons>
   );
 };
