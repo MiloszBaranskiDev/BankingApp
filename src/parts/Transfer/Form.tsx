@@ -10,6 +10,9 @@ const StyledForm = styled.form`
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};
   padding: ${(props) => props.theme.tilePadding};
+  button {
+    margin-top: 20px;
+  }
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     display: flex;
     flex-wrap: wrap;
@@ -58,9 +61,18 @@ const Form: React.FC = () => {
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    console.log("click");
+    const values: object = Array.prototype.slice
+      .call(e.target)
+      .filter((el) => el.id)
+      .reduce(
+        (form, el) => ({
+          ...form,
+          [el.id]: el.value,
+        }),
+        {}
+      );
   };
 
   return (
@@ -87,6 +99,3 @@ const Form: React.FC = () => {
 };
 
 export default Form;
-function e(e: any): void {
-  throw new Error("Function not implemented.");
-}
