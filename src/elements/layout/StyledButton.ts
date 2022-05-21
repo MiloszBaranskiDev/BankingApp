@@ -8,6 +8,7 @@ const StyledButton = styled.a`
   text-align: center;
   letter-spacing: 0.5px;
   padding: 13px 9px;
+  outline: none;
   border: none;
   transition: border-radius 0.3s;
   background-color: ${(props) => props.theme.colors.main};

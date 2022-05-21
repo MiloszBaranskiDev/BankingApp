@@ -10,9 +10,6 @@ const StyledForm = styled.form`
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};
   padding: ${(props) => props.theme.tilePadding};
-  button {
-    margin-top: 20px;
-  }
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     display: flex;
     flex-wrap: wrap;
@@ -21,8 +18,15 @@ const StyledForm = styled.form`
       flex-basis: 49%;
     }
   }
+  button {
+    margin-top: 20px;
+  }
   .transferField {
     margin-bottom: 12px;
+    .field-error {
+      color: red;
+      border-color: red;
+    }
   }
 `;
 
@@ -63,6 +67,7 @@ const Form: React.FC = () => {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+
     const values: object = Array.prototype.slice
       .call(e.target)
       .filter((el) => el.id)
@@ -73,6 +78,14 @@ const Form: React.FC = () => {
         }),
         {}
       );
+
+    Object.entries(values).forEach(([key, value]) => {
+      if (value.length === 0) {
+        document
+          .getElementById(`${key.toLowerCase()}`)
+          ?.classList.add("field-error");
+      }
+    });
   };
 
   return (
@@ -83,7 +96,7 @@ const Form: React.FC = () => {
             {field.label}
           </StyledLabel>
           {!field.isSelect ? (
-            <StyledInput id={field.label.toLowerCase()} type={field.type} />
+            <StyledInput type={field.type} id={field.label.toLowerCase()} />
           ) : (
             <StyledSelect id={field.label.toLowerCase()}>
               <option value="test">test</option>
