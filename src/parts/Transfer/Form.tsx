@@ -80,10 +80,23 @@ const Form: React.FC = () => {
       );
 
     Object.entries(values).forEach(([key, value]) => {
+      const field: HTMLElement | null = document.getElementById(
+        `${key.toLowerCase()}`
+      );
+
       if (value.length === 0) {
-        document
-          .getElementById(`${key.toLowerCase()}`)
-          ?.classList.add("field-error");
+        field?.classList.add("field-error");
+      } else {
+        field?.classList.remove("field-error");
+      }
+    });
+
+    const target: HTMLFormElement = e.target as HTMLFormElement;
+    const children: NodeListOf<ChildNode> = target.childNodes;
+    children.forEach((child: any) => {
+      const field = child.childNodes[1];
+      if (field?.nodeName === "INPUT" || field?.nodeName === "SELECT") {
+        field.value = "";
       }
     });
   };
