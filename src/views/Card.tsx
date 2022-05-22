@@ -1,8 +1,10 @@
+import StyledPageTitle from "elements/layout/StyledPageTitle";
+
 const Card: React.FC = () => {
   return (
-    <div>
-      <p>Card</p>
-    </div>
+    <>
+      <StyledPageTitle>Card</StyledPageTitle>
+    </>
   );
 };
 

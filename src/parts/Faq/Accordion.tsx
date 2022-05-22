@@ -4,6 +4,9 @@ const Accordion: React.FC = () => {
   return (
     <ul>
       <AccordionItem />
+      <AccordionItem />
+      <AccordionItem />
+      <AccordionItem />
     </ul>
   );
 };

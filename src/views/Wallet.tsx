@@ -1,8 +1,10 @@
+import StyledPageTitle from "elements/layout/StyledPageTitle";
+
 const Wallet: React.FC = () => {
   return (
-    <div>
-      <p>Wallet</p>
-    </div>
+    <>
+      <StyledPageTitle>Wallet</StyledPageTitle>
+    </>
   );
 };
 

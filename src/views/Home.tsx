@@ -1,8 +1,10 @@
+import StyledPageTitle from "elements/layout/StyledPageTitle";
+
 const Home: React.FC = () => {
   return (
-    <div>
-      <p>Home</p>
-    </div>
+    <>
+      <StyledPageTitle>Home</StyledPageTitle>
+    </>
   );
 };
 

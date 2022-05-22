@@ -1,8 +1,10 @@
+import StyledPageTitle from "elements/layout/StyledPageTitle";
+
 const Chat: React.FC = () => {
   return (
-    <div>
-      <p>Chat</p>
-    </div>
+    <>
+      <StyledPageTitle>Chat</StyledPageTitle>
+    </>
   );
 };
 
