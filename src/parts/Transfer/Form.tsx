@@ -79,11 +79,11 @@ const Form: React.FC = () => {
         {}
       );
 
+    // check if field is not empty
     Object.entries(values).forEach(([key, value]) => {
       const field: HTMLElement | null = document.getElementById(
         `${key.toLowerCase()}`
       );
-
       if (value.length === 0) {
         field?.classList.add("field-error");
       } else {
@@ -91,10 +91,11 @@ const Form: React.FC = () => {
       }
     });
 
+    // clear values
     const target: HTMLFormElement = e.target as HTMLFormElement;
     const children: NodeListOf<ChildNode> = target.childNodes;
-    children.forEach((child: any) => {
-      const field = child.childNodes[1];
+    children.forEach((child: ChildNode) => {
+      const field = child.childNodes[1] as HTMLInputElement | HTMLSelectElement;
       if (field?.nodeName === "INPUT" || field?.nodeName === "SELECT") {
         field.value = "";
       }
@@ -112,7 +113,9 @@ const Form: React.FC = () => {
             <StyledInput type={field.type} id={field.label.toLowerCase()} />
           ) : (
             <StyledSelect id={field.label.toLowerCase()}>
-              <option value="test">test</option>
+              <option value="PLN">{"PLN (balance: 200zł)"}</option>
+              <option value="EUR">{"EUR (balance: 35€)"}</option>
+              <option value="USD">{"USD (balance: 40$)"}</option>
             </StyledSelect>
           )}
         </div>
