@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 interface Props {
   symbol: string;
-  price?: Promise<Number> | number;
+  price: any;
+  // price?: Promise<Number> | number;
 }
 
 const StyledTile = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   margin-bottom: 24px;
@@ -18,11 +20,11 @@ const StyledTile = styled.div`
     flex-basis: 49.3%;
   }
   @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
-    flex-basis: 32.3%;
+    flex-basis: 23.8%;
   }
 `;
 
-const StyledPrice = styled.p`
+const StyledText = styled.p`
   color: ${(props) => props.theme.colors.main};
   font-weight: ${(props) => props.theme.typography.weight_bold};
   font-size: ${(props) => props.theme.typography.size_extra_big};
@@ -31,7 +33,8 @@ const StyledPrice = styled.p`
 const Tile: React.FC<Props> = ({ price, symbol }) => {
   return (
     <StyledTile>
-      <StyledPrice>{20}</StyledPrice>
+      <StyledText>{symbol}/PLN</StyledText>
+      <StyledText>{price}</StyledText>
     </StyledTile>
   );
 };

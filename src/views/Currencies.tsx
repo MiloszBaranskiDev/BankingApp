@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import GetCurrencyPrice from "utils/GetCurrencyPrice";
 import StyledPageTitle from "elements/layout/StyledPageTitle";
-import Tiles from "parts/Currencies/Tiles";
 import Loader from "elements/Loader";
+import Tiles from "parts/Currencies/Tiles";
 
 interface ICurrency {
   symbol: string;
@@ -12,27 +12,24 @@ interface ICurrency {
 const Currencies: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [currencies, setCurrencies] = useState<ICurrency[]>([
-    {
-      symbol: "eur",
-    },
-    {
-      symbol: "usd",
-    },
-    {
-      symbol: "gbp",
-    },
+    { symbol: "eur" },
+    { symbol: "usd" },
+    { symbol: "gbp" },
+    { symbol: "chf" },
   ]);
 
   useEffect(() => {
-    if (currencies.length > 0) {
-      currencies.forEach((currency: ICurrency, i: number) => {
-        const currenciesObj: ICurrency[] = currencies;
-        currenciesObj[i]["price"] = GetCurrencyPrice(currency.symbol);
-        setCurrencies(currenciesObj);
+    if (!currencies[0].price) {
+      let currenciesObj: ICurrency[] = currencies;
+
+      currencies.forEach(async (currency: ICurrency, i: number) => {
+        currenciesObj[i]["price"] = await GetCurrencyPrice(currency.symbol);
+        currencies.length - 1 === i && setLoading(!loading);
       });
-      currencies[0].price ? setLoading(false) : setLoading(loading);
+
+      setCurrencies(currenciesObj);
     }
-  }, []);
+  }, [currencies]);
 
   return (
     <>

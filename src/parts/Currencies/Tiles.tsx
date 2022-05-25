@@ -25,7 +25,7 @@ const Tiles: React.FC<Props> = ({ currencies }) => {
       {currencies.map((currency: ICurrency) => (
         <Tile
           price={currency.price}
-          symbol={currency.symbol}
+          symbol={currency.symbol.toUpperCase()}
           key={currency.symbol}
         />
       ))}
