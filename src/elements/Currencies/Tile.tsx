@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 interface Props {
   symbol: string;
-  price?: any;
-  // price?: Promise<Number> | number;
+  price?: number;
 }
 
 const StyledTile = styled.div`
@@ -29,6 +28,9 @@ const StyledText = styled.p`
   color: ${(props) => props.theme.colors.main};
   font-weight: ${(props) => props.theme.typography.weight_bold};
   font-size: ${(props) => props.theme.typography.size_extra_big};
+  &:first-child {
+    margin-bottom: 2px;
+  }
 `;
 
 const Tile: React.FC<Props> = ({ price, symbol }) => {

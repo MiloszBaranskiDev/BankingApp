@@ -1,8 +1,9 @@
-import { useState, useEffect, SetStateAction } from "react";
+import { useState, useEffect } from "react";
 import GetCurrenciesPrices from "utils/GetCurrenciesPrices";
 import StyledPageTitle from "elements/layout/StyledPageTitle";
 import Loader from "elements/Loader";
 import Tiles from "parts/Currencies/Tiles";
+import Swap from "parts/Currencies/Swap";
 
 interface ICurrency {
   symbol: string;
@@ -29,6 +30,7 @@ const Currencies: React.FC = () => {
 
   useEffect(() => {
     loadPrices(currencies);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -40,7 +42,14 @@ const Currencies: React.FC = () => {
   return (
     <>
       <StyledPageTitle>Currencies</StyledPageTitle>
-      {!loading ? <Tiles currencies={currencies} /> : <Loader />}
+      {!loading ? (
+        <>
+          <Tiles currencies={currencies} />
+          <Swap />
+        </>
+      ) : (
+        <Loader />
+      )}
     </>
   );
 };
