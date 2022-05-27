@@ -3,7 +3,7 @@ import Tile from "elements/Currencies/Tile";
 
 interface ICurrency {
   symbol: string;
-  price?: Promise<Number> | number;
+  price?: number;
 }
 
 interface Props {
@@ -25,7 +25,7 @@ const Tiles: React.FC<Props> = ({ currencies }) => {
       {currencies.map((currency: ICurrency) => (
         <Tile
           price={currency.price}
-          symbol={currency.symbol.toUpperCase()}
+          symbol={currency.symbol}
           key={currency.symbol}
         />
       ))}

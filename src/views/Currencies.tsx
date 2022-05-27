@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
-import GetCurrencyPrice from "utils/GetCurrencyPrice";
+import { useState, useEffect, SetStateAction } from "react";
+import GetCurrenciesPrices from "utils/GetCurrenciesPrices";
 import StyledPageTitle from "elements/layout/StyledPageTitle";
 import Loader from "elements/Loader";
 import Tiles from "parts/Currencies/Tiles";
 
 interface ICurrency {
   symbol: string;
-  price?: Promise<Number> | number;
+  price?: number;
+}
+
+interface ILoadPrices {
+  (currencies: ICurrency[]): Promise<void>;
 }
 
 const Currencies: React.FC = () => {
@@ -18,17 +22,19 @@ const Currencies: React.FC = () => {
     { symbol: "chf" },
   ]);
 
+  const loadPrices: ILoadPrices = async (currencies) => {
+    const loadedData = await GetCurrenciesPrices(currencies);
+    setCurrencies(loadedData!);
+  };
+
   useEffect(() => {
-    if (!currencies[0].price) {
-      let currenciesObj: ICurrency[] = currencies;
+    loadPrices(currencies);
+  }, []);
 
-      currencies.forEach(async (currency: ICurrency, i: number) => {
-        currenciesObj[i]["price"] = await GetCurrencyPrice(currency.symbol);
-        currencies.length - 1 === i && setLoading(!loading);
-      });
-
-      setCurrencies(currenciesObj);
-    }
+  useEffect(() => {
+    currencies[currencies.length - 1].price !== undefined
+      ? setLoading(false)
+      : setLoading(true);
   }, [currencies]);
 
   return (

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 interface Props {
   symbol: string;
-  price: any;
+  price?: any;
   // price?: Promise<Number> | number;
 }
 
@@ -25,6 +25,7 @@ const StyledTile = styled.div`
 `;
 
 const StyledText = styled.p`
+  text-transform: uppercase;
   color: ${(props) => props.theme.colors.main};
   font-weight: ${(props) => props.theme.typography.weight_bold};
   font-size: ${(props) => props.theme.typography.size_extra_big};
