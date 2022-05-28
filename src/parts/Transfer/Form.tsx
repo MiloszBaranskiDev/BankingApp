@@ -68,6 +68,7 @@ const Form: React.FC = () => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
+    // get fields
     const values: object = Array.prototype.slice
       .call(e.target)
       .filter((el) => el.id)
@@ -84,11 +85,9 @@ const Form: React.FC = () => {
       const field: HTMLElement | null = document.getElementById(
         `${key.toLowerCase()}`
       );
-      if (value.length === 0) {
-        field?.classList.add("field-error");
-      } else {
-        field?.classList.remove("field-error");
-      }
+      value.length === 0
+        ? field?.classList.add("field-error")
+        : field?.classList.remove("field-error");
     });
 
     // clear values
@@ -116,6 +115,7 @@ const Form: React.FC = () => {
               <option value="PLN">{"PLN (balance: 200zł)"}</option>
               <option value="EUR">{"EUR (balance: 35€)"}</option>
               <option value="USD">{"USD (balance: 40$)"}</option>
+              <option value="CHF">{"CHF (balance: 25₣)"}</option>
             </StyledSelect>
           )}
         </div>

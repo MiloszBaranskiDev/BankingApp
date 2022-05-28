@@ -17,6 +17,7 @@ const StyledTile = styled.div`
   box-shadow: ${(props) => props.theme.shadow};
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     flex-basis: 49.3%;
+    margin-bottom: 0;
   }
   @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
     flex-basis: 23.8%;

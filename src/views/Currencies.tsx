@@ -4,6 +4,7 @@ import StyledPageTitle from "elements/layout/StyledPageTitle";
 import Loader from "elements/Loader";
 import Tiles from "parts/Currencies/Tiles";
 import Swap from "parts/Currencies/Swap";
+import Charts from "parts/Currencies/Charts";
 
 interface ICurrency {
   symbol: string;
@@ -46,6 +47,7 @@ const Currencies: React.FC = () => {
         <>
           <Tiles currencies={currencies} />
           <Swap />
+          <Charts currencies={currencies} />
         </>
       ) : (
         <Loader />
