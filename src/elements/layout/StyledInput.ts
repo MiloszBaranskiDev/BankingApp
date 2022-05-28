@@ -12,6 +12,9 @@ const StyledInput = styled.input`
   background-color: ${(props) => props.theme.colors.bgc};
   color: ${(props) => props.theme.colors.typography_dark};
   font-size: ${(props) => props.theme.typography.size_normal};
+  &[type="date"] {
+    cursor: pointer;
+  }
   &:focus {
     border-color: ${(props) => props.theme.colors.main};
   }
