@@ -51,6 +51,8 @@ const ChartDates: React.FC<Props> = ({
           value={startDate}
           type="date"
           id="start-date"
+          min=""
+          max=""
         />
       </StyledDate>
       <StyledDate>
@@ -60,6 +62,7 @@ const ChartDates: React.FC<Props> = ({
           value={endDate}
           type="date"
           id="end-date"
+          min=""
           max={GetTodayDate()}
         />
       </StyledDate>

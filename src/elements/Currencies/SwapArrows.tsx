@@ -6,8 +6,9 @@ const StyledSwapArrows = styled.i`
   text-align: center;
   padding: 20px 0;
   transition: color 0.3s;
+  color: ${(props) => props.theme.colors.main};
   &:hover {
-    color: ${(props) => props.theme.colors.main};
+    color: unset;
   }
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     padding: 0 32px;

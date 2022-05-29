@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import GetCurrenciesPrices from "utils/api/GetCurrenciesPrices";
+import GetCurrenciesPrices from "api/GetCurrenciesPrices";
 import StyledPageTitle from "elements/layout/StyledPageTitle";
 import Loader from "elements/Loader";
 import Tiles from "parts/Currencies/Tiles";

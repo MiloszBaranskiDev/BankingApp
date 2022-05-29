@@ -8,11 +8,12 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
+import Loader from "elements/Loader";
 import StyledHeading from "elements/layout/StyledHeading";
 import ChartDates from "elements/Currencies/ChartDates";
 import GetTodayDate from "utils/GetTodayDate";
-import GetCurrencyHistoricalPrices from "utils/api/GetCurrencyHistoricalPrices";
+import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";
 
 interface Props {
   symbol: string;
@@ -64,19 +65,36 @@ const StyledChart = styled.div`
 `;
 
 const Chart: React.FC<Props> = ({ symbol }) => {
-  const [data, setData] = useState<IChartData>(null as any);
+  const theme: any = useTheme();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [chartData, setChartData] = useState<IChartData>(null as any);
   const [startDate, setStartDate] = useState<string>("2022-01-01");
   const [endDate, setEndDate] = useState<string>(GetTodayDate());
 
   const loadPrices = async (start: string, end: string) => {
-    // const loadedPrices = await GetCurrencyHistoricalPrices(symbol, start, end);
-    // setData(loadedPrices!);
-    console.log(GetCurrencyHistoricalPrices(symbol, start, end));
+    const loadedPrices = await GetCurrencyHistoricalPrices(symbol, start, end);
+    setChartData({
+      labels: loadedPrices!,
+      datasets: [
+        {
+          borderWidth: 1,
+          borderColor: theme.colors.main,
+          backgroundColor: theme.colors.main,
+          data: loadedPrices!,
+        },
+      ],
+    });
   };
 
   useEffect(() => {
     loadPrices(startDate, endDate);
   }, [startDate, endDate]);
+
+  useEffect(() => {
+    chartData !== null && chartData.labels.length > 0
+      ? setLoading(false)
+      : setLoading(true);
+  }, [chartData]);
 
   return (
     <StyledChart>
@@ -87,7 +105,11 @@ const Chart: React.FC<Props> = ({ symbol }) => {
         setStartDate={setStartDate}
         setEndDate={setEndDate}
       />
-      {/* {data !== null && <Line options={options} data={data} />} */}
+      {!loading && chartData !== null ? (
+        <Line options={options} data={chartData} />
+      ) : (
+        <Loader />
+      )}
     </StyledChart>
   );
 };
