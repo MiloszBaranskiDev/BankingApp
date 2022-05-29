@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface Props {
   className?: string;
+  answer: string;
 }
 
 const StyledAnswer = styled.p`
@@ -16,8 +17,8 @@ const StyledAnswer = styled.p`
   }
 `;
 
-const Answer: React.FC<Props> = ({ className }) => {
-  return <StyledAnswer className={className}>Answer</StyledAnswer>;
+const Answer: React.FC<Props> = ({ className, answer }) => {
+  return <StyledAnswer className={className}>{answer}</StyledAnswer>;
 };
 
 export default Answer;

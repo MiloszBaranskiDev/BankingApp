@@ -3,6 +3,7 @@ import styled from "styled-components";
 interface Props {
   open: boolean;
   setOpen: (arg0: boolean) => void;
+  question: string;
 }
 
 const StyledQuestion = styled.a`
@@ -24,13 +25,13 @@ const StyledQuestion = styled.a`
   }
 `;
 
-const Question: React.FC<Props> = ({ open, setOpen }) => {
+const Question: React.FC<Props> = ({ open, setOpen, question }) => {
   return (
     <StyledQuestion onClick={() => setOpen(!open)} role="button">
       <i
         className={open ? "fas fa-chevron-up reverse" : "fas fa-chevron-up"}
       ></i>
-      Question
+      {question}
     </StyledQuestion>
   );
 };
