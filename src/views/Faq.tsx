@@ -3,12 +3,12 @@ import StyledPageTitle from "elements/layout/StyledPageTitle";
 import StyledInput from "elements/layout/StyledInput";
 import Accordion from "parts/Faq/Accordion";
 
-interface IData {
+interface IFaqData {
   question: string;
   answer: string;
 }
 
-const data: IData[] = [
+const faqData: IFaqData[] = [
   {
     question: "How to make transfer?",
     answer:
@@ -32,7 +32,7 @@ const data: IData[] = [
   {
     question: "I have not found an answer to the question.",
     answer:
-      "Lorem ipsum praesent sollicitudin ut massa dictum finibus. Etiam consectetur malesuada velit. Nullam ut semper mi. Phasellus ut tempor urna. Nulla aliquet. ",
+      "Lorem ipsum praesent sollicitudin ut massa dictum finibus. Etiam consectetur malesuada velit. Nullam ut semper mi. Phasellus ut tempor urna. Nulla aliquet.",
   },
 ];
 
@@ -48,22 +48,24 @@ const Faq: React.FC = () => {
         placeholder="Enter your question to find the answer."
       />
       <ul>
-        {data
-          .filter((item) => {
+        {faqData
+          .filter((faqItem) => {
             if (!inputValue) return true;
             if (
-              item.question.toLowerCase().includes(inputValue.toLowerCase()) ||
-              item.answer.toLowerCase().includes(inputValue.toLowerCase())
+              faqItem.question
+                .toLowerCase()
+                .includes(inputValue.toLowerCase()) ||
+              faqItem.answer.toLowerCase().includes(inputValue.toLowerCase())
             ) {
               return true;
             }
             return false;
           })
-          .map((item) => (
+          .map((faqItem) => (
             <Accordion
-              key={item.question}
-              question={item.question}
-              answer={item.answer}
+              key={faqItem.question}
+              question={faqItem.question}
+              answer={faqItem.answer}
             />
           ))}
       </ul>

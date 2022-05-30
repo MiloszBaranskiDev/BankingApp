@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 const StyledItem = styled.li`
   margin-bottom: 20px;
@@ -49,13 +50,13 @@ const StyledItem = styled.li`
 const Item: React.FC = () => {
   return (
     <StyledItem>
-      <a href="#">
+      <NavLink to={`/notification/22`} className="notification">
         <div className="icon">
           <i className="fas fa-arrow-down"></i>
         </div>
         <p className="title">Notification</p>
         <p className="time">7 hours ago</p>
-      </a>
+      </NavLink>
     </StyledItem>
   );
 };

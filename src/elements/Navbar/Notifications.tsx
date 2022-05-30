@@ -128,7 +128,7 @@ const Notifications: React.FC = () => {
           </div>
           <ul>
             <li>
-              <a href="#" className="notification">
+              <NavLink to={`/notification/22`} className="notification">
                 <div className="notification__icon">
                   <i className="fas fa-arrow-down"></i>
                 </div>
@@ -137,10 +137,10 @@ const Notifications: React.FC = () => {
                   <p>Your account has been credited with 100$</p>
                 </div>
                 <p className="notification__date">Today</p>
-              </a>
+              </NavLink>
             </li>
             <li style={{ opacity: 0.5 }}>
-              <a href="#" className="notification">
+              <NavLink to={`/notification/44`} className="notification">
                 <div className="notification__icon">
                   <i className="fas fa-arrow-down"></i>
                 </div>
@@ -149,7 +149,7 @@ const Notifications: React.FC = () => {
                   <p>Your account has been credited with 100$</p>
                 </div>
                 <p className="notification__date">Today</p>
-              </a>
+              </NavLink>
             </li>
           </ul>
           <div className="bottom">

@@ -15,6 +15,7 @@ import Profile from "views/Profile";
 import Faq from "views/Faq";
 import Chat from "views/Chat";
 import Notifications from "views/Notifications";
+import SingleNotification from "views/SingleNotification";
 
 const App: React.FC = () => {
   return (
@@ -36,6 +37,10 @@ const App: React.FC = () => {
               <Route path="/faq" element={<Faq />} />
               <Route path="/chat" element={<Chat />} />
               <Route path="/notifications" element={<Notifications />} />
+              <Route
+                path="/notification/:id"
+                element={<SingleNotification />}
+              />
             </Routes>
           </StyledWrapper>
         </ThemeProvider>
