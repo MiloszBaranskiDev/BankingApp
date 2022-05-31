@@ -62,6 +62,21 @@ const StyledChart = styled.div`
   h2 {
     text-transform: uppercase;
   }
+  canvas {
+    margin-top: 30px;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    display: flex;
+    flex-wrap: wrap;
+    h2 {
+      margin-right: auto;
+      padding-right: 35px;
+    }
+    canvas {
+      margin-top: 0;
+      flex-basis: 100%;
+    }
+  }
 `;
 
 const Chart: React.FC<Props> = ({ symbol }) => {
