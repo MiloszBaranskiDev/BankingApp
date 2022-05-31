@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import HandleClickOutside from "utils/HandleClickOutside";
 
 const StyledContainer = styled.div`
   position: relative;
@@ -68,23 +69,15 @@ const StyledUserMenu = styled.div`
 `;
 
 const User: React.FC = () => {
-  const ref: any = useRef();
+  const submenuRef: any = useRef();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleClickOutside = (e: any) => {
-      if (showUserMenu && ref.current && !ref.current.contains(e.target)) {
-        setShowUserMenu(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    HandleClickOutside(submenuRef, showUserMenu, setShowUserMenu);
   }, [showUserMenu]);
 
   return (
-    <StyledContainer ref={ref}>
+    <StyledContainer ref={submenuRef}>
       <StyledIcon
         onClick={() => setShowUserMenu((showUserMenu) => !showUserMenu)}
         style={{

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
-import onClickOutside from "react-onclickoutside";
 import styled from "styled-components";
 import StyledButton from "elements/layout/StyledButton";
+import HandleClickOutside from "utils/HandleClickOutside";
 
 const StyledContainer = styled.div`
   position: relative;
@@ -110,10 +110,15 @@ const StyledNotifications = styled.div`
 `;
 
 const Notifications: React.FC = () => {
+  const submenuRef: any = useRef();
   const [showNotifications, setShowNotifications] = useState<boolean>(false);
 
+  useEffect(() => {
+    HandleClickOutside(submenuRef, showNotifications, setShowNotifications);
+  }, [showNotifications]);
+
   return (
-    <StyledContainer>
+    <StyledContainer ref={submenuRef}>
       <StyledIcon
         onClick={() =>
           setShowNotifications((showNotifications) => !showNotifications)
