@@ -68,7 +68,6 @@ const Form: React.FC = () => {
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    // get fields
     const values: object = Array.prototype.slice
       .call(e.target)
       .filter((el) => el.id)
@@ -80,7 +79,6 @@ const Form: React.FC = () => {
         {}
       );
 
-    // check if field is not empty
     Object.entries(values).forEach(([key, value]) => {
       const field: HTMLElement | null = document.getElementById(
         `${key.toLowerCase()}`
@@ -90,7 +88,6 @@ const Form: React.FC = () => {
         : field?.classList.remove("field-error");
     });
 
-    // clear values
     const target: HTMLFormElement = e.target as HTMLFormElement;
     const children: NodeListOf<ChildNode> = target.childNodes;
     children.forEach((child: ChildNode) => {

@@ -41,6 +41,11 @@ ChartJS.register(
 
 const options: object = {
   responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+    },
+  },
   scales: {
     x: {
       display: false,
