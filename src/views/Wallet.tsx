@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import StyledPageTitle from "elements/layout/StyledPageTitle";
 import Chart from "parts/Wallet/Chart";
+import Balance from "parts/Wallet/Balance";
 
 const StyledBox = styled.div`
   margin-top: 30px;
@@ -16,6 +17,7 @@ const Wallet: React.FC = () => {
       <StyledPageTitle>Wallet</StyledPageTitle>
       <StyledBox>
         <Chart />
+        <Balance />
       </StyledBox>
     </>
   );

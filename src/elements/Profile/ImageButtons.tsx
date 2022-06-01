@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import styled from "styled-components";
 import StyledButton from "elements/layout/StyledButton";
 
@@ -22,9 +23,24 @@ const StyledImageButtons = styled.div`
 `;
 
 const ImageButtons: React.FC = () => {
+  const uploadInput: any = useRef();
+
+  const handleUpload = () => {
+    uploadInput.current.click();
+    uploadInput.current.addEventListener(
+      "change",
+      (e: { target: { files: (Blob | MediaSource)[] } }) => {
+        console.log(URL.createObjectURL(e.target.files[0]));
+      }
+    );
+  };
+
   return (
     <StyledImageButtons>
-      <StyledButton as="button">Upload new photo</StyledButton>
+      <input ref={uploadInput} type="file" accept="image/*" hidden />
+      <StyledButton onClick={handleUpload} as="button">
+        Upload new photo
+      </StyledButton>
       <StyledButton as="button">Remove</StyledButton>
     </StyledImageButtons>
   );
