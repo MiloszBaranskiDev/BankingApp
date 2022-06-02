@@ -16,6 +16,7 @@ interface IChartData {
 }
 
 const S_Chart = styled.div`
+  flex-basis: 100%;
   padding: ${(props) => props.theme.tilePadding};
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};
@@ -23,10 +24,6 @@ const S_Chart = styled.div`
   canvas {
     height: auto !important;
     width: 100% !important;
-  }
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    flex-basis: 40%;
-    margin-right: auto;
   }
 `;
 

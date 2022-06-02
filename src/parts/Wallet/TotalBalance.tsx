@@ -4,14 +4,15 @@ import TotalBalanceAmount from "elements/Wallet/TotalBalanceAmount";
 import TotalBalanceInfo from "elements/Wallet/TotalBalanceInfo";
 
 const S_TotalBalance = styled.div`
+  margin-bottom: 12px;
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: ${(props) => props.theme.tilePadding};
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};
   box-shadow: ${(props) => props.theme.shadow};
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    flex-basis: 30%;
-    margin-right: auto;
-  }
   h2 {
     span {
       font-weight: ${(props) => props.theme.typography.weight_normal};
