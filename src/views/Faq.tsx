@@ -1,6 +1,6 @@
 import { useState } from "react";
-import StyledPageTitle from "elements/layout/StyledPageTitle";
-import StyledInput from "elements/layout/StyledInput";
+import S_PageTitle from "elements/layout/S_PageTitle";
+import S_Input from "elements/layout/S_Input";
 import Accordion from "parts/Faq/Accordion";
 
 interface IFaqData {
@@ -41,8 +41,8 @@ const Faq: React.FC = () => {
 
   return (
     <>
-      <StyledPageTitle>Faq</StyledPageTitle>
-      <StyledInput
+      <S_PageTitle>Faq</S_PageTitle>
+      <S_Input
         onChange={(e) => setInputValue(e.target.value)}
         type="text"
         placeholder="Enter your question to find the answer."

@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import StyledPageTitle from "elements/layout/StyledPageTitle";
+import S_PageTitle from "elements/layout/S_PageTitle";
 import Chart from "parts/Wallet/Chart";
-import Balance from "parts/Wallet/Balance";
+import TotalBalance from "parts/Wallet/TotalBalance";
 
-const StyledBox = styled.div`
+const S_Box = styled.div`
   margin-top: 30px;
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     display: flex;
@@ -14,11 +14,11 @@ const StyledBox = styled.div`
 const Wallet: React.FC = () => {
   return (
     <>
-      <StyledPageTitle>Wallet</StyledPageTitle>
-      <StyledBox>
+      <S_PageTitle>Wallet</S_PageTitle>
+      <S_Box>
         <Chart />
-        <Balance />
-      </StyledBox>
+        <TotalBalance />
+      </S_Box>
     </>
   );
 };

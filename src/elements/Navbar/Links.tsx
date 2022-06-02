@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-const StyledNav = styled.nav`
+const S_Nav = styled.nav`
   margin-left: auto;
   ul {
     display: flex;
@@ -30,7 +30,7 @@ const StyledNav = styled.nav`
 
 const Links: React.FC = () => {
   return (
-    <StyledNav>
+    <S_Nav>
       <ul>
         <li>
           <NavLink
@@ -96,7 +96,7 @@ const Links: React.FC = () => {
           </NavLink>
         </li>
       </ul>
-    </StyledNav>
+    </S_Nav>
   );
 };
 

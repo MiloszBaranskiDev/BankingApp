@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import StyledHeading from "elements/layout/StyledHeading";
+import S_Heading from "elements/layout/S_Heading";
 
 interface IChartData {
   labels: string[];
@@ -15,7 +15,7 @@ interface IChartData {
   ];
 }
 
-const StyledChart = styled.div`
+const S_Chart = styled.div`
   padding: ${(props) => props.theme.tilePadding};
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};
@@ -58,10 +58,10 @@ const chartData: IChartData = {
 
 const Chart: React.FC = () => {
   return (
-    <StyledChart>
-      <StyledHeading>Currencies</StyledHeading>
+    <S_Chart>
+      <S_Heading>Currencies</S_Heading>
       <Doughnut data={chartData} />
-    </StyledChart>
+    </S_Chart>
   );
 };
 

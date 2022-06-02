@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import StyledLabel from "elements/layout/StyledLabel";
-import StyledInput from "elements/layout/StyledInput";
+import S_Label from "elements/layout/S_Label";
+import S_Input from "elements/layout/S_Input";
 
-const StyledUserFields = styled.div`
+const S_UserFields = styled.div`
   margin-top: 30px;
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     display: flex;
@@ -51,20 +51,18 @@ const UserFields: React.FC = () => {
   ];
 
   return (
-    <StyledUserFields>
+    <S_UserFields>
       {fields.map((field) => (
         <div className="userField" key={field.label}>
-          <StyledLabel htmlFor={field.label.toLowerCase()}>
-            {field.label}
-          </StyledLabel>
-          <StyledInput
+          <S_Label htmlFor={field.label.toLowerCase()}>{field.label}</S_Label>
+          <S_Input
             value={field.value}
             type={field.type}
             id={field.label.toLowerCase()}
           />
         </div>
       ))}
-    </StyledUserFields>
+    </S_UserFields>
   );
 };
 

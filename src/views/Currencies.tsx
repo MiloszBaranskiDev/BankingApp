@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import GetCurrenciesPrices from "api/GetCurrenciesPrices";
-import StyledPageTitle from "elements/layout/StyledPageTitle";
+import S_PageTitle from "elements/layout/S_PageTitle";
 import Loader from "elements/Loader";
 import Tiles from "parts/Currencies/Tiles";
 import Swap from "parts/Currencies/Swap";
@@ -42,7 +42,7 @@ const Currencies: React.FC = () => {
 
   return (
     <>
-      <StyledPageTitle>Currencies</StyledPageTitle>
+      <S_PageTitle>Currencies</S_PageTitle>
       {!loading ? (
         <>
           <Tiles currencies={currencies} />

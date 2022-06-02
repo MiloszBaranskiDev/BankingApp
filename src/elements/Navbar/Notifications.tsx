@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import StyledButton from "elements/layout/StyledButton";
+import S_Button from "elements/layout/S_Button";
 import HandleClickOutside from "utils/HandleClickOutside";
 
-const StyledContainer = styled.div`
+const S_Container = styled.div`
   position: relative;
   margin-left: auto;
 `;
 
-const StyledIcon = styled.button`
+const S_Icon = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -31,7 +31,7 @@ const StyledIcon = styled.button`
   }
 `;
 
-const StyledNotifications = styled.div`
+const S_Notifications = styled.div`
   position: absolute;
   top: 60px;
   right: 0;
@@ -118,16 +118,16 @@ const Notifications: React.FC = () => {
   }, [showNotifications]);
 
   return (
-    <StyledContainer ref={submenuRef}>
-      <StyledIcon
+    <S_Container ref={submenuRef}>
+      <S_Icon
         onClick={() =>
           setShowNotifications((showNotifications) => !showNotifications)
         }
       >
         <i className="fas fa-bell"></i>
-      </StyledIcon>
+      </S_Icon>
       {showNotifications ? (
-        <StyledNotifications>
+        <S_Notifications>
           <div className="top">
             <h3>Notifications</h3>
             <p>8 new</p>
@@ -159,13 +159,13 @@ const Notifications: React.FC = () => {
             </li>
           </ul>
           <div className="bottom">
-            <StyledButton as={NavLink} to="/notifications">
+            <S_Button as={NavLink} to="/notifications">
               Read all notifications
-            </StyledButton>
+            </S_Button>
           </div>
-        </StyledNotifications>
+        </S_Notifications>
       ) : null}
-    </StyledContainer>
+    </S_Container>
   );
 };
 

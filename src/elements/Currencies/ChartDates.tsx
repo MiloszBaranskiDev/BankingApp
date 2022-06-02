@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import GetTodayDate from "utils/GetTodayDate";
-import StyledLabel from "elements/layout/StyledLabel";
-import StyledInput from "elements/layout/StyledInput";
+import S_Label from "elements/layout/S_Label";
+import S_Input from "elements/layout/S_Input";
 
 interface Props {
   startDate: string;
@@ -10,7 +10,7 @@ interface Props {
   setEndDate: (arg0: string) => void;
 }
 
-const StyledChartDates = styled.div`
+const S_ChartDates = styled.div`
   display: flex;
   flex-direction: column;
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
@@ -26,7 +26,7 @@ const StyledChartDates = styled.div`
   }
 `;
 
-const StyledDate = styled.div`
+const S_Date = styled.div`
   display: flex;
   flex-direction: column;
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
@@ -43,10 +43,10 @@ const ChartDates: React.FC<Props> = ({
   setEndDate,
 }) => {
   return (
-    <StyledChartDates>
-      <StyledDate>
-        <StyledLabel htmlFor="start-date">From</StyledLabel>
-        <StyledInput
+    <S_ChartDates>
+      <S_Date>
+        <S_Label htmlFor="start-date">From</S_Label>
+        <S_Input
           onChange={(e) => setStartDate(e.target.value)}
           value={startDate}
           type="date"
@@ -54,10 +54,10 @@ const ChartDates: React.FC<Props> = ({
           min=""
           max=""
         />
-      </StyledDate>
-      <StyledDate>
-        <StyledLabel htmlFor="end-date">To</StyledLabel>
-        <StyledInput
+      </S_Date>
+      <S_Date>
+        <S_Label htmlFor="end-date">To</S_Label>
+        <S_Input
           onChange={(e) => setEndDate(e.target.value)}
           value={endDate}
           type="date"
@@ -65,8 +65,8 @@ const ChartDates: React.FC<Props> = ({
           min=""
           max={GetTodayDate()}
         />
-      </StyledDate>
-    </StyledChartDates>
+      </S_Date>
+    </S_ChartDates>
   );
 };
 

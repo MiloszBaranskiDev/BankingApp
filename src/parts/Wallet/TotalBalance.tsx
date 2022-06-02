@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import StyledHeading from "elements/layout/StyledHeading";
-import BalanceAmount from "elements/Wallet/BalanceAmount";
-import BalanceInfo from "elements/Wallet/BalanceInfo";
+import S_Heading from "elements/layout/S_Heading";
+import TotalBalanceAmount from "elements/Wallet/TotalBalanceAmount";
+import TotalBalanceInfo from "elements/Wallet/TotalBalanceInfo";
 
-const StyledBalance = styled.div`
+const S_TotalBalance = styled.div`
   padding: ${(props) => props.theme.tilePadding};
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};
@@ -21,13 +21,13 @@ const StyledBalance = styled.div`
 
 const Balance: React.FC = () => {
   return (
-    <StyledBalance>
-      <StyledHeading>
+    <S_TotalBalance>
+      <S_Heading>
         Total balance<span>*</span>
-      </StyledHeading>
-      <BalanceAmount />
-      <BalanceInfo />
-    </StyledBalance>
+      </S_Heading>
+      <TotalBalanceAmount />
+      <TotalBalanceInfo />
+    </S_TotalBalance>
   );
 };
 

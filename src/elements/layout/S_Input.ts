@@ -1,19 +1,26 @@
 import styled from "styled-components";
 
-const StyledSelect = styled.select`
-  display: block;
+const S_Input = styled.input`
   border: none;
   padding: 12px;
   outline: none;
   border: 1px solid transparent;
   width: 100%;
-  cursor: pointer;
   transition: border-color 0.3s;
   box-shadow: ${(props) => props.theme.shadow};
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};
   color: ${(props) => props.theme.colors.typography_dark};
   font-size: ${(props) => props.theme.typography.size_normal};
+  &[type="date"] {
+    cursor: pointer;
+  }
+  &:focus {
+    border-color: ${(props) => props.theme.colors.main};
+  }
+  &::placeholder {
+    color: ${(props) => props.theme.colors.typography};
+  }
 `;
 
-export default StyledSelect;
+export default S_Input;

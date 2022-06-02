@@ -1,9 +1,9 @@
-import StyledPageTitle from "elements/layout/StyledPageTitle";
+import S_PageTitle from "elements/layout/S_PageTitle";
 
 const Settings: React.FC = () => {
   return (
     <>
-      <StyledPageTitle>Settings</StyledPageTitle>
+      <S_PageTitle>Settings</S_PageTitle>
     </>
   );
 };

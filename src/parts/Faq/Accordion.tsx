@@ -8,7 +8,7 @@ interface Props {
   answer: string;
 }
 
-const StyledAccordion = styled.li`
+const S_Accordion = styled.li`
   margin-bottom: 20px;
   border: 1px solid transparent;
   transition: border 0.3s;
@@ -27,10 +27,10 @@ const Accordion: React.FC<Props> = ({ question, answer }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
-    <StyledAccordion>
+    <S_Accordion>
       <Question open={open} setOpen={setOpen} question={question} />
       <Answer className={open ? "show-answer" : ""} answer={answer} />
-    </StyledAccordion>
+    </S_Accordion>
   );
 };
 

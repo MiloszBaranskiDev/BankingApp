@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import StyledWrapper from "elements/layout/StyledWrapper";
+import S_Wrapper from "elements/layout/S_Wrapper";
 import Logo from "elements/Navbar/Logo";
 import User from "elements/Navbar/User";
 import Links from "elements/Navbar/Links";
 import Notifications from "elements/Navbar/Notifications";
 
-const StyledNavbar = styled.div`
+const S_Navbar = styled.div`
   padding: 10px 0;
   background-color: ${(props) => props.theme.colors.bgc};
   box-shadow: ${(props) => props.theme.shadow};
@@ -18,14 +18,14 @@ const StyledNavbar = styled.div`
 
 const Navbar: React.FC = () => {
   return (
-    <StyledNavbar>
-      <StyledWrapper className="navbarWrapper">
+    <S_Navbar>
+      <S_Wrapper className="navbarWrapper">
         <Logo />
         <Links />
         <Notifications />
         <User />
-      </StyledWrapper>
-    </StyledNavbar>
+      </S_Wrapper>
+    </S_Navbar>
   );
 };
 

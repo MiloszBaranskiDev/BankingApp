@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import StyledHeading from "elements/layout/StyledHeading";
+import S_Heading from "elements/layout/S_Heading";
 import Tile from "elements/Currencies/Tile";
 
 interface ICurrency {
@@ -11,7 +11,7 @@ interface Props {
   currencies: ICurrency[];
 }
 
-const StyledTiles = styled.div`
+const S_Tiles = styled.div`
   margin-top: 30px;
   h2 {
     flex-basis: 100%;
@@ -25,8 +25,8 @@ const StyledTiles = styled.div`
 
 const Tiles: React.FC<Props> = ({ currencies }) => {
   return (
-    <StyledTiles>
-      <StyledHeading>Exchange rates</StyledHeading>
+    <S_Tiles>
+      <S_Heading>Exchange rates</S_Heading>
       {currencies.map((currency: ICurrency) => (
         <Tile
           price={currency.price}
@@ -34,7 +34,7 @@ const Tiles: React.FC<Props> = ({ currencies }) => {
           key={currency.symbol}
         />
       ))}
-    </StyledTiles>
+    </S_Tiles>
   );
 };
 

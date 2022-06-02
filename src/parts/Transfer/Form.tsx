@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import StyledLabel from "elements/layout/StyledLabel";
-import StyledInput from "elements/layout/StyledInput";
-import StyledSelect from "elements/layout/StyledSelect";
-import StyledButton from "elements/layout/StyledButton";
+import S_Label from "elements/layout/S_Label";
+import S_Input from "elements/layout/S_Input";
+import S_Select from "elements/layout/S_Select";
+import S_Button from "elements/layout/S_Button";
 
-const StyledForm = styled.form`
+const S_Form = styled.form`
   margin-top: 30px;
   box-shadow: ${(props) => props.theme.shadow};
   border-radius: ${(props) => props.theme.radius};
@@ -99,28 +99,26 @@ const Form: React.FC = () => {
   };
 
   return (
-    <StyledForm onSubmit={(e) => handleSubmit(e)}>
+    <S_Form onSubmit={(e) => handleSubmit(e)}>
       {fields.map((field) => (
         <div className="transferField" key={field.label}>
-          <StyledLabel htmlFor={field.label.toLowerCase()}>
-            {field.label}
-          </StyledLabel>
+          <S_Label htmlFor={field.label.toLowerCase()}>{field.label}</S_Label>
           {!field.isSelect ? (
-            <StyledInput type={field.type} id={field.label.toLowerCase()} />
+            <S_Input type={field.type} id={field.label.toLowerCase()} />
           ) : (
-            <StyledSelect id={field.label.toLowerCase()}>
+            <S_Select id={field.label.toLowerCase()}>
               <option value="PLN">{"PLN (balance: 200zł)"}</option>
               <option value="EUR">{"EUR (balance: 35€)"}</option>
               <option value="USD">{"USD (balance: 40$)"}</option>
               <option value="CHF">{"CHF (balance: 25₣)"}</option>
-            </StyledSelect>
+            </S_Select>
           )}
         </div>
       ))}
-      <StyledButton as={"button"} type="submit">
+      <S_Button as={"button"} type="submit">
         Send transfer
-      </StyledButton>
-    </StyledForm>
+      </S_Button>
+    </S_Form>
   );
 };
 

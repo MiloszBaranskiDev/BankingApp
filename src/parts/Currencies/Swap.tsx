@@ -2,7 +2,7 @@ import styled from "styled-components";
 import SwapArrows from "elements/Currencies/SwapArrows";
 import SwapCurrency from "elements/Currencies/SwapCurrency";
 
-const StyledSwap = styled.div`
+const S_Swap = styled.div`
   margin: 60px 0;
   background-color: ${(props) => props.theme.colors.bgc};
   padding: ${(props) => props.theme.tilePadding};
@@ -10,7 +10,7 @@ const StyledSwap = styled.div`
   box-shadow: ${(props) => props.theme.shadow};
 `;
 
-const StyledBox = styled.div`
+const S_Box = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,13 +24,13 @@ const StyledBox = styled.div`
 
 const Swap: React.FC = () => {
   return (
-    <StyledSwap>
-      <StyledBox>
+    <S_Swap>
+      <S_Box>
         <SwapCurrency outgoing={true} />
         <SwapArrows />
         <SwapCurrency outgoing={false} />
-      </StyledBox>
-    </StyledSwap>
+      </S_Box>
+    </S_Swap>
   );
 };
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledButton = styled.a`
+const S_Button = styled.a`
   color: white;
   cursor: pointer;
   user-select: none;
@@ -20,4 +20,4 @@ const StyledButton = styled.a`
   }
 `;
 
-export default StyledButton;
+export default S_Button;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledSwapArrows = styled.i`
+const S_SwapArrows = styled.i`
   cursor: pointer;
   font-size: 36px;
   text-align: center;
@@ -19,7 +19,7 @@ const StyledSwapArrows = styled.i`
 `;
 
 const SwapArrows: React.FC = () => {
-  return <StyledSwapArrows className="fas fa-exchange-alt"></StyledSwapArrows>;
+  return <S_SwapArrows className="fas fa-exchange-alt"></S_SwapArrows>;
 };
 
 export default SwapArrows;

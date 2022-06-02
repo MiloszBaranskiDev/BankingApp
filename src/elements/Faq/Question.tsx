@@ -6,7 +6,7 @@ interface Props {
   question: string;
 }
 
-const StyledQuestion = styled.a`
+const S_Question = styled.a`
   display: flex;
   align-items: center;
   user-select: none;
@@ -27,12 +27,12 @@ const StyledQuestion = styled.a`
 
 const Question: React.FC<Props> = ({ open, setOpen, question }) => {
   return (
-    <StyledQuestion onClick={() => setOpen(!open)} role="button">
+    <S_Question onClick={() => setOpen(!open)} role="button">
       <i
         className={open ? "fas fa-chevron-up reverse" : "fas fa-chevron-up"}
       ></i>
       {question}
-    </StyledQuestion>
+    </S_Question>
   );
 };
 

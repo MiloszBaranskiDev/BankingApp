@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import theme from "Theme";
-import StyledWrapper from "elements/layout/StyledWrapper";
+import S_Wrapper from "elements/layout/S_Wrapper";
 import Navbar from "parts/Navbar";
 import Home from "views/Home";
 import Wallet from "views/Wallet";
@@ -23,7 +23,7 @@ const App: React.FC = () => {
       <div className="App" style={{ backgroundColor: theme.colors.bgc_dark }}>
         <ThemeProvider theme={theme}>
           <Navbar />
-          <StyledWrapper>
+          <S_Wrapper>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/wallet" element={<Wallet />} />
@@ -42,7 +42,7 @@ const App: React.FC = () => {
                 element={<SingleNotification />}
               />
             </Routes>
-          </StyledWrapper>
+          </S_Wrapper>
         </ThemeProvider>
       </div>
     </BrowserRouter>

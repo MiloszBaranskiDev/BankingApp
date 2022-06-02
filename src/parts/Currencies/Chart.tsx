@@ -10,7 +10,7 @@ import {
 import { Line } from "react-chartjs-2";
 import styled, { useTheme } from "styled-components";
 import Loader from "elements/Loader";
-import StyledHeading from "elements/layout/StyledHeading";
+import S_Heading from "elements/layout/S_Heading";
 import ChartDates from "elements/Currencies/ChartDates";
 import GetTodayDate from "utils/GetTodayDate";
 import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";
@@ -58,7 +58,7 @@ const options: object = {
   },
 };
 
-const StyledChart = styled.div`
+const S_Chart = styled.div`
   margin-bottom: 24px;
   background-color: ${(props) => props.theme.colors.bgc};
   padding: ${(props) => props.theme.tilePadding};
@@ -117,8 +117,8 @@ const Chart: React.FC<Props> = ({ symbol }) => {
   }, [chartData]);
 
   return (
-    <StyledChart>
-      <StyledHeading>{symbol}/PLN</StyledHeading>
+    <S_Chart>
+      <S_Heading>{symbol}/PLN</S_Heading>
       <ChartDates
         startDate={startDate}
         endDate={endDate}
@@ -130,7 +130,7 @@ const Chart: React.FC<Props> = ({ symbol }) => {
       ) : (
         <Loader />
       )}
-    </StyledChart>
+    </S_Chart>
   );
 };
 

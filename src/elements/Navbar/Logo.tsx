@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledLogo = styled.p`
+const S_Logo = styled.p`
   margin-right: 25px;
   color: ${(props) => props.theme.colors.main};
   font-weight: ${(props) => props.theme.typography.weight_bold};
@@ -13,10 +13,10 @@ const StyledLogo = styled.p`
 
 const Logo: React.FC = () => {
   return (
-    <StyledLogo>
+    <S_Logo>
       <i className="fas fa-wallet"></i>
       BankingApp
-    </StyledLogo>
+    </S_Logo>
   );
 };
 

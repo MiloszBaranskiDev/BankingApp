@@ -5,7 +5,7 @@ interface Props {
   answer: string;
 }
 
-const StyledAnswer = styled.p`
+const S_Answer = styled.p`
   width: 0;
   height: 0;
   padding: 0;
@@ -22,7 +22,7 @@ const StyledAnswer = styled.p`
 `;
 
 const Answer: React.FC<Props> = ({ className, answer }) => {
-  return <StyledAnswer className={className}>{answer}</StyledAnswer>;
+  return <S_Answer className={className}>{answer}</S_Answer>;
 };
 
 export default Answer;

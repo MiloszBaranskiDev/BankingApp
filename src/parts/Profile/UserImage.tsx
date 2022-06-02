@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Image from "elements/Profile/Image";
 import ImageButtons from "elements/Profile/ImageButtons";
 
-const StyledUserImage = styled.div`
+const S_UserImage = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -12,10 +12,10 @@ const UserImage: React.FC = () => {
   const [imageInput, setImageInput] = useState<string>();
 
   return (
-    <StyledUserImage>
+    <S_UserImage>
       <Image />
       <ImageButtons />
-    </StyledUserImage>
+    </S_UserImage>
   );
 };
 

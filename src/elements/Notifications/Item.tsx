@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-const StyledItem = styled.li`
+const S_Item = styled.li`
   margin-bottom: 20px;
   border: 1px solid transparent;
   opacity: 0.5;
@@ -49,7 +49,7 @@ const StyledItem = styled.li`
 
 const Item: React.FC = () => {
   return (
-    <StyledItem>
+    <S_Item>
       <NavLink to={`/notification/22`} className="notification">
         <div className="icon">
           <i className="fas fa-arrow-down"></i>
@@ -57,7 +57,7 @@ const Item: React.FC = () => {
         <p className="title">Notification</p>
         <p className="time">7 hours ago</p>
       </NavLink>
-    </StyledItem>
+    </S_Item>
   );
 };
 

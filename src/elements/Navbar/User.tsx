@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import HandleClickOutside from "utils/HandleClickOutside";
 
-const StyledContainer = styled.div`
+const S_Container = styled.div`
   position: relative;
   width: 40px;
   height: 40px;
 `;
 
-const StyledIcon = styled.button`
+const S_Icon = styled.button`
   margin-left: 8px;
   width: 100%;
   height: 100%;
@@ -25,7 +25,7 @@ const StyledIcon = styled.button`
   }
 `;
 
-const StyledUserMenu = styled.div`
+const S_UserMenu = styled.div`
   position: absolute;
   top: 60px;
   right: 0;
@@ -77,8 +77,8 @@ const User: React.FC = () => {
   }, [showUserMenu]);
 
   return (
-    <StyledContainer ref={submenuRef}>
-      <StyledIcon
+    <S_Container ref={submenuRef}>
+      <S_Icon
         onClick={() => setShowUserMenu((showUserMenu) => !showUserMenu)}
         style={{
           backgroundImage:
@@ -86,7 +86,7 @@ const User: React.FC = () => {
         }}
       />
       {showUserMenu ? (
-        <StyledUserMenu>
+        <S_UserMenu>
           <div className="top">
             <h3>Name</h3>
             <p>Bank account</p>
@@ -111,9 +111,9 @@ const User: React.FC = () => {
               </NavLink>
             </li>
           </ul>
-        </StyledUserMenu>
+        </S_UserMenu>
       ) : null}
-    </StyledContainer>
+    </S_Container>
   );
 };
 

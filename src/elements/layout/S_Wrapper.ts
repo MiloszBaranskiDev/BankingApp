@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-const StyledWrapper = styled.div`
+const S_Wrapper = styled.div`
   width: 90%;
   max-width: 1260px;
   margin: 0 auto;
 `;
 
-export default StyledWrapper;
+export default S_Wrapper;

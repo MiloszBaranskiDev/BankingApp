@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledBalanceAmount = styled.p`
+const S_TotalBalanceAmount = styled.p`
   display: flex;
   align-items: center;
   margin-bottom: 3px;
@@ -14,12 +14,12 @@ const StyledBalanceAmount = styled.p`
   }
 `;
 
-const BalanceAmount: React.FC = () => {
+const TotalBalanceAmount: React.FC = () => {
   return (
-    <StyledBalanceAmount>
+    <S_TotalBalanceAmount>
       ~15000 PLN <span>+15%**</span>
-    </StyledBalanceAmount>
+    </S_TotalBalanceAmount>
   );
 };
 
-export default BalanceAmount;
+export default TotalBalanceAmount;

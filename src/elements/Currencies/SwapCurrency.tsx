@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import StyledHeading from "elements/layout/StyledHeading";
-import StyledSelect from "elements/layout/StyledSelect";
-import StyledInput from "elements/layout/StyledInput";
+import S_Heading from "elements/layout/S_Heading";
+import S_Select from "elements/layout/S_Select";
+import S_Input from "elements/layout/S_Input";
 
 interface Props {
   outgoing: boolean;
 }
 
-const StyledSwapCurrency = styled.div`
+const S_SwapCurrency = styled.div`
   input,
   select {
     margin-bottom: 12px;
@@ -19,16 +19,16 @@ const StyledSwapCurrency = styled.div`
 
 const SwapCurrency: React.FC<Props> = ({ outgoing }) => {
   return (
-    <StyledSwapCurrency>
-      <StyledHeading>{outgoing ? "From" : "To"}</StyledHeading>
-      <StyledSelect>
+    <S_SwapCurrency>
+      <S_Heading>{outgoing ? "From" : "To"}</S_Heading>
+      <S_Select>
         <option value="PLN">{"PLN (balance: 200zł)"}</option>
         <option value="EUR">{"EUR (balance: 35€)"}</option>
         <option value="USD">{"USD (balance: 40$)"}</option>
-      </StyledSelect>
-      <StyledInput type="number" placeholder="Enter amount" />
+      </S_Select>
+      <S_Input type="number" placeholder="Enter amount" />
       <p>Balance after: 500</p>
-    </StyledSwapCurrency>
+    </S_SwapCurrency>
   );
 };
 

@@ -1,10 +1,10 @@
-import StyledPageTitle from "elements/layout/StyledPageTitle";
+import S_PageTitle from "elements/layout/S_PageTitle";
 import List from "parts/Notifications/List";
 
 const Notifications: React.FC = () => {
   return (
     <>
-      <StyledPageTitle>Notifications</StyledPageTitle>
+      <S_PageTitle>Notifications</S_PageTitle>
       <List />
     </>
   );

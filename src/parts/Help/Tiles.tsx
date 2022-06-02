@@ -2,7 +2,7 @@ import styled from "styled-components";
 import FaqTile from "elements/Help/FaqTile";
 import ChatTile from "elements/Help/ChatTile";
 
-const StyledTiles = styled.div`
+const S_Tiles = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -40,10 +40,10 @@ const StyledTiles = styled.div`
 
 const Tiles: React.FC = () => {
   return (
-    <StyledTiles>
+    <S_Tiles>
       <FaqTile />
       <ChatTile />
-    </StyledTiles>
+    </S_Tiles>
   );
 };
 

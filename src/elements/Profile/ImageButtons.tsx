@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import styled from "styled-components";
-import StyledButton from "elements/layout/StyledButton";
+import S_Button from "elements/layout/S_Button";
 
-const StyledImageButtons = styled.div`
+const S_ImageButtons = styled.div`
   display: flex;
   flex-direction: column;
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
@@ -36,13 +36,13 @@ const ImageButtons: React.FC = () => {
   };
 
   return (
-    <StyledImageButtons>
+    <S_ImageButtons>
       <input ref={uploadInput} type="file" accept="image/*" hidden />
-      <StyledButton onClick={handleUpload} as="button">
+      <S_Button onClick={handleUpload} as="button">
         Upload new photo
-      </StyledButton>
-      <StyledButton as="button">Remove</StyledButton>
-    </StyledImageButtons>
+      </S_Button>
+      <S_Button as="button">Remove</S_Button>
+    </S_ImageButtons>
   );
 };
 

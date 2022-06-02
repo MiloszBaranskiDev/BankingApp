@@ -1,9 +1,9 @@
-import StyledPageTitle from "elements/layout/StyledPageTitle";
+import S_PageTitle from "elements/layout/S_PageTitle";
 
 const Chat: React.FC = () => {
   return (
     <>
-      <StyledPageTitle>Chat</StyledPageTitle>
+      <S_PageTitle>Chat</S_PageTitle>
     </>
   );
 };
