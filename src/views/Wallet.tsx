@@ -5,7 +5,6 @@ import TotalBalance from "parts/Wallet/TotalBalance";
 import CurrenciesBalance from "parts/Wallet/CurrenciesBalance";
 
 const S_Box = styled.div`
-  margin-top: 30px;
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     display: flex;
     justify-content: space-between;

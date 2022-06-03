@@ -42,7 +42,6 @@ const S_Item = styled.li`
     border-color: ${(props) => props.theme.colors.main};
   }
   &:first-child {
-    margin-top: 30px;
     opacity: 1;
   }
 `;

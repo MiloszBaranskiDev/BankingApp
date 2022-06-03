@@ -5,7 +5,6 @@ import S_Select from "elements/layout/S_Select";
 import S_Button from "elements/layout/S_Button";
 
 const S_Form = styled.form`
-  margin-top: 30px;
   box-shadow: ${(props) => props.theme.shadow};
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};

@@ -12,7 +12,6 @@ interface Props {
 }
 
 const S_Tiles = styled.div`
-  margin-top: 30px;
   h2 {
     flex-basis: 100%;
   }

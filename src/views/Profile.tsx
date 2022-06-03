@@ -4,6 +4,7 @@ import UserImage from "parts/Profile/UserImage";
 import UserFields from "parts/Profile/UserFields";
 
 const S_Profile = styled.div`
+  box-shadow: ${(props) => props.theme.shadow};
   background-color: ${(props) => props.theme.colors.bgc};
   border-radius: ${(props) => props.theme.radius};
   padding: ${(props) => props.theme.tilePadding};
