@@ -1,4 +1,6 @@
+import { useState, useEffect } from "react";
 import styled from "styled-components";
+import TypingAnimation from "./TypingAnimation";
 
 interface Props {
   text: string;
@@ -36,10 +38,27 @@ const S_Hour = styled.p`
 `;
 
 const Message: React.FC<Props> = ({ text, hour, user }) => {
+  const [typingAnimation, setTypingAnimation] = useState<boolean>(
+    !user ? true : false
+  );
+
+  useEffect(() => {
+    !user &&
+      setTimeout(function () {
+        setTypingAnimation(false);
+      }, 2000);
+  }, []);
+
   return (
     <S_Message className={`${user ? "message-user" : ""}`}>
-      <S_Text>{text}</S_Text>
-      <S_Hour>{hour}</S_Hour>
+      {!typingAnimation ? (
+        <>
+          <S_Text>{text}</S_Text>
+          <S_Hour>{hour}</S_Hour>
+        </>
+      ) : (
+        <TypingAnimation />
+      )}
     </S_Message>
   );
 };

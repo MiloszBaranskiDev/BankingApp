@@ -10,6 +10,7 @@ const S_Loader = styled.div`
 
 const Loader: React.FC = () => {
   const theme: any = useTheme();
+
   return (
     <S_Loader>
       <RotatingLines width="60" strokeColor={theme.colors.main} />

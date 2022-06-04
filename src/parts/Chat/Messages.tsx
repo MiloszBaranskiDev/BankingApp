@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Message from "elements/Chat/Message";
 
@@ -20,11 +21,23 @@ const S_Messages = styled.div`
   background-color: ${(props) => props.theme.colors.bgc};
   border-radius: ${(props) => props.theme.radius};
   padding: ${(props) => props.theme.tilePadding};
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    height: 420px;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+    height: 480px;
+  }
 `;
 
 const Messages: React.FC<Props> = ({ messages }) => {
+  const refMessages: any = useRef();
+
+  useEffect(() => {
+    refMessages.current.scrollTop = refMessages.current.scrollHeight;
+  }, [messages]);
+
   return (
-    <S_Messages>
+    <S_Messages ref={refMessages}>
       {messages.map((message) => (
         <Message
           text={message.text}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import GetCurrentHour from "utils/GetCurrentHour";
+import GetMessageId from "utils/GetMessageId";
 import S_Input from "elements/layout/S_Input";
 import S_Button from "elements/layout/S_Button";
 import Emoji from "elements/Chat/Emoji";
@@ -46,7 +47,7 @@ const Controls: React.FC<Props> = ({ messages, setMessages }) => {
           text: inputValue,
           hour: GetCurrentHour(),
           user: true,
-          id: Math.floor(1000 + Math.random() * 9000),
+          id: GetMessageId(),
         },
       ]);
       setInputValue("");

@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import GetCurrentHour from "utils/GetCurrentHour";
+import GetRandomMessage from "utils/GetRandomMessage";
 import S_PageTitle from "elements/layout/S_PageTitle";
 import Messages from "parts/Chat/Messages";
 import Controls from "parts/Chat/Controls";
@@ -27,13 +28,13 @@ const Chat: React.FC = () => {
       user: false,
       id: 1337,
     },
-    {
-      text: "Hello, I can't swap my currencies.",
-      hour: GetCurrentHour(),
-      user: true,
-      id: 2003,
-    },
   ]);
+
+  useEffect(() => {
+    if (messages.length > 1 && messages[messages.length - 1].user === true) {
+      setMessages([...messages, GetRandomMessage()]);
+    }
+  }, [messages]);
 
   return (
     <>
