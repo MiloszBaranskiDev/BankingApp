@@ -1,7 +1,7 @@
 ## Stack
 
 - React with TypeScript
-- Redux
+- Redux Toolkit
 - React Router
 - Chart.js
 - emoji-picker-react

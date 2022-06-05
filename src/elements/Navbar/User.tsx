@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { RootState } from "redux/store";
+import { useSelector } from "react-redux";
+import styled from "styled-components";
 import HandleClickOutside from "utils/HandleClickOutside";
 
 const S_Container = styled.div`
@@ -69,6 +71,7 @@ const S_UserMenu = styled.div`
 `;
 
 const User: React.FC = () => {
+  const { image } = useSelector((state: RootState) => state.user);
   const submenuRef: any = useRef();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
 
@@ -81,8 +84,7 @@ const User: React.FC = () => {
       <S_Icon
         onClick={() => setShowUserMenu((showUserMenu) => !showUserMenu)}
         style={{
-          backgroundImage:
-            "url('https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg')",
+          backgroundImage: `url(${image})`,
         }}
       />
       {showUserMenu ? (

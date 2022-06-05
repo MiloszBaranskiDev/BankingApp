@@ -1,6 +1,13 @@
 import styled from "styled-components";
-import S_Label from "elements/layout/S_Label";
-import S_Input from "elements/layout/S_Input";
+import { RootState } from "redux/store";
+import { useSelector } from "react-redux";
+import Field from "elements/Profile/Field";
+
+interface IField {
+  label: string;
+  type: string;
+  value: string | number;
+}
 
 const S_UserFields = styled.div`
   margin-top: 30px;
@@ -20,47 +27,41 @@ const S_UserFields = styled.div`
   }
 `;
 
-interface IFields {
-  label: string;
-  type: string;
-  value: string | number;
-}
-
 const UserFields: React.FC = () => {
-  const fields: IFields[] = [
+  const user = useSelector((state: RootState) => state.user);
+
+  const fields: IField[] = [
     {
       label: "Login",
       type: "string",
-      value: null as any,
+      value: user.login,
     },
     {
       label: "E-mail",
       type: "email",
-      value: null as any,
+      value: user.email,
     },
     {
       label: "Phone",
       type: "number",
-      value: null as any,
+      value: user.phone,
     },
     {
       label: "Address",
       type: "string",
-      value: null as any,
+      value: user.address,
     },
   ];
 
   return (
     <S_UserFields>
       {fields.map((field) => (
-        <div className="userField" key={field.label}>
-          <S_Label htmlFor={field.label.toLowerCase()}>{field.label}</S_Label>
-          <S_Input
-            value={field.value}
-            type={field.type}
-            id={field.label.toLowerCase()}
-          />
-        </div>
+        <Field
+          label={field.label}
+          type={field.type}
+          value={field.value}
+          key={field.label}
+        />
       ))}
     </S_UserFields>
   );

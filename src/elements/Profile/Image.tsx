@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { RootState } from "redux/store";
+import { useSelector } from "react-redux";
 
 const S_Image = styled.img`
   width: 100px;
@@ -10,9 +12,9 @@ const S_Image = styled.img`
 `;
 
 const Image: React.FC = () => {
-  return (
-    <S_Image src="https://cdn.pixabay.com/photo/2016/11/18/19/07/happy-1836445_960_720.jpg" />
-  );
+  const { image } = useSelector((state: RootState) => state.user);
+
+  return <S_Image src={image} />;
 };
 
 export default Image;
