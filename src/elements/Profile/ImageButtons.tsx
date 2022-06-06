@@ -1,5 +1,7 @@
-import { useRef } from "react";
 import styled from "styled-components";
+import { useRef } from "react";
+import { editUser } from "redux/slices/UserSlice";
+import { useDispatch } from "react-redux";
 import S_Button from "elements/layout/S_Button";
 
 const S_ImageButtons = styled.div`
@@ -24,15 +26,26 @@ const S_ImageButtons = styled.div`
 
 const ImageButtons: React.FC = () => {
   const uploadInput: any = useRef();
+  const dispatch = useDispatch();
 
   const handleUpload = () => {
     uploadInput.current.click();
     uploadInput.current.addEventListener(
       "change",
       (e: { target: { files: (Blob | MediaSource)[] } }) => {
-        console.log(URL.createObjectURL(e.target.files[0]));
+        dispatch(
+          editUser({
+            label: "image",
+            value: URL.createObjectURL(e.target.files[0]),
+          })
+        );
       }
     );
+  };
+
+  const handleRemove = () => {
+    dispatch(editUser({ label: "image", value: "/user_image_default.png" }));
+    uploadInput.current.value = "";
   };
 
   return (
@@ -41,7 +54,9 @@ const ImageButtons: React.FC = () => {
       <S_Button onClick={handleUpload} as="button">
         Upload new photo
       </S_Button>
-      <S_Button as="button">Remove</S_Button>
+      <S_Button onClick={handleRemove} as="button">
+        Remove
+      </S_Button>
     </S_ImageButtons>
   );
 };

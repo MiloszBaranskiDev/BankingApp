@@ -5,6 +5,12 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import HandleClickOutside from "utils/HandleClickOutside";
 
+interface IUserField {
+  label: string;
+  type: string;
+  value: string;
+}
+
 const S_Container = styled.div`
   position: relative;
   width: 40px;
@@ -71,7 +77,13 @@ const S_UserMenu = styled.div`
 `;
 
 const User: React.FC = () => {
-  const { image } = useSelector((state: RootState) => state.user);
+  const userFields: IUserField[] = useSelector(
+    (state: RootState) => state.user
+  );
+  const imagePath: string = userFields.find(
+    (item) => item.label === "image"
+  )!.value;
+
   const submenuRef: any = useRef();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
 
@@ -84,7 +96,7 @@ const User: React.FC = () => {
       <S_Icon
         onClick={() => setShowUserMenu((showUserMenu) => !showUserMenu)}
         style={{
-          backgroundImage: `url(${image})`,
+          backgroundImage: `url(${imagePath})`,
         }}
       />
       {showUserMenu ? (

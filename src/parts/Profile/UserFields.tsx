@@ -3,10 +3,10 @@ import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import Field from "elements/Profile/Field";
 
-interface IField {
+interface IUserField {
   label: string;
   type: string;
-  value: string | number;
+  value: string;
 }
 
 const S_UserFields = styled.div`
@@ -28,34 +28,13 @@ const S_UserFields = styled.div`
 `;
 
 const UserFields: React.FC = () => {
-  const user = useSelector((state: RootState) => state.user);
-
-  const fields: IField[] = [
-    {
-      label: "Login",
-      type: "string",
-      value: user.login,
-    },
-    {
-      label: "E-mail",
-      type: "email",
-      value: user.email,
-    },
-    {
-      label: "Phone",
-      type: "number",
-      value: user.phone,
-    },
-    {
-      label: "Address",
-      type: "string",
-      value: user.address,
-    },
-  ];
+  const userFields: IUserField[] = useSelector(
+    (state: RootState) => state.user
+  );
 
   return (
     <S_UserFields>
-      {fields.map((field) => (
+      {userFields.map((field: IUserField) => (
         <Field
           label={field.label}
           type={field.type}

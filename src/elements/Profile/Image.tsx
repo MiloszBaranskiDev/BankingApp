@@ -2,6 +2,12 @@ import styled from "styled-components";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 
+interface IUserField {
+  label: string;
+  type: string;
+  value: string;
+}
+
 const S_Image = styled.img`
   width: 100px;
   height: 100px;
@@ -12,9 +18,15 @@ const S_Image = styled.img`
 `;
 
 const Image: React.FC = () => {
-  const { image } = useSelector((state: RootState) => state.user);
+  const userFields: IUserField[] = useSelector(
+    (state: RootState) => state.user
+  );
 
-  return <S_Image src={image} />;
+  const imagePath: string = userFields.find(
+    (item) => item.label === "image"
+  )!.value;
+
+  return <S_Image src={imagePath} />;
 };
 
 export default Image;

@@ -1,37 +1,57 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface IUserState {
-  login: string;
-  email: string;
-  phone: number;
-  address: string;
-  image: string;
+interface IUserField {
+  label: string;
+  type: string;
+  value: string;
 }
 
-const initialState: IUserState = {
-  login: "user",
-  email: "user@email.com",
-  phone: +48123456789,
-  address: "Example address",
-  image: "/user_image.webp",
-};
+interface IPayload {
+  label: string;
+  value: string;
+}
+
+const initialState: IUserField[] = [
+  {
+    label: "login",
+    type: "text",
+    value: "user",
+  },
+  {
+    label: "e-mail",
+    type: "email",
+    value: "user@email.com",
+  },
+  {
+    label: "phone",
+    type: "number",
+    value: "123456789",
+  },
+  {
+    label: "address",
+    type: "text",
+    value: "Lorem address",
+  },
+  {
+    label: "image",
+    type: null as any,
+    value: "/user_image.webp",
+  },
+];
 
 export const UserSlice = createSlice({
   name: "UserSlice",
   initialState,
   reducers: {
-    increment: (state) => {
-      // state.value += 1;
-    },
-    decrement: (state) => {
-      // state.value -= 1;
-    },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      // state.value += action.payload;
+    editUser: (state, action: PayloadAction<IPayload>) => {
+      const { label, value } = action.payload;
+      const index: number = state.findIndex((item) => item.label === label);
+
+      state[index].value = value;
     },
   },
 });
 
-export const { increment, decrement, incrementByAmount } = UserSlice.actions;
+export const { editUser } = UserSlice.actions;
 
 export default UserSlice.reducer;
