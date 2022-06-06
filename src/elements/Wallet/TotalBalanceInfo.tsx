@@ -10,7 +10,7 @@ const TotalBalanceInfo: React.FC = () => {
       <S_TotalBalanceInfo>
         *All currencies converted into PLN
       </S_TotalBalanceInfo>
-      <S_TotalBalanceInfo>**Compared to month ago</S_TotalBalanceInfo>
+      <S_TotalBalanceInfo>**Compared to 24h ago</S_TotalBalanceInfo>
     </>
   );
 };
