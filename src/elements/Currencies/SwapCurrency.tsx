@@ -10,9 +10,9 @@ interface ICurrency {
 
 interface Props {
   wallet: ICurrency[];
-  outgoing: boolean;
   swapCurrency: string;
   setSwapCurrency: (arg0: string) => void;
+  outgoing: boolean;
 }
 
 const S_SwapCurrency = styled.div`
@@ -27,9 +27,9 @@ const S_SwapCurrency = styled.div`
 
 const SwapCurrency: React.FC<Props> = ({
   wallet,
-  outgoing,
   swapCurrency,
   setSwapCurrency,
+  outgoing,
 }) => {
   return (
     <S_SwapCurrency>
@@ -38,7 +38,7 @@ const SwapCurrency: React.FC<Props> = ({
         value={swapCurrency}
         onChange={(e) => setSwapCurrency(e.target.value)}
       >
-        {wallet.map((currency: ICurrency) => (
+        {wallet.map((currency) => (
           <option
             value={currency.symbol}
             key={currency.symbol}

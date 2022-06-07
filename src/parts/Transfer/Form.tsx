@@ -1,8 +1,22 @@
+import { RootState } from "redux/store";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import S_Label from "elements/layout/S_Label";
 import S_Input from "elements/layout/S_Input";
 import S_Select from "elements/layout/S_Select";
 import S_Button from "elements/layout/S_Button";
+
+interface ICurrency {
+  symbol: string;
+  price?: number;
+  amount?: number;
+}
+
+interface IFields {
+  label: string;
+  type: string;
+  isSelect?: boolean;
+}
 
 const S_Form = styled.form`
   box-shadow: ${(props) => props.theme.shadow};
@@ -29,40 +43,36 @@ const S_Form = styled.form`
   }
 `;
 
-interface IFields {
-  label: string;
-  type: string;
-  isSelect?: boolean;
-}
+const fields: IFields[] = [
+  {
+    label: "Recipient",
+    type: "text",
+  },
+  {
+    label: "Account No.",
+    type: "text",
+  },
+  {
+    label: "Address",
+    type: "text",
+  },
+  {
+    label: "Currency",
+    isSelect: true,
+    type: null as any,
+  },
+  {
+    label: "Amount",
+    type: "number",
+  },
+  {
+    label: "Title",
+    type: "text",
+  },
+];
 
 const Form: React.FC = () => {
-  const fields: IFields[] = [
-    {
-      label: "Recipient",
-      type: "string",
-    },
-    {
-      label: "Account No.",
-      type: "string",
-    },
-    {
-      label: "Address",
-      type: "string",
-    },
-    {
-      label: "Currency",
-      isSelect: true,
-      type: null as any,
-    },
-    {
-      label: "Amount",
-      type: "number",
-    },
-    {
-      label: "Title",
-      type: "string",
-    },
-  ];
+  const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -82,6 +92,7 @@ const Form: React.FC = () => {
       const field: HTMLElement | null = document.getElementById(
         `${key.toLowerCase()}`
       );
+
       value.length === 0
         ? field?.classList.add("field-error")
         : field?.classList.remove("field-error");
@@ -89,10 +100,13 @@ const Form: React.FC = () => {
 
     const target: HTMLFormElement = e.target as HTMLFormElement;
     const children: NodeListOf<ChildNode> = target.childNodes;
-    children.forEach((child: ChildNode) => {
+
+    children.forEach((child) => {
       const field = child.childNodes[1] as HTMLInputElement | HTMLSelectElement;
-      if (field?.nodeName === "INPUT" || field?.nodeName === "SELECT") {
-        field.value = "";
+      if (field !== undefined) {
+        field.nodeName === "SELECT"
+          ? (field.value = wallet[0].symbol)
+          : (field.value = "");
       }
     });
   };
@@ -103,13 +117,29 @@ const Form: React.FC = () => {
         <div className="transferField" key={field.label}>
           <S_Label htmlFor={field.label.toLowerCase()}>{field.label}</S_Label>
           {!field.isSelect ? (
-            <S_Input type={field.type} id={field.label.toLowerCase()} />
+            <>
+              {field.type === "text" ? (
+                <S_Input type={field.type} id={field.label.toLowerCase()} />
+              ) : (
+                <S_Input
+                  min={1}
+                  // max={wallet.find((item) => item.symbol === "image")!.amount}
+                  type={field.type}
+                  id={field.label.toLowerCase()}
+                />
+              )}
+            </>
           ) : (
-            <S_Select id={field.label.toLowerCase()}>
-              <option value="PLN">{"PLN (balance: 200zł)"}</option>
-              <option value="EUR">{"EUR (balance: 35€)"}</option>
-              <option value="USD">{"USD (balance: 40$)"}</option>
-              <option value="CHF">{"CHF (balance: 25₣)"}</option>
+            <S_Select
+              defaultValue={wallet[0].symbol}
+              id={field.label.toLowerCase()}
+            >
+              {wallet.map((currency) => (
+                <option
+                  value={currency.symbol}
+                  key={currency.symbol}
+                >{`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}</option>
+              ))}
             </S_Select>
           )}
         </div>

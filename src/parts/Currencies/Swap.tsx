@@ -38,8 +38,6 @@ const Swap: React.FC<Props> = ({ wallet }) => {
     wallet[wallet.length - 1].symbol
   );
 
-  console.log("from:", swapFrom, "to:", swapTo);
-
   return (
     <S_Swap>
       <S_Box>
