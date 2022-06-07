@@ -1,6 +1,16 @@
+import { useState } from "react";
 import styled from "styled-components";
 import SwapArrows from "elements/Currencies/SwapArrows";
 import SwapCurrency from "elements/Currencies/SwapCurrency";
+
+interface ICurrency {
+  symbol: string;
+  amount?: number;
+}
+
+interface Props {
+  wallet: ICurrency[];
+}
 
 const S_Swap = styled.div`
   margin: 60px 0;
@@ -22,13 +32,30 @@ const S_Box = styled.div`
   }
 `;
 
-const Swap: React.FC = () => {
+const Swap: React.FC<Props> = ({ wallet }) => {
+  const [swapFrom, setSwapFrom] = useState<string>(wallet[0].symbol);
+  const [swapTo, setSwapTo] = useState<string>(
+    wallet[wallet.length - 1].symbol
+  );
+
+  console.log("from:", swapFrom, "to:", swapTo);
+
   return (
     <S_Swap>
       <S_Box>
-        <SwapCurrency outgoing={true} />
+        <SwapCurrency
+          wallet={wallet}
+          swapCurrency={swapFrom}
+          setSwapCurrency={setSwapFrom}
+          outgoing={true}
+        />
         <SwapArrows />
-        <SwapCurrency outgoing={false} />
+        <SwapCurrency
+          wallet={wallet}
+          swapCurrency={swapTo}
+          setSwapCurrency={setSwapTo}
+          outgoing={false}
+        />
       </S_Box>
     </S_Swap>
   );

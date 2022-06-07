@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { RootState } from "redux/store";
+import { useSelector } from "react-redux";
 import GetCurrenciesPrices from "api/GetCurrenciesPrices";
 import S_PageTitle from "elements/layout/S_PageTitle";
 import Loader from "elements/Loader";
@@ -9,6 +11,7 @@ import Chart from "parts/Currencies/Chart";
 interface ICurrency {
   symbol: string;
   price?: number;
+  amount?: number;
 }
 
 interface ILoadPrices {
@@ -16,13 +19,15 @@ interface ILoadPrices {
 }
 
 const Currencies: React.FC = () => {
+  const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
+  const symbols: string[] = wallet.map((currency) => currency.symbol);
+  const initCurrencies: ICurrency[] = [];
+  symbols.forEach((symbol: string) => {
+    symbol !== "PLN" && initCurrencies.push({ symbol: symbol.toLowerCase() });
+  });
+
   const [loading, setLoading] = useState<boolean>(true);
-  const [currencies, setCurrencies] = useState<ICurrency[]>([
-    { symbol: "eur" },
-    { symbol: "usd" },
-    { symbol: "gbp" },
-    { symbol: "chf" },
-  ]);
+  const [currencies, setCurrencies] = useState<ICurrency[]>(initCurrencies);
 
   const loadPrices: ILoadPrices = async (currencies) => {
     const loadedData = await GetCurrenciesPrices(currencies);
@@ -46,7 +51,7 @@ const Currencies: React.FC = () => {
       {!loading ? (
         <>
           <Tiles currencies={currencies} />
-          <Swap />
+          <Swap wallet={wallet} />
           {currencies.map((currency: ICurrency) => (
             <Chart symbol={currency.symbol} key={currency.symbol} />
           ))}

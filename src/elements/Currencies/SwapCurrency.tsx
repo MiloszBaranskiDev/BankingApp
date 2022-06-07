@@ -3,8 +3,16 @@ import S_Heading from "elements/layout/S_Heading";
 import S_Select from "elements/layout/S_Select";
 import S_Input from "elements/layout/S_Input";
 
+interface ICurrency {
+  symbol: string;
+  amount?: number;
+}
+
 interface Props {
+  wallet: ICurrency[];
   outgoing: boolean;
+  swapCurrency: string;
+  setSwapCurrency: (arg0: string) => void;
 }
 
 const S_SwapCurrency = styled.div`
@@ -17,17 +25,28 @@ const S_SwapCurrency = styled.div`
   }
 `;
 
-const SwapCurrency: React.FC<Props> = ({ outgoing }) => {
+const SwapCurrency: React.FC<Props> = ({
+  wallet,
+  outgoing,
+  swapCurrency,
+  setSwapCurrency,
+}) => {
   return (
     <S_SwapCurrency>
       <S_Heading>{outgoing ? "From" : "To"}</S_Heading>
-      <S_Select>
-        <option value="PLN">{"PLN (balance: 200zł)"}</option>
-        <option value="EUR">{"EUR (balance: 35€)"}</option>
-        <option value="USD">{"USD (balance: 40$)"}</option>
+      <S_Select
+        value={swapCurrency}
+        onChange={(e) => setSwapCurrency(e.target.value)}
+      >
+        {wallet.map((currency: ICurrency) => (
+          <option
+            value={currency.symbol}
+            key={currency.symbol}
+          >{`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}</option>
+        ))}
       </S_Select>
       <S_Input type="number" placeholder="Enter amount" />
-      <p>Balance after: 500</p>
+      <p>Balance after: 500 {swapCurrency}</p>
     </S_SwapCurrency>
   );
 };
