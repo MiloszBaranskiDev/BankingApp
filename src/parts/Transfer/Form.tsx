@@ -1,5 +1,6 @@
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 import styled from "styled-components";
 import S_Label from "elements/layout/S_Label";
 import S_Input from "elements/layout/S_Input";
@@ -16,6 +17,11 @@ interface IFields {
   label: string;
   type: string;
   isSelect?: boolean;
+}
+
+interface IFormData {
+  label: string;
+  value: string | number;
 }
 
 const S_Form = styled.form`
@@ -36,10 +42,6 @@ const S_Form = styled.form`
   }
   .transferField {
     margin-bottom: 12px;
-    .field-error {
-      color: red;
-      border-color: red;
-    }
   }
 `;
 
@@ -74,65 +76,41 @@ const fields: IFields[] = [
 const Form: React.FC = () => {
   const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
 
+  const initFormData: IFormData[] = [];
+  fields.forEach((field) => {
+    initFormData.push({ label: field.label, value: null as any });
+  });
+
+  const [formData, setFormData] = useState<IFormData[]>(initFormData);
+
+  const handleChange = (label: string, value: string | number) => {
+    const index: number = formData.findIndex((item) => item.label === label);
+    let newFormData: IFormData[] = [...formData];
+    newFormData[index].value = value;
+    setFormData(newFormData);
+  };
+
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-
-    const values: object = Array.prototype.slice
-      .call(e.target)
-      .filter((el) => el.id)
-      .reduce(
-        (form, el) => ({
-          ...form,
-          [el.id]: el.value,
-        }),
-        {}
-      );
-
-    Object.entries(values).forEach(([key, value]) => {
-      const field: HTMLElement | null = document.getElementById(
-        `${key.toLowerCase()}`
-      );
-
-      value.length === 0
-        ? field?.classList.add("field-error")
-        : field?.classList.remove("field-error");
-    });
-
-    const target: HTMLFormElement = e.target as HTMLFormElement;
-    const children: NodeListOf<ChildNode> = target.childNodes;
-
-    children.forEach((child) => {
-      const field = child.childNodes[1] as HTMLInputElement | HTMLSelectElement;
-      if (field !== undefined) {
-        field.nodeName === "SELECT"
-          ? (field.value = wallet[0].symbol)
-          : (field.value = "");
-      }
-    });
+    console.log(formData);
   };
 
   return (
     <S_Form onSubmit={(e) => handleSubmit(e)}>
       {fields.map((field) => (
         <div className="transferField" key={field.label}>
-          <S_Label htmlFor={field.label.toLowerCase()}>{field.label}</S_Label>
+          <S_Label htmlFor={field.label}>{field.label}</S_Label>
           {!field.isSelect ? (
-            <>
-              {field.type === "text" ? (
-                <S_Input type={field.type} id={field.label.toLowerCase()} />
-              ) : (
-                <S_Input
-                  min={1}
-                  // max={wallet.find((item) => item.symbol === "image")!.amount}
-                  type={field.type}
-                  id={field.label.toLowerCase()}
-                />
-              )}
-            </>
+            <S_Input
+              onChange={(e) => handleChange(field.label, e.target.value)}
+              type={field.type}
+              id={field.label}
+            />
           ) : (
             <S_Select
+              onChange={(e) => handleChange(field.label, e.target.value)}
               defaultValue={wallet[0].symbol}
-              id={field.label.toLowerCase()}
+              id={field.label}
             >
               {wallet.map((currency) => (
                 <option

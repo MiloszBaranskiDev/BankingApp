@@ -20,11 +20,13 @@ interface ILoadPrices {
 
 const Currencies: React.FC = () => {
   const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
-  const symbols: string[] = wallet.map((currency) => currency.symbol);
+
   const initCurrencies: ICurrency[] = [];
-  symbols.forEach((symbol: string) => {
-    symbol !== "PLN" && initCurrencies.push({ symbol: symbol.toLowerCase() });
-  });
+  wallet.map(
+    (currency) =>
+      currency.symbol !== "PLN" &&
+      initCurrencies.push({ symbol: currency.symbol.toLowerCase() })
+  );
 
   const [loading, setLoading] = useState<boolean>(true);
   const [currencies, setCurrencies] = useState<ICurrency[]>(initCurrencies);
