@@ -1,11 +1,15 @@
+import { useState, useRef, MutableRefObject } from "react";
 import { RootState } from "redux/store";
-import { useSelector } from "react-redux";
-import React, { useState, useRef, MutableRefObject } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateWallet } from "redux/slices/WalletSlice";
+import { addTransaction } from "redux/slices/TransactionsSlice";
 import styled from "styled-components";
 import S_Label from "elements/layout/S_Label";
 import S_Input from "elements/layout/S_Input";
 import S_Select from "elements/layout/S_Select";
 import S_Button from "elements/layout/S_Button";
+import GetRandomId from "utils/GeRandomId";
+import GetTodayDate from "utils/GetTodayDate";
 
 interface ICurrency {
   symbol: string;
@@ -45,7 +49,10 @@ const S_Form = styled.form`
   .transferField {
     margin-bottom: 12px;
     .field-error {
-      border-color: red;
+      border-color: #e74c3c;
+    }
+    option:disabled {
+      color: #e74c3c;
     }
   }
 `;
@@ -83,6 +90,7 @@ const fields: IField[] = [
 ];
 
 const Form: React.FC = () => {
+  const dispatch = useDispatch();
   const formRef: MutableRefObject<HTMLFormElement | null> = useRef(null);
   const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
 
@@ -123,19 +131,54 @@ const Form: React.FC = () => {
 
   const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
+    let canBeSubmited: boolean = true;
 
-    formData.forEach((field: IFormData, i: number) => {
+    formData.forEach((field, i: number) => {
       const fieldElement: HTMLElement = formRef.current?.childNodes[i]
         .lastChild as HTMLElement;
 
       if (fieldElement.nodeName !== "SELECT") {
-        String(field.value).length > 0
-          ? fieldElement.classList.remove("field-error")
-          : fieldElement.classList.add("field-error");
+        if (String(field.value).length > 0) {
+          fieldElement.classList.remove("field-error");
+        } else {
+          fieldElement.classList.add("field-error");
+          canBeSubmited = false;
+        }
       }
     });
 
-    console.log(formData);
+    if (canBeSubmited) {
+      const currency: string = formData
+        .find((item) => item.label === "Currency")!
+        .value.toString();
+
+      const currencyAmount: any = wallet.find(
+        (item) => item.symbol === currency
+      )!.amount!;
+
+      const amount: number | string = formData.find(
+        (item) => item.label === "Amount"
+      )!.value;
+
+      dispatch(
+        updateWallet({
+          symbol: currency,
+          amount: currencyAmount - Number(amount),
+        })
+      );
+
+      dispatch(
+        addTransaction({
+          category: "Outgoing transfer",
+          date: GetTodayDate(),
+          details: formData.map((item) => ({ ...item })),
+        })
+      );
+
+      formData.forEach((field) => {
+        field.value = "";
+      });
+    }
   };
 
   return (
@@ -158,13 +201,13 @@ const Form: React.FC = () => {
               id={field.label}
             >
               {wallet.map((currency) => (
-                <React.Fragment key={currency.symbol}>
-                  {currency.amount! >= 0.01 && (
-                    <option value={currency.symbol}>
-                      {`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}
-                    </option>
-                  )}
-                </React.Fragment>
+                <option
+                  value={currency.symbol}
+                  disabled={currency.amount! >= 0.01 ? false : true}
+                  key={currency.symbol}
+                >
+                  {`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}
+                </option>
               ))}
             </S_Select>
           )}

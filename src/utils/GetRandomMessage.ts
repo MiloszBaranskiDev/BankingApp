@@ -1,5 +1,5 @@
 import GetCurrentHour from "utils/GetCurrentHour";
-import GetMessageId from "./GetMessageId";
+import GetRandomId from "./GeRandomId";
 import { loremIpsum } from "react-lorem-ipsum";
 
 interface IMessage {
@@ -20,7 +20,7 @@ const GetRandomMessage = () => {
     ),
     hour: GetCurrentHour(),
     user: false,
-    id: GetMessageId(),
+    id: GetRandomId(),
   };
 
   return randomMessage;
