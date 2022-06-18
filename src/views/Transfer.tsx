@@ -8,7 +8,9 @@ const Transfer: React.FC = () => {
 
   return (
     <>
-      <S_PageTitle>Transfer</S_PageTitle>
+      <S_PageTitle>
+        {showSummary ? "Transfer summary" : "New transfer"}
+      </S_PageTitle>
       {!showSummary ? (
         <Form setShowSummary={setShowSummary} />
       ) : (

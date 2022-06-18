@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Location, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
@@ -77,6 +78,10 @@ const S_UserMenu = styled.div`
 `;
 
 const User: React.FC = () => {
+  const submenuRef: any = useRef();
+  const location: Location = useLocation();
+  const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
+
   const userFields: IUserField[] = useSelector(
     (state: RootState) => state.user
   );
@@ -84,12 +89,13 @@ const User: React.FC = () => {
     (item) => item.label === "image"
   )!.value;
 
-  const submenuRef: any = useRef();
-  const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
-
   useEffect(() => {
     HandleClickOutside(submenuRef, showUserMenu, setShowUserMenu);
   }, [showUserMenu]);
+
+  useEffect(() => {
+    setShowUserMenu(false);
+  }, [location]);
 
   return (
     <S_Container ref={submenuRef}>

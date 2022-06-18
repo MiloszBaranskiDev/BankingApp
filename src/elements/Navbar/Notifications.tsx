@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { Location, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import S_Button from "elements/layout/S_Button";
@@ -36,7 +37,7 @@ const S_Notifications = styled.div`
   top: 60px;
   right: 0;
   z-index: 99;
-  width: 85vw;
+  width: 80vw;
   max-width: 360px;
   background-color: ${(props) => props.theme.colors.bgc};
   border-radius: ${(props) => props.theme.radius};
@@ -111,11 +112,16 @@ const S_Notifications = styled.div`
 
 const Notifications: React.FC = () => {
   const submenuRef: any = useRef();
+  const location: Location = useLocation();
   const [showNotifications, setShowNotifications] = useState<boolean>(false);
 
   useEffect(() => {
     HandleClickOutside(submenuRef, showNotifications, setShowNotifications);
   }, [showNotifications]);
+
+  useEffect(() => {
+    setShowNotifications(false);
+  }, [location]);
 
   return (
     <S_Container ref={submenuRef}>

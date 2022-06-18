@@ -34,12 +34,6 @@ const SummaryDetails: React.FC<Props> = ({ transaction }) => {
       <>
         <li>
           <p>
-            <span>Category</span>
-            <span>{transaction.category}</span>
-          </p>
-        </li>
-        <li>
-          <p>
             <span>Date</span>
             <span>{transaction.date}</span>
           </p>

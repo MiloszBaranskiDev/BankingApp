@@ -1,14 +1,26 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-const S_Nav = styled.nav`
-  margin-left: auto;
+interface Props {
+  openLinks: boolean;
+}
+
+const S_Links = styled.nav`
+  flex-basis: 100%;
+  width: 100%;
+  order: 1;
   ul {
+    padding-top: 10px;
     display: flex;
+    flex-direction: column;
     li {
-      margin-right: 50px;
       display: flex;
       align-items: center;
+      justify-content: center;
+      line-height: 36px;
+      @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+        justify-content: flex-end;
+      }
       &:last-child {
         margin-right: 0;
       }
@@ -16,7 +28,7 @@ const S_Nav = styled.nav`
         margin-right: 6px;
       }
       a {
-        font-size: ${(props) => props.theme.typography.size_normal};
+        font-size: ${(props) => props.theme.typography.size_big};
         font-weight: ${(props) => props.theme.typography.weight_bold};
         transition: color 0.3s;
       }
@@ -26,11 +38,49 @@ const S_Nav = styled.nav`
       }
     }
   }
+  @media (max-width: calc(${(props) =>
+      props.theme.breakpoints.desktop} - 1px)) {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    height: 0;
+    opacity: 0;
+    z-index: -5;
+    transition: all 0.3s;
+    background-color: ${(props) => props.theme.colors.bgc};
+    &.open-links {
+      height: 275px;
+      opacity: 1;
+      z-index: 5;
+    }
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    padding-right: calc((100% - 720px) / 2);
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+    margin-left: auto;
+    flex-basis: unset;
+    padding-right: unset;
+    width: unset;
+    order: unset;
+    ul {
+      padding-top: 0;
+      flex-direction: row;
+      li {
+        margin-right: 45px;
+        justify-content: unset;
+        line-height: unset;
+        a {
+          font-size: ${(props) => props.theme.typography.size_normal};
+        }
+      }
+    }
+  }
 `;
 
-const Links: React.FC = () => {
+const Links: React.FC<Props> = ({ openLinks }) => {
   return (
-    <S_Nav>
+    <S_Links className={`${openLinks ? "open-links" : ""}`}>
       <ul>
         <li>
           <NavLink
@@ -96,7 +146,7 @@ const Links: React.FC = () => {
           </NavLink>
         </li>
       </ul>
-    </S_Nav>
+    </S_Links>
   );
 };
 

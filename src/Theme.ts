@@ -16,6 +16,7 @@ const theme = {
     weight_bold: 600,
   },
   breakpoints: {
+    mobile_big: "480px",
     tablet: "768px",
     desktop: "1260px",
   },
