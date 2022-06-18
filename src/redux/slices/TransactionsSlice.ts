@@ -8,7 +8,7 @@ interface ITransaction {
 
 const initialState: ITransaction[] = [
   {
-    category: "Outgoing Transfer",
+    category: "Outgoing transfer",
     date: "2022-06-11",
     details: [
       {

@@ -1,4 +1,4 @@
-import { useState, useRef, MutableRefObject } from "react";
+import { useEffect, useState, useRef, MutableRefObject } from "react";
 import { RootState } from "redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { updateWallet } from "redux/slices/WalletSlice";
@@ -8,8 +8,12 @@ import S_Label from "elements/layout/S_Label";
 import S_Input from "elements/layout/S_Input";
 import S_Select from "elements/layout/S_Select";
 import S_Button from "elements/layout/S_Button";
-import GetRandomId from "utils/GeRandomId";
 import GetTodayDate from "utils/GetTodayDate";
+import S_Heading from "elements/layout/S_Heading";
+
+interface Props {
+  setShowSummary: (arg0: boolean) => void;
+}
 
 interface ICurrency {
   symbol: string;
@@ -89,18 +93,33 @@ const fields: IField[] = [
   },
 ];
 
-const Form: React.FC = () => {
+const Form: React.FC<Props> = ({ setShowSummary }) => {
   const dispatch = useDispatch();
   const formRef: MutableRefObject<HTMLFormElement | null> = useRef(null);
   const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
+  const [zeroBalance, setZeroBalance] = useState<boolean>(true);
+
+  const getDefaultCurrency = () => {
+    return wallet.find((currency) => currency.amount! >= 0.01);
+  };
+
+  useEffect(() => {
+    if (getDefaultCurrency() === undefined) {
+      setZeroBalance(true);
+    } else {
+      setZeroBalance(false);
+    }
+  }, [wallet]);
 
   const initFormData: IFormData[] = [];
-  fields.forEach((field) => {
-    initFormData.push({
-      label: field.label,
-      value: field.label !== "Currency" ? "" : wallet[0].symbol,
+  if (getDefaultCurrency() !== undefined) {
+    fields.forEach((field) => {
+      initFormData.push({
+        label: field.label,
+        value: field.label !== "Currency" ? "" : getDefaultCurrency()!.symbol,
+      });
     });
-  });
+  }
 
   const [formData, setFormData] = useState<IFormData[]>(initFormData);
 
@@ -152,7 +171,7 @@ const Form: React.FC = () => {
         .find((item) => item.label === "Currency")!
         .value.toString();
 
-      const currencyAmount: any = wallet.find(
+      const currencyAmount: number = wallet.find(
         (item) => item.symbol === currency
       )!.amount!;
 
@@ -175,48 +194,60 @@ const Form: React.FC = () => {
         })
       );
 
-      formData.forEach((field) => {
-        field.value = "";
-      });
+      setShowSummary(true);
     }
   };
 
   return (
-    <S_Form ref={formRef} onSubmit={(e) => handleSubmit(e)}>
-      {fields.map((field, i: number) => (
-        <div className="transferField" key={field.label}>
-          <S_Label htmlFor={field.label}>{field.label}</S_Label>
-          {!field.isSelect ? (
-            <S_Input
-              onChange={(e) => handleChange(field.label, e.target.value)}
-              value={formData[i].value}
-              type={field.type}
-              id={field.label}
-              maxLength={field.maxLength && field.maxLength}
-            />
-          ) : (
-            <S_Select
-              onChange={(e) => handleChange(field.label, e.target.value)}
-              value={formData[i].value}
-              id={field.label}
-            >
-              {wallet.map((currency) => (
-                <option
-                  value={currency.symbol}
-                  disabled={currency.amount! >= 0.01 ? false : true}
-                  key={currency.symbol}
-                >
-                  {`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}
-                </option>
+    <>
+      {!zeroBalance && getDefaultCurrency() !== undefined ? (
+        <>
+          <S_Form ref={formRef} onSubmit={(e) => handleSubmit(e)}>
+            <>
+              {fields.map((field, i: number) => (
+                <div className="transferField" key={field.label}>
+                  <S_Label htmlFor={field.label}>{field.label}</S_Label>
+                  {!field.isSelect ? (
+                    <S_Input
+                      onChange={(e) =>
+                        handleChange(field.label, e.target.value)
+                      }
+                      value={formData[i].value}
+                      type={field.type}
+                      id={field.label}
+                      maxLength={field.maxLength && field.maxLength}
+                    />
+                  ) : (
+                    <S_Select
+                      onChange={(e) =>
+                        handleChange(field.label, e.target.value)
+                      }
+                      value={formData[i].value}
+                      id={field.label}
+                    >
+                      {wallet.map((currency) => (
+                        <option
+                          value={currency.symbol}
+                          disabled={currency.amount! >= 0.01 ? false : true}
+                          key={currency.symbol}
+                        >
+                          {`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}
+                        </option>
+                      ))}
+                    </S_Select>
+                  )}
+                </div>
               ))}
-            </S_Select>
-          )}
-        </div>
-      ))}
-      <S_Button as={"button"} type="submit">
-        Send transfer
-      </S_Button>
-    </S_Form>
+              <S_Button as={"button"} type="submit">
+                Send transfer
+              </S_Button>
+            </>
+          </S_Form>
+        </>
+      ) : (
+        <S_Heading>You don't have the balance to make a transfer!</S_Heading>
+      )}
+    </>
   );
 };
 
