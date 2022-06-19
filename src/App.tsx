@@ -16,12 +16,14 @@ import Faq from "views/Faq";
 import Chat from "views/Chat";
 import Notifications from "views/Notifications";
 import SingleNotification from "views/SingleNotification";
+import ScrollToTop from "ScrollToTop";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <div className="App" style={{ backgroundColor: theme.colors.bgc_dark }}>
         <ThemeProvider theme={theme}>
+          <ScrollToTop />
           <Navbar />
           <S_Wrapper>
             <Routes>

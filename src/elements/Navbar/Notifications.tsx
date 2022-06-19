@@ -26,9 +26,11 @@ const S_Icon = styled.button`
   i {
     font-size: ${(props) => props.theme.typography.size_normal};
   }
-  &:hover {
-    background-color: ${(props) => props.theme.colors.main};
-    color: white;
+  @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+    &:hover {
+      background-color: ${(props) => props.theme.colors.main};
+      color: white;
+    }
   }
 `;
 
@@ -37,16 +39,25 @@ const S_Notifications = styled.div`
   top: 60px;
   right: 0;
   z-index: 99;
-  width: 80vw;
-  max-width: 360px;
+  width: 200px;
   background-color: ${(props) => props.theme.colors.bgc};
   border-radius: ${(props) => props.theme.radius};
   box-shadow: ${(props) => props.theme.shadow};
+  @media (min-width: 340px) {
+    width: 225px;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.mobile_big}) {
+    width: 80vw;
+    max-width: 360px;
+  }
   .top,
   .notification,
   .bottom {
-    padding: 14px;
+    padding: 9px;
     border-bottom: 2px solid ${(props) => props.theme.colors.bgc_dark};
+    @media (min-width: ${(props) => props.theme.breakpoints.mobile_big}) {
+      padding: 14px;
+    }
   }
   .top {
     display: flex;
@@ -72,21 +83,30 @@ const S_Notifications = styled.div`
       align-items: center;
       transition: background-color 0.3s;
       &__icon {
-        flex-basis: 38px;
-        height: 38px;
+        flex-basis: 28px;
+        height: 28px;
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 50%;
         color: white;
         background-color: ${(props) => props.theme.colors.main};
+        @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+          flex-basis: 38px;
+          height: 38px;
+        }
         i {
           font-size: ${(props) => props.theme.typography.size_small};
         }
       }
       &__content {
-        padding: 0 18px;
+        padding: 0 9px;
         flex-basis: calc(100% - 38px - 60px);
+        flex-grow: 1;
+        @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+          flex-grow: unset;
+          padding: 0 18px;
+        }
         p {
           font-size: ${(props) => props.theme.typography.size_extra_small};
         }
@@ -96,12 +116,13 @@ const S_Notifications = styled.div`
         }
       }
       &__date {
-        width: 60px;
-        flex-basis: 60px;
         text-align: end;
         overflow-wrap: break-word;
         opacity: 0.8;
         font-size: ${(props) => props.theme.typography.size_extra_small};
+        @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+          flex-basis: 60px;
+        }
       }
       &:hover {
         background-color: ${(props) => props.theme.colors.bgc_dark};
@@ -151,7 +172,7 @@ const Notifications: React.FC = () => {
                 <p className="notification__date">Today</p>
               </NavLink>
             </li>
-            <li style={{ opacity: 0.5 }}>
+            <li>
               <NavLink to={`/notification/44`} className="notification">
                 <div className="notification__icon">
                   <i className="fas fa-arrow-down"></i>

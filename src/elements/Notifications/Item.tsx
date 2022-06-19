@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 const S_Item = styled.li`
   margin-bottom: 20px;
   border: 1px solid transparent;
-  opacity: 0.5;
   transition: border 0.3s;
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};
@@ -40,9 +39,6 @@ const S_Item = styled.li`
   }
   &:hover {
     border-color: ${(props) => props.theme.colors.main};
-  }
-  &:first-child {
-    opacity: 1;
   }
 `;
 
