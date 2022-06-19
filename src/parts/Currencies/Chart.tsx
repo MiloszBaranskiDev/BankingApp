@@ -91,6 +91,10 @@ const Chart: React.FC<Props> = ({ symbol }) => {
   const [startDate, setStartDate] = useState<string>("2022-01-01");
   const [endDate, setEndDate] = useState<string>(GetTodayDate());
 
+  let test: Date | string = new Date();
+  test.setDate(test.getDate() - 19);
+  test = test.toISOString().split("T")[0];
+
   const loadPrices = async (start: string, end: string) => {
     const loadedPrices = await GetCurrencyHistoricalPrices(symbol, start, end);
     setChartData({

@@ -46,7 +46,7 @@ const Message: React.FC<Props> = ({ text, hour, user }) => {
     !user &&
       setTimeout(function () {
         setTypingAnimation(false);
-      }, 2000);
+      }, 800);
   }, []);
 
   return (

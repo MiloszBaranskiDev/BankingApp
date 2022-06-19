@@ -32,7 +32,10 @@ const Chat: React.FC = () => {
 
   useEffect(() => {
     if (messages.length > 1 && messages[messages.length - 1].user === true) {
-      setMessages([...messages, GetRandomMessage()]);
+      const timer = setTimeout(() => {
+        setMessages([...messages, GetRandomMessage()]);
+      }, 850);
+      return () => clearTimeout(timer);
     }
   }, [messages]);
 
