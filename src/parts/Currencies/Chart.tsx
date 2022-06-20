@@ -31,6 +31,11 @@ interface IChartData {
   ];
 }
 
+enum CalculateActions {
+  add = "add",
+  subtract = "subract",
+}
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -84,16 +89,38 @@ const S_Chart = styled.div`
   }
 `;
 
+const calculateDate = (
+  comparedDate: string,
+  action: CalculateActions,
+  diff: number
+) => {
+  let date: Date | string = new Date(comparedDate);
+
+  if (action === CalculateActions.add) {
+    date.setDate(date.getDate() + diff);
+  } else if (action === CalculateActions.subtract) {
+    date.setDate(date.getDate() - diff);
+  }
+
+  date = date.toISOString().split("T")[0];
+
+  return date;
+};
+
 const Chart: React.FC<Props> = ({ symbol }) => {
   const theme: any = useTheme();
+
   const [loading, setLoading] = useState<boolean>(true);
   const [chartData, setChartData] = useState<IChartData>(null as any);
-  const [startDate, setStartDate] = useState<string>("2022-01-01");
-  const [endDate, setEndDate] = useState<string>(GetTodayDate());
 
-  let test: Date | string = new Date();
-  test.setDate(test.getDate() - 19);
-  test = test.toISOString().split("T")[0];
+  const [endDate, setEndDate] = useState<string>(GetTodayDate());
+  const [startDate, setStartDate] = useState<string>(
+    calculateDate(endDate, CalculateActions.subtract, 180)
+  );
+
+  const [minStartDate, setMinStartDate] = useState<string>();
+  const [minEndDate, setMinEndDate] = useState<string>();
+  const [maxStartDate, setMaxStartDate] = useState<string>();
 
   const loadPrices = async (start: string, end: string) => {
     const loadedPrices = await GetCurrencyHistoricalPrices(symbol, start, end);
@@ -112,6 +139,9 @@ const Chart: React.FC<Props> = ({ symbol }) => {
 
   useEffect(() => {
     loadPrices(startDate, endDate);
+    setMinStartDate(calculateDate(endDate, CalculateActions.subtract, 360));
+    setMinEndDate(calculateDate(startDate, CalculateActions.add, 7));
+    setMaxStartDate(calculateDate(endDate, CalculateActions.subtract, 7));
   }, [startDate, endDate]);
 
   useEffect(() => {
@@ -126,6 +156,9 @@ const Chart: React.FC<Props> = ({ symbol }) => {
       <ChartDates
         startDate={startDate}
         endDate={endDate}
+        minStartDate={minStartDate!}
+        minEndDate={minEndDate!}
+        maxStartDate={maxStartDate!}
         setStartDate={setStartDate}
         setEndDate={setEndDate}
       />

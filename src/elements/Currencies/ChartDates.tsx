@@ -6,6 +6,9 @@ import S_Input from "elements/layout/S_Input";
 interface Props {
   startDate: string;
   endDate: string;
+  minStartDate: string;
+  minEndDate: string;
+  maxStartDate: string;
   setStartDate: (arg0: string) => void;
   setEndDate: (arg0: string) => void;
 }
@@ -39,6 +42,9 @@ const S_Date = styled.div`
 const ChartDates: React.FC<Props> = ({
   startDate,
   endDate,
+  minStartDate,
+  minEndDate,
+  maxStartDate,
   setStartDate,
   setEndDate,
 }) => {
@@ -51,8 +57,8 @@ const ChartDates: React.FC<Props> = ({
           value={startDate}
           type="date"
           id="start-date"
-          min=""
-          max=""
+          min={minStartDate}
+          max={maxStartDate}
         />
       </S_Date>
       <S_Date>
@@ -62,8 +68,8 @@ const ChartDates: React.FC<Props> = ({
           value={endDate}
           type="date"
           id="end-date"
-          min=""
-          max={endDate}
+          min={minEndDate}
+          max={GetTodayDate()}
         />
       </S_Date>
     </S_ChartDates>
