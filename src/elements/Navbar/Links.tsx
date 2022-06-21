@@ -1,8 +1,15 @@
+import { ReactElement } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 interface Props {
   openLinks: boolean;
+}
+
+interface ILink {
+  to: string;
+  text: string;
+  icon: ReactElement;
 }
 
 const S_Links = styled.nav`
@@ -25,7 +32,7 @@ const S_Links = styled.nav`
         margin-right: 0;
       }
       i {
-        margin-right: 6px;
+        margin-right: 7px;
       }
       a {
         font-size: ${(props) => props.theme.typography.size_big};
@@ -78,73 +85,54 @@ const S_Links = styled.nav`
   }
 `;
 
+const links: ILink[] = [
+  {
+    to: "/",
+    text: "Home",
+    icon: <i className="fas fa-home"></i>,
+  },
+  {
+    to: "/wallet",
+    text: "Wallet",
+    icon: <i className="fas fa-wallet"></i>,
+  },
+  {
+    to: "/transactions",
+    text: "Transactions",
+    icon: <i className="fas fa-hand-holding-usd"></i>,
+  },
+  {
+    to: "/transfer",
+    text: "Transfer",
+    icon: <i className="fas fa-paper-plane"></i>,
+  },
+  {
+    to: "/currencies",
+    text: "Currencies",
+    icon: <i className="fas fa-coins"></i>,
+  },
+  {
+    to: "/help",
+    text: "Help",
+    icon: <i className="fas fa-headset"></i>,
+  },
+];
+
 const Links: React.FC<Props> = ({ openLinks }) => {
   return (
     <S_Links className={`${openLinks ? "open-links" : ""}`}>
       <ul>
-        <li>
-          <NavLink
-            to="/"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
-          >
-            <i className="fas fa-home"></i>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/wallet"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
-          >
-            <i className="fas fa-wallet"></i>
-            Wallet
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/transactions"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
-          >
-            <i className="fas fa-hand-holding-usd"></i>
-            Transactions
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/transfer"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
-          >
-            <i className="fas fa-paper-plane"></i>
-            Transfer
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/currencies"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
-          >
-            <i className="fas fa-coins"></i>
-            Currencies
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/card"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
-          >
-            <i className="fas fa-credit-card"></i>
-            Card
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="/help"
-            className={({ isActive }) => (isActive ? "active-link" : "")}
-          >
-            <i className="fas fa-headset"></i>
-            Help
-          </NavLink>
-        </li>
+        {links.map((link) => (
+          <li key={link.to}>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+              to={link.to}
+            >
+              {link.icon}
+              {link.text}
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </S_Links>
   );
