@@ -18,7 +18,7 @@ const Transactions: React.FC = () => {
   return (
     <>
       <S_PageTitle>Transactions</S_PageTitle>
-      {transactions && <div>test</div>}
+      {transactions && <div>soon</div>}
     </>
   );
 };
