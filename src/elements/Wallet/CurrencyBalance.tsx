@@ -11,18 +11,43 @@ const S_CurrencyBalance = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
-  padding: ${(props) => props.theme.tilePadding};
+  padding: 10px;
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};
   box-shadow: ${(props) => props.theme.shadow};
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    &:nth-last-of-type(-n + 2) {
-      margin-bottom: 0;
-    }
+  &:last-child {
+    flex-grow: 1;
   }
   p {
-    font-size: ${(props) => props.theme.typography.size_big};
+    text-align: center;
+    font-size: ${(props) => props.theme.typography.size_normal};
     font-weight: ${(props) => props.theme.typography.weight_bold};
+    span {
+      &:first-child {
+        margin-right: 4px;
+      }
+    }
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    &:last-child {
+      margin-bottom: 0;
+    }
+    p {
+      span {
+        display: block;
+        &:first-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
+    flex-basis: 18.5%;
+    padding: 0;
+    margin-bottom: 0;
+    &:last-child {
+      flex-grow: unset;
+    }
   }
 `;
 
@@ -30,7 +55,8 @@ const CurrencyBalance: React.FC<Props> = ({ symbol, amount }) => {
   return (
     <S_CurrencyBalance>
       <p>
-        {amount} {symbol}
+        <span>{amount}</span>
+        <span>{symbol}</span>
       </p>
     </S_CurrencyBalance>
   );

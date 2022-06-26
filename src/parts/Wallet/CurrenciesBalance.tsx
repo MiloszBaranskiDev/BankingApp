@@ -11,6 +11,7 @@ interface Props {
 }
 
 const S_CurrenciesBalance = styled.div`
+  flex-basis: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -19,15 +20,13 @@ const S_CurrenciesBalance = styled.div`
 const CurrenciesBalance: React.FC<Props> = ({ wallet }) => {
   return (
     <S_CurrenciesBalance>
-      {wallet.map((currency) =>
-        currency.symbol !== "PLN" ? (
-          <CurrencyBalance
-            symbol={currency.symbol}
-            amount={currency.amount}
-            key={currency.symbol}
-          />
-        ) : null
-      )}
+      {wallet.map((currency) => (
+        <CurrencyBalance
+          symbol={currency.symbol}
+          amount={currency.amount}
+          key={currency.symbol}
+        />
+      ))}
     </S_CurrenciesBalance>
   );
 };

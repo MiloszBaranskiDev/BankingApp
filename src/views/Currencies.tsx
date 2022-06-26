@@ -11,7 +11,6 @@ import Chart from "parts/Currencies/Chart";
 interface ICurrency {
   symbol: string;
   price?: number;
-  amount?: number;
 }
 
 interface ILoadPrices {
@@ -21,15 +20,12 @@ interface ILoadPrices {
 const Currencies: React.FC = () => {
   const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
 
-  const initCurrencies: ICurrency[] = [];
-  wallet.map(
-    (currency) =>
-      currency.symbol !== "PLN" &&
-      initCurrencies.push({ symbol: currency.symbol.toLowerCase() })
-  );
-
   const [loading, setLoading] = useState<boolean>(true);
-  const [currencies, setCurrencies] = useState<ICurrency[]>(initCurrencies);
+  const [currencies, setCurrencies] = useState<ICurrency[]>(
+    wallet
+      .filter((currency) => currency["symbol"] !== "PLN")
+      .map((currency) => currency)
+  );
 
   const loadPrices: ILoadPrices = async (currencies) => {
     const loadedData = await GetCurrenciesPrices(currencies);

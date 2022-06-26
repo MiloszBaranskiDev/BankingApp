@@ -28,7 +28,10 @@ const S_Column = styled.div`
     justify-content: flex-start;
   }
   @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
-    flex-basis: 32.5%;
+    flex-basis: 36.5%;
+    &:nth-child(2) {
+      flex-basis: 25%;
+    }
   }
 `;
 
@@ -40,13 +43,13 @@ const Wallet: React.FC = () => {
       <S_PageTitle>Wallet</S_PageTitle>
       <S_Box>
         <S_Column>
-          <TotalBalance />
+          <TotalBalance wallet={wallet} />
           <CurrenciesBalance wallet={wallet} />
         </S_Column>
         <S_Column>
           <Chart wallet={wallet} />
         </S_Column>
-        <S_Column></S_Column>
+        <S_Column>links</S_Column>
       </S_Box>
     </>
   );

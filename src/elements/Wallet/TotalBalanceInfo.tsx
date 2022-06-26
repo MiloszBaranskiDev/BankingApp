@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const S_TotalBalanceInfo = styled.p`
-  font-size: ${(props) => props.theme.typography.size_extra_small};
+  font-size: ${(props) => props.theme.typography.size_small};
 `;
 
 const TotalBalanceInfo: React.FC = () => {
