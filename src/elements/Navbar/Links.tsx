@@ -48,6 +48,8 @@ const S_Links = styled.nav`
   @media (max-width: calc(${(props) =>
       props.theme.breakpoints.desktop} - 1px)) {
     position: absolute;
+    transform: translateX(-100vw);
+    overflow: hidden;
     top: 60px;
     left: 0;
     height: 0;
@@ -56,6 +58,7 @@ const S_Links = styled.nav`
     transition: all 0.3s;
     background-color: ${(props) => props.theme.colors.bgc};
     &.open-links {
+      transform: unset;
       height: 275px;
       opacity: 1;
       z-index: 5;

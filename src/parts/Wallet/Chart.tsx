@@ -40,10 +40,14 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart: React.FC<Props> = ({ wallet }) => {
   const chartData: IChartData = {
-    labels: wallet.map((currency) => currency.symbol),
+    labels: wallet
+      .filter((currency) => currency.amount >= 0.01)
+      .map((currency) => currency.symbol),
     datasets: [
       {
-        data: wallet.map((currency) => currency.amount),
+        data: wallet
+          .filter((currency) => currency.amount >= 0.01)
+          .map((currency) => currency.amount),
         backgroundColor: [
           "rgba(255, 102, 0, 0.2)",
           "rgba(255, 99, 132, 0.2)",
@@ -66,7 +70,14 @@ const Chart: React.FC<Props> = ({ wallet }) => {
   return (
     <S_Chart>
       <S_Heading>Currencies</S_Heading>
-      <Doughnut data={chartData} />
+      {wallet.some((currency) => currency.amount >= 0.01) ? (
+        <Doughnut data={chartData} />
+      ) : (
+        <p>
+          The chart is currently unavailable because you don't have any
+          currencies.
+        </p>
+      )}
     </S_Chart>
   );
 };

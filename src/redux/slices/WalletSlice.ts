@@ -8,23 +8,23 @@ interface ICurrency {
 const initialState: ICurrency[] = [
   {
     symbol: "PLN",
-    amount: 1337,
+    amount: 4500,
   },
   {
     symbol: "EUR",
-    amount: 200,
+    amount: 1337,
   },
   {
     symbol: "USD",
-    amount: 120,
+    amount: 440,
   },
   {
     symbol: "GBP",
-    amount: 80.08,
+    amount: 280.08,
   },
   {
     symbol: "CHF",
-    amount: 40.12,
+    amount: 99.12,
   },
 ];
 

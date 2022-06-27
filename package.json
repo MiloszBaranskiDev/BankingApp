@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@types/randomcolor": "^0.5.6",
     "@types/react-onclickoutside": "^6.7.4",
     "@types/styled-components": "^5.1.25"
   }

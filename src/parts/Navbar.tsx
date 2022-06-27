@@ -12,6 +12,7 @@ const S_Navbar = styled.div`
   padding: 10px 0;
   position: sticky;
   top: 0;
+  z-index: 99;
   background-color: ${(props) => props.theme.colors.bgc};
   box-shadow: ${(props) => props.theme.shadow};
   .navbarWrapper {

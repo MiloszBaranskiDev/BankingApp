@@ -4,7 +4,7 @@
 - Redux Toolkit
 - React Router
 - Chart.js
+- Styled Components
 - emoji-picker-react
 - react-lorem-ipsum
-- Styled Components
 - NBP Web API

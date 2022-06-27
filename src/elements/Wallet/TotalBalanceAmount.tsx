@@ -7,12 +7,14 @@ interface Props {
 }
 
 const S_TotalBalanceAmount = styled.p`
+  margin-bottom: 4px;
   display: flex;
   align-items: center;
-  margin-bottom: 4px;
+  word-break: break-all;
   font-size: ${(props) => props.theme.typography.size_extra_big};
   font-weight: ${(props) => props.theme.typography.weight_bold};
   span {
+    word-break: normal;
     margin-left: 8px;
     color: #00cf00;
     font-size: ${(props) => props.theme.typography.size_normal};
@@ -20,9 +22,6 @@ const S_TotalBalanceAmount = styled.p`
   }
   @media (min-width: ${(props) => props.theme.breakpoints.mobile_big}) {
     font-size: ${(props) => props.theme.typography.size_title};
-  }
-  @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
-    font-size: 42px;
   }
 `;
 
