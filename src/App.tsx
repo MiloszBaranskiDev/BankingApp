@@ -1,8 +1,8 @@
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import theme from "Theme";
-import S_Wrapper from "elements/layout/S_Wrapper";
-import Navbar from "parts/Navbar";
+import S_Wrapper from "components/layout/S_Wrapper";
+import Navbar from "components/Navbar/Navbar";
 import ScrollToTop from "ScrollToTop";
 import AppRouter from "AppRouter";
 
