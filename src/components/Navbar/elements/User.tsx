@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import HandleClickOutside from "utils/HandleClickOutside";
+import HandleClickOutside from "helpers/HandleClickOutside";
 
 interface IUserField {
   label: string;

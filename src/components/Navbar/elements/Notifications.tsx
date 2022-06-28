@@ -3,7 +3,7 @@ import { Location, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import S_Button from "components/layout/S_Button";
-import HandleClickOutside from "utils/HandleClickOutside";
+import HandleClickOutside from "helpers/HandleClickOutside";
 
 const S_Container = styled.div`
   position: relative;
