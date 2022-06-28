@@ -1,23 +1,5 @@
 import styled from "styled-components";
 
-const S_SummaryDetails = styled.ul`
-  margin-bottom: 20px;
-  li {
-    line-height: 26px;
-    font-size: ${(props) => props.theme.typography.size_big};
-    span:first-child {
-      margin-right: 12px;
-      position: relative;
-      font-weight: ${(props) => props.theme.typography.weight_bold};
-      &::after {
-        content: ":";
-        position: absolute;
-        right: -5px;
-      }
-    }
-  }
-`;
-
 interface ITransaction {
   category: string;
   date: string;
@@ -30,7 +12,7 @@ interface Props {
 
 const SummaryDetails: React.FC<Props> = ({ transaction }) => {
   return (
-    <S_SummaryDetails>
+    <StyledSummaryDetails>
       <>
         <li>
           <p>
@@ -48,8 +30,26 @@ const SummaryDetails: React.FC<Props> = ({ transaction }) => {
           </li>
         ))}
       </>
-    </S_SummaryDetails>
+    </StyledSummaryDetails>
   );
 };
 
 export default SummaryDetails;
+
+const StyledSummaryDetails = styled.ul`
+  margin-bottom: 20px;
+  li {
+    line-height: 26px;
+    font-size: ${(props) => props.theme.typography.size_big};
+    span:first-child {
+      margin-right: 12px;
+      position: relative;
+      font-weight: ${(props) => props.theme.typography.weight_bold};
+      &::after {
+        content: ":";
+        position: absolute;
+        right: -5px;
+      }
+    }
+  }
+`;

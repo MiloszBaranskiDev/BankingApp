@@ -10,16 +10,9 @@ interface Props {
   wallet: ICurrency[];
 }
 
-const S_CurrenciesBalance = styled.div`
-  flex-basis: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
 const CurrenciesBalance: React.FC<Props> = ({ wallet }) => {
   return (
-    <S_CurrenciesBalance>
+    <StyledCurrenciesBalance>
       {wallet.map((currency) => (
         <CurrencyBalance
           symbol={currency.symbol}
@@ -27,8 +20,15 @@ const CurrenciesBalance: React.FC<Props> = ({ wallet }) => {
           key={currency.symbol}
         />
       ))}
-    </S_CurrenciesBalance>
+    </StyledCurrenciesBalance>
   );
 };
 
 export default CurrenciesBalance;
+
+const StyledCurrenciesBalance = styled.div`
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;

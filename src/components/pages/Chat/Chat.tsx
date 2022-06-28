@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import GetCurrentHour from "utils/GetCurrentHour";
 import GetRandomMessage from "utils/GetRandomMessage";
-import S_PageTitle from "components/layout/S_PageTitle";
+import StyledPageTitle from "components/layout/StyledPageTitle";
 import Messages from "./parts/Messages";
 import Controls from "./parts/Controls";
 
@@ -12,13 +12,6 @@ interface IMessage {
   user: boolean;
   id: number;
 }
-
-const S_Chat = styled.div`
-  box-shadow: ${(props) => props.theme.shadow};
-  background-color: ${(props) => props.theme.colors.bgc};
-  border-radius: ${(props) => props.theme.radius};
-  padding: ${(props) => props.theme.tilePadding};
-`;
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<IMessage[]>([
@@ -41,13 +34,20 @@ const Chat: React.FC = () => {
 
   return (
     <>
-      <S_PageTitle>Chat</S_PageTitle>
-      <S_Chat>
+      <StyledPageTitle>Chat</StyledPageTitle>
+      <StyledChat>
         <Messages messages={messages} />
         <Controls messages={messages} setMessages={setMessages} />
-      </S_Chat>
+      </StyledChat>
     </>
   );
 };
 
 export default Chat;
+
+const StyledChat = styled.div`
+  box-shadow: ${(props) => props.theme.shadow};
+  background-color: ${(props) => props.theme.colors.bgc};
+  border-radius: ${(props) => props.theme.radius};
+  padding: ${(props) => props.theme.tilePadding};
+`;

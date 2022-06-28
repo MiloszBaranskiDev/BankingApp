@@ -1,5 +1,5 @@
-import S_Label from "components/layout/S_Label";
-import S_Input from "components/layout/S_Input";
+import StyledLabel from "components/layout/StyledLabel";
+import StyledInput from "components/layout/StyledInput";
 import { useDispatch } from "react-redux";
 import { editUser } from "redux/slices/UserSlice";
 
@@ -20,8 +20,8 @@ const Field: React.FC<Props> = ({ label, type, value }) => {
     <>
       {type && (
         <div className="userField">
-          <S_Label htmlFor={label}>{label}</S_Label>
-          <S_Input
+          <StyledLabel htmlFor={label}>{label}</StyledLabel>
+          <StyledInput
             defaultValue={type !== "number" ? value : Number(value)}
             type={type}
             id={label}

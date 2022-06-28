@@ -8,7 +8,35 @@ interface Props {
   user: boolean;
 }
 
-const S_Message = styled.div`
+const Message: React.FC<Props> = ({ text, hour, user }) => {
+  const [typingAnimation, setTypingAnimation] = useState<boolean>(
+    !user ? true : false
+  );
+
+  useEffect(() => {
+    !user &&
+      setTimeout(function () {
+        setTypingAnimation(false);
+      }, 800);
+  }, []);
+
+  return (
+    <StyledMessage className={`${user ? "message-user" : ""}`}>
+      {!typingAnimation ? (
+        <>
+          <StyledText>{text}</StyledText>
+          <StyledHour>{hour}</StyledHour>
+        </>
+      ) : (
+        <TypingAnimation />
+      )}
+    </StyledMessage>
+  );
+};
+
+export default Message;
+
+const StyledMessage = styled.div`
   max-width: 90%;
   margin-bottom: 8px;
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
@@ -24,7 +52,7 @@ const S_Message = styled.div`
   }
 `;
 
-const S_Text = styled.p`
+const StyledText = styled.p`
   padding: 10px;
   display: inline-block;
   box-shadow: ${(props) => props.theme.shadow};
@@ -32,35 +60,7 @@ const S_Text = styled.p`
   font-size: ${(props) => props.theme.typography.size_small};
 `;
 
-const S_Hour = styled.p`
+const StyledHour = styled.p`
   margin-top: 4px;
   font-size: ${(props) => props.theme.typography.size_extra_small};
 `;
-
-const Message: React.FC<Props> = ({ text, hour, user }) => {
-  const [typingAnimation, setTypingAnimation] = useState<boolean>(
-    !user ? true : false
-  );
-
-  useEffect(() => {
-    !user &&
-      setTimeout(function () {
-        setTypingAnimation(false);
-      }, 800);
-  }, []);
-
-  return (
-    <S_Message className={`${user ? "message-user" : ""}`}>
-      {!typingAnimation ? (
-        <>
-          <S_Text>{text}</S_Text>
-          <S_Hour>{hour}</S_Hour>
-        </>
-      ) : (
-        <TypingAnimation />
-      )}
-    </S_Message>
-  );
-};
-
-export default Message;

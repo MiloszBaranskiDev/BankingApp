@@ -10,7 +10,7 @@ import {
 import { Line } from "react-chartjs-2";
 import styled, { useTheme } from "styled-components";
 import Loader from "components/Loader";
-import S_Heading from "components/layout/S_Heading";
+import StyledHeading from "components/layout/StyledHeading";
 import ChartDates from "../elements/ChartDates";
 import GetTodayDate from "utils/GetTodayDate";
 import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";
@@ -62,32 +62,6 @@ const options: object = {
     },
   },
 };
-
-const S_Chart = styled.div`
-  margin-bottom: 24px;
-  background-color: ${(props) => props.theme.colors.bgc};
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  box-shadow: ${(props) => props.theme.shadow};
-  h2 {
-    text-transform: uppercase;
-  }
-  canvas {
-    margin-top: 30px;
-  }
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    display: flex;
-    flex-wrap: wrap;
-    h2 {
-      margin-right: auto;
-      padding-right: 35px;
-    }
-    canvas {
-      margin-top: 0;
-      flex-basis: 100%;
-    }
-  }
-`;
 
 const calculateDate = (
   comparedDate: string,
@@ -151,8 +125,8 @@ const Chart: React.FC<Props> = ({ symbol }) => {
   }, [chartData]);
 
   return (
-    <S_Chart>
-      <S_Heading>{symbol}/PLN</S_Heading>
+    <StyledChart>
+      <StyledHeading>{symbol}/PLN</StyledHeading>
       <ChartDates
         startDate={startDate}
         endDate={endDate}
@@ -167,8 +141,34 @@ const Chart: React.FC<Props> = ({ symbol }) => {
       ) : (
         <Loader />
       )}
-    </S_Chart>
+    </StyledChart>
   );
 };
 
 export default Chart;
+
+const StyledChart = styled.div`
+  margin-bottom: 24px;
+  background-color: ${(props) => props.theme.colors.bgc};
+  padding: ${(props) => props.theme.tilePadding};
+  border-radius: ${(props) => props.theme.radius};
+  box-shadow: ${(props) => props.theme.shadow};
+  h2 {
+    text-transform: uppercase;
+  }
+  canvas {
+    margin-top: 30px;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    display: flex;
+    flex-wrap: wrap;
+    h2 {
+      margin-right: auto;
+      padding-right: 35px;
+    }
+    canvas {
+      margin-top: 0;
+      flex-basis: 100%;
+    }
+  }
+`;

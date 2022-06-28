@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateWallet } from "redux/slices/WalletSlice";
 import { addTransaction } from "redux/slices/TransactionsSlice";
 import styled from "styled-components";
-import S_Label from "components/layout/S_Label";
-import S_Input from "components/layout/S_Input";
-import S_Select from "components/layout/S_Select";
-import S_Button from "components/layout/S_Button";
-import S_Heading from "components/layout/S_Heading";
+import StyledLabel from "components/layout/StyledLabel";
+import StyledInput from "components/layout/StyledInput";
+import StyledSelect from "components/layout/StyledSelect";
+import StyledButton from "components/layout/StyledButton";
+import StyledHeading from "components/layout/StyledHeading";
 import GetTodayDate from "utils/GetTodayDate";
 
 interface Props {
@@ -33,33 +33,6 @@ interface IFormData {
   label: string;
   value: string | number;
 }
-
-const S_Form = styled.form`
-  box-shadow: ${(props) => props.theme.shadow};
-  border-radius: ${(props) => props.theme.radius};
-  background-color: ${(props) => props.theme.colors.bgc};
-  padding: ${(props) => props.theme.tilePadding};
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    .transferField {
-      flex-basis: 49%;
-    }
-  }
-  button {
-    margin-top: 20px;
-  }
-  .transferField {
-    margin-bottom: 12px;
-    .field-error {
-      border-color: #e74c3c;
-    }
-    option:disabled {
-      color: #e74c3c;
-    }
-  }
-`;
 
 const fields: IField[] = [
   {
@@ -202,13 +175,13 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
     <>
       {!zeroBalance && getDefaultCurrency() !== undefined ? (
         <>
-          <S_Form ref={formRef} onSubmit={(e) => handleSubmit(e)}>
+          <StyledForm ref={formRef} onSubmit={(e) => handleSubmit(e)}>
             <>
               {fields.map((field, i: number) => (
                 <div className="transferField" key={field.label}>
-                  <S_Label htmlFor={field.label}>{field.label}</S_Label>
+                  <StyledLabel htmlFor={field.label}>{field.label}</StyledLabel>
                   {!field.isSelect ? (
-                    <S_Input
+                    <StyledInput
                       onChange={(e) =>
                         handleChange(field.label, e.target.value)
                       }
@@ -218,7 +191,7 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
                       maxLength={field.maxLength && field.maxLength}
                     />
                   ) : (
-                    <S_Select
+                    <StyledSelect
                       onChange={(e) =>
                         handleChange(field.label, e.target.value)
                       }
@@ -234,21 +207,50 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
                           {`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}
                         </option>
                       ))}
-                    </S_Select>
+                    </StyledSelect>
                   )}
                 </div>
               ))}
-              <S_Button as={"button"} type="submit">
+              <StyledButton as={"button"} type="submit">
                 Send transfer
-              </S_Button>
+              </StyledButton>
             </>
-          </S_Form>
+          </StyledForm>
         </>
       ) : (
-        <S_Heading>You don't have the balance to make a transfer!</S_Heading>
+        <StyledHeading>
+          You don't have the balance to make a transfer!
+        </StyledHeading>
       )}
     </>
   );
 };
 
 export default Form;
+
+const StyledForm = styled.form`
+  box-shadow: ${(props) => props.theme.shadow};
+  border-radius: ${(props) => props.theme.radius};
+  background-color: ${(props) => props.theme.colors.bgc};
+  padding: ${(props) => props.theme.tilePadding};
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .transferField {
+      flex-basis: 49%;
+    }
+  }
+  button {
+    margin-top: 20px;
+  }
+  .transferField {
+    margin-bottom: 12px;
+    .field-error {
+      border-color: #e74c3c;
+    }
+    option:disabled {
+      color: #e74c3c;
+    }
+  }
+`;

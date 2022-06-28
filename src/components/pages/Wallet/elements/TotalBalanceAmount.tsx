@@ -6,7 +6,29 @@ interface Props {
   amount?: string;
 }
 
-const S_TotalBalanceAmount = styled.p`
+const TotalBalanceAmount: React.FC<Props> = ({ amount }) => {
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    amount !== undefined ? setLoading(false) : setLoading(true);
+  }, [amount]);
+
+  return (
+    <>
+      {!loading ? (
+        <StyledTotalBalanceAmount>
+          ~{amount} PLN <span>+15%**</span>
+        </StyledTotalBalanceAmount>
+      ) : (
+        <Loader />
+      )}
+    </>
+  );
+};
+
+export default TotalBalanceAmount;
+
+const StyledTotalBalanceAmount = styled.p`
   margin-bottom: 4px;
   display: flex;
   align-items: center;
@@ -24,25 +46,3 @@ const S_TotalBalanceAmount = styled.p`
     font-size: ${(props) => props.theme.typography.size_title};
   }
 `;
-
-const TotalBalanceAmount: React.FC<Props> = ({ amount }) => {
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    amount !== undefined ? setLoading(false) : setLoading(true);
-  }, [amount]);
-
-  return (
-    <>
-      {!loading ? (
-        <S_TotalBalanceAmount>
-          ~{amount} PLN <span>+15%**</span>
-        </S_TotalBalanceAmount>
-      ) : (
-        <Loader />
-      )}
-    </>
-  );
-};
-
-export default TotalBalanceAmount;

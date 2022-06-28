@@ -12,7 +12,62 @@ interface ILink {
   icon: ReactElement;
 }
 
-const S_Links = styled.nav`
+const links: ILink[] = [
+  {
+    to: "/",
+    text: "Home",
+    icon: <i className="fas fa-home"></i>,
+  },
+  {
+    to: "/wallet",
+    text: "Wallet",
+    icon: <i className="fas fa-wallet"></i>,
+  },
+  {
+    to: "/transactions",
+    text: "Transactions",
+    icon: <i className="fas fa-hand-holding-usd"></i>,
+  },
+  {
+    to: "/transfer",
+    text: "Transfer",
+    icon: <i className="fas fa-paper-plane"></i>,
+  },
+  {
+    to: "/currencies",
+    text: "Currencies",
+    icon: <i className="fas fa-coins"></i>,
+  },
+  {
+    to: "/help",
+    text: "Help",
+    icon: <i className="fas fa-headset"></i>,
+  },
+];
+
+const Links: React.FC<Props> = ({ openLinks }) => {
+  return (
+    <StyledLinks className={`${openLinks ? "open-links" : ""}`}>
+      <ul>
+        {links.map((link) => (
+          <li key={link.to}>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active-link" : "")}
+              to={link.to}
+            >
+              {link.icon}
+              {link.text}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </StyledLinks>
+  );
+};
+
+export default Links;
+
+const StyledLinks = styled.nav`
   flex-basis: 100%;
   width: 100%;
   order: 1;
@@ -87,58 +142,3 @@ const S_Links = styled.nav`
     }
   }
 `;
-
-const links: ILink[] = [
-  {
-    to: "/",
-    text: "Home",
-    icon: <i className="fas fa-home"></i>,
-  },
-  {
-    to: "/wallet",
-    text: "Wallet",
-    icon: <i className="fas fa-wallet"></i>,
-  },
-  {
-    to: "/transactions",
-    text: "Transactions",
-    icon: <i className="fas fa-hand-holding-usd"></i>,
-  },
-  {
-    to: "/transfer",
-    text: "Transfer",
-    icon: <i className="fas fa-paper-plane"></i>,
-  },
-  {
-    to: "/currencies",
-    text: "Currencies",
-    icon: <i className="fas fa-coins"></i>,
-  },
-  {
-    to: "/help",
-    text: "Help",
-    icon: <i className="fas fa-headset"></i>,
-  },
-];
-
-const Links: React.FC<Props> = ({ openLinks }) => {
-  return (
-    <S_Links className={`${openLinks ? "open-links" : ""}`}>
-      <ul>
-        {links.map((link) => (
-          <li key={link.to}>
-            <NavLink
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-              to={link.to}
-            >
-              {link.icon}
-              {link.text}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-    </S_Links>
-  );
-};
-
-export default Links;

@@ -8,15 +8,6 @@ interface IUserField {
   value: string;
 }
 
-const S_Image = styled.img`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 12px;
-  object-fit: cover;
-  object-position: center;
-`;
-
 const Image: React.FC = () => {
   const userFields: IUserField[] = useSelector(
     (state: RootState) => state.user
@@ -26,7 +17,16 @@ const Image: React.FC = () => {
     (item) => item.label === "image"
   )!.value;
 
-  return <S_Image src={imagePath} />;
+  return <StyledImage src={imagePath} />;
 };
 
 export default Image;
+
+const StyledImage = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 12px;
+  object-fit: cover;
+  object-position: center;
+`;

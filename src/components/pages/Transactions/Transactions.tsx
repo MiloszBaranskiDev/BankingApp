@@ -1,6 +1,6 @@
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
-import S_PageTitle from "components/layout/S_PageTitle";
+import StyledPageTitle from "components/layout/StyledPageTitle";
 
 interface ITransaction {
   category: string;
@@ -17,7 +17,7 @@ const Transactions: React.FC = () => {
 
   return (
     <>
-      <S_PageTitle>Transactions</S_PageTitle>
+      <StyledPageTitle>Transactions</StyledPageTitle>
       {transactions && <div>soon</div>}
     </>
   );

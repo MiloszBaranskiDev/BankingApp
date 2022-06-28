@@ -2,8 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import GetCurrentHour from "utils/GetCurrentHour";
 import GetRandomId from "utils/GeRandomId";
-import S_Input from "components/layout/S_Input";
-import S_Button from "components/layout/S_Button";
+import StyledInput from "components/layout/StyledInput";
+import StyledButton from "components/layout/StyledButton";
 import Emoji from "../elements/Emoji";
 
 interface IMessage {
@@ -17,23 +17,6 @@ interface Props {
   messages: IMessage[];
   setMessages: (arg0: IMessage[]) => void;
 }
-
-const S_Controls = styled.div`
-  display: flex;
-  position: relative;
-  .message-input {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  .message-btn {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    width: 55px;
-    i {
-      font-size: ${(props) => props.theme.typography.size_big};
-    }
-  }
-`;
 
 const Controls: React.FC<Props> = ({ messages, setMessages }) => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -56,8 +39,8 @@ const Controls: React.FC<Props> = ({ messages, setMessages }) => {
   };
 
   return (
-    <S_Controls>
-      <S_Input
+    <StyledControls>
+      <StyledInput
         onKeyPress={(e) => e.key === "Enter" && handleSend()}
         onChange={(e) => setInputValue(e.target.value)}
         value={inputValue}
@@ -71,11 +54,28 @@ const Controls: React.FC<Props> = ({ messages, setMessages }) => {
         showEmojiPicker={showEmojiPicker}
         setShowEmojiPicker={setShowEmojiPicker}
       />
-      <S_Button onClick={handleSend} as={"button"} className="message-btn">
+      <StyledButton onClick={handleSend} as={"button"} className="message-btn">
         <i className="fas fa-paper-plane"></i>
-      </S_Button>
-    </S_Controls>
+      </StyledButton>
+    </StyledControls>
   );
 };
 
 export default Controls;
+
+const StyledControls = styled.div`
+  display: flex;
+  position: relative;
+  .message-input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .message-btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 55px;
+    i {
+      font-size: ${(props) => props.theme.typography.size_big};
+    }
+  }
+`;

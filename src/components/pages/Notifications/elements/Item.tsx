@@ -1,7 +1,23 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-const S_Item = styled.li`
+const Item: React.FC = () => {
+  return (
+    <StyledItem>
+      <NavLink to={`/notification/22`} className="notification">
+        <div className="icon">
+          <i className="fas fa-arrow-down"></i>
+        </div>
+        <p className="title">Notification</p>
+        <p className="time">7 hours ago</p>
+      </NavLink>
+    </StyledItem>
+  );
+};
+
+export default Item;
+
+const StyledItem = styled.li`
   margin-bottom: 20px;
   border: 1px solid transparent;
   transition: border 0.3s;
@@ -41,19 +57,3 @@ const S_Item = styled.li`
     border-color: ${(props) => props.theme.colors.main};
   }
 `;
-
-const Item: React.FC = () => {
-  return (
-    <S_Item>
-      <NavLink to={`/notification/22`} className="notification">
-        <div className="icon">
-          <i className="fas fa-arrow-down"></i>
-        </div>
-        <p className="title">Notification</p>
-        <p className="time">7 hours ago</p>
-      </NavLink>
-    </S_Item>
-  );
-};
-
-export default Item;

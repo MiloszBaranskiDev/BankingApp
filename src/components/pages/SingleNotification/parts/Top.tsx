@@ -1,9 +1,21 @@
 import styled from "styled-components";
-import S_PageTitle from "components/layout/S_PageTitle";
+import StyledPageTitle from "components/layout/StyledPageTitle";
 import Remove from "../elements/Remove";
 import Date from "../elements/Date";
 
-const S_Top = styled.div`
+const Top: React.FC = () => {
+  return (
+    <StyledTop>
+      <StyledPageTitle>Single notification</StyledPageTitle>
+      <Remove />
+      <Date />
+    </StyledTop>
+  );
+};
+
+export default Top;
+
+const StyledTop = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -20,15 +32,3 @@ const S_Top = styled.div`
     }
   }
 `;
-
-const Top: React.FC = () => {
-  return (
-    <S_Top>
-      <S_PageTitle>Single notification</S_PageTitle>
-      <Remove />
-      <Date />
-    </S_Top>
-  );
-};
-
-export default Top;

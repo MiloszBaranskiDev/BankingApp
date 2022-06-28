@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import GetCurrenciesPrices from "api/GetCurrenciesPrices";
-import S_PageTitle from "components/layout/S_PageTitle";
+import StyledPageTitle from "components/layout/StyledPageTitle";
 import Loader from "components/Loader";
 import Tiles from "./parts/Tiles";
 import Swap from "./parts/Swap";
@@ -45,7 +45,7 @@ const Currencies: React.FC = () => {
 
   return (
     <>
-      <S_PageTitle>Currencies</S_PageTitle>
+      <StyledPageTitle>Currencies</StyledPageTitle>
       {!loading ? (
         <>
           <Tiles currencies={currencies} />

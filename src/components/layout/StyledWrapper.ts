@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const S_Wrapper = styled.div`
+const StyledWrapper = styled.div`
   margin: 0 auto;
   width: 90%;
   @media (min-width: ${(props) => props.theme.breakpoints.mobile_big}) {
@@ -15,4 +15,4 @@ const S_Wrapper = styled.div`
   }
 `;
 
-export default S_Wrapper;
+export default StyledWrapper;

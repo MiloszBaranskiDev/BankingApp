@@ -12,13 +12,75 @@ interface IUserField {
   value: string;
 }
 
-const S_Container = styled.div`
+const User: React.FC = () => {
+  const submenuRef: any = useRef();
+  const location: Location = useLocation();
+  const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
+
+  const userFields: IUserField[] = useSelector(
+    (state: RootState) => state.user
+  );
+  const imagePath: string = userFields.find(
+    (item) => item.label === "image"
+  )!.value;
+
+  useEffect(() => {
+    HandleClickOutside(submenuRef, showUserMenu, setShowUserMenu);
+  }, [showUserMenu]);
+
+  useEffect(() => {
+    setShowUserMenu(false);
+  }, [location]);
+
+  return (
+    <StyledContainer ref={submenuRef}>
+      <StyledIcon
+        onClick={() => setShowUserMenu((showUserMenu) => !showUserMenu)}
+        style={{
+          backgroundImage: `url(${imagePath})`,
+        }}
+      />
+      {showUserMenu ? (
+        <StyledUserMenu>
+          <div className="top">
+            <h3>Name</h3>
+            <p>Bank account</p>
+          </div>
+          <ul>
+            <li>
+              <NavLink to="/profile">
+                <i className="fas fa-user"></i>
+                Profile
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/notifications">
+                <i className="fas fa-bell"></i>
+                Notifications
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/settings">
+                <i className="fas fa-cog"></i>
+                Settings
+              </NavLink>
+            </li>
+          </ul>
+        </StyledUserMenu>
+      ) : null}
+    </StyledContainer>
+  );
+};
+
+export default User;
+
+const StyledContainer = styled.div`
   position: relative;
   width: 40px;
   height: 40px;
 `;
 
-const S_Icon = styled.button`
+const StyledIcon = styled.button`
   margin-left: 8px;
   width: 100%;
   height: 100%;
@@ -34,7 +96,7 @@ const S_Icon = styled.button`
   }
 `;
 
-const S_UserMenu = styled.div`
+const StyledUserMenu = styled.div`
   position: absolute;
   top: 60px;
   right: 0;
@@ -76,65 +138,3 @@ const S_UserMenu = styled.div`
     }
   }
 `;
-
-const User: React.FC = () => {
-  const submenuRef: any = useRef();
-  const location: Location = useLocation();
-  const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
-
-  const userFields: IUserField[] = useSelector(
-    (state: RootState) => state.user
-  );
-  const imagePath: string = userFields.find(
-    (item) => item.label === "image"
-  )!.value;
-
-  useEffect(() => {
-    HandleClickOutside(submenuRef, showUserMenu, setShowUserMenu);
-  }, [showUserMenu]);
-
-  useEffect(() => {
-    setShowUserMenu(false);
-  }, [location]);
-
-  return (
-    <S_Container ref={submenuRef}>
-      <S_Icon
-        onClick={() => setShowUserMenu((showUserMenu) => !showUserMenu)}
-        style={{
-          backgroundImage: `url(${imagePath})`,
-        }}
-      />
-      {showUserMenu ? (
-        <S_UserMenu>
-          <div className="top">
-            <h3>Name</h3>
-            <p>Bank account</p>
-          </div>
-          <ul>
-            <li>
-              <NavLink to="/profile">
-                <i className="fas fa-user"></i>
-                Profile
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/notifications">
-                <i className="fas fa-bell"></i>
-                Notifications
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/settings">
-                <i className="fas fa-cog"></i>
-                Settings
-              </NavLink>
-            </li>
-          </ul>
-        </S_UserMenu>
-      ) : null}
-    </S_Container>
-  );
-};
-
-export default User;

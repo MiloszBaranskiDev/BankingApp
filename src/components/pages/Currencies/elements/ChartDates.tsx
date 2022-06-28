@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import GetTodayDate from "utils/GetTodayDate";
-import S_Label from "components/layout/S_Label";
-import S_Input from "components/layout/S_Input";
+import StyledLabel from "components/layout/StyledLabel";
+import StyledInput from "components/layout/StyledInput";
 
 interface Props {
   startDate: string;
@@ -13,7 +13,46 @@ interface Props {
   setEndDate: (arg0: string) => void;
 }
 
-const S_ChartDates = styled.div`
+const ChartDates: React.FC<Props> = ({
+  startDate,
+  endDate,
+  minStartDate,
+  minEndDate,
+  maxStartDate,
+  setStartDate,
+  setEndDate,
+}) => {
+  return (
+    <StyledChartDates>
+      <StyledDate>
+        <StyledLabel htmlFor="start-date">From</StyledLabel>
+        <StyledInput
+          onChange={(e) => setStartDate(e.target.value)}
+          value={startDate}
+          type="date"
+          id="start-date"
+          min={minStartDate}
+          max={maxStartDate}
+        />
+      </StyledDate>
+      <StyledDate>
+        <StyledLabel htmlFor="end-date">To</StyledLabel>
+        <StyledInput
+          onChange={(e) => setEndDate(e.target.value)}
+          value={endDate}
+          type="date"
+          id="end-date"
+          min={minEndDate}
+          max={GetTodayDate()}
+        />
+      </StyledDate>
+    </StyledChartDates>
+  );
+};
+
+export default ChartDates;
+
+const StyledChartDates = styled.div`
   display: flex;
   flex-direction: column;
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
@@ -29,7 +68,7 @@ const S_ChartDates = styled.div`
   }
 `;
 
-const S_Date = styled.div`
+const StyledDate = styled.div`
   display: flex;
   flex-direction: column;
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
@@ -38,42 +77,3 @@ const S_Date = styled.div`
     }
   }
 `;
-
-const ChartDates: React.FC<Props> = ({
-  startDate,
-  endDate,
-  minStartDate,
-  minEndDate,
-  maxStartDate,
-  setStartDate,
-  setEndDate,
-}) => {
-  return (
-    <S_ChartDates>
-      <S_Date>
-        <S_Label htmlFor="start-date">From</S_Label>
-        <S_Input
-          onChange={(e) => setStartDate(e.target.value)}
-          value={startDate}
-          type="date"
-          id="start-date"
-          min={minStartDate}
-          max={maxStartDate}
-        />
-      </S_Date>
-      <S_Date>
-        <S_Label htmlFor="end-date">To</S_Label>
-        <S_Input
-          onChange={(e) => setEndDate(e.target.value)}
-          value={endDate}
-          type="date"
-          id="end-date"
-          min={minEndDate}
-          max={GetTodayDate()}
-        />
-      </S_Date>
-    </S_ChartDates>
-  );
-};
-
-export default ChartDates;

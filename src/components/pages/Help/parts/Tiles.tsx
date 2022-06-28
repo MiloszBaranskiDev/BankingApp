@@ -2,7 +2,18 @@ import styled from "styled-components";
 import FaqTile from "../elements/FaqTile";
 import ChatTile from "../elements/ChatTile";
 
-const S_Tiles = styled.div`
+const Tiles: React.FC = () => {
+  return (
+    <StyledTiles>
+      <FaqTile />
+      <ChatTile />
+    </StyledTiles>
+  );
+};
+
+export default Tiles;
+
+const StyledTiles = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -37,14 +48,3 @@ const S_Tiles = styled.div`
     }
   }
 `;
-
-const Tiles: React.FC = () => {
-  return (
-    <S_Tiles>
-      <FaqTile />
-      <ChatTile />
-    </S_Tiles>
-  );
-};
-
-export default Tiles;

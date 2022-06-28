@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import S_Heading from "components/layout/S_Heading";
-import S_Select from "components/layout/S_Select";
-import S_Input from "components/layout/S_Input";
+import StyledHeading from "components/layout/StyledHeading";
+import StyledSelect from "components/layout/StyledSelect";
+import StyledInput from "components/layout/StyledInput";
 
 interface ICurrency {
   symbol: string;
@@ -15,16 +15,6 @@ interface Props {
   outgoing: boolean;
 }
 
-const S_SwapCurrency = styled.div`
-  input,
-  select {
-    margin-bottom: 12px;
-  }
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    flex-grow: 1;
-  }
-`;
-
 const SwapCurrency: React.FC<Props> = ({
   wallet,
   swapCurrency,
@@ -32,9 +22,9 @@ const SwapCurrency: React.FC<Props> = ({
   outgoing,
 }) => {
   return (
-    <S_SwapCurrency>
-      <S_Heading>{outgoing ? "From" : "To"}</S_Heading>
-      <S_Select
+    <StyledSwapCurrency>
+      <StyledHeading>{outgoing ? "From" : "To"}</StyledHeading>
+      <StyledSelect
         value={swapCurrency}
         onChange={(e) => setSwapCurrency(e.target.value)}
       >
@@ -44,11 +34,21 @@ const SwapCurrency: React.FC<Props> = ({
             key={currency.symbol}
           >{`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}</option>
         ))}
-      </S_Select>
-      <S_Input type="number" placeholder="Enter amount" />
+      </StyledSelect>
+      <StyledInput type="number" placeholder="Enter amount" />
       <p>Balance after: 500 {swapCurrency}</p>
-    </S_SwapCurrency>
+    </StyledSwapCurrency>
   );
 };
 
 export default SwapCurrency;
+
+const StyledSwapCurrency = styled.div`
+  input,
+  select {
+    margin-bottom: 12px;
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    flex-grow: 1;
+  }
+`;

@@ -1,14 +1,37 @@
 import { useState, useEffect } from "react";
 import { Location, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import S_Wrapper from "components/layout/S_Wrapper";
+import StyledWrapper from "components/layout/StyledWrapper";
 import Logo from "./elements/Logo";
 import User from "./elements/User";
 import Links from "./elements/Links";
 import Notifications from "./elements/Notifications";
 import Hamburger from "./elements/Hamburger";
 
-const S_Navbar = styled.div`
+const Navbar: React.FC = () => {
+  const location: Location = useLocation();
+  const [openLinks, setOpenLinks] = useState<boolean>(false);
+
+  useEffect(() => {
+    setOpenLinks(false);
+  }, [location]);
+
+  return (
+    <StyledNavbar>
+      <StyledWrapper className="navbarWrapper">
+        <Logo />
+        <Links openLinks={openLinks} />
+        <Notifications />
+        <User />
+        <Hamburger openLinks={openLinks} setOpenLinks={setOpenLinks} />
+      </StyledWrapper>
+    </StyledNavbar>
+  );
+};
+
+export default Navbar;
+
+const StyledNavbar = styled.div`
   padding: 10px 0;
   position: sticky;
   top: 0;
@@ -21,26 +44,3 @@ const S_Navbar = styled.div`
     align-items: center;
   }
 `;
-
-const Navbar: React.FC = () => {
-  const location: Location = useLocation();
-  const [openLinks, setOpenLinks] = useState<boolean>(false);
-
-  useEffect(() => {
-    setOpenLinks(false);
-  }, [location]);
-
-  return (
-    <S_Navbar>
-      <S_Wrapper className="navbarWrapper">
-        <Logo />
-        <Links openLinks={openLinks} />
-        <Notifications />
-        <User />
-        <Hamburger openLinks={openLinks} setOpenLinks={setOpenLinks} />
-      </S_Wrapper>
-    </S_Navbar>
-  );
-};
-
-export default Navbar;

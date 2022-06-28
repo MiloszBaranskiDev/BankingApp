@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import S_Heading from "components/layout/S_Heading";
+import StyledHeading from "components/layout/StyledHeading";
 
 interface ICurrency {
   symbol: string;
@@ -23,18 +23,6 @@ interface IChartData {
     }
   ];
 }
-
-const S_Chart = styled.div`
-  flex-basis: 100%;
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  background-color: ${(props) => props.theme.colors.bgc};
-  box-shadow: ${(props) => props.theme.shadow};
-  canvas {
-    height: auto !important;
-    width: 100% !important;
-  }
-`;
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -68,8 +56,8 @@ const Chart: React.FC<Props> = ({ wallet }) => {
   };
 
   return (
-    <S_Chart>
-      <S_Heading>Currencies</S_Heading>
+    <StyledChart>
+      <StyledHeading>Currencies</StyledHeading>
       {wallet.some((currency) => currency.amount >= 0.01) ? (
         <Doughnut data={chartData} />
       ) : (
@@ -78,8 +66,20 @@ const Chart: React.FC<Props> = ({ wallet }) => {
           currencies.
         </p>
       )}
-    </S_Chart>
+    </StyledChart>
   );
 };
 
 export default Chart;
+
+const StyledChart = styled.div`
+  flex-basis: 100%;
+  padding: ${(props) => props.theme.tilePadding};
+  border-radius: ${(props) => props.theme.radius};
+  background-color: ${(props) => props.theme.colors.bgc};
+  box-shadow: ${(props) => props.theme.shadow};
+  canvas {
+    height: auto !important;
+    width: 100% !important;
+  }
+`;

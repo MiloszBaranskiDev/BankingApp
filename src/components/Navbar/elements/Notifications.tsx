@@ -2,15 +2,82 @@ import { useState, useEffect, useRef } from "react";
 import { Location, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import S_Button from "components/layout/S_Button";
+import StyledButton from "components/layout/StyledButton";
 import HandleClickOutside from "helpers/HandleClickOutside";
 
-const S_Container = styled.div`
+const Notifications: React.FC = () => {
+  const submenuRef: any = useRef();
+  const location: Location = useLocation();
+  const [showNotifications, setShowNotifications] = useState<boolean>(false);
+
+  useEffect(() => {
+    HandleClickOutside(submenuRef, showNotifications, setShowNotifications);
+  }, [showNotifications]);
+
+  useEffect(() => {
+    setShowNotifications(false);
+  }, [location]);
+
+  return (
+    <StyledContainer ref={submenuRef}>
+      <StyledIcon
+        onClick={() =>
+          setShowNotifications((showNotifications) => !showNotifications)
+        }
+      >
+        <i className="fas fa-bell"></i>
+      </StyledIcon>
+      {showNotifications ? (
+        <StyledNotifications>
+          <div className="top">
+            <h3>Notifications</h3>
+            <p>8 new</p>
+          </div>
+          <ul>
+            <li>
+              <NavLink to={`/notification/22`} className="notification">
+                <div className="notification__icon">
+                  <i className="fas fa-arrow-down"></i>
+                </div>
+                <div className="notification__content">
+                  <p>Received Payment</p>
+                  <p>Your account has been credited with 100$</p>
+                </div>
+                <p className="notification__date">Today</p>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to={`/notification/44`} className="notification">
+                <div className="notification__icon">
+                  <i className="fas fa-arrow-down"></i>
+                </div>
+                <div className="notification__content">
+                  <p>Received Payment</p>
+                  <p>Your account has been credited with 100$</p>
+                </div>
+                <p className="notification__date">Today</p>
+              </NavLink>
+            </li>
+          </ul>
+          <div className="bottom">
+            <StyledButton as={NavLink} to="/notifications">
+              Read all notifications
+            </StyledButton>
+          </div>
+        </StyledNotifications>
+      ) : null}
+    </StyledContainer>
+  );
+};
+
+export default Notifications;
+
+const StyledContainer = styled.div`
   position: relative;
   margin-left: auto;
 `;
 
-const S_Icon = styled.button`
+const StyledIcon = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -34,7 +101,7 @@ const S_Icon = styled.button`
   }
 `;
 
-const S_Notifications = styled.div`
+const StyledNotifications = styled.div`
   position: absolute;
   top: 60px;
   right: 0;
@@ -130,70 +197,3 @@ const S_Notifications = styled.div`
     }
   }
 `;
-
-const Notifications: React.FC = () => {
-  const submenuRef: any = useRef();
-  const location: Location = useLocation();
-  const [showNotifications, setShowNotifications] = useState<boolean>(false);
-
-  useEffect(() => {
-    HandleClickOutside(submenuRef, showNotifications, setShowNotifications);
-  }, [showNotifications]);
-
-  useEffect(() => {
-    setShowNotifications(false);
-  }, [location]);
-
-  return (
-    <S_Container ref={submenuRef}>
-      <S_Icon
-        onClick={() =>
-          setShowNotifications((showNotifications) => !showNotifications)
-        }
-      >
-        <i className="fas fa-bell"></i>
-      </S_Icon>
-      {showNotifications ? (
-        <S_Notifications>
-          <div className="top">
-            <h3>Notifications</h3>
-            <p>8 new</p>
-          </div>
-          <ul>
-            <li>
-              <NavLink to={`/notification/22`} className="notification">
-                <div className="notification__icon">
-                  <i className="fas fa-arrow-down"></i>
-                </div>
-                <div className="notification__content">
-                  <p>Received Payment</p>
-                  <p>Your account has been credited with 100$</p>
-                </div>
-                <p className="notification__date">Today</p>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={`/notification/44`} className="notification">
-                <div className="notification__icon">
-                  <i className="fas fa-arrow-down"></i>
-                </div>
-                <div className="notification__content">
-                  <p>Received Payment</p>
-                  <p>Your account has been credited with 100$</p>
-                </div>
-                <p className="notification__date">Today</p>
-              </NavLink>
-            </li>
-          </ul>
-          <div className="bottom">
-            <S_Button as={NavLink} to="/notifications">
-              Read all notifications
-            </S_Button>
-          </div>
-        </S_Notifications>
-      ) : null}
-    </S_Container>
-  );
-};
-
-export default Notifications;

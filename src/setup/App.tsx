@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import theme from "./Theme";
-import S_Wrapper from "components/layout/S_Wrapper";
+import StyledWrapper from "components/layout/StyledWrapper";
 import Navbar from "components/Navbar/Navbar";
 import ScrollToTop from "helpers/ScrollToTop";
 import AppRouter from "./AppRouter";
@@ -13,9 +13,9 @@ const App: React.FC = () => {
         <ThemeProvider theme={theme}>
           <ScrollToTop />
           <Navbar />
-          <S_Wrapper>
+          <StyledWrapper>
             <AppRouter />
-          </S_Wrapper>
+          </StyledWrapper>
         </ThemeProvider>
       </div>
     </BrowserRouter>

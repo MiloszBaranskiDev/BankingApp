@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import S_Heading from "components/layout/S_Heading";
+import StyledHeading from "components/layout/StyledHeading";
 import TotalBalanceAmount from "../elements/TotalBalanceAmount";
 import TotalBalanceInfo from "../elements/TotalBalanceInfo";
 import GetCurrenciesPrices from "api/GetCurrenciesPrices";
@@ -17,24 +17,6 @@ interface Props {
 interface ILoadRates {
   (currencies: ICurrency[]): Promise<void>;
 }
-
-const S_TotalBalance = styled.div`
-  margin-bottom: 12px;
-  flex-basis: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  background-color: ${(props) => props.theme.colors.bgc};
-  box-shadow: ${(props) => props.theme.shadow};
-  h2 {
-    margin-bottom: 4px;
-    span {
-      font-weight: ${(props) => props.theme.typography.weight_normal};
-    }
-  }
-`;
 
 const TotalBalance: React.FC<Props> = ({ wallet }) => {
   const [convertedCurrencies, setConvertedCurrencies] = useState<string>();
@@ -64,14 +46,32 @@ const TotalBalance: React.FC<Props> = ({ wallet }) => {
   }, []);
 
   return (
-    <S_TotalBalance>
-      <S_Heading>
+    <StyledTotalBalance>
+      <StyledHeading>
         Total balance<span>*</span>
-      </S_Heading>
+      </StyledHeading>
       <TotalBalanceAmount amount={convertedCurrencies} />
       <TotalBalanceInfo />
-    </S_TotalBalance>
+    </StyledTotalBalance>
   );
 };
 
 export default TotalBalance;
+
+const StyledTotalBalance = styled.div`
+  margin-bottom: 12px;
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: ${(props) => props.theme.tilePadding};
+  border-radius: ${(props) => props.theme.radius};
+  background-color: ${(props) => props.theme.colors.bgc};
+  box-shadow: ${(props) => props.theme.shadow};
+  h2 {
+    margin-bottom: 4px;
+    span {
+      font-weight: ${(props) => props.theme.typography.weight_normal};
+    }
+  }
+`;

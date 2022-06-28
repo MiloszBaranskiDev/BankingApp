@@ -1,28 +1,30 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import S_Button from "components/layout/S_Button";
+import StyledButton from "components/layout/StyledButton";
 
 interface Props {
   setShowSummary: (arg0: boolean) => void;
 }
 
-const S_SummaryBtns = styled.div`
+const SummaryBtns: React.FC<Props> = ({ setShowSummary }) => {
+  return (
+    <StyledSummaryBtns>
+      <StyledButton onClick={() => setShowSummary(false)}>
+        New transfer
+      </StyledButton>
+      <StyledButton as={NavLink} to="/transactions">
+        Transactions
+      </StyledButton>
+    </StyledSummaryBtns>
+  );
+};
+
+export default SummaryBtns;
+
+const StyledSummaryBtns = styled.div`
   display: flex;
   justify-content: space-between;
   a {
     flex-basis: 49%;
   }
 `;
-
-const SummaryBtns: React.FC<Props> = ({ setShowSummary }) => {
-  return (
-    <S_SummaryBtns>
-      <S_Button onClick={() => setShowSummary(false)}>New transfer</S_Button>
-      <S_Button as={NavLink} to="/transactions">
-        Transactions
-      </S_Button>
-    </S_SummaryBtns>
-  );
-};
-
-export default SummaryBtns;

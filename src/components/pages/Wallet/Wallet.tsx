@@ -1,7 +1,7 @@
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import S_PageTitle from "components/layout/S_PageTitle";
+import StyledPageTitle from "components/layout/StyledPageTitle";
 import Chart from "./parts/Chart";
 import TotalBalance from "./parts/TotalBalance";
 import CurrenciesBalance from "./parts/CurrenciesBalance";
@@ -11,7 +11,29 @@ interface ICurrency {
   amount: number;
 }
 
-const S_Box = styled.div`
+const Wallet: React.FC = () => {
+  const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
+
+  return (
+    <>
+      <StyledPageTitle>Wallet</StyledPageTitle>
+      <StyledBox>
+        <StyledColumn>
+          <TotalBalance wallet={wallet} />
+          <CurrenciesBalance wallet={wallet} />
+        </StyledColumn>
+        <StyledColumn>
+          <Chart wallet={wallet} />
+        </StyledColumn>
+        <StyledColumn>links</StyledColumn>
+      </StyledBox>
+    </>
+  );
+};
+
+export default Wallet;
+
+const StyledBox = styled.div`
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     display: flex;
     justify-content: space-between;
@@ -20,7 +42,7 @@ const S_Box = styled.div`
   }
 `;
 
-const S_Column = styled.div`
+const StyledColumn = styled.div`
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     flex-basis: 49%;
     display: flex;
@@ -34,25 +56,3 @@ const S_Column = styled.div`
     }
   }
 `;
-
-const Wallet: React.FC = () => {
-  const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
-
-  return (
-    <>
-      <S_PageTitle>Wallet</S_PageTitle>
-      <S_Box>
-        <S_Column>
-          <TotalBalance wallet={wallet} />
-          <CurrenciesBalance wallet={wallet} />
-        </S_Column>
-        <S_Column>
-          <Chart wallet={wallet} />
-        </S_Column>
-        <S_Column>links</S_Column>
-      </S_Box>
-    </>
-  );
-};
-
-export default Wallet;

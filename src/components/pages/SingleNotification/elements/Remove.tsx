@@ -1,6 +1,16 @@
 import styled from "styled-components";
 
-const S_Remove = styled.button`
+const Remove: React.FC = () => {
+  return (
+    <StyledRemove>
+      <i className="far fa-trash-alt"></i>
+    </StyledRemove>
+  );
+};
+
+export default Remove;
+
+const StyledRemove = styled.button`
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -11,13 +21,3 @@ const S_Remove = styled.button`
     color: unset;
   }
 `;
-
-const Remove: React.FC = () => {
-  return (
-    <S_Remove>
-      <i className="far fa-trash-alt"></i>
-    </S_Remove>
-  );
-};
-
-export default Remove;

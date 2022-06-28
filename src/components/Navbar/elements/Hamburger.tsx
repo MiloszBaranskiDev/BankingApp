@@ -5,7 +5,17 @@ interface Props {
   setOpenLinks: (arg0: boolean) => void;
 }
 
-const S_Hamburger = styled.button`
+const Hamburger: React.FC<Props> = ({ openLinks, setOpenLinks }) => {
+  return (
+    <StyledHamburger onClick={() => setOpenLinks(!openLinks)}>
+      <i className="fas fa-bars"></i>
+    </StyledHamburger>
+  );
+};
+
+export default Hamburger;
+
+const StyledHamburger = styled.button`
   display: block;
   margin-left: 25px;
   border: none;
@@ -19,13 +29,3 @@ const S_Hamburger = styled.button`
     color: ${(props) => props.theme.colors.main};
   }
 `;
-
-const Hamburger: React.FC<Props> = ({ openLinks, setOpenLinks }) => {
-  return (
-    <S_Hamburger onClick={() => setOpenLinks(!openLinks)}>
-      <i className="fas fa-bars"></i>
-    </S_Hamburger>
-  );
-};
-
-export default Hamburger;

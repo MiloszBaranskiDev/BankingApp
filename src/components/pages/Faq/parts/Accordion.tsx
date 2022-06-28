@@ -8,7 +8,20 @@ interface Props {
   answer: string;
 }
 
-const S_Accordion = styled.li`
+const Accordion: React.FC<Props> = ({ question, answer }) => {
+  const [open, setOpen] = useState<boolean>(false);
+
+  return (
+    <StyledAccordion>
+      <Question open={open} setOpen={setOpen} question={question} />
+      <Answer className={open ? "show-answer" : ""} answer={answer} />
+    </StyledAccordion>
+  );
+};
+
+export default Accordion;
+
+const StyledAccordion = styled.li`
   margin-bottom: 20px;
   border: 1px solid transparent;
   transition: border 0.3s;
@@ -22,16 +35,3 @@ const S_Accordion = styled.li`
     margin-top: 50px;
   }
 `;
-
-const Accordion: React.FC<Props> = ({ question, answer }) => {
-  const [open, setOpen] = useState<boolean>(false);
-
-  return (
-    <S_Accordion>
-      <Question open={open} setOpen={setOpen} question={question} />
-      <Answer className={open ? "show-answer" : ""} answer={answer} />
-    </S_Accordion>
-  );
-};
-
-export default Accordion;

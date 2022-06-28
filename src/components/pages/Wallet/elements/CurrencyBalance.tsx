@@ -5,7 +5,20 @@ interface Props {
   amount: number;
 }
 
-const S_CurrencyBalance = styled.div`
+const CurrencyBalance: React.FC<Props> = ({ symbol, amount }) => {
+  return (
+    <StyledCurrencyBalance>
+      <p>
+        <span>{amount}</span>
+        <span>{symbol}</span>
+      </p>
+    </StyledCurrencyBalance>
+  );
+};
+
+export default CurrencyBalance;
+
+const StyledCurrencyBalance = styled.div`
   flex-basis: 48.5%;
   display: flex;
   align-items: center;
@@ -50,16 +63,3 @@ const S_CurrencyBalance = styled.div`
     }
   }
 `;
-
-const CurrencyBalance: React.FC<Props> = ({ symbol, amount }) => {
-  return (
-    <S_CurrencyBalance>
-      <p>
-        <span>{amount}</span>
-        <span>{symbol}</span>
-      </p>
-    </S_CurrencyBalance>
-  );
-};
-
-export default CurrencyBalance;

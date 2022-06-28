@@ -1,4 +1,4 @@
-import S_PageTitle from "components/layout/S_PageTitle";
+import StyledPageTitle from "components/layout/StyledPageTitle";
 import Form from "./parts/Form";
 import Summary from "./parts/Summary";
 import { useState } from "react";
@@ -8,9 +8,9 @@ const Transfer: React.FC = () => {
 
   return (
     <>
-      <S_PageTitle>
+      <StyledPageTitle>
         {showSummary ? "Transfer summary" : "New transfer"}
-      </S_PageTitle>
+      </StyledPageTitle>
       {!showSummary ? (
         <Form setShowSummary={setShowSummary} />
       ) : (

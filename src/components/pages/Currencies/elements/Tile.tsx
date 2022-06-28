@@ -5,7 +5,18 @@ interface Props {
   price?: number;
 }
 
-const S_Tile = styled.div`
+const Tile: React.FC<Props> = ({ price, symbol }) => {
+  return (
+    <StyledTile>
+      <StyledText>{symbol}/PLN</StyledText>
+      <StyledText>{price}</StyledText>
+    </StyledTile>
+  );
+};
+
+export default Tile;
+
+const StyledTile = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,7 +35,7 @@ const S_Tile = styled.div`
   }
 `;
 
-const S_Text = styled.p`
+const StyledText = styled.p`
   text-transform: uppercase;
   color: ${(props) => props.theme.colors.main};
   font-weight: ${(props) => props.theme.typography.weight_bold};
@@ -33,14 +44,3 @@ const S_Text = styled.p`
     margin-bottom: 2px;
   }
 `;
-
-const Tile: React.FC<Props> = ({ price, symbol }) => {
-  return (
-    <S_Tile>
-      <S_Text>{symbol}/PLN</S_Text>
-      <S_Text>{price}</S_Text>
-    </S_Tile>
-  );
-};
-
-export default Tile;

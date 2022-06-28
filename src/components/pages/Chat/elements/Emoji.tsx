@@ -8,22 +8,6 @@ interface Props {
   setShowEmojiPicker: (arg0: boolean) => void;
 }
 
-const S_EmojiBtn = styled.button`
-  cursor: pointer;
-  border: none;
-  width: 40px;
-  background-color: ${(props) => props.theme.colors.bgc_dark};
-  i {
-    font-size: ${(props) => props.theme.typography.size_big};
-  }
-`;
-
-const S_EmojiPicker = styled.div`
-  position: absolute;
-  right: 0;
-  bottom: 56px;
-`;
-
 const Emoji: React.FC<Props> = ({
   inputValue,
   setInputValue,
@@ -36,16 +20,32 @@ const Emoji: React.FC<Props> = ({
 
   return (
     <>
-      <S_EmojiBtn onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
+      <StyledEmojiBtn onClick={() => setShowEmojiPicker(!showEmojiPicker)}>
         <i className="fas fa-smile"></i>
-      </S_EmojiBtn>
+      </StyledEmojiBtn>
       {showEmojiPicker && (
-        <S_EmojiPicker>
+        <StyledEmojiPicker>
           <Picker onEmojiClick={handleEmoji} />
-        </S_EmojiPicker>
+        </StyledEmojiPicker>
       )}
     </>
   );
 };
 
 export default Emoji;
+
+const StyledEmojiBtn = styled.button`
+  cursor: pointer;
+  border: none;
+  width: 40px;
+  background-color: ${(props) => props.theme.colors.bgc_dark};
+  i {
+    font-size: ${(props) => props.theme.typography.size_big};
+  }
+`;
+
+const StyledEmojiPicker = styled.div`
+  position: absolute;
+  right: 0;
+  bottom: 56px;
+`;

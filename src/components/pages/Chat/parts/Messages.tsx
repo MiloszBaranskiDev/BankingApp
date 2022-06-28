@@ -13,7 +13,30 @@ interface IMessage {
   id: number;
 }
 
-const S_Messages = styled.div`
+const Messages: React.FC<Props> = ({ messages }) => {
+  const refMessages: any = useRef();
+
+  useEffect(() => {
+    refMessages.current.scrollTop = refMessages.current.scrollHeight;
+  }, [messages]);
+
+  return (
+    <StyledMessages ref={refMessages}>
+      {messages.map((message) => (
+        <Message
+          text={message.text}
+          user={message.user}
+          hour={message.hour}
+          key={message.id}
+        />
+      ))}
+    </StyledMessages>
+  );
+};
+
+export default Messages;
+
+const StyledMessages = styled.div`
   margin-bottom: 30px;
   height: 360px;
   overflow-y: auto;
@@ -28,26 +51,3 @@ const S_Messages = styled.div`
     height: 480px;
   }
 `;
-
-const Messages: React.FC<Props> = ({ messages }) => {
-  const refMessages: any = useRef();
-
-  useEffect(() => {
-    refMessages.current.scrollTop = refMessages.current.scrollHeight;
-  }, [messages]);
-
-  return (
-    <S_Messages ref={refMessages}>
-      {messages.map((message) => (
-        <Message
-          text={message.text}
-          user={message.user}
-          hour={message.hour}
-          key={message.id}
-        />
-      ))}
-    </S_Messages>
-  );
-};
-
-export default Messages;
