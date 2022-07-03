@@ -1,9 +1,11 @@
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
-import StyledPageTitle from "components/layout/StyledPageTitle";
+import StyledPageTitle from "components/styled/StyledPageTitle";
+import Accordion from "components/Accordion";
 
 interface ITransaction {
   category: string;
+  id: number;
   date: string;
   details: object[];
 }
@@ -18,7 +20,17 @@ const Transactions: React.FC = () => {
   return (
     <>
       <StyledPageTitle>Transactions</StyledPageTitle>
-      {transactions && <div>soon</div>}
+      {transactions && (
+        <ul>
+          {transactions.map((transaction) => (
+            <Accordion
+              key={transaction.id}
+              top={transaction.category + " / " + transaction.date}
+              content={transaction}
+            />
+          ))}
+        </ul>
+      )}
     </>
   );
 };

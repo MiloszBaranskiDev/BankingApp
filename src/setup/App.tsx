@@ -1,7 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import theme from "./Theme";
-import StyledWrapper from "components/layout/StyledWrapper";
+import StyledWrapper from "components/styled/StyledWrapper";
 import Navbar from "components/Navbar/Navbar";
 import ScrollToTop from "helpers/ScrollToTop";
 import AppRouter from "./AppRouter";

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import GetTodayDate from "utils/GetTodayDate";
-import StyledLabel from "components/layout/StyledLabel";
-import StyledInput from "components/layout/StyledInput";
+import StyledLabel from "components/styled/StyledLabel";
+import StyledInput from "components/styled/StyledInput";
 
 interface Props {
   startDate: string;

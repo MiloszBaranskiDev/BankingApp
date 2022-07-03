@@ -1,4 +1,4 @@
-import StyledPageTitle from "components/layout/StyledPageTitle";
+import StyledPageTitle from "components/styled/StyledPageTitle";
 
 const Home: React.FC = () => {
   return (

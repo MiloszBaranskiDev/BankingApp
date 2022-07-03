@@ -1,4 +1,4 @@
-import StyledPageTitle from "components/layout/StyledPageTitle";
+import StyledPageTitle from "components/styled/StyledPageTitle";
 import Text from "../elements/Text";
 
 const Header: React.FC = () => {

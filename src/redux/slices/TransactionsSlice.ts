@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface ITransaction {
   category: string;
   date: string;
+  id: number;
   details: object[];
 }
 
@@ -10,6 +11,7 @@ const initialState: ITransaction[] = [
   {
     category: "Outgoing transfer",
     date: "2022-06-11",
+    id: 1943,
     details: [
       {
         label: "Recipient",
@@ -40,10 +42,19 @@ const initialState: ITransaction[] = [
   {
     category: "Currency swap",
     date: "2022-06-13",
+    id: 2581,
     details: [
       {
-        label: "Lorem",
-        value: "Lorem",
+        label: "From",
+        value: "88 USD",
+      },
+      {
+        label: "To",
+        value: "396 PLN",
+      },
+      {
+        label: "Exchange rate",
+        value: "4.5",
       },
     ],
   },
@@ -54,8 +65,8 @@ export const TransactionsSlice = createSlice({
   initialState,
   reducers: {
     addTransaction: (state, action: PayloadAction<ITransaction>) => {
-      const { category, date, details } = action.payload;
-      state.push({ category: category, date: date, details: details });
+      const { category, date, id, details } = action.payload;
+      state.push({ category: category, date: date, id: id, details: details });
     },
   },
 });

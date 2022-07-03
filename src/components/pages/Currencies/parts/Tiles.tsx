@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import StyledHeading from "components/layout/StyledHeading";
+import StyledHeading from "components/styled/StyledHeading";
 import Tile from "../elements/Tile";
 
 interface ICurrency {

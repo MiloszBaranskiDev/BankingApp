@@ -1,7 +1,7 @@
 import { useState } from "react";
-import StyledPageTitle from "components/layout/StyledPageTitle";
-import StyledInput from "components/layout/StyledInput";
-import Accordion from "./parts/Accordion";
+import StyledPageTitle from "components/styled/StyledPageTitle";
+import StyledInput from "components/styled/StyledInput";
+import Accordion from "components/Accordion";
 
 interface IFaqData {
   question: string;
@@ -64,8 +64,8 @@ const Faq: React.FC = () => {
           .map((faqItem) => (
             <Accordion
               key={faqItem.question}
-              question={faqItem.question}
-              answer={faqItem.answer}
+              top={faqItem.question}
+              content={faqItem.answer}
             />
           ))}
       </ul>

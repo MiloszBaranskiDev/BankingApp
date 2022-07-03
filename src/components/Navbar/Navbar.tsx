@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Location, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import StyledWrapper from "components/layout/StyledWrapper";
+import StyledWrapper from "components/styled/StyledWrapper";
 import Logo from "./elements/Logo";
 import User from "./elements/User";
 import Links from "./elements/Links";

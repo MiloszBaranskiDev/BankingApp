@@ -4,12 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateWallet } from "redux/slices/WalletSlice";
 import { addTransaction } from "redux/slices/TransactionsSlice";
 import styled from "styled-components";
-import StyledLabel from "components/layout/StyledLabel";
-import StyledInput from "components/layout/StyledInput";
-import StyledSelect from "components/layout/StyledSelect";
-import StyledButton from "components/layout/StyledButton";
-import StyledHeading from "components/layout/StyledHeading";
+import StyledLabel from "components/styled/StyledLabel";
+import StyledInput from "components/styled/StyledInput";
+import StyledSelect from "components/styled/StyledSelect";
+import StyledButton from "components/styled/StyledButton";
+import StyledHeading from "components/styled/StyledHeading";
 import GetTodayDate from "utils/GetTodayDate";
+import GetRandomId from "utils/GeRandomId";
 
 interface Props {
   setShowSummary: (arg0: boolean) => void;
@@ -162,6 +163,7 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
       dispatch(
         addTransaction({
           category: "Outgoing transfer",
+          id: GetRandomId(),
           date: GetTodayDate(),
           details: formData.map((item) => ({ ...item })),
         })

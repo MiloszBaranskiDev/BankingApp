@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import StyledPageTitle from "components/layout/StyledPageTitle";
+import StyledPageTitle from "components/styled/StyledPageTitle";
 import UserImage from "./parts/UserImage";
 import UserFields from "./parts/UserFields";
 

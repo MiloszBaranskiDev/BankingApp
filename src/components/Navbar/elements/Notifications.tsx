@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Location, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import StyledButton from "components/layout/StyledButton";
+import StyledButton from "components/styled/StyledButton";
 import HandleClickOutside from "helpers/HandleClickOutside";
 
 const Notifications: React.FC = () => {

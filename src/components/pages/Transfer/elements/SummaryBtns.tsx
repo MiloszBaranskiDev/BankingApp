@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import StyledButton from "components/layout/StyledButton";
+import StyledButton from "components/styled/StyledButton";
 
 interface Props {
   setShowSummary: (arg0: boolean) => void;

@@ -10,7 +10,7 @@ import {
 import { Line } from "react-chartjs-2";
 import styled, { useTheme } from "styled-components";
 import Loader from "components/Loader";
-import StyledHeading from "components/layout/StyledHeading";
+import StyledHeading from "components/styled/StyledHeading";
 import ChartDates from "../elements/ChartDates";
 import GetTodayDate from "utils/GetTodayDate";
 import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";

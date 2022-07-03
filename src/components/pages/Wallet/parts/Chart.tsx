@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import StyledHeading from "components/layout/StyledHeading";
+import StyledHeading from "components/styled/StyledHeading";
 
 interface ICurrency {
   symbol: string;

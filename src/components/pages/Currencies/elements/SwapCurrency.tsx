@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import StyledHeading from "components/layout/StyledHeading";
-import StyledSelect from "components/layout/StyledSelect";
-import StyledInput from "components/layout/StyledInput";
+import StyledHeading from "components/styled/StyledHeading";
+import StyledSelect from "components/styled/StyledSelect";
+import StyledInput from "components/styled/StyledInput";
 
 interface ICurrency {
   symbol: string;

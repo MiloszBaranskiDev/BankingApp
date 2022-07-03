@@ -1,7 +1,7 @@
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import StyledPageTitle from "components/layout/StyledPageTitle";
+import StyledPageTitle from "components/styled/StyledPageTitle";
 import Chart from "./parts/Chart";
 import TotalBalance from "./parts/TotalBalance";
 import CurrenciesBalance from "./parts/CurrenciesBalance";

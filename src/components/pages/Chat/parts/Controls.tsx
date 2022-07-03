@@ -2,8 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import GetCurrentHour from "utils/GetCurrentHour";
 import GetRandomId from "utils/GeRandomId";
-import StyledInput from "components/layout/StyledInput";
-import StyledButton from "components/layout/StyledButton";
+import StyledInput from "components/styled/StyledInput";
+import StyledButton from "components/styled/StyledButton";
 import Emoji from "../elements/Emoji";
 
 interface IMessage {

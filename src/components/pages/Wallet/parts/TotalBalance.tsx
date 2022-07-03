@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import StyledHeading from "components/layout/StyledHeading";
+import StyledHeading from "components/styled/StyledHeading";
 import TotalBalanceAmount from "../elements/TotalBalanceAmount";
 import TotalBalanceInfo from "../elements/TotalBalanceInfo";
 import GetCurrenciesPrices from "api/GetCurrenciesPrices";

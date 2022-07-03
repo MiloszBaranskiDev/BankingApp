@@ -1,4 +1,4 @@
-import StyledPageTitle from "components/layout/StyledPageTitle";
+import StyledPageTitle from "components/styled/StyledPageTitle";
 import Form from "./parts/Form";
 import Summary from "./parts/Summary";
 import { useState } from "react";
