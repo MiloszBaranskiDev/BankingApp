@@ -15,8 +15,6 @@ const Transactions: React.FC = () => {
     (state: RootState) => state.transactions
   );
 
-  console.log(transactions);
-
   return (
     <>
       <StyledPageTitle>Transactions</StyledPageTitle>

@@ -10,14 +10,16 @@ interface ICurrency {
 
 interface Props {
   wallet: ICurrency[];
-  swapCurrency: string;
+  exchangedCurrency: string;
+  oppositeCurrency: string;
   setSwapCurrency: (arg0: string) => void;
   outgoing: boolean;
 }
 
 const SwapCurrency: React.FC<Props> = ({
   wallet,
-  swapCurrency,
+  exchangedCurrency,
+  oppositeCurrency,
   setSwapCurrency,
   outgoing,
 }) => {
@@ -25,18 +27,20 @@ const SwapCurrency: React.FC<Props> = ({
     <StyledSwapCurrency>
       <StyledHeading>{outgoing ? "From" : "To"}</StyledHeading>
       <StyledSelect
-        value={swapCurrency}
+        value={exchangedCurrency}
         onChange={(e) => setSwapCurrency(e.target.value)}
       >
-        {wallet.map((currency) => (
-          <option
-            value={currency.symbol}
-            key={currency.symbol}
-          >{`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}</option>
-        ))}
+        {wallet
+          .filter((currency) => currency.symbol !== oppositeCurrency)
+          .map((currency) => (
+            <option
+              value={currency.symbol}
+              key={currency.symbol}
+            >{`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}</option>
+          ))}
       </StyledSelect>
       <StyledInput type="number" placeholder="Enter amount" />
-      <p>Balance after: 500 {swapCurrency}</p>
+      <p>Balance after: 500 {exchangedCurrency}</p>
     </StyledSwapCurrency>
   );
 };

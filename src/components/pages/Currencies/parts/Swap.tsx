@@ -18,19 +18,26 @@ const Swap: React.FC<Props> = ({ wallet }) => {
     wallet[wallet.length - 1].symbol
   );
 
+  const reverseSwap = () => {
+    setSwapFrom(swapTo);
+    setSwapTo(swapFrom);
+  };
+
   return (
     <StyledSwap>
       <StyledBox>
         <SwapCurrency
           wallet={wallet}
-          swapCurrency={swapFrom}
+          exchangedCurrency={swapFrom}
+          oppositeCurrency={swapTo}
           setSwapCurrency={setSwapFrom}
           outgoing={true}
         />
-        <SwapArrows />
+        <SwapArrows reverseSwap={reverseSwap} />
         <SwapCurrency
           wallet={wallet}
-          swapCurrency={swapTo}
+          exchangedCurrency={swapTo}
+          oppositeCurrency={swapFrom}
           setSwapCurrency={setSwapTo}
           outgoing={false}
         />
