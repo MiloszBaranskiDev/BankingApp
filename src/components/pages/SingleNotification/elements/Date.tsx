@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-const Date: React.FC = () => {
-  return <StyledDate>12.05.2022</StyledDate>;
+interface Props {
+  date: string;
+}
+
+const Date: React.FC<Props> = ({ date }) => {
+  return <StyledDate>{date}</StyledDate>;
 };
 
 export default Date;

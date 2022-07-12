@@ -1,11 +1,24 @@
 import { useState, useEffect, useRef } from "react";
 import { Location, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { RootState } from "redux/store";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import StyledButton from "components/styled/StyledButton";
 import HandleClickOutside from "helpers/HandleClickOutside";
 
+interface INotification {
+  title: string;
+  date: string;
+  content: string;
+  read: boolean;
+  id: number;
+}
+
 const Notifications: React.FC = () => {
+  const notifications: INotification[] = useSelector(
+    (state: RootState) => state.notifications
+  );
   const submenuRef: any = useRef();
   const location: Location = useLocation();
   const [showNotifications, setShowNotifications] = useState<boolean>(false);
@@ -33,37 +46,49 @@ const Notifications: React.FC = () => {
             <h3>Notifications</h3>
             <p>8 new</p>
           </div>
-          <ul>
-            <li>
-              <NavLink to={`/notification/22`} className="notification">
-                <div className="notification__icon">
-                  <i className="fas fa-arrow-down"></i>
-                </div>
-                <div className="notification__content">
-                  <p>Received Payment</p>
-                  <p>Your account has been credited with 100$</p>
-                </div>
-                <p className="notification__date">Today</p>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to={`/notification/44`} className="notification">
-                <div className="notification__icon">
-                  <i className="fas fa-arrow-down"></i>
-                </div>
-                <div className="notification__content">
-                  <p>Received Payment</p>
-                  <p>Your account has been credited with 100$</p>
-                </div>
-                <p className="notification__date">Today</p>
-              </NavLink>
-            </li>
-          </ul>
-          <div className="bottom">
-            <StyledButton as={NavLink} to="/notifications">
-              Read all notifications
-            </StyledButton>
-          </div>
+          <>
+            {notifications ? (
+              <ul>
+                {notifications
+                  .slice(0)
+                  .reverse()
+                  .map((notification) => (
+                    <li key={notification.id}>
+                      <NavLink
+                        to={`/notification/${notification.id}`}
+                        className="notification"
+                      >
+                        <div className="notification__icon">
+                          <i className="fas fa-arrow-down"></i>
+                        </div>
+                        <div className="notification__content">
+                          <p>{notification.title}</p>
+                          <p>
+                            {notification.content
+                              .split(" ")
+                              .slice(0, 8)
+                              .join(" ")}
+                            ...
+                          </p>
+                        </div>
+                        <p className="notification__date">
+                          {notification.date}
+                        </p>
+                      </NavLink>
+                    </li>
+                  ))}
+              </ul>
+            ) : (
+              <p>You don't have any notifications.</p>
+            )}
+          </>
+          {notifications && (
+            <div className="bottom">
+              <StyledButton as={NavLink} to="/notifications">
+                Read all notifications
+              </StyledButton>
+            </div>
+          )}
         </StyledNotifications>
       ) : null}
     </StyledContainer>

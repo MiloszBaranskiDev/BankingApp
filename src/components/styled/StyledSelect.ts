@@ -8,6 +8,7 @@ const StyledSelect = styled.select`
   border: 1px solid transparent;
   width: 100%;
   cursor: pointer;
+  appearance: none;
   transition: border-color 0.3s;
   box-shadow: ${(props) => props.theme.shadow};
   border-radius: ${(props) => props.theme.radius};

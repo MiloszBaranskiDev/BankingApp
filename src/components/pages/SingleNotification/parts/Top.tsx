@@ -3,12 +3,17 @@ import StyledPageTitle from "components/styled/StyledPageTitle";
 import Remove from "../elements/Remove";
 import Date from "../elements/Date";
 
-const Top: React.FC = () => {
+interface Props {
+  title: string;
+  date: string;
+}
+
+const Top: React.FC<Props> = ({ title, date }) => {
   return (
     <StyledTop>
-      <StyledPageTitle>Single notification</StyledPageTitle>
+      <StyledPageTitle>{title}</StyledPageTitle>
       <Remove />
-      <Date />
+      <Date date={date} />
     </StyledTop>
   );
 };

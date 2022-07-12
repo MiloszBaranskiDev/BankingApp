@@ -15,18 +15,23 @@ const Transactions: React.FC = () => {
     (state: RootState) => state.transactions
   );
 
+  console.log(transactions);
+
   return (
     <>
       <StyledPageTitle>Transactions</StyledPageTitle>
       {transactions && (
         <ul>
-          {transactions.map((transaction) => (
-            <Accordion
-              key={transaction.id}
-              top={transaction.category + " / " + transaction.date}
-              content={transaction}
-            />
-          ))}
+          {transactions
+            .slice(0)
+            .reverse()
+            .map((transaction) => (
+              <Accordion
+                key={transaction.id}
+                top={transaction.category + " / " + transaction.date}
+                content={transaction}
+              />
+            ))}
         </ul>
       )}
     </>

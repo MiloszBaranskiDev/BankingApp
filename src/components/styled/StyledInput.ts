@@ -7,6 +7,7 @@ const StyledInput = styled.input`
   border: 1px solid transparent;
   width: 100%;
   transition: border-color 0.3s;
+  appearance: none;
   box-shadow: ${(props) => props.theme.shadow};
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};

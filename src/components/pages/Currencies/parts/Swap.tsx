@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import SwapArrows from "../elements/SwapArrows";
 import SwapCurrency from "../elements/SwapCurrency";
@@ -6,39 +6,63 @@ import SwapCurrency from "../elements/SwapCurrency";
 interface ICurrency {
   symbol: string;
   amount?: number;
+  price?: number;
+}
+
+interface ISwapData {
+  symbol: string;
+  amount: number;
 }
 
 interface Props {
-  wallet: ICurrency[];
+  currencies: ICurrency[];
 }
 
-const Swap: React.FC<Props> = ({ wallet }) => {
-  const [swapFrom, setSwapFrom] = useState<string>(wallet[0].symbol);
-  const [swapTo, setSwapTo] = useState<string>(
-    wallet[wallet.length - 1].symbol
-  );
+const Swap: React.FC<Props> = ({ currencies }) => {
+  const [swapFrom, setSwapFrom] = useState<ISwapData>({
+    symbol: currencies[0].symbol,
+    amount: 0,
+  });
+  const [swapTo, setSwapTo] = useState<ISwapData>({
+    symbol: "USD",
+    amount: 0,
+  });
 
   const reverseSwap = () => {
     setSwapFrom(swapTo);
     setSwapTo(swapFrom);
   };
 
+  // console.log(currencies);
+
+  useEffect(() => {
+    if (swapFrom.symbol === "PLN") {
+      const diff: number =
+        1 /
+        currencies.find((currency) => currency.symbol === swapTo.symbol)!
+          .price!;
+      console.log(swapTo.amount * diff);
+    } else {
+    }
+    // eslint-disable-next-line
+  }, [swapFrom, swapTo]);
+
   return (
     <StyledSwap>
       <StyledBox>
         <SwapCurrency
-          wallet={wallet}
-          exchangedCurrency={swapFrom}
-          oppositeCurrency={swapTo}
-          setSwapCurrency={setSwapFrom}
+          currencies={currencies}
+          oppositeCurrency={swapTo.symbol}
+          swapData={swapFrom}
+          setSwapData={setSwapFrom}
           outgoing={true}
         />
         <SwapArrows reverseSwap={reverseSwap} />
         <SwapCurrency
-          wallet={wallet}
-          exchangedCurrency={swapTo}
-          oppositeCurrency={swapFrom}
-          setSwapCurrency={setSwapTo}
+          currencies={currencies}
+          oppositeCurrency={swapFrom.symbol}
+          swapData={swapTo}
+          setSwapData={setSwapTo}
           outgoing={false}
         />
       </StyledBox>
@@ -49,7 +73,7 @@ const Swap: React.FC<Props> = ({ wallet }) => {
 export default Swap;
 
 const StyledSwap = styled.div`
-  margin: 60px 0;
+  margin-bottom: 60px;
   background-color: ${(props) => props.theme.colors.bgc};
   padding: ${(props) => props.theme.tilePadding};
   border-radius: ${(props) => props.theme.radius};

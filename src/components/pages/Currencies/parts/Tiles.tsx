@@ -29,6 +29,7 @@ const Tiles: React.FC<Props> = ({ currencies }) => {
 export default Tiles;
 
 const StyledTiles = styled.div`
+  margin-bottom: 60px;
   h2 {
     flex-basis: 100%;
   }

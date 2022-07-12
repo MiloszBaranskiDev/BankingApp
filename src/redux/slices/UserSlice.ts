@@ -46,7 +46,6 @@ export const UserSlice = createSlice({
     editUser: (state, action: PayloadAction<IPayload>) => {
       const { label, value } = action.payload;
       const index: number = state.findIndex((item) => item.label === label);
-
       state[index].value = value;
     },
   },

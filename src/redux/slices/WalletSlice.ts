@@ -35,7 +35,6 @@ export const WalletSlice = createSlice({
     updateWallet: (state, action: PayloadAction<ICurrency>) => {
       const { symbol, amount } = action.payload;
       const index: number = state.findIndex((item) => item.symbol === symbol);
-
       state[index].amount = amount;
     },
   },

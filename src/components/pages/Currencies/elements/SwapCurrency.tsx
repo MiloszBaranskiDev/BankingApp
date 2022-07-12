@@ -2,36 +2,45 @@ import styled from "styled-components";
 import StyledHeading from "components/styled/StyledHeading";
 import StyledSelect from "components/styled/StyledSelect";
 import StyledInput from "components/styled/StyledInput";
+import { Dispatch, SetStateAction } from "react";
 
 interface ICurrency {
   symbol: string;
   amount?: number;
 }
 
+interface ISwapData {
+  symbol: string;
+  amount: number;
+}
+
 interface Props {
-  wallet: ICurrency[];
-  exchangedCurrency: string;
+  currencies: ICurrency[];
   oppositeCurrency: string;
-  setSwapCurrency: (arg0: string) => void;
+  swapData: ISwapData;
+  setSwapData: Dispatch<SetStateAction<ISwapData>>;
   outgoing: boolean;
 }
 
 const SwapCurrency: React.FC<Props> = ({
-  wallet,
-  exchangedCurrency,
+  currencies,
   oppositeCurrency,
-  setSwapCurrency,
+  swapData,
+  setSwapData,
   outgoing,
 }) => {
   return (
     <StyledSwapCurrency>
       <StyledHeading>{outgoing ? "From" : "To"}</StyledHeading>
       <StyledSelect
-        value={exchangedCurrency}
-        onChange={(e) => setSwapCurrency(e.target.value)}
+        value={swapData.symbol}
+        onChange={(e) => setSwapData({ ...swapData, symbol: e.target.value })}
       >
-        {wallet
-          .filter((currency) => currency.symbol !== oppositeCurrency)
+        {currencies
+          .filter(
+            (currency) =>
+              currency.symbol !== oppositeCurrency && currency.amount! >= 0.01
+          )
           .map((currency) => (
             <option
               value={currency.symbol}
@@ -39,8 +48,17 @@ const SwapCurrency: React.FC<Props> = ({
             >{`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}</option>
           ))}
       </StyledSelect>
-      <StyledInput type="number" placeholder="Enter amount" />
-      <p>Balance after: 500 {exchangedCurrency}</p>
+      <StyledInput
+        type="number"
+        placeholder="Enter amount"
+        // min={}
+        // max={}
+        value={swapData.amount}
+        onChange={(e) =>
+          setSwapData({ ...swapData, amount: Number(e.target.value) })
+        }
+      />
+      <p>Balance after: 500 {swapData.symbol}</p>
     </StyledSwapCurrency>
   );
 };

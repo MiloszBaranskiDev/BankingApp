@@ -1,15 +1,21 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-const Item: React.FC = () => {
+interface Props {
+  id: number;
+  title: string;
+  date: string;
+}
+
+const Item: React.FC<Props> = ({ id, title, date }) => {
   return (
     <StyledItem>
-      <NavLink to={`/notification/22`} className="notification">
+      <NavLink to={`/notification/${id}`} className="notification">
         <div className="icon">
           <i className="fas fa-arrow-down"></i>
         </div>
-        <p className="title">Notification</p>
-        <p className="time">7 hours ago</p>
+        <p className="title">{title}</p>
+        <p className="date">{date}</p>
       </NavLink>
     </StyledItem>
   );
@@ -48,7 +54,7 @@ const StyledItem = styled.li`
       margin-right: auto;
       font-weight: ${(props) => props.theme.typography.weight_bold};
     }
-    .time {
+    .date {
       margin-left: 12px;
       font-size: ${(props) => props.theme.typography.size_extra_small};
     }
