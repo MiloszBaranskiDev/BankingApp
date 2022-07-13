@@ -17,7 +17,7 @@ const List: React.FC = () => {
 
   return (
     <>
-      {notifications ? (
+      {notifications.length > 1 ? (
         <ul>
           {notifications
             .slice(0)

@@ -47,7 +47,7 @@ const Notifications: React.FC = () => {
             <p>8 new</p>
           </div>
           <>
-            {notifications ? (
+            {notifications.length > 0 ? (
               <ul>
                 {notifications
                   .slice(0)
@@ -79,10 +79,12 @@ const Notifications: React.FC = () => {
                   ))}
               </ul>
             ) : (
-              <p>You don't have any notifications.</p>
+              <p className="no-notifications">
+                You don't have any notifications.
+              </p>
             )}
           </>
-          {notifications && (
+          {notifications.length > 0 && (
             <div className="bottom">
               <StyledButton as={NavLink} to="/notifications">
                 Read all notifications
@@ -220,5 +222,8 @@ const StyledNotifications = styled.div`
         background-color: ${(props) => props.theme.colors.bgc_dark};
       }
     }
+  }
+  .no-notifications {
+    padding: 14px;
   }
 `;

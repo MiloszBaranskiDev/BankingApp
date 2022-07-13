@@ -4,15 +4,16 @@ import Remove from "../elements/Remove";
 import Date from "../elements/Date";
 
 interface Props {
+  id: number;
   title: string;
   date: string;
 }
 
-const Top: React.FC<Props> = ({ title, date }) => {
+const Top: React.FC<Props> = ({ id, title, date }) => {
   return (
     <StyledTop>
       <StyledPageTitle>{title}</StyledPageTitle>
-      <Remove />
+      <Remove id={id} />
       <Date date={date} />
     </StyledTop>
   );

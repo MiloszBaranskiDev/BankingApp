@@ -21,11 +21,13 @@ const SingleNotification: React.FC = () => {
     (notification) => notification.id === Number(id)
   )!;
 
-  console.log(notification);
-
   return (
     <>
-      <Top title={notification.title} date={notification.date} />
+      <Top
+        id={notification.id}
+        title={notification.title}
+        date={notification.date}
+      />
       <Content text={notification.content} />
     </>
   );

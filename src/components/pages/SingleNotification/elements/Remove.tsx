@@ -1,8 +1,23 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { removeNotification } from "redux/slices/NotificationsSlice";
+import { useDispatch } from "react-redux";
 
-const Remove: React.FC = () => {
+interface Props {
+  id: number;
+}
+
+const Remove: React.FC<Props> = ({ id }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const removeHandler = (id: number) => {
+    dispatch(removeNotification({ id }));
+    navigate("/notifications");
+  };
+
   return (
-    <StyledRemove>
+    <StyledRemove onClick={() => removeHandler(id)}>
       <i className="far fa-trash-alt"></i>
     </StyledRemove>
   );
