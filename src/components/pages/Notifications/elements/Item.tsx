@@ -5,14 +5,15 @@ interface Props {
   id: number;
   title: string;
   date: string;
+  read: boolean;
 }
 
-const Item: React.FC<Props> = ({ id, title, date }) => {
+const Item: React.FC<Props> = ({ id, title, date, read }) => {
   return (
     <StyledItem>
       <NavLink to={`/notification/${id}`} className="notification">
-        <div className="icon">
-          <i className="fas fa-arrow-down"></i>
+        <div className={`icon ${!read ? "new" : ""}`}>
+          <i className="fas fa-bell"></i>
         </div>
         <p className="title">{title}</p>
         <p className="date">{date}</p>
@@ -44,10 +45,12 @@ const StyledItem = styled.li`
       justify-content: center;
       border-radius: 50%;
       margin-right: 12px;
-      background-color: ${(props) => props.theme.colors.main};
-      i {
+      font-size: ${(props) => props.theme.typography.size_small};
+      color: ${(props) => props.theme.colors.main};
+      background-color: ${(props) => props.theme.colors.bgc_dark};
+      &.new {
         color: white;
-        font-size: ${(props) => props.theme.typography.size_small};
+        background-color: ${(props) => props.theme.colors.main};
       }
     }
     .title {
@@ -56,7 +59,7 @@ const StyledItem = styled.li`
     }
     .date {
       margin-left: 12px;
-      font-size: ${(props) => props.theme.typography.size_extra_small};
+      font-size: ${(props) => props.theme.typography.size_small};
     }
   }
   &:hover {

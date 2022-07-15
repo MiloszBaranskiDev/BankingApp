@@ -1,15 +1,16 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { removeNotification } from "redux/slices/NotificationsSlice";
 import { useDispatch } from "react-redux";
+import { Dispatch } from "@reduxjs/toolkit";
 
 interface Props {
   id: number;
 }
 
 const Remove: React.FC<Props> = ({ id }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch: Dispatch = useDispatch();
+  const navigate: NavigateFunction = useNavigate();
 
   const removeHandler = (id: number) => {
     dispatch(removeNotification({ id }));

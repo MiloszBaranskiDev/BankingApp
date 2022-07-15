@@ -31,6 +31,10 @@ const Notifications: React.FC = () => {
     setShowNotifications(false);
   }, [location]);
 
+  const newNotificationsCount: number = notifications.filter(
+    (notification) => notification.read === false
+  ).length;
+
   return (
     <StyledContainer ref={submenuRef}>
       <StyledIcon
@@ -44,7 +48,9 @@ const Notifications: React.FC = () => {
         <StyledNotifications>
           <div className="top">
             <h3>Notifications</h3>
-            <p>8 new</p>
+            <>
+              {newNotificationsCount > 0 && <p>{newNotificationsCount} new</p>}
+            </>
           </div>
           <>
             {notifications.length > 0 ? (
@@ -52,14 +58,19 @@ const Notifications: React.FC = () => {
                 {notifications
                   .slice(0)
                   .reverse()
+                  .slice(0, 3)
                   .map((notification) => (
                     <li key={notification.id}>
                       <NavLink
                         to={`/notification/${notification.id}`}
                         className="notification"
                       >
-                        <div className="notification__icon">
-                          <i className="fas fa-arrow-down"></i>
+                        <div
+                          className={`notification__icon ${
+                            !notification.read ? "new" : ""
+                          }`}
+                        >
+                          <i className="fas fa-bell"></i>
                         </div>
                         <div className="notification__content">
                           <p>{notification.title}</p>
@@ -183,8 +194,12 @@ const StyledNotifications = styled.div`
         align-items: center;
         justify-content: center;
         border-radius: 50%;
-        color: white;
-        background-color: ${(props) => props.theme.colors.main};
+        color: ${(props) => props.theme.colors.main};
+        background-color: ${(props) => props.theme.colors.bgc_dark};
+        &.new {
+          color: white;
+          background-color: ${(props) => props.theme.colors.main};
+        }
         @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
           flex-basis: 38px;
           height: 38px;

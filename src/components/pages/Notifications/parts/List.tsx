@@ -17,7 +17,7 @@ const List: React.FC = () => {
 
   return (
     <>
-      {notifications.length > 1 ? (
+      {notifications.length > 0 ? (
         <ul>
           {notifications
             .slice(0)
@@ -28,6 +28,7 @@ const List: React.FC = () => {
                 id={notification.id}
                 title={notification.title}
                 date={notification.date}
+                read={notification.read}
               />
             ))}
         </ul>
