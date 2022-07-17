@@ -59,18 +59,18 @@ const StyledChartDates = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    input {
-      margin-bottom: 0;
-    }
-  }
-  input {
-    margin-bottom: 12px;
   }
 `;
 
 const StyledDate = styled.div`
   display: flex;
   flex-direction: column;
+  input {
+    margin-bottom: 12px;
+    &::-webkit-calendar-picker-indicator {
+      cursor: pointer;
+    }
+  }
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     &:first-child {
       margin-right: 12px;
