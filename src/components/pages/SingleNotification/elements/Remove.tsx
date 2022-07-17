@@ -5,14 +5,14 @@ import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 
 interface Props {
-  id: number;
+  id: string;
 }
 
 const Remove: React.FC<Props> = ({ id }) => {
   const dispatch: Dispatch = useDispatch();
   const navigate: NavigateFunction = useNavigate();
 
-  const removeHandler = (id: number) => {
+  const removeHandler = (id: string) => {
     dispatch(removeNotification({ id }));
     navigate("/notifications");
   };

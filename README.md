@@ -7,4 +7,5 @@
 - Styled Components
 - emoji-picker-react
 - react-lorem-ipsum
+- uuid
 - NBP Web API

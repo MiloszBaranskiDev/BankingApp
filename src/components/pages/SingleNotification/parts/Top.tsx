@@ -4,7 +4,7 @@ import Remove from "../elements/Remove";
 import Date from "../elements/Date";
 
 interface Props {
-  id: number;
+  id: string;
   title: string;
   date: string;
 }

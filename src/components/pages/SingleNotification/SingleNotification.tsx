@@ -13,7 +13,7 @@ interface INotification {
   date: string;
   content: string;
   read: boolean;
-  id: number;
+  id: string;
 }
 
 const SingleNotification: React.FC = () => {
@@ -23,7 +23,7 @@ const SingleNotification: React.FC = () => {
     (state: RootState) => state.notifications
   );
   const notification: INotification = notifications.find(
-    (notification) => notification.id === Number(id)
+    (notification) => notification.id === id
   )!;
 
   useEffect(() => {

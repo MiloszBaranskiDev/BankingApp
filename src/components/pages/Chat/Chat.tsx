@@ -10,7 +10,7 @@ interface IMessage {
   text: string;
   hour: string;
   user: boolean;
-  id: number;
+  id: string;
 }
 
 const Chat: React.FC = () => {
@@ -19,7 +19,7 @@ const Chat: React.FC = () => {
       text: "Hello, how can I help you?",
       hour: GetCurrentHour(),
       user: false,
-      id: 1337,
+      id: "4a4aeb4d-6b6d-4bad-9bdd-1b0d7b3dcb6d",
     },
   ]);
 

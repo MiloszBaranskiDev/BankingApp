@@ -12,7 +12,7 @@ interface INotification {
   date: string;
   content: string;
   read: boolean;
-  id: number;
+  id: string;
 }
 
 const Notifications: React.FC = () => {

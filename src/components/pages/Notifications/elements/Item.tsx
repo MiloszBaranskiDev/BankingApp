@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
 interface Props {
-  id: number;
+  id: string;
   title: string;
   date: string;
   read: boolean;

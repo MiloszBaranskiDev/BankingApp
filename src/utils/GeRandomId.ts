@@ -1,7 +1,7 @@
-const GetRandomId = () => {
-  const id: number = Math.floor(1000 + Math.random() * 9000);
+import { v4 as uuidv4 } from "uuid";
 
-  return id;
+const GetRandomId = () => {
+  return uuidv4();
 };
 
 export default GetRandomId;

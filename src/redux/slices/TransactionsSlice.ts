@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface ITransaction {
   category: string;
   date: string;
-  id: number;
+  id: string;
   details: object[];
 }
 
@@ -11,7 +11,7 @@ const initialState: ITransaction[] = [
   {
     category: "Outgoing transfer",
     date: "2022-06-11",
-    id: 1943,
+    id: "6r6deb4d-6b6d-4bad-9bdd-1b0d7b3dcb6d",
     details: [
       {
         label: "Recipient",
@@ -42,7 +42,7 @@ const initialState: ITransaction[] = [
   {
     category: "Currency swap",
     date: "2022-06-13",
-    id: 2581,
+    id: "3r3deb3d-6b6d-4bad-9bdd-1b0d7b3dcb6d",
     details: [
       {
         label: "From",

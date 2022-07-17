@@ -10,7 +10,7 @@ interface IMessage {
   text: string;
   hour: string;
   user: boolean;
-  id: number;
+  id: string;
 }
 
 interface Props {

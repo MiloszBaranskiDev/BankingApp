@@ -5,7 +5,7 @@ import Accordion from "components/Accordion";
 
 interface ITransaction {
   category: string;
-  id: number;
+  id: string;
   date: string;
   details: object[];
 }
