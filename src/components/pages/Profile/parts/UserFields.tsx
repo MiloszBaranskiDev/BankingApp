@@ -1,13 +1,10 @@
 import styled from "styled-components";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
-import Field from "../elements/Field";
 
-interface IUserField {
-  label: string;
-  type: string;
-  value: string;
-}
+import { IUserField } from "interfaces/IUserField";
+
+import Field from "../elements/Field";
 
 const UserFields: React.FC = () => {
   const userFields: IUserField[] = useSelector(

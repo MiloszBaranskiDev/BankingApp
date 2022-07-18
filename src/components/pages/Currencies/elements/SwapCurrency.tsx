@@ -1,13 +1,11 @@
 import styled from "styled-components";
+import { Dispatch, SetStateAction } from "react";
+
+import { ICurrency } from "interfaces/ICurrency";
+
 import StyledHeading from "components/styled/StyledHeading";
 import StyledSelect from "components/styled/StyledSelect";
 import StyledInput from "components/styled/StyledInput";
-import { Dispatch, SetStateAction } from "react";
-
-interface ICurrency {
-  symbol: string;
-  amount?: number;
-}
 
 interface ISwapData {
   symbol: string;

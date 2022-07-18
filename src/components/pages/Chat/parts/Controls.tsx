@@ -1,17 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
+
 import GetCurrentHour from "utils/GetCurrentHour";
 import GetRandomId from "utils/GeRandomId";
+import { IMessage } from "interfaces/IMessage";
+
 import StyledInput from "components/styled/StyledInput";
 import StyledButton from "components/styled/StyledButton";
 import Emoji from "../elements/Emoji";
-
-interface IMessage {
-  text: string;
-  hour: string;
-  user: boolean;
-  id: string;
-}
 
 interface Props {
   messages: IMessage[];

@@ -4,16 +4,12 @@ import { NavLink } from "react-router-dom";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import HandleClickOutside from "helpers/HandleClickOutside";
 
-interface IUserField {
-  label: string;
-  type: string;
-  value: string;
-}
+import HandleClickOutside from "helpers/HandleClickOutside";
+import { IUserField } from "interfaces/IUserField";
 
 const User: React.FC = () => {
-  const submenuRef: any = useRef();
+  const submenuRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const location: Location = useLocation();
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
 

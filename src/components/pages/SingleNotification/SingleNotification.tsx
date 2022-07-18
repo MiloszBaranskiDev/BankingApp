@@ -1,20 +1,15 @@
+import { useEffect } from "react";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { updateNotification } from "redux/slices/NotificationsSlice";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
+
+import { INotification } from "interfaces/INotification";
+
 import Top from "./parts/Top";
 import Content from "./parts/Content";
-import { useEffect } from "react";
-
-interface INotification {
-  title: string;
-  date: string;
-  content: string;
-  read: boolean;
-  id: string;
-}
 
 const SingleNotification: React.FC = () => {
   const dispatch: Dispatch = useDispatch();

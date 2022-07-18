@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import Image from "../elements/Image";
 import ImageButtons from "../elements/ImageButtons";
 

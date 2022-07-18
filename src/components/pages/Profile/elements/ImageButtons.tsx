@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useRef } from "react";
 import { editUser } from "redux/slices/UserSlice";
 import { useDispatch } from "react-redux";
+
 import StyledButton from "components/styled/StyledButton";
 
 const ImageButtons: React.FC = () => {

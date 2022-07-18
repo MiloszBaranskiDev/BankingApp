@@ -1,11 +1,9 @@
 import styled from "styled-components";
+
+import { ICurrency } from "interfaces/ICurrency";
+
 import StyledHeading from "components/styled/StyledHeading";
 import Tile from "../elements/Tile";
-
-interface ICurrency {
-  symbol: string;
-  price?: number;
-}
 
 interface Props {
   currencies: ICurrency[];

@@ -1,13 +1,7 @@
+import { loremIpsum } from "react-lorem-ipsum";
 import GetCurrentHour from "utils/GetCurrentHour";
 import GetRandomId from "./GeRandomId";
-import { loremIpsum } from "react-lorem-ipsum";
-
-interface IMessage {
-  text: string;
-  hour: string;
-  user: boolean;
-  id: string;
-}
+import { IMessage } from "interfaces/IMessage";
 
 const GetRandomMessage = () => {
   const randomMessage: IMessage = {

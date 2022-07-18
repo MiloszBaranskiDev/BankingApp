@@ -1,17 +1,14 @@
 import styled from "styled-components";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
+
+import { ITransaction } from "interfaces/ITransaction";
+
 import SummaryDetails from "../elements/SummaryDetails";
 import SummaryBtns from "../elements/SummaryBtns";
 
 interface Props {
   setShowSummary: (arg0: boolean) => void;
-}
-
-interface ITransaction {
-  category: string;
-  date: string;
-  details: object[];
 }
 
 const Summary: React.FC<Props> = ({ setShowSummary }) => {

@@ -4,22 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateWallet } from "redux/slices/WalletSlice";
 import { addTransaction } from "redux/slices/TransactionsSlice";
 import styled from "styled-components";
+
+import GetTodayDate from "utils/GetTodayDate";
+import GetRandomId from "utils/GeRandomId";
+
+import { ICurrency } from "interfaces/ICurrency";
+
 import StyledLabel from "components/styled/StyledLabel";
 import StyledInput from "components/styled/StyledInput";
 import StyledSelect from "components/styled/StyledSelect";
 import StyledButton from "components/styled/StyledButton";
 import StyledHeading from "components/styled/StyledHeading";
-import GetTodayDate from "utils/GetTodayDate";
-import GetRandomId from "utils/GeRandomId";
 
 interface Props {
   setShowSummary: (arg0: boolean) => void;
-}
-
-interface ICurrency {
-  symbol: string;
-  price?: number;
-  amount?: number;
 }
 
 interface IField {

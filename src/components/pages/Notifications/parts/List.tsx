@@ -1,14 +1,9 @@
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
-import Item from "../elements/Item";
 
-interface INotification {
-  title: string;
-  date: string;
-  content: string;
-  read: boolean;
-  id: string;
-}
+import { INotification } from "interfaces/INotification";
+
+import Item from "../elements/Item";
 
 const List: React.FC = () => {
   const notifications: INotification[] = useSelector(

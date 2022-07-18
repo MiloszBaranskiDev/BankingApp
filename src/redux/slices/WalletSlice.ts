@@ -1,9 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface ICurrency {
-  symbol: string;
-  amount: number;
-}
+import { ICurrency } from "interfaces/ICurrency";
 
 const initialState: ICurrency[] = [
   {

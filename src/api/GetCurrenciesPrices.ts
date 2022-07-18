@@ -1,7 +1,4 @@
-interface ICurrency {
-  symbol: string;
-  price?: number;
-}
+import { ICurrency } from "interfaces/ICurrency";
 
 const GetCurrenciesPrices = async (currencies: ICurrency[]) => {
   try {

@@ -9,11 +9,13 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import styled, { useTheme } from "styled-components";
+
+import GetTodayDate from "utils/GetTodayDate";
+import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";
+
 import Loader from "components/Loader";
 import StyledHeading from "components/styled/StyledHeading";
 import ChartDates from "../elements/ChartDates";
-import GetTodayDate from "utils/GetTodayDate";
-import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";
 
 interface Props {
   symbol: string;
@@ -24,8 +26,8 @@ interface IChartData {
   datasets: [
     {
       borderWidth: number;
-      borderColor: any;
-      backgroundColor: any;
+      borderColor: string;
+      backgroundColor: string;
       data: number[];
     }
   ];

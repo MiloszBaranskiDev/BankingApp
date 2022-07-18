@@ -18,9 +18,9 @@ const AppRouter: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/wallet" element={<Wallet />} />
-        <Route path="/transactions" element={<Transactions />} />
-        <Route path="/transfer" element={<Transfer />} />
         <Route path="/currencies" element={<Currencies />} />
+        <Route path="/transfer" element={<Transfer />} />
+        <Route path="/transactions" element={<Transactions />} />
         <Route path="/help" element={<Help />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/profile" element={<Profile />} />

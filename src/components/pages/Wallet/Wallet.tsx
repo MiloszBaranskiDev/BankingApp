@@ -1,15 +1,13 @@
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+
+import { ICurrency } from "interfaces/ICurrency";
+
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import Chart from "./parts/Chart";
 import TotalBalance from "./parts/TotalBalance";
 import CurrenciesBalance from "./parts/CurrenciesBalance";
-
-interface ICurrency {
-  symbol: string;
-  amount: number;
-}
 
 const Wallet: React.FC = () => {
   const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);

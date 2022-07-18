@@ -1,12 +1,10 @@
 import styled from "styled-components";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import StyledHeading from "components/styled/StyledHeading";
 
-interface ICurrency {
-  symbol: string;
-  amount: number;
-}
+import { ICurrency } from "interfaces/ICurrency";
+
+import StyledHeading from "components/styled/StyledHeading";
 
 interface Props {
   wallet: ICurrency[];
@@ -29,13 +27,13 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const Chart: React.FC<Props> = ({ wallet }) => {
   const chartData: IChartData = {
     labels: wallet
-      .filter((currency) => currency.amount >= 0.01)
+      .filter((currency) => currency.amount! >= 0.01)
       .map((currency) => currency.symbol),
     datasets: [
       {
         data: wallet
-          .filter((currency) => currency.amount >= 0.01)
-          .map((currency) => currency.amount),
+          .filter((currency) => currency.amount! >= 0.01)
+          .map((currency) => currency.amount!),
         backgroundColor: [
           "rgba(255, 102, 0, 0.2)",
           "rgba(255, 99, 132, 0.2)",
@@ -58,7 +56,7 @@ const Chart: React.FC<Props> = ({ wallet }) => {
   return (
     <StyledChart>
       <StyledHeading>Currencies</StyledHeading>
-      {wallet.some((currency) => currency.amount >= 0.01) ? (
+      {wallet.some((currency) => currency.amount! >= 0.01) ? (
         <Doughnut data={chartData} />
       ) : (
         <p>

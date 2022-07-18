@@ -1,26 +1,20 @@
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
+
+import { ITransaction } from "interfaces/ITransaction";
+
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import Accordion from "components/Accordion";
-
-interface ITransaction {
-  category: string;
-  id: string;
-  date: string;
-  details: object[];
-}
 
 const Transactions: React.FC = () => {
   const transactions: ITransaction[] = useSelector(
     (state: RootState) => state.transactions
   );
 
-  console.log(transactions);
-
   return (
     <>
       <StyledPageTitle>Transactions</StyledPageTitle>
-      {transactions && (
+      {transactions.length > 0 && (
         <ul>
           {transactions
             .slice(0)

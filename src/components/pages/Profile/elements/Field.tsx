@@ -1,7 +1,8 @@
-import StyledLabel from "components/styled/StyledLabel";
-import StyledInput from "components/styled/StyledInput";
 import { useDispatch } from "react-redux";
 import { editUser } from "redux/slices/UserSlice";
+
+import StyledLabel from "components/styled/StyledLabel";
+import StyledInput from "components/styled/StyledInput";
 
 interface Props {
   label: string;

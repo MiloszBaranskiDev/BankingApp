@@ -24,9 +24,9 @@ const links: ILink[] = [
     icon: <i className="fas fa-wallet"></i>,
   },
   {
-    to: "/transactions",
-    text: "Transactions",
-    icon: <i className="fas fa-hand-holding-usd"></i>,
+    to: "/currencies",
+    text: "Currencies",
+    icon: <i className="fas fa-coins"></i>,
   },
   {
     to: "/transfer",
@@ -34,9 +34,9 @@ const links: ILink[] = [
     icon: <i className="fas fa-paper-plane"></i>,
   },
   {
-    to: "/currencies",
-    text: "Currencies",
-    icon: <i className="fas fa-coins"></i>,
+    to: "/transactions",
+    text: "Transactions",
+    icon: <i className="fas fa-hand-holding-usd"></i>,
   },
   {
     to: "/help",

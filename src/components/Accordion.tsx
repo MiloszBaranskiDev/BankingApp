@@ -1,9 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-
-interface ITransaction {
-  details: object[];
-}
+import { ITransaction } from "interfaces/ITransaction";
 
 interface Props {
   top: string;

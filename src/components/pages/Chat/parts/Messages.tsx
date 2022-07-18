@@ -1,20 +1,16 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
+
+import { IMessage } from "interfaces/IMessage";
+
 import Message from "../elements/Message";
 
 interface Props {
   messages: IMessage[];
 }
 
-interface IMessage {
-  text: string;
-  hour: string;
-  user: boolean;
-  id: string;
-}
-
 const Messages: React.FC<Props> = ({ messages }) => {
-  const refMessages: any = useRef();
+  const refMessages = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {
     refMessages.current.scrollTop = refMessages.current.scrollHeight;

@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface IUserField {
-  label: string;
-  type: string;
-  value: string;
-}
+import { IUserField } from "interfaces/IUserField";
 
 interface IPayload {
   label: string;

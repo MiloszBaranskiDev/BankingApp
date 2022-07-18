@@ -1,18 +1,16 @@
 import { useState, useEffect } from "react";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
+
+import { ICurrency } from "interfaces/ICurrency";
+
 import GetCurrenciesPrices from "api/GetCurrenciesPrices";
+
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import Loader from "components/Loader";
 import Tiles from "./parts/Tiles";
 import Swap from "./parts/Swap";
 import Chart from "./parts/Chart";
-
-interface ICurrency {
-  symbol: string;
-  price?: number;
-  amount?: number;
-}
 
 interface ILoadPrices {
   (currencies: ICurrency[]): Promise<void>;
@@ -46,8 +44,6 @@ const Currencies: React.FC = () => {
       ? setLoading(false)
       : setLoading(true);
   }, [currencies]);
-
-  // console.log(currencies);
 
   return (
     <>

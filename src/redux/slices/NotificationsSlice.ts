@@ -1,12 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface INotification {
-  title: string;
-  date: string;
-  content: string;
-  read: boolean;
-  id: string;
-}
+import { INotification } from "interfaces/INotification";
 
 const initialState: INotification[] = [
   {

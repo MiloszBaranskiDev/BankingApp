@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+
 import GetCurrentHour from "utils/GetCurrentHour";
 import GetRandomMessage from "utils/GetRandomMessage";
+
+import { IMessage } from "interfaces/IMessage";
+
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import Messages from "./parts/Messages";
 import Controls from "./parts/Controls";
-
-interface IMessage {
-  text: string;
-  hour: string;
-  user: boolean;
-  id: string;
-}
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<IMessage[]>([

@@ -2,11 +2,7 @@ import styled from "styled-components";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 
-interface IUserField {
-  label: string;
-  type: string;
-  value: string;
-}
+import { IUserField } from "interfaces/IUserField";
 
 const Image: React.FC = () => {
   const userFields: IUserField[] = useSelector(

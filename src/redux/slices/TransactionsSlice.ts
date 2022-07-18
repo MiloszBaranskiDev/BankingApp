@@ -1,11 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface ITransaction {
-  category: string;
-  date: string;
-  id: string;
-  details: object[];
-}
+import { ITransaction } from "interfaces/ITransaction";
 
 const initialState: ITransaction[] = [
   {

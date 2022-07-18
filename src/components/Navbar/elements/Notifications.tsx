@@ -4,22 +4,17 @@ import { NavLink } from "react-router-dom";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import StyledButton from "components/styled/StyledButton";
+
+import { INotification } from "interfaces/INotification";
 import HandleClickOutside from "helpers/HandleClickOutside";
 
-interface INotification {
-  title: string;
-  date: string;
-  content: string;
-  read: boolean;
-  id: string;
-}
+import StyledButton from "components/styled/StyledButton";
 
 const Notifications: React.FC = () => {
   const notifications: INotification[] = useSelector(
     (state: RootState) => state.notifications
   );
-  const submenuRef: any = useRef();
+  const submenuRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const location: Location = useLocation();
   const [showNotifications, setShowNotifications] = useState<boolean>(false);
 

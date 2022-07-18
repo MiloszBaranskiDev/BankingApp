@@ -1,14 +1,13 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
+
+import GetCurrenciesPrices from "api/GetCurrenciesPrices";
+
+import { ICurrency } from "interfaces/ICurrency";
+
 import StyledHeading from "components/styled/StyledHeading";
 import TotalBalanceAmount from "../elements/TotalBalanceAmount";
 import TotalBalanceInfo from "../elements/TotalBalanceInfo";
-import GetCurrenciesPrices from "api/GetCurrenciesPrices";
-
-interface ICurrency {
-  symbol: string;
-  amount: number;
-}
 
 interface Props {
   wallet: ICurrency[];
@@ -28,12 +27,12 @@ const TotalBalance: React.FC<Props> = ({ wallet }) => {
     const loadedRates = await GetCurrenciesPrices(
       currencies.filter((currency) => currency.symbol !== mainCurrency.symbol)
     );
-    let totalAmount: number = mainCurrency.amount;
+    let totalAmount: number = mainCurrency.amount!;
 
     currencies.forEach((currency) => {
       currency.symbol !== mainCurrency.symbol &&
         (totalAmount +=
-          currency.amount *
+          currency.amount! *
           loadedRates!.find((item) => item.symbol === currency.symbol)!.price);
     });
 

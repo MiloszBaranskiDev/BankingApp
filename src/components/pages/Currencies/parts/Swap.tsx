@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
+
+import { ICurrency } from "interfaces/ICurrency";
+
 import SwapArrows from "../elements/SwapArrows";
 import SwapCurrency from "../elements/SwapCurrency";
-
-interface ICurrency {
-  symbol: string;
-  amount?: number;
-  price?: number;
-}
 
 interface ISwapData {
   symbol: string;
@@ -32,8 +29,6 @@ const Swap: React.FC<Props> = ({ currencies }) => {
     setSwapFrom(swapTo);
     setSwapTo(swapFrom);
   };
-
-  // console.log(currencies);
 
   useEffect(() => {
     if (swapFrom.symbol === "PLN") {

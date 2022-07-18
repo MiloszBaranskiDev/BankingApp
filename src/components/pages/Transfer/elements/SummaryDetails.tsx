@@ -1,10 +1,5 @@
 import styled from "styled-components";
-
-interface ITransaction {
-  category: string;
-  date: string;
-  details: object[];
-}
+import { ITransaction } from "interfaces/ITransaction";
 
 interface Props {
   transaction: ITransaction;
