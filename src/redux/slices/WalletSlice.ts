@@ -4,23 +4,23 @@ import { ICurrency } from "interfaces/ICurrency";
 const initialState: ICurrency[] = [
   {
     symbol: "PLN",
-    amount: 4500,
+    balance: 4500,
   },
   {
     symbol: "EUR",
-    amount: 1337,
+    balance: 1337,
   },
   {
     symbol: "USD",
-    amount: 440,
+    balance: 440,
   },
   {
     symbol: "GBP",
-    amount: 280.08,
+    balance: 280.08,
   },
   {
     symbol: "CHF",
-    amount: 99.12,
+    balance: 99.12,
   },
 ];
 
@@ -29,9 +29,9 @@ export const WalletSlice = createSlice({
   initialState,
   reducers: {
     updateWallet: (state, action: PayloadAction<ICurrency>) => {
-      const { symbol, amount } = action.payload;
+      const { symbol, balance } = action.payload;
       const index: number = state.findIndex((item) => item.symbol === symbol);
-      state[index].amount = amount;
+      state[index].balance = balance;
     },
   },
 });

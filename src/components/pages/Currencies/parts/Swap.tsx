@@ -15,11 +15,17 @@ interface Props {
   currencies: ICurrency[];
 }
 
+enum SwapDirection {
+  from = "from",
+  to = "to",
+}
+
 const Swap: React.FC<Props> = ({ currencies }) => {
   const [swapFrom, setSwapFrom] = useState<ISwapData>({
     symbol: currencies[0].symbol,
     amount: 0,
   });
+
   const [swapTo, setSwapTo] = useState<ISwapData>({
     symbol: "USD",
     amount: 0,
@@ -30,17 +36,60 @@ const Swap: React.FC<Props> = ({ currencies }) => {
     setSwapTo(swapFrom);
   };
 
-  useEffect(() => {
-    if (swapFrom.symbol === "PLN") {
-      const diff: number =
-        1 /
-        currencies.find((currency) => currency.symbol === swapTo.symbol)!
-          .price!;
-      console.log(swapTo.amount * diff);
-    } else {
+  const autoConvertInputs = (direction: SwapDirection) => {
+    let multiplier: number;
+
+    let firstCurrency = currencies.find(
+      (currency) => currency.symbol === swapFrom.symbol
+    );
+
+    let secondCurrency = currencies.find(
+      (currency) => currency.symbol === swapTo.symbol
+    );
+
+    if (direction === SwapDirection.from) {
+      if (swapFrom.symbol === "PLN") {
+        multiplier =
+          1 /
+          currencies.find((currency) => currency.symbol === swapTo.symbol)!
+            .price!;
+      } else {
+        multiplier =
+          swapTo.symbol === "PLN"
+            ? firstCurrency!.price!
+            : firstCurrency!.price! / secondCurrency!.price!;
+      }
+
+      setSwapTo({
+        ...swapTo,
+        amount: swapFrom.amount * multiplier!,
+      });
+    } else if (direction === SwapDirection.to) {
+      if (swapTo.symbol === "PLN") {
+        multiplier =
+          1 /
+          currencies.find((currency) => currency.symbol === swapFrom.symbol)!
+            .price!;
+      } else {
+        multiplier =
+          swapFrom.symbol === "PLN"
+            ? secondCurrency!.price!
+            : secondCurrency!.price! / firstCurrency!.price!;
+      }
+      setSwapFrom({
+        ...swapFrom,
+        amount: swapTo.amount * multiplier!,
+      });
     }
-    // eslint-disable-next-line
-  }, [swapFrom, swapTo]);
+  };
+
+  useEffect(() => {
+    autoConvertInputs(SwapDirection.from);
+  }, [swapFrom.amount]);
+
+  useEffect(() => {
+    autoConvertInputs(SwapDirection.to);
+  }, [swapTo.amount]);
 
   return (
     <StyledSwap>

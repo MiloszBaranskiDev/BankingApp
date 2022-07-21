@@ -37,13 +37,13 @@ const SwapCurrency: React.FC<Props> = ({
         {currencies
           .filter(
             (currency) =>
-              currency.symbol !== oppositeCurrency && currency.amount! >= 0.01
+              currency.symbol !== oppositeCurrency && currency.balance! >= 0.01
           )
           .map((currency) => (
             <option
               value={currency.symbol}
               key={currency.symbol}
-            >{`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}</option>
+            >{`${currency.symbol} (balance: ${currency.balance} ${currency.symbol})`}</option>
           ))}
       </StyledSelect>
       <StyledInput
@@ -51,7 +51,7 @@ const SwapCurrency: React.FC<Props> = ({
         placeholder="Enter amount"
         // min={}
         // max={}
-        value={swapData.amount}
+        value={swapData.amount.toFixed(2)}
         onChange={(e) =>
           setSwapData({ ...swapData, amount: Number(e.target.value) })
         }

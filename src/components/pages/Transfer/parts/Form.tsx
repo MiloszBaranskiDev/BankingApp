@@ -72,7 +72,7 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
   const [zeroBalance, setZeroBalance] = useState<boolean>(true);
 
   const getDefaultCurrency = () => {
-    return wallet.find((currency) => currency.amount! >= 0.01);
+    return wallet.find((currency) => currency.balance! >= 0.01);
   };
 
   useEffect(() => {
@@ -109,7 +109,7 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
       newFormData[index].value = Math.max(
         0.01,
         Math.min(
-          wallet.find((item) => item.symbol === currentCurrency)!.amount!,
+          wallet.find((item) => item.symbol === currentCurrency)!.balance!,
           Number(value)
         )
       );
@@ -143,9 +143,9 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
         .find((item) => item.label === "Currency")!
         .value.toString();
 
-      const currencyAmount: number = wallet.find(
+      const currencyBalance: number = wallet.find(
         (item) => item.symbol === currency
-      )!.amount!;
+      )!.balance!;
 
       const amount: number | string = formData.find(
         (item) => item.label === "Amount"
@@ -154,7 +154,7 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
       dispatch(
         updateWallet({
           symbol: currency,
-          amount: currencyAmount - Number(amount),
+          balance: currencyBalance - Number(amount),
         })
       );
 
@@ -201,10 +201,10 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
                       {wallet.map((currency) => (
                         <option
                           value={currency.symbol}
-                          disabled={currency.amount! >= 0.01 ? false : true}
+                          disabled={currency.balance! >= 0.01 ? false : true}
                           key={currency.symbol}
                         >
-                          {`${currency.symbol} (balance: ${currency.amount} ${currency.symbol})`}
+                          {`${currency.symbol} (balance: ${currency.balance} ${currency.symbol})`}
                         </option>
                       ))}
                     </StyledSelect>

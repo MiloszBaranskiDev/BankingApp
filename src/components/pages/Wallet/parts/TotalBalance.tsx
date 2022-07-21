@@ -27,12 +27,12 @@ const TotalBalance: React.FC<Props> = ({ wallet }) => {
     const loadedRates = await GetCurrenciesPrices(
       currencies.filter((currency) => currency.symbol !== mainCurrency.symbol)
     );
-    let totalAmount: number = mainCurrency.amount!;
+    let totalAmount: number = mainCurrency.balance!;
 
     currencies.forEach((currency) => {
       currency.symbol !== mainCurrency.symbol &&
         (totalAmount +=
-          currency.amount! *
+          currency.balance! *
           loadedRates!.find((item) => item.symbol === currency.symbol)!.price);
     });
 

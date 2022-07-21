@@ -14,7 +14,7 @@ const CurrenciesBalance: React.FC<Props> = ({ wallet }) => {
       {wallet.map((currency) => (
         <CurrencyBalance
           symbol={currency.symbol}
-          amount={currency.amount!}
+          amount={currency.balance!}
           key={currency.symbol}
         />
       ))}

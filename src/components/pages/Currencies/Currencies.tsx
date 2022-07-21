@@ -30,7 +30,10 @@ const Currencies: React.FC = () => {
 
   const loadPrices: ILoadPrices = async (currencies) => {
     const loadedData = await GetCurrenciesPrices(excludePLN(currencies));
-    setCurrencies(loadedData!);
+    setCurrencies([
+      wallet.find((currency) => currency.symbol === "PLN")!,
+      ...loadedData!,
+    ]);
   };
 
   useEffect(() => {
@@ -51,7 +54,7 @@ const Currencies: React.FC = () => {
       {!loading ? (
         <>
           <Tiles currencies={excludePLN(currencies)} />
-          {currencies.filter((currency) => currency.amount! >= 0.01).length >=
+          {currencies.filter((currency) => currency.balance! >= 0.01).length >=
             2 && <Swap currencies={currencies} />}
           {excludePLN(currencies).map((currency) => (
             <Chart symbol={currency.symbol} key={currency.symbol} />

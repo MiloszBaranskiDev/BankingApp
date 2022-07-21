@@ -27,13 +27,13 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const Chart: React.FC<Props> = ({ wallet }) => {
   const chartData: IChartData = {
     labels: wallet
-      .filter((currency) => currency.amount! >= 0.01)
+      .filter((currency) => currency.balance! >= 0.01)
       .map((currency) => currency.symbol),
     datasets: [
       {
         data: wallet
-          .filter((currency) => currency.amount! >= 0.01)
-          .map((currency) => currency.amount!),
+          .filter((currency) => currency.balance! >= 0.01)
+          .map((currency) => currency.balance!),
         backgroundColor: [
           "rgba(255, 102, 0, 0.2)",
           "rgba(255, 99, 132, 0.2)",
@@ -56,7 +56,7 @@ const Chart: React.FC<Props> = ({ wallet }) => {
   return (
     <StyledChart>
       <StyledHeading>Currencies</StyledHeading>
-      {wallet.some((currency) => currency.amount! >= 0.01) ? (
+      {wallet.some((currency) => currency.balance! >= 0.01) ? (
         <Doughnut data={chartData} />
       ) : (
         <p>
