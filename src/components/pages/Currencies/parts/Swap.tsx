@@ -20,6 +20,11 @@ enum SwapDirection {
   to = "to",
 }
 
+enum SwapEvent {
+  select = "select",
+  input = "input",
+}
+
 const Swap: React.FC<Props> = ({ currencies }) => {
   const [swapFrom, setSwapFrom] = useState<ISwapData>({
     symbol: currencies[0].symbol,
@@ -36,18 +41,16 @@ const Swap: React.FC<Props> = ({ currencies }) => {
     setSwapTo(swapFrom);
   };
 
-  const autoConvertInputs = (direction: SwapDirection) => {
+  const autoConvertInputs = (direction: SwapDirection, event: SwapEvent) => {
     let multiplier: number;
-
     let firstCurrency = currencies.find(
       (currency) => currency.symbol === swapFrom.symbol
     );
-
     let secondCurrency = currencies.find(
       (currency) => currency.symbol === swapTo.symbol
     );
 
-    if (direction === SwapDirection.from) {
+    const updateTo = () => {
       if (swapFrom.symbol === "PLN") {
         multiplier =
           1 /
@@ -59,12 +62,13 @@ const Swap: React.FC<Props> = ({ currencies }) => {
             ? firstCurrency!.price!
             : firstCurrency!.price! / secondCurrency!.price!;
       }
-
       setSwapTo({
         ...swapTo,
         amount: swapFrom.amount * multiplier!,
       });
-    } else if (direction === SwapDirection.to) {
+    };
+
+    const updateFrom = () => {
       if (swapTo.symbol === "PLN") {
         multiplier =
           1 /
@@ -80,16 +84,36 @@ const Swap: React.FC<Props> = ({ currencies }) => {
         ...swapFrom,
         amount: swapTo.amount * multiplier!,
       });
+    };
+
+    if (
+      (direction === SwapDirection.from && event === SwapEvent.input) ||
+      (direction === SwapDirection.to && event === SwapEvent.select)
+    ) {
+      updateTo();
+    } else if (
+      (direction === SwapDirection.to && event === SwapEvent.input) ||
+      (direction === SwapDirection.from && event === SwapEvent.select)
+    ) {
+      updateFrom();
     }
   };
 
   useEffect(() => {
-    autoConvertInputs(SwapDirection.from);
+    autoConvertInputs(SwapDirection.from, SwapEvent.input);
   }, [swapFrom.amount]);
 
   useEffect(() => {
-    autoConvertInputs(SwapDirection.to);
+    autoConvertInputs(SwapDirection.to, SwapEvent.input);
   }, [swapTo.amount]);
+
+  useEffect(() => {
+    autoConvertInputs(SwapDirection.from, SwapEvent.select);
+  }, [swapFrom.symbol]);
+
+  useEffect(() => {
+    autoConvertInputs(SwapDirection.to, SwapEvent.select);
+  }, [swapTo.symbol]);
 
   return (
     <StyledSwap>
@@ -102,6 +126,7 @@ const Swap: React.FC<Props> = ({ currencies }) => {
           outgoing={true}
         />
         <SwapArrows reverseSwap={reverseSwap} />
+        SUBMIT
         <SwapCurrency
           currencies={currencies}
           oppositeCurrency={swapFrom.symbol}
