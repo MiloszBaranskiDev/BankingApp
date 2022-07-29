@@ -38,7 +38,7 @@ const StyledTotalBalanceAmount = styled.p`
   span {
     word-break: normal;
     margin-left: 8px;
-    color: #00cf00;
+    color: ${(props) => props.theme.colors.green};
     font-size: ${(props) => props.theme.typography.size_normal};
     font-weight: ${(props) => props.theme.typography.weight_normal};
   }

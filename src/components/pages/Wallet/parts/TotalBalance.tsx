@@ -58,7 +58,7 @@ const TotalBalance: React.FC<Props> = ({ wallet }) => {
 export default TotalBalance;
 
 const StyledTotalBalance = styled.div`
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   flex-basis: 100%;
   display: flex;
   flex-direction: column;

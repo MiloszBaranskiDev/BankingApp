@@ -68,14 +68,14 @@ const StyledDate = styled.div`
   display: flex;
   flex-direction: column;
   input {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
     &::-webkit-calendar-picker-indicator {
       cursor: pointer;
     }
   }
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     &:first-child {
-      margin-right: 12px;
+      margin-right: 16px;
     }
   }
 `;

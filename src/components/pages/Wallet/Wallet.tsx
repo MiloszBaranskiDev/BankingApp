@@ -8,6 +8,8 @@ import StyledPageTitle from "components/styled/StyledPageTitle";
 import Chart from "./parts/Chart";
 import TotalBalance from "./parts/TotalBalance";
 import CurrenciesBalance from "./parts/CurrenciesBalance";
+import Incomes from "./parts/Incomes";
+import Expenses from "./parts/Expenses";
 
 const Wallet: React.FC = () => {
   const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
@@ -23,7 +25,10 @@ const Wallet: React.FC = () => {
         <StyledColumn>
           <Chart wallet={wallet} />
         </StyledColumn>
-        <StyledColumn>links</StyledColumn>
+        <StyledColumn>
+          <Incomes />
+          <Expenses />
+        </StyledColumn>
       </StyledBox>
     </>
   );
@@ -42,13 +47,13 @@ const StyledBox = styled.div`
 
 const StyledColumn = styled.div`
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    flex-basis: 49%;
+    flex-basis: calc(50% - 8px);
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
   }
   @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
-    flex-basis: 36.5%;
+    flex-basis: calc(37.5% - 16px);
     &:nth-child(2) {
       flex-basis: 25%;
     }

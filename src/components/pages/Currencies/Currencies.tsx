@@ -7,6 +7,7 @@ import { ICurrency } from "interfaces/ICurrency";
 import GetCurrenciesPrices from "api/GetCurrenciesPrices";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
+import StyledHeading from "components/styled/StyledHeading";
 import Loader from "components/Loader";
 import Tiles from "./parts/Tiles";
 import Swap from "./parts/Swap";
@@ -55,7 +56,12 @@ const Currencies: React.FC = () => {
         <>
           <Tiles currencies={excludePLN(currencies)} />
           {currencies.filter((currency) => currency.balance! >= 0.01).length >=
-            2 && <Swap currencies={currencies} />}
+            2 && (
+            <>
+              <StyledHeading>Swap currencies</StyledHeading>
+              <Swap currencies={currencies} />
+            </>
+          )}
           {excludePLN(currencies).map((currency) => (
             <Chart symbol={currency.symbol} key={currency.symbol} />
           ))}

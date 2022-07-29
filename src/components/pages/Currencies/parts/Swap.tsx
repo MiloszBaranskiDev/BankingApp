@@ -43,10 +43,10 @@ const Swap: React.FC<Props> = ({ currencies }) => {
 
   const autoConvertInputs = (direction: SwapDirection, event: SwapEvent) => {
     let multiplier: number;
-    let firstCurrency = currencies.find(
+    const firstCurrency = currencies.find(
       (currency) => currency.symbol === swapFrom.symbol
     );
-    let secondCurrency = currencies.find(
+    const secondCurrency = currencies.find(
       (currency) => currency.symbol === swapTo.symbol
     );
 
