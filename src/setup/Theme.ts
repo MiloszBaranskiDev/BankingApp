@@ -3,6 +3,8 @@ const theme = {
     main: "#3b37c5",
     bgc: "white",
     bgc_dark: "#f7f9fb",
+    green: "#44bd32",
+    red: "#eb4d4b",
     typography: "#a6afc0",
   },
   typography: {
