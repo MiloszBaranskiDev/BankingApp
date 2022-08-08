@@ -12,7 +12,12 @@ import Chat from "components/pages/Chat/Chat";
 import Notifications from "components/pages/Notifications/Notifications";
 import SingleNotification from "components/pages/SingleNotification/SingleNotification";
 
-const AppRouter: React.FC = () => {
+interface Props {
+  theme: any;
+  setTheme: (arg0: any) => void;
+}
+
+const AppRouter: React.FC<Props> = ({ theme, setTheme }) => {
   return (
     <>
       <Routes>
@@ -22,7 +27,10 @@ const AppRouter: React.FC = () => {
         <Route path="/transfer" element={<Transfer />} />
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/help" element={<Help />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route
+          path="/settings"
+          element={<Settings theme={theme} setTheme={setTheme} />}
+        />
         <Route path="/profile" element={<Profile />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/chat" element={<Chat />} />

@@ -25,3 +25,10 @@ a {
 ul {
   list-style: none;
 }
+
+a,
+button,
+select,
+input {
+  cursor: pointer;
+}
