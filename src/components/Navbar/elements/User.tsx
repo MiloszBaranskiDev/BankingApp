@@ -16,6 +16,11 @@ const User: React.FC = () => {
   const userFields: IUserField[] = useSelector(
     (state: RootState) => state.user
   );
+
+  const userLogin: string = userFields.find(
+    (item) => item.label === "login"
+  )!.value;
+
   const imagePath: string = userFields.find(
     (item) => item.label === "image"
   )!.value;
@@ -39,7 +44,7 @@ const User: React.FC = () => {
       {showUserMenu ? (
         <StyledUserMenu>
           <div className="top">
-            <h3>Name</h3>
+            <h3>{userLogin}</h3>
             <p>Bank account</p>
           </div>
           <ul>
