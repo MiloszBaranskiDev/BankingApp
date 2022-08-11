@@ -1,26 +1,50 @@
-import styled from "styled-components";
-import { RootState } from "redux/store";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { RootState } from "redux/store";
+import { useDispatch } from "react-redux";
+import { editUser } from "redux/slices/UserSlice";
+import styled from "styled-components";
 
 import { IUserField } from "interfaces/IUserField";
 
+import StyledButton from "components/styled/StyledButton";
 import Field from "../elements/Field";
 
 const UserFields: React.FC = () => {
-  const userFields: IUserField[] = useSelector(
-    (state: RootState) => state.user
-  );
+  const dispatch = useDispatch();
+  const userData: IUserField[] = useSelector((state: RootState) => state.user);
+  const [currentUserData, setUpdatedUserData] =
+    useState<IUserField[]>(userData);
+
+  useEffect(() => {
+    setUpdatedUserData(userData);
+  }, [userData]);
+
+  const handleSave = () => {
+    dispatch(editUser({ updatedArr: currentUserData }));
+  };
 
   return (
     <StyledUserFields>
-      {userFields.map((field: IUserField) => (
-        <Field
-          label={field.label}
-          type={field.type}
-          value={field.value}
-          key={field.label}
-        />
-      ))}
+      <>
+        {userData.length > 0 && (
+          <>
+            {userData.map((field: IUserField) => (
+              <Field
+                label={field.label}
+                type={field.type}
+                value={field.value}
+                key={field.label}
+                currentUserData={currentUserData}
+                setUpdatedUserData={setUpdatedUserData}
+              />
+            ))}
+          </>
+        )}
+        <StyledButton onClick={handleSave} as={"button"}>
+          Save changes
+        </StyledButton>
+      </>
     </StyledUserFields>
   );
 };
@@ -42,5 +66,8 @@ const StyledUserFields = styled.div`
   }
   input {
     margin-bottom: 12px;
+  }
+  button {
+    margin-top: 16px;
   }
 `;

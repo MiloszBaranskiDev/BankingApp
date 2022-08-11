@@ -1,21 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IUserField } from "interfaces/IUserField";
 
-interface IPayload {
-  label: string;
-  value: string;
-}
+import { IUserField } from "interfaces/IUserField";
 
 const initialState: IUserField[] = [
   {
     label: "login",
     type: "text",
-    value: "user",
+    value: "John",
   },
   {
     label: "e-mail",
     type: "email",
-    value: "user@email.com",
+    value: "john@email.com",
   },
   {
     label: "phone",
@@ -38,10 +34,9 @@ export const UserSlice = createSlice({
   name: "UserSlice",
   initialState,
   reducers: {
-    editUser: (state, action: PayloadAction<IPayload>) => {
-      const { label, value } = action.payload;
-      const index: number = state.findIndex((item) => item.label === label);
-      state[index].value = value;
+    editUser: (state, action: PayloadAction<{ updatedArr: IUserField[] }>) => {
+      const { updatedArr } = action.payload;
+      return (state = updatedArr);
     },
   },
 });

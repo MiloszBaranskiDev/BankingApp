@@ -1,13 +1,28 @@
 import styled from "styled-components";
 import { useRef } from "react";
-import { editUser } from "redux/slices/UserSlice";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { RootState } from "redux/store";
+import { editUser } from "redux/slices/UserSlice";
 
 import StyledButton from "components/styled/StyledButton";
 
 const ImageButtons: React.FC = () => {
-  const uploadInput: any = useRef();
   const dispatch = useDispatch();
+  const userData = useSelector((state: RootState) => state.user);
+  const uploadInput: any = useRef();
+
+  const updateUserData = (path: string) => {
+    const updatedArr = userData.map((field, i) => {
+      if (i === userData.findIndex((field) => field.label === "image")) {
+        return { ...field, value: path };
+      }
+
+      return field;
+    });
+
+    return updatedArr;
+  };
 
   const handleUpload = () => {
     uploadInput.current.click();
@@ -16,8 +31,7 @@ const ImageButtons: React.FC = () => {
       (e: { target: { files: (Blob | MediaSource)[] } }) => {
         dispatch(
           editUser({
-            label: "image",
-            value: URL.createObjectURL(e.target.files[0]),
+            updatedArr: updateUserData(URL.createObjectURL(e.target.files[0])),
           })
         );
       }
@@ -25,7 +39,9 @@ const ImageButtons: React.FC = () => {
   };
 
   const handleRemove = () => {
-    dispatch(editUser({ label: "image", value: "/user_image_default.png" }));
+    dispatch(
+      editUser({ updatedArr: updateUserData("/user_image_default.png") })
+    );
     uploadInput.current.value = "";
   };
 
