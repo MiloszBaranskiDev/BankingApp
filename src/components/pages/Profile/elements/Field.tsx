@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 import StyledLabel from "components/styled/StyledLabel";
 import StyledInput from "components/styled/StyledInput";
 
@@ -9,6 +11,7 @@ interface Props {
   value: string;
   currentUserData: IUserField[];
   setUpdatedUserData: (arg0: IUserField[]) => void;
+  hasError: boolean;
 }
 
 const Field: React.FC<Props> = ({
@@ -17,6 +20,7 @@ const Field: React.FC<Props> = ({
   value,
   currentUserData,
   setUpdatedUserData,
+  hasError,
 }) => {
   const handleChange = (value: string) => {
     const updatedArr = currentUserData.map((field, i) => {
@@ -33,18 +37,30 @@ const Field: React.FC<Props> = ({
   return (
     <>
       {type && (
-        <div className="userField">
+        <StyledField>
           <StyledLabel htmlFor={label}>{label}</StyledLabel>
           <StyledInput
             onChange={(e) => handleChange(String(e.target.value))}
             defaultValue={type !== "number" ? value : Number(value)}
+            className={`${hasError && "input-error"}`}
             type={type}
-            id={label}
           />
-        </div>
+        </StyledField>
       )}
     </>
   );
 };
 
 export default Field;
+
+const StyledField = styled.div`
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    flex-basis: 49%;
+  }
+  input {
+    margin-bottom: 20px;
+    &.input-error {
+      border: 1px solid ${(props) => props.theme.colors.red};
+    }
+  }
+`;

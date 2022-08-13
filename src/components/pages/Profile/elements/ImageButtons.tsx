@@ -1,15 +1,18 @@
 import styled from "styled-components";
 import { useRef } from "react";
+import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { editUser } from "redux/slices/UserSlice";
 
+import { IUserField } from "interfaces/IUserField";
+
 import StyledButton from "components/styled/StyledButton";
 
 const ImageButtons: React.FC = () => {
-  const dispatch = useDispatch();
-  const userData = useSelector((state: RootState) => state.user);
+  const dispatch: Dispatch = useDispatch();
+  const userData: IUserField[] = useSelector((state: RootState) => state.user);
   const uploadInput: any = useRef();
 
   const updateUserData = (path: string) => {

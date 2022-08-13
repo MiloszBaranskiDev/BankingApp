@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
+import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { editUser } from "redux/slices/UserSlice";
 import styled from "styled-components";
@@ -11,8 +12,13 @@ import StyledButton from "components/styled/StyledButton";
 import Field from "../elements/Field";
 
 const UserFields: React.FC = () => {
-  const dispatch = useDispatch();
+  const saveBtn: any = useRef();
+  const dispatch: Dispatch = useDispatch();
   const userData: IUserField[] = useSelector((state: RootState) => state.user);
+
+  const [indexesOfEmptyInputs, setIndexesOfEmptyInputs] = useState<number[]>(
+    []
+  );
   const [currentUserData, setUpdatedUserData] =
     useState<IUserField[]>(userData);
 
@@ -21,7 +27,18 @@ const UserFields: React.FC = () => {
   }, [userData]);
 
   const handleSave = () => {
-    dispatch(editUser({ updatedArr: currentUserData }));
+    if (!currentUserData.some((field) => field.value === "")) {
+      setIndexesOfEmptyInputs([]);
+      dispatch(editUser({ updatedArr: currentUserData }));
+      saveBtn.current.classList.add("saved");
+      setTimeout(() => {
+        saveBtn.current.classList.remove("saved");
+      }, 750);
+    } else {
+      currentUserData.forEach((field, i: number) => {
+        field.value === "" && setIndexesOfEmptyInputs((old) => [...old, i]);
+      });
+    }
   };
 
   return (
@@ -29,19 +46,22 @@ const UserFields: React.FC = () => {
       <>
         {userData.length > 0 && (
           <>
-            {userData.map((field: IUserField) => (
+            {userData.map((field: IUserField, i: number) => (
               <Field
+                key={field.label}
                 label={field.label}
                 type={field.type}
                 value={field.value}
-                key={field.label}
+                hasError={indexesOfEmptyInputs.some(
+                  (emptyInputIndex) => emptyInputIndex === i
+                )}
                 currentUserData={currentUserData}
                 setUpdatedUserData={setUpdatedUserData}
               />
             ))}
           </>
         )}
-        <StyledButton onClick={handleSave} as={"button"}>
+        <StyledButton ref={saveBtn} onClick={handleSave} as={"button"}>
           Save changes
         </StyledButton>
       </>
@@ -57,17 +77,12 @@ const StyledUserFields = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    .userField {
-      flex-basis: 49%;
-    }
-  }
-  h2 {
-    margin-bottom: 24px;
-  }
-  input {
-    margin-bottom: 12px;
   }
   button {
     margin-top: 16px;
+    transition: all 0.3s;
+    &.saved {
+      background-color: ${(props) => props.theme.colors.green};
+    }
   }
 `;
