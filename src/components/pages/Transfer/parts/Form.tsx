@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, MutableRefObject } from "react";
 import { RootState } from "redux/store";
+import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { updateWallet } from "redux/slices/WalletSlice";
 import { addTransaction } from "redux/slices/TransactionsSlice";
@@ -66,7 +67,7 @@ const fields: IField[] = [
 ];
 
 const Form: React.FC<Props> = ({ setShowSummary }) => {
-  const dispatch = useDispatch();
+  const dispatch: Dispatch = useDispatch();
   const formRef: MutableRefObject<HTMLFormElement | null> = useRef(null);
   const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
   const [zeroBalance, setZeroBalance] = useState<boolean>(true);
@@ -247,10 +248,10 @@ const StyledForm = styled.form`
   .transferField {
     margin-bottom: 12px;
     .field-error {
-      border-color: #e74c3c;
+      border-color: ${(props) => props.theme.colors.red};
     }
     option:disabled {
-      color: #e74c3c;
+      color: ${(props) => props.theme.colors.red};
     }
   }
 `;
