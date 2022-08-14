@@ -3,7 +3,8 @@ import styled from "styled-components";
 import StyledHeading from "components/styled/StyledHeading";
 import StyledButton from "components/styled/StyledButton";
 import ModeSwitcher from "../elements/ModeSwitcher";
-import Color from "../elements/Color";
+import Colors from "../elements/Colors";
+import CustomColor from "../elements/CustomColor";
 
 interface Props {
   theme: any;
@@ -15,7 +16,8 @@ const Theme: React.FC<Props> = ({ theme, setTheme }) => {
     <StyledTheme>
       <StyledHeading>Theme</StyledHeading>
       <ModeSwitcher theme={theme} setTheme={setTheme} />
-      <Color theme={theme} setTheme={setTheme} />
+      <Colors theme={theme} setTheme={setTheme} />
+      <CustomColor theme={theme} setTheme={setTheme} />
       <StyledButton as={"button"}>Reset to default</StyledButton>
     </StyledTheme>
   );

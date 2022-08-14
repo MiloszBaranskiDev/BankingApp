@@ -5,8 +5,8 @@ interface Props {
   setTheme: (arg0: any) => void;
 }
 
-const Color: React.FC<Props> = ({ theme, setTheme }) => {
-  const handleColor = (color: string) => {
+const CustomColor: React.FC<Props> = ({ theme, setTheme }) => {
+  const handleCustomColor = (color: string) => {
     setTheme({
       ...theme,
       colors: {
@@ -21,17 +21,17 @@ const Color: React.FC<Props> = ({ theme, setTheme }) => {
       <p>Choose custom color:</p>
       <StyledColorInput
         defaultValue={theme.colors.main}
-        onBlur={(e) => handleColor(e.target.value)}
+        onBlur={(e) => handleCustomColor(e.target.value)}
         type="color"
       />
     </div>
   );
 };
 
-export default Color;
+export default CustomColor;
 
 const StyledColorInput = styled.input`
-  margin: 10px 0 20px 0;
+  margin: 5px 0 20px 0;
   border: 1px solid ${(props) => props.theme.colors.bgc_dark};
   background: ${(props) => props.theme.colors.bgc_dark};
   height: 35px;
