@@ -3,6 +3,7 @@ import TransactionsSlice from "./slices/TransactionsSlice";
 import UserSlice from "./slices/UserSlice";
 import WalletSlice from "./slices/WalletSlice";
 import NotificationsSlice from "./slices/NotificationsSlice";
+import SettingsSlice from "./slices/SettingsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     wallet: WalletSlice,
     transactions: TransactionsSlice,
     notifications: NotificationsSlice,
+    settings: SettingsSlice,
   },
 });
 
