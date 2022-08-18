@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
+import { ESettingsKeys } from "enums/SettingsKeys";
+
 interface Props {
-  theme: any;
-  setTheme: (arg0: any) => void;
+  handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
 interface IColorProps {
@@ -10,6 +11,7 @@ interface IColorProps {
 }
 
 const colors: string[] = [
+  "#70a1ff",
   "#A3CB38",
   "#1289A7",
   "#B33771",
@@ -18,24 +20,14 @@ const colors: string[] = [
   "#786fa6",
 ];
 
-const Colors: React.FC<Props> = ({ theme, setTheme }) => {
-  const handleColor = (color: string) => {
-    setTheme({
-      ...theme,
-      colors: {
-        ...theme.colors,
-        main: color,
-      },
-    });
-  };
-
+const Colors: React.FC<Props> = ({ handleSettingsChange }) => {
   return (
     <StyledColors>
       {colors.map((color) => (
         <StyledColor
           key={color}
           bgcColor={color}
-          onClick={() => handleColor(color)}
+          onClick={() => handleSettingsChange(ESettingsKeys.mainColor, color)}
         />
       ))}
     </StyledColors>

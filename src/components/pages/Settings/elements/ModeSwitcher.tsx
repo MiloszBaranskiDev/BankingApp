@@ -1,29 +1,27 @@
 import styled from "styled-components";
 
+import { ESettingsKeys } from "enums/SettingsKeys";
+
 interface Props {
-  theme: any;
-  setTheme: (arg0: any) => void;
+  isLightMode: boolean;
+  handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
-const ModeSwitcher: React.FC<Props> = ({ theme, setTheme }) => {
-  const handleMode = (isLight: boolean) => {
-    setTheme({
-      ...theme,
-      isLight: isLight,
-    });
-  };
-
+const ModeSwitcher: React.FC<Props> = ({
+  isLightMode,
+  handleSettingsChange,
+}) => {
   return (
     <StyledModeSwitcher>
       <button
-        onClick={() => handleMode(true)}
-        className={`${theme.isLight ? "active" : ""}`}
+        onClick={() => handleSettingsChange(ESettingsKeys.isLightMode, true)}
+        className={`${isLightMode ? "active" : ""}`}
       >
         Light
       </button>
       <button
-        onClick={() => handleMode(false)}
-        className={`${!theme.isLight ? "active" : ""}`}
+        onClick={() => handleSettingsChange(ESettingsKeys.isLightMode, false)}
+        className={`${!isLightMode ? "active" : ""}`}
       >
         Dark
       </button>

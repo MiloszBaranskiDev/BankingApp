@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+
 import Home from "components/pages/Home/Home";
 import Wallet from "components/pages/Wallet/Wallet";
 import Transactions from "components/pages/Transactions/Transactions";
@@ -12,12 +13,7 @@ import Chat from "components/pages/Chat/Chat";
 import Notifications from "components/pages/Notifications/Notifications";
 import SingleNotification from "components/pages/SingleNotification/SingleNotification";
 
-interface Props {
-  theme: any;
-  setTheme: (arg0: any) => void;
-}
-
-const AppRouter: React.FC<Props> = ({ theme, setTheme }) => {
+const AppRouter: React.FC = () => {
   return (
     <>
       <Routes>
@@ -27,10 +23,7 @@ const AppRouter: React.FC<Props> = ({ theme, setTheme }) => {
         <Route path="/transfer" element={<Transfer />} />
         <Route path="/transactions" element={<Transactions />} />
         <Route path="/help" element={<Help />} />
-        <Route
-          path="/settings"
-          element={<Settings theme={theme} setTheme={setTheme} />}
-        />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/chat" element={<Chat />} />

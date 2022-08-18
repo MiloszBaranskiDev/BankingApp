@@ -1,27 +1,24 @@
 import styled from "styled-components";
 
+import { ESettingsKeys } from "enums/SettingsKeys";
+
 interface Props {
-  theme: any;
-  setTheme: (arg0: any) => void;
+  currentMainColor: string;
+  handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
-const CustomColor: React.FC<Props> = ({ theme, setTheme }) => {
-  const handleCustomColor = (color: string) => {
-    setTheme({
-      ...theme,
-      colors: {
-        ...theme.colors,
-        main: color,
-      },
-    });
-  };
-
+const CustomColor: React.FC<Props> = ({
+  currentMainColor,
+  handleSettingsChange,
+}) => {
   return (
     <div>
       <p>Choose custom color:</p>
       <StyledColorInput
-        defaultValue={theme.colors.main}
-        onBlur={(e) => handleCustomColor(e.target.value)}
+        defaultValue={currentMainColor}
+        onBlur={(e) =>
+          handleSettingsChange(ESettingsKeys.mainColor, e.target.value)
+        }
         type="color"
       />
     </div>
@@ -31,7 +28,7 @@ const CustomColor: React.FC<Props> = ({ theme, setTheme }) => {
 export default CustomColor;
 
 const StyledColorInput = styled.input`
-  margin: 5px 0 20px 0;
+  margin-top: 5px;
   border: 1px solid ${(props) => props.theme.colors.bgc_dark};
   background: ${(props) => props.theme.colors.bgc_dark};
   height: 35px;

@@ -1,24 +1,31 @@
 import styled from "styled-components";
 
+import { ESettingsKeys } from "enums/SettingsKeys";
+import { ISettings } from "interfaces/ISettings";
+
 import StyledHeading from "components/styled/StyledHeading";
-import StyledButton from "components/styled/StyledButton";
 import ModeSwitcher from "../elements/ModeSwitcher";
 import Colors from "../elements/Colors";
 import CustomColor from "../elements/CustomColor";
 
 interface Props {
-  theme: any;
-  setTheme: (arg0: any) => void;
+  settings: ISettings;
+  handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
-const Theme: React.FC<Props> = ({ theme, setTheme }) => {
+const Theme: React.FC<Props> = ({ settings, handleSettingsChange }) => {
   return (
     <StyledTheme>
       <StyledHeading>Theme</StyledHeading>
-      <ModeSwitcher theme={theme} setTheme={setTheme} />
-      <Colors theme={theme} setTheme={setTheme} />
-      <CustomColor theme={theme} setTheme={setTheme} />
-      <StyledButton as={"button"}>Reset to default</StyledButton>
+      <ModeSwitcher
+        isLightMode={settings[ESettingsKeys.isLightMode]}
+        handleSettingsChange={handleSettingsChange}
+      />
+      <Colors handleSettingsChange={handleSettingsChange} />
+      <CustomColor
+        currentMainColor={settings[ESettingsKeys.mainColor]}
+        handleSettingsChange={handleSettingsChange}
+      />
     </StyledTheme>
   );
 };
