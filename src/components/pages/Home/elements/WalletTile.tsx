@@ -12,7 +12,7 @@ interface IBtnProps {
   defaultStyle: boolean;
 }
 
-enum Heading {
+enum EHeading {
   balance = "balance",
   incomes = "incomes",
 }
@@ -23,10 +23,9 @@ const WalletTile: React.FC<Props> = ({ heading, number }) => {
       <StyledHeading>{heading}</StyledHeading>
       <StyledNumber
         number={number}
-        defaultStyle={heading.toLowerCase() === Heading.balance}
+        defaultStyle={heading.toLowerCase() === EHeading.balance}
       >
-        {heading.toLowerCase() !== Heading.incomes ? number : "+" + number}{" "}
-        SYMBOL
+        {heading.toLowerCase() !== EHeading.incomes ? number : "+" + number} PLN
       </StyledNumber>
     </StyledWalletTile>
   );
