@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { ISettings } from "interfaces/ISettings";
-import { ESettingsKeys } from "enums/SettingsKeys";
-import { ECurrencies } from "enums/Currencies";
+import { ESettingsKeys } from "enums/ESettingsKeys";
+import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
 
 interface IPayload {
   key: ESettingsKeys;
@@ -14,7 +14,7 @@ const initialState: ISettings = {
   [ESettingsKeys.mainColor]: "#70a1ff",
   [ESettingsKeys.bgcColor]: "white",
   [ESettingsKeys.bgcDarkColor]: "#f7f9fb",
-  [ESettingsKeys.favouriteCurrency]: ECurrencies.eur,
+  [ESettingsKeys.favouriteCurrency]: ECurrenciesSymbols.eur,
 };
 
 export const SettingsSlice = createSlice({
