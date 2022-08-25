@@ -10,7 +10,7 @@ import DefaultTheme from "./DefaultTheme";
 
 import ScrollToTop from "helpers/ScrollToTop";
 
-import { ESettingsKeys } from "enums/SettingsKeys";
+import { ESettingsKeys } from "enums/ESettingsKeys";
 import { ISettings } from "interfaces/ISettings";
 
 import StyledWrapper from "components/styled/StyledWrapper";
