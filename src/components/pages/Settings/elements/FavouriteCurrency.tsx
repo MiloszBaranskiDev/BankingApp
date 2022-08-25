@@ -4,12 +4,12 @@ import StyledSelect from "components/styled/StyledSelect";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 
-import { ESettingsKeys } from "enums/SettingsKeys";
-import { ECurrencies } from "enums/Currencies";
+import { ESettingsKeys } from "enums/ESettingsKeys";
+import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
 import { ICurrency } from "interfaces/ICurrency";
 
 interface Props {
-  favouriteCurrency: Exclude<ECurrencies, ECurrencies.pln>;
+  favouriteCurrency: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>;
   handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
@@ -30,7 +30,7 @@ const FavouriteCurrency: React.FC<Props> = ({
       >
         {wallet.map((currency) => (
           <React.Fragment key={currency.symbol}>
-            {currency.symbol !== ECurrencies.pln && (
+            {currency.symbol !== ECurrenciesSymbols.pln && (
               <option value={currency.symbol}>{currency.symbol}</option>
             )}
           </React.Fragment>

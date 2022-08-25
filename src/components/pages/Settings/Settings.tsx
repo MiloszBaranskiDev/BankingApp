@@ -4,7 +4,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 import { updateSettings } from "redux/slices/SettingsSlice";
 
 import { ISettings } from "interfaces/ISettings";
-import { ESettingsKeys } from "enums/SettingsKeys";
+import { ESettingsKeys } from "enums/ESettingsKeys";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import Theme from "./parts/Theme";

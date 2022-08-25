@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { ESettingsKeys } from "enums/SettingsKeys";
+import { ESettingsKeys } from "enums/ESettingsKeys";
 import { ISettings } from "interfaces/ISettings";
 
 import StyledHeading from "components/styled/StyledHeading";
