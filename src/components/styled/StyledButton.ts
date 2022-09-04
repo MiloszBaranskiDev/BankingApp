@@ -4,10 +4,10 @@ const StyledButton = styled.a`
   color: white;
   cursor: pointer;
   user-select: none;
-  display: block;
+  display: inline-block;
   text-align: center;
   letter-spacing: 0.5px;
-  padding: 13px 9px;
+  padding: 12px 18px;
   outline: none;
   border: none;
   transition: border-radius 0.3s;
