@@ -1,19 +1,12 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
+import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
 import { ICurrency } from "interfaces/ICurrency";
 
+import StyledButton from "components/styled/StyledButton";
 import SwapArrows from "../elements/SwapArrows";
 import SwapCurrency from "../elements/SwapCurrency";
-
-interface ISwapData {
-  symbol: string;
-  amount: number;
-}
-
-interface Props {
-  currencies: ICurrency[];
-}
 
 enum SwapDirection {
   from = "from",
@@ -25,14 +18,25 @@ enum SwapEvent {
   input = "input",
 }
 
+interface ISwapData {
+  symbol: string;
+  amount: number;
+}
+
+interface Props {
+  currencies: ICurrency[];
+}
+
 const Swap: React.FC<Props> = ({ currencies }) => {
+  const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(true);
+
   const [swapFrom, setSwapFrom] = useState<ISwapData>({
     symbol: currencies[0].symbol,
     amount: 0,
   });
 
   const [swapTo, setSwapTo] = useState<ISwapData>({
-    symbol: "USD",
+    symbol: ECurrenciesSymbols.usd,
     amount: 0,
   });
 
@@ -41,11 +45,17 @@ const Swap: React.FC<Props> = ({ currencies }) => {
     setSwapTo(swapFrom);
   };
 
+  const handleSwap = () => {
+    console.log("button click");
+  };
+
   const autoConvertInputs = (direction: SwapDirection, event: SwapEvent) => {
     let multiplier: number;
+
     const firstCurrency = currencies.find(
       (currency) => currency.symbol === swapFrom.symbol
     );
+
     const secondCurrency = currencies.find(
       (currency) => currency.symbol === swapTo.symbol
     );
@@ -62,6 +72,7 @@ const Swap: React.FC<Props> = ({ currencies }) => {
             ? firstCurrency!.price!
             : firstCurrency!.price! / secondCurrency!.price!;
       }
+
       setSwapTo({
         ...swapTo,
         amount: swapFrom.amount * multiplier!,
@@ -80,6 +91,7 @@ const Swap: React.FC<Props> = ({ currencies }) => {
             ? secondCurrency!.price!
             : secondCurrency!.price! / firstCurrency!.price!;
       }
+
       setSwapFrom({
         ...swapFrom,
         amount: swapTo.amount * multiplier!,
@@ -100,6 +112,12 @@ const Swap: React.FC<Props> = ({ currencies }) => {
   };
 
   useEffect(() => {
+    swapFrom.amount === 0 || swapTo.amount === 0
+      ? setButtonIsDisabled(true)
+      : setButtonIsDisabled(false);
+  }, [swapFrom.amount, swapTo.amount]);
+
+  useEffect(() => {
     autoConvertInputs(SwapDirection.from, SwapEvent.input);
   }, [swapFrom.amount]);
 
@@ -115,6 +133,8 @@ const Swap: React.FC<Props> = ({ currencies }) => {
     autoConvertInputs(SwapDirection.to, SwapEvent.select);
   }, [swapTo.symbol]);
 
+  console.log(buttonIsDisabled, swapFrom.amount, swapTo.amount);
+
   return (
     <StyledSwap>
       <StyledBox>
@@ -125,8 +145,17 @@ const Swap: React.FC<Props> = ({ currencies }) => {
           setSwapData={setSwapFrom}
           outgoing={true}
         />
-        <SwapArrows reverseSwap={reverseSwap} />
-        SUBMIT
+        <StyledColumm>
+          <SwapArrows reverseSwap={reverseSwap} />
+          <StyledButton
+            as="button"
+            disabled={buttonIsDisabled}
+            style={buttonIsDisabled ? { cursor: "not-allowed" } : {}}
+            onClick={handleSwap}
+          >
+            Submit
+          </StyledButton>
+        </StyledColumm>
         <SwapCurrency
           currencies={currencies}
           oppositeCurrency={swapFrom.symbol}
@@ -158,5 +187,15 @@ const StyledBox = styled.div`
     flex-wrap: wrap;
     justify-content: unset;
     align-items: center;
+  }
+`;
+
+const StyledColumm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    padding: 0 40px;
   }
 `;
