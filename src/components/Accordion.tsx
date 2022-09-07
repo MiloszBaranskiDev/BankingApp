@@ -12,12 +12,12 @@ const Accordion: React.FC<Props> = ({ top, content }) => {
 
   return (
     <StyledAccordion>
-      <StyledQuestion onClick={() => setOpen(!open)} role="button">
+      <StyledTop onClick={() => setOpen(!open)} role="button">
         <i
           className={open ? "fas fa-chevron-up reverse" : "fas fa-chevron-up"}
         ></i>
         {top}
-      </StyledQuestion>
+      </StyledTop>
       {typeof content === "string" ? (
         <StyledContent className={open ? "show-content" : ""}>
           {content}
@@ -56,7 +56,7 @@ const StyledAccordion = styled.li`
   }
 `;
 
-const StyledQuestion = styled.a`
+const StyledTop = styled.a`
   display: flex;
   align-items: center;
   user-select: none;
@@ -84,7 +84,6 @@ const StyledContent = styled.p`
   transition: all 0.3s;
   li {
     line-height: 26px;
-    font-size: ${(props) => props.theme.typography.size_big};
     span:first-child {
       margin-right: 12px;
       position: relative;
