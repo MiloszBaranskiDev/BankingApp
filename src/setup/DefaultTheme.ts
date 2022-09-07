@@ -11,7 +11,7 @@ const DefaultTheme = {
   typography: {
     size_small: "14px",
     size_normal: "16px",
-    size_big: "18px",
+    size_big: "20px",
     size_extra_small: "12px",
     size_extra_big: "24px",
     size_title: "32px",
