@@ -14,9 +14,11 @@ import Content from "./parts/Content";
 const SingleNotification: React.FC = () => {
   const dispatch: Dispatch = useDispatch();
   const { id } = useParams();
+
   const notifications: INotification[] = useSelector(
     (state: RootState) => state.notifications
   );
+
   const notification: INotification = notifications.find(
     (notification) => notification.id === id
   )!;
