@@ -1,69 +1,25 @@
 import { useState, useEffect } from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
 import styled, { useTheme } from "styled-components";
 
 import GetTodayDate from "utils/GetTodayDate";
 import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";
 
+import { ILineChartData } from "interfaces/ILineChartData";
+import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+
+import LineChart from "components/LineChart";
 import Loader from "components/Loader";
 import StyledHeading from "components/styled/StyledHeading";
 import ChartDates from "../elements/ChartDates";
 
 interface Props {
-  symbol: string;
-}
-
-interface IChartData {
-  labels: number[];
-  datasets: [
-    {
-      borderWidth: number;
-      borderColor: string;
-      backgroundColor: string;
-      data: number[];
-    }
-  ];
+  currencySymbol: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>;
 }
 
 enum CalculateActions {
   add = "add",
   subtract = "subract",
 }
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Tooltip
-);
-
-const options: object = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-    },
-  },
-  scales: {
-    x: {
-      display: false,
-    },
-  },
-  elements: {
-    point: {
-      radius: 1.65,
-    },
-  },
-};
 
 const calculateDate = (
   comparedDate: string,
@@ -83,11 +39,11 @@ const calculateDate = (
   return date;
 };
 
-const Chart: React.FC<Props> = ({ symbol }) => {
+const Chart: React.FC<Props> = ({ currencySymbol }) => {
   const theme: any = useTheme();
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [chartData, setChartData] = useState<IChartData>(null as any);
+  const [chartData, setChartData] = useState<ILineChartData>(null as any);
 
   const [endDate, setEndDate] = useState<string>(GetTodayDate());
   const [startDate, setStartDate] = useState<string>(
@@ -99,7 +55,12 @@ const Chart: React.FC<Props> = ({ symbol }) => {
   const [maxStartDate, setMaxStartDate] = useState<string>();
 
   const loadPrices = async (start: string, end: string) => {
-    const loadedPrices = await GetCurrencyHistoricalPrices(symbol, start, end);
+    const loadedPrices = await GetCurrencyHistoricalPrices(
+      currencySymbol,
+      start,
+      end
+    );
+
     setChartData({
       labels: loadedPrices!,
       datasets: [
@@ -121,14 +82,14 @@ const Chart: React.FC<Props> = ({ symbol }) => {
   }, [startDate, endDate]);
 
   useEffect(() => {
-    chartData !== null && chartData.labels.length > 0
+    chartData !== undefined && chartData !== null && chartData.labels.length > 0
       ? setLoading(false)
       : setLoading(true);
   }, [chartData]);
 
   return (
     <StyledChart>
-      <StyledHeading>{symbol}/PLN</StyledHeading>
+      <StyledHeading>{currencySymbol}/PLN</StyledHeading>
       <ChartDates
         startDate={startDate}
         endDate={endDate}
@@ -138,8 +99,8 @@ const Chart: React.FC<Props> = ({ symbol }) => {
         setStartDate={setStartDate}
         setEndDate={setEndDate}
       />
-      {!loading && chartData !== null ? (
-        <Line options={options} data={chartData} />
+      {!loading && chartData !== undefined && chartData !== null ? (
+        <LineChart chartData={chartData} />
       ) : (
         <Loader />
       )}
