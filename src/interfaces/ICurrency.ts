@@ -1,5 +1,7 @@
+import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+
 export interface ICurrency {
-  symbol: string;
+  symbol: ECurrenciesSymbols;
   balance?: number;
   price?: number;
 }

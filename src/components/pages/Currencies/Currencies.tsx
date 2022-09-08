@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 
+import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
 import { ICurrency } from "interfaces/ICurrency";
 
 import GetCurrenciesPrices from "api/GetCurrenciesPrices";
@@ -18,7 +19,9 @@ interface ILoadPrices {
 }
 
 const excludePLN = (currencies: ICurrency[]) => {
-  return currencies.filter((currency) => currency.symbol !== "PLN");
+  return currencies.filter(
+    (currency) => currency.symbol !== ECurrenciesSymbols.pln
+  );
 };
 
 const Currencies: React.FC = () => {
@@ -63,7 +66,15 @@ const Currencies: React.FC = () => {
             </>
           )}
           {excludePLN(currencies).map((currency) => (
-            <Chart symbol={currency.symbol} key={currency.symbol} />
+            <Chart
+              currencySymbol={
+                currency.symbol as Exclude<
+                  ECurrenciesSymbols,
+                  ECurrenciesSymbols.pln
+                >
+              }
+              key={currency.symbol}
+            />
           ))}
         </>
       ) : (

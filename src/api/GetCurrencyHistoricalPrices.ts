@@ -1,12 +1,14 @@
+import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+
 const GetCurrencyHistoricalPrices = async (
-  symbol: string,
+  currencySymbol: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>,
   start: string,
   end: string
 ) => {
   try {
     const historicalPrices: number[] = [];
     const response: Response = await fetch(
-      `http://api.nbp.pl/api/exchangerates/rates/a/${symbol}/${start}/${end}/`
+      `http://api.nbp.pl/api/exchangerates/rates/a/${currencySymbol}/${start}/${end}/`
     );
 
     const responseJson = await response.json();

@@ -1,25 +1,27 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICurrency } from "interfaces/ICurrency";
 
+import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+
 const initialState: ICurrency[] = [
   {
-    symbol: "PLN",
+    symbol: ECurrenciesSymbols.pln,
     balance: 4500,
   },
   {
-    symbol: "EUR",
+    symbol: ECurrenciesSymbols.eur,
     balance: 1337,
   },
   {
-    symbol: "USD",
+    symbol: ECurrenciesSymbols.usd,
     balance: 440,
   },
   {
-    symbol: "GBP",
+    symbol: ECurrenciesSymbols.gbp,
     balance: 280.08,
   },
   {
-    symbol: "CHF",
+    symbol: ECurrenciesSymbols.chf,
     balance: 99.12,
   },
 ];

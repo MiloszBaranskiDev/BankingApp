@@ -16,6 +16,7 @@ import StyledInput from "components/styled/StyledInput";
 import StyledSelect from "components/styled/StyledSelect";
 import StyledButton from "components/styled/StyledButton";
 import StyledHeading from "components/styled/StyledHeading";
+import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
 
 interface Props {
   setShowSummary: (arg0: boolean) => void;
@@ -68,8 +69,11 @@ const fields: IField[] = [
 
 const Form: React.FC<Props> = ({ setShowSummary }) => {
   const dispatch: Dispatch = useDispatch();
+
   const formRef: MutableRefObject<HTMLFormElement | null> = useRef(null);
+
   const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
+
   const [zeroBalance, setZeroBalance] = useState<boolean>(true);
 
   const getDefaultCurrency = () => {
@@ -140,12 +144,12 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
     });
 
     if (canBeSubmited) {
-      const currency: string = formData
+      const currencySymbol = formData
         .find((item) => item.label === "Currency")!
-        .value.toString();
+        .value.toString() as ECurrenciesSymbols;
 
       const currencyBalance: number = wallet.find(
-        (item) => item.symbol === currency
+        (item) => item.symbol === currencySymbol
       )!.balance!;
 
       const amount: number | string = formData.find(
@@ -154,7 +158,7 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
 
       dispatch(
         updateWallet({
-          symbol: currency,
+          symbol: currencySymbol,
           balance: currencyBalance - Number(amount),
         })
       );
