@@ -3,9 +3,7 @@ import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
-
 import AppRouter from "./AppRouter";
-
 import DefaultTheme from "./DefaultTheme";
 
 import ScrollToTop from "helpers/ScrollToTop";
@@ -15,6 +13,7 @@ import { ISettings } from "interfaces/ISettings";
 
 import StyledWrapper from "components/styled/StyledWrapper";
 import Navbar from "components/Navbar/Navbar";
+import Footer from "components/Footer";
 
 const App: React.FC = () => {
   const settings: ISettings = useSelector((state: RootState) => state.settings);
@@ -45,6 +44,7 @@ const App: React.FC = () => {
           <StyledWrapper>
             <AppRouter />
           </StyledWrapper>
+          <Footer />
         </ThemeProvider>
       </div>
     </BrowserRouter>

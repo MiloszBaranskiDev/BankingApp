@@ -19,7 +19,8 @@ a {
 
 .App {
   min-height: 100vh;
-  padding-bottom: 60px;
+  display: flex;
+  flex-direction: column;
 }
 
 ul {
