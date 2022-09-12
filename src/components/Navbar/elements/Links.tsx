@@ -80,9 +80,7 @@ const StyledLinks = styled.nav`
       align-items: center;
       justify-content: center;
       line-height: 36px;
-      @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-        justify-content: flex-end;
-      }
+
       &:last-child {
         margin-right: 0;
       }
@@ -119,13 +117,10 @@ const StyledLinks = styled.nav`
       z-index: 5;
     }
   }
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    padding-right: calc((100% - 720px) / 2);
-  }
+
   @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
     margin-left: auto;
     flex-basis: unset;
-    padding-right: unset;
     width: unset;
     order: unset;
     ul {
