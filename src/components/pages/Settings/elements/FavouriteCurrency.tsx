@@ -26,7 +26,7 @@ const FavouriteCurrency: React.FC<Props> = ({
         onChange={(e) =>
           handleSettingsChange(ESettingsKeys.favouriteCurrency, e.target.value)
         }
-        defaultValue={favouriteCurrency}
+        value={favouriteCurrency}
       >
         {wallet.map((currency) => (
           <React.Fragment key={currency.symbol}>

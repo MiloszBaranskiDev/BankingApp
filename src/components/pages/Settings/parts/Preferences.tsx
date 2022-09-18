@@ -5,6 +5,8 @@ import { ISettings } from "interfaces/ISettings";
 
 import StyledHeading from "components/styled/StyledHeading";
 import FavouriteCurrency from "../elements/FavouriteCurrency";
+import LocalStorage from "../elements/LocalStorage";
+import Restore from "../elements/Restore";
 
 interface Props {
   settings: ISettings;
@@ -19,6 +21,8 @@ const Preferences: React.FC<Props> = ({ settings, handleSettingsChange }) => {
         favouriteCurrency={settings[ESettingsKeys.favouriteCurrency]}
         handleSettingsChange={handleSettingsChange}
       />
+      <LocalStorage />
+      <Restore />
     </StyledPreferences>
   );
 };

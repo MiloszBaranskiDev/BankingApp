@@ -28,9 +28,12 @@ export const SettingsSlice = createSlice({
         [key]: value,
       };
     },
+    restoreApp: (state) => {
+      // store.ts will restart the store when this is fired up
+    },
   },
 });
 
-export const { updateSettings } = SettingsSlice.actions;
+export const { updateSettings, restoreApp } = SettingsSlice.actions;
 
 export default SettingsSlice.reducer;
