@@ -7,6 +7,7 @@ import {
   Tooltip,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
+import styled from "styled-components";
 
 import { ILineChartData } from "interfaces/ILineChartData";
 
@@ -42,7 +43,18 @@ const options: object = {
 };
 
 const LineChart: React.FC<Props> = ({ chartData }) => {
-  return <Line options={options} data={chartData} />;
+  return (
+    <StyledLineChart>
+      <Line options={options} data={chartData} />
+    </StyledLineChart>
+  );
 };
 
 export default LineChart;
+
+const StyledLineChart = styled.div`
+  flex-basis: 100%;
+  canvas {
+    max-width: 100% !important;
+  }
+`;
