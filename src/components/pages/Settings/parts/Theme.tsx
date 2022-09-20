@@ -33,8 +33,13 @@ const Theme: React.FC<Props> = ({ settings, handleSettingsChange }) => {
 export default Theme;
 
 const StyledTheme = styled.div`
+  margin-bottom: 16px;
   padding: ${(props) => props.theme.tilePadding};
   border-radius: ${(props) => props.theme.radius};
   background-color: ${(props) => props.theme.colors.bgc};
   box-shadow: ${(props) => props.theme.shadow};
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    margin-bottom: 0;
+    flex-basis: 49.3%;
+  }
 `;
