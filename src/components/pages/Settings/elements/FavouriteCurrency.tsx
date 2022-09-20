@@ -43,6 +43,7 @@ const FavouriteCurrency: React.FC<Props> = ({
 export default FavouriteCurrency;
 
 const StyledFavouriteCurrency = styled.div`
+  margin-bottom: 20px;
   p {
     margin-bottom: 10px;
   }
