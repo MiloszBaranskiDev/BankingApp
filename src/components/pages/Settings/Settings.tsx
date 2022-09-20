@@ -2,13 +2,14 @@ import { RootState } from "redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 import { updateSettings } from "redux/slices/SettingsSlice";
+import styled from "styled-components";
 
 import { ISettings } from "interfaces/ISettings";
 import { ESettingsKeys } from "enums/ESettingsKeys";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import Theme from "./parts/Theme";
-import Preferences from "./parts/Preferences";
+import General from "./parts/General";
 
 const Settings: React.FC = () => {
   const dispatch: Dispatch = useDispatch();
@@ -24,13 +25,27 @@ const Settings: React.FC = () => {
   return (
     <>
       <StyledPageTitle>Settings</StyledPageTitle>
-      <Theme settings={settings} handleSettingsChange={handleSettingsChange} />
-      <Preferences
-        settings={settings}
-        handleSettingsChange={handleSettingsChange}
-      />
+      <StyledBox>
+        <Theme
+          settings={settings}
+          handleSettingsChange={handleSettingsChange}
+        />
+        <General
+          settings={settings}
+          handleSettingsChange={handleSettingsChange}
+        />
+      </StyledBox>
     </>
   );
 };
 
 export default Settings;
+
+const StyledBox = styled.div`
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+`;
