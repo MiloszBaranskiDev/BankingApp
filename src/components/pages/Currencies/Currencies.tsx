@@ -3,6 +3,7 @@ import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 
 import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { IWallet } from "interfaces/IWallet";
 import { ICurrency } from "interfaces/ICurrency";
 
 import GetCurrenciesPrices from "api/GetCurrenciesPrices";
@@ -25,17 +26,17 @@ const excludePLN = (currencies: ICurrency[]) => {
 };
 
 const Currencies: React.FC = () => {
-  const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
+  const wallet: IWallet = useSelector((state: RootState) => state.wallet);
 
   const [loading, setLoading] = useState<boolean>(true);
   const [currencies, setCurrencies] = useState<ICurrency[]>(
-    wallet.map((currency) => currency)
+    wallet.currencies.map((currency) => currency)
   );
 
   const loadPrices: ILoadPrices = async (currencies) => {
     const loadedData = await GetCurrenciesPrices(excludePLN(currencies));
     setCurrencies([
-      wallet.find((currency) => currency.symbol === "PLN")!,
+      wallet.currencies.find((currency) => currency.symbol === "PLN")!,
       ...loadedData!,
     ]);
   };

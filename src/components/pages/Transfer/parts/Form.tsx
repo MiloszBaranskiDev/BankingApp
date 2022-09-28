@@ -9,7 +9,7 @@ import styled from "styled-components";
 import GetTodayDate from "utils/GetTodayDate";
 import GetRandomId from "utils/GeRandomId";
 
-import { ICurrency } from "interfaces/ICurrency";
+import { IWallet } from "interfaces/IWallet";
 
 import StyledLabel from "components/styled/StyledLabel";
 import StyledInput from "components/styled/StyledInput";
@@ -72,12 +72,12 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
 
   const formRef: MutableRefObject<HTMLFormElement | null> = useRef(null);
 
-  const wallet: ICurrency[] = useSelector((state: RootState) => state.wallet);
+  const wallet: IWallet = useSelector((state: RootState) => state.wallet);
 
   const [zeroBalance, setZeroBalance] = useState<boolean>(true);
 
   const getDefaultCurrency = () => {
-    return wallet.find((currency) => currency.balance! >= 0.01);
+    return wallet.currencies.find((currency) => currency.balance! >= 0.01);
   };
 
   useEffect(() => {
@@ -114,7 +114,8 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
       newFormData[index].value = Math.max(
         0.01,
         Math.min(
-          wallet.find((item) => item.symbol === currentCurrency)!.balance!,
+          wallet.currencies.find((item) => item.symbol === currentCurrency)!
+            .balance!,
           Number(value)
         )
       );
@@ -148,7 +149,7 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
         .find((item) => item.label === "Currency")!
         .value.toString() as ECurrenciesSymbols;
 
-      const currencyBalance: number = wallet.find(
+      const currencyBalance: number = wallet.currencies.find(
         (item) => item.symbol === currencySymbol
       )!.balance!;
 
@@ -203,7 +204,7 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
                       value={formData[i].value}
                       id={field.label}
                     >
-                      {wallet.map((currency) => (
+                      {wallet.currencies.map((currency) => (
                         <option
                           value={currency.symbol}
                           disabled={currency.balance! >= 0.01 ? false : true}

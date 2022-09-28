@@ -7,7 +7,7 @@ import { ICurrency } from "interfaces/ICurrency";
 import StyledHeading from "components/styled/StyledHeading";
 
 interface Props {
-  wallet: ICurrency[];
+  currencies: ICurrency[];
 }
 
 interface IChartData {
@@ -24,14 +24,14 @@ interface IChartData {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Chart: React.FC<Props> = ({ wallet }) => {
+const Chart: React.FC<Props> = ({ currencies }) => {
   const chartData: IChartData = {
-    labels: wallet
+    labels: currencies
       .filter((currency) => currency.balance! >= 0.01)
       .map((currency) => currency.symbol),
     datasets: [
       {
-        data: wallet
+        data: currencies
           .filter((currency) => currency.balance! >= 0.01)
           .map((currency) => currency.balance!),
         backgroundColor: [
@@ -56,7 +56,7 @@ const Chart: React.FC<Props> = ({ wallet }) => {
   return (
     <StyledChart>
       <StyledHeading>Currencies</StyledHeading>
-      {wallet.some((currency) => currency.balance! >= 0.01) ? (
+      {currencies.some((currency) => currency.balance! >= 0.01) ? (
         <Doughnut data={chartData} />
       ) : (
         <p>

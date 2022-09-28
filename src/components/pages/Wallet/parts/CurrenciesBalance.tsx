@@ -5,13 +5,13 @@ import { ICurrency } from "interfaces/ICurrency";
 import CurrencyBalance from "../elements/CurrencyBalance";
 
 interface Props {
-  wallet: ICurrency[];
+  currencies: ICurrency[];
 }
 
-const CurrenciesBalance: React.FC<Props> = ({ wallet }) => {
+const CurrenciesBalance: React.FC<Props> = ({ currencies }) => {
   return (
     <StyledCurrenciesBalance>
-      {wallet.map((currency) => (
+      {currencies.map((currency) => (
         <CurrencyBalance
           symbol={currency.symbol}
           amount={currency.balance!}
