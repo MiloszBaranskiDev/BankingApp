@@ -32,6 +32,9 @@ const App: React.FC = () => {
           ? ("#f7f9fb" as any)
           : ("#24282e" as any),
       },
+      shadow: settings[ESettingsKeys.isLightMode]
+        ? "rgb(58 53 65 / 10%) 0px 2px 10px 0px"
+        : "rgb(200 200 200 / 10%) 0px 2px 10px 0px",
     });
   }, [settings]);
 
