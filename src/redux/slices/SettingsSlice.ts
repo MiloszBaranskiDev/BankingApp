@@ -28,6 +28,7 @@ export const SettingsSlice = createSlice({
         [key]: value,
       };
     },
+
     restoreApp: (state) => {
       // store.ts will restart the store when this is fired up
     },
