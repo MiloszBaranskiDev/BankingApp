@@ -47,7 +47,7 @@ const StyledWalletTile = styled.div`
     flex-basis: calc(50% - 8px);
   }
   @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
-    flex-basis: calc(33% - 8px);
+    flex-basis: calc(33.33% - 8px);
     margin-bottom: 0;
   }
 `;

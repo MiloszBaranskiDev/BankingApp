@@ -98,4 +98,7 @@ const StyledChart = styled.div`
   h2 {
     margin-bottom: 30px;
   }
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    flex-basis: calc(50% - 8px);
+  }
 `;
