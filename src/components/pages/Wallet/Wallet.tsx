@@ -31,6 +31,7 @@ const Wallet: React.FC = () => {
           <Expenses />
         </StyledColumn>
         <Goals
+          goals={wallet.goals}
           currenciesSymbols={wallet.currencies.map(
             (currency) => currency.symbol
           )}

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, MutableRefObject } from "react";
 import { RootState } from "redux/store";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { updateWallet } from "redux/slices/WalletSlice";
+import { updateWalletCurrencies } from "redux/slices/WalletSlice";
 import { addTransaction } from "redux/slices/TransactionsSlice";
 import styled from "styled-components";
 
@@ -158,7 +158,7 @@ const Form: React.FC<Props> = ({ setShowSummary }) => {
       )!.value;
 
       dispatch(
-        updateWallet({
+        updateWalletCurrencies({
           symbol: currencySymbol,
           balance: currencyBalance - Number(amount),
         })
