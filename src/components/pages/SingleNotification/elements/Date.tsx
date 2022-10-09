@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-interface Props {
+interface IProps {
   date: string;
 }
 
-const Date: React.FC<Props> = ({ date }) => {
+const Date: React.FC<IProps> = ({ date }) => {
   return <StyledDate>{date}</StyledDate>;
 };
 

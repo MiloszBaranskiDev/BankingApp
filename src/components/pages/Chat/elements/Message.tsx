@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import TypingAnimation from "./TypingAnimation";
 
-interface Props {
+interface IProps {
   text: string;
   hour: string;
   user: boolean;
 }
 
-const Message: React.FC<Props> = ({ text, hour, user }) => {
+const Message: React.FC<IProps> = ({ text, hour, user }) => {
   const [typingAnimation, setTypingAnimation] = useState<boolean>(
     !user ? true : false
   );

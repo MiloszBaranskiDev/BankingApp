@@ -1,10 +1,10 @@
 import Text from "../elements/Text";
 
-interface Props {
+interface IProps {
   text: string;
 }
 
-const Content: React.FC<Props> = ({ text }) => {
+const Content: React.FC<IProps> = ({ text }) => {
   return <Text text={text} />;
 };
 

@@ -7,12 +7,13 @@ import { RootState } from "redux/store";
 import { ESettingsKeys } from "enums/ESettingsKeys";
 import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
 import { IWallet } from "interfaces/IWallet";
-interface Props {
+
+interface IProps {
   favouriteCurrency: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>;
   handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
-const FavouriteCurrency: React.FC<Props> = ({
+const FavouriteCurrency: React.FC<IProps> = ({
   favouriteCurrency,
   handleSettingsChange,
 }) => {

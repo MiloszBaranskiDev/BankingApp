@@ -7,11 +7,11 @@ import { ITransaction } from "interfaces/ITransaction";
 import SummaryDetails from "../elements/SummaryDetails";
 import SummaryBtns from "../elements/SummaryBtns";
 
-interface Props {
+interface IProps {
   setShowSummary: (arg0: boolean) => void;
 }
 
-const Summary: React.FC<Props> = ({ setShowSummary }) => {
+const Summary: React.FC<IProps> = ({ setShowSummary }) => {
   const transactions: ITransaction[] = useSelector(
     (state: RootState) => state.transactions
   );

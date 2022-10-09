@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
 
-interface Props {
+interface IProps {
   inputValue: string;
   setInputValue: (arg0: string) => void;
   showEmojiPicker: boolean;
   setShowEmojiPicker: (arg0: boolean) => void;
 }
 
-const Emoji: React.FC<Props> = ({
+const Emoji: React.FC<IProps> = ({
   inputValue,
   setInputValue,
   showEmojiPicker,

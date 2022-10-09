@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 import StyledHeading from "components/styled/StyledHeading";
 
-interface Props {
+interface IProps {
   heading: string;
   number: number;
 }
@@ -17,7 +17,7 @@ enum EHeading {
   incomes = "incomes",
 }
 
-const WalletTile: React.FC<Props> = ({ heading, number }) => {
+const WalletTile: React.FC<IProps> = ({ heading, number }) => {
   return (
     <StyledWalletTile>
       <StyledHeading>{heading}</StyledHeading>

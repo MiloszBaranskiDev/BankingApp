@@ -11,7 +11,7 @@ import styled from "styled-components";
 
 import { ILineChartData } from "interfaces/ILineChartData";
 
-interface Props {
+interface IProps {
   chartData: ILineChartData;
 }
 
@@ -42,7 +42,7 @@ const options: object = {
   },
 };
 
-const LineChart: React.FC<Props> = ({ chartData }) => {
+const LineChart: React.FC<IProps> = ({ chartData }) => {
   return (
     <StyledLineChart>
       <Line options={options} data={chartData} />

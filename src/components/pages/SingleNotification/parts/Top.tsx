@@ -4,13 +4,13 @@ import StyledPageTitle from "components/styled/StyledPageTitle";
 import Remove from "../elements/Remove";
 import Date from "../elements/Date";
 
-interface Props {
+interface IProps {
   id: string;
   title: string;
   date: string;
 }
 
-const Top: React.FC<Props> = ({ id, title, date }) => {
+const Top: React.FC<IProps> = ({ id, title, date }) => {
   return (
     <StyledTop>
       <StyledPageTitle>{title}</StyledPageTitle>

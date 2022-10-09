@@ -5,11 +5,11 @@ import { ICurrency } from "interfaces/ICurrency";
 import StyledHeading from "components/styled/StyledHeading";
 import Tile from "../elements/Tile";
 
-interface Props {
+interface IProps {
   currencies: ICurrency[];
 }
 
-const Tiles: React.FC<Props> = ({ currencies }) => {
+const Tiles: React.FC<IProps> = ({ currencies }) => {
   return (
     <StyledTiles>
       <StyledHeading>Exchange rates</StyledHeading>

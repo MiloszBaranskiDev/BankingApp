@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-interface Props {
+interface IProps {
   symbol: string;
   price?: number;
 }
 
-const Tile: React.FC<Props> = ({ price, symbol }) => {
+const Tile: React.FC<IProps> = ({ price, symbol }) => {
   return (
     <StyledTile>
       <StyledText>{symbol}/PLN</StyledText>

@@ -4,11 +4,11 @@ import { removeNotification } from "redux/slices/NotificationsSlice";
 import { useDispatch } from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
 
-interface Props {
+interface IProps {
   id: string;
 }
 
-const Remove: React.FC<Props> = ({ id }) => {
+const Remove: React.FC<IProps> = ({ id }) => {
   const dispatch: Dispatch = useDispatch();
   const navigate: NavigateFunction = useNavigate();
 

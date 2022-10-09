@@ -8,12 +8,12 @@ import ModeSwitcher from "../elements/ModeSwitcher";
 import Colors from "../elements/Colors";
 import CustomColor from "../elements/CustomColor";
 
-interface Props {
+interface IProps {
   settings: ISettings;
   handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
-const Theme: React.FC<Props> = ({ settings, handleSettingsChange }) => {
+const Theme: React.FC<IProps> = ({ settings, handleSettingsChange }) => {
   return (
     <StyledTheme>
       <StyledHeading>Theme</StyledHeading>

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-interface Props {
+interface IProps {
   text: string;
 }
 
-const Text: React.FC<Props> = ({ text }) => {
+const Text: React.FC<IProps> = ({ text }) => {
   return <StyledText>{text}</StyledText>;
 };
 

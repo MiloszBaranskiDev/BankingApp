@@ -7,12 +7,12 @@ import StyledHeading from "components/styled/StyledHeading";
 import FavouriteCurrency from "../elements/FavouriteCurrency";
 import Restore from "../elements/Restore";
 
-interface Props {
+interface IProps {
   settings: ISettings;
   handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
-const General: React.FC<Props> = ({ settings, handleSettingsChange }) => {
+const General: React.FC<IProps> = ({ settings, handleSettingsChange }) => {
   return (
     <StyledGeneral>
       <StyledHeading>General</StyledHeading>

@@ -18,7 +18,7 @@ import StyledButton from "components/styled/StyledButton";
 import StyledHeading from "components/styled/StyledHeading";
 import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
 
-interface Props {
+interface IProps {
   setShowSummary: (arg0: boolean) => void;
 }
 
@@ -67,7 +67,7 @@ const fields: IField[] = [
   },
 ];
 
-const Form: React.FC<Props> = ({ setShowSummary }) => {
+const Form: React.FC<IProps> = ({ setShowSummary }) => {
   const dispatch: Dispatch = useDispatch();
 
   const formRef: MutableRefObject<HTMLFormElement | null> = useRef(null);

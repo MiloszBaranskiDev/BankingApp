@@ -9,12 +9,12 @@ import StyledInput from "components/styled/StyledInput";
 import StyledButton from "components/styled/StyledButton";
 import Emoji from "../elements/Emoji";
 
-interface Props {
+interface IProps {
   messages: IMessage[];
   setMessages: (arg0: IMessage[]) => void;
 }
 
-const Controls: React.FC<Props> = ({ messages, setMessages }) => {
+const Controls: React.FC<IProps> = ({ messages, setMessages }) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [showEmojiPicker, setShowEmojiPicker] = useState<boolean>(false);
 

@@ -23,11 +23,11 @@ interface ISwapData {
   amount: number;
 }
 
-interface Props {
+interface IProps {
   currencies: ICurrency[];
 }
 
-const Swap: React.FC<Props> = ({ currencies }) => {
+const Swap: React.FC<IProps> = ({ currencies }) => {
   const [buttonIsDisabled, setButtonIsDisabled] = useState<boolean>(true);
 
   const [swapFrom, setSwapFrom] = useState<ISwapData>({

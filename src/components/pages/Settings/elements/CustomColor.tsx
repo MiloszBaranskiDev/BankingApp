@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 import { ESettingsKeys } from "enums/ESettingsKeys";
 
-interface Props {
+interface IProps {
   currentMainColor: string;
   handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
-const CustomColor: React.FC<Props> = ({
+const CustomColor: React.FC<IProps> = ({
   currentMainColor,
   handleSettingsChange,
 }) => {

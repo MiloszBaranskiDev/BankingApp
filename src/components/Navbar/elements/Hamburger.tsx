@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-interface Props {
+interface IProps {
   openLinks: boolean;
   setOpenLinks: (arg0: boolean) => void;
 }
 
-const Hamburger: React.FC<Props> = ({ openLinks, setOpenLinks }) => {
+const Hamburger: React.FC<IProps> = ({ openLinks, setOpenLinks }) => {
   return (
     <StyledHamburger onClick={() => setOpenLinks(!openLinks)}>
       <i className="fas fa-bars"></i>

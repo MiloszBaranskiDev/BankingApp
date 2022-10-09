@@ -4,11 +4,11 @@ import { ICurrency } from "interfaces/ICurrency";
 
 import CurrencyBalance from "../elements/CurrencyBalance";
 
-interface Props {
+interface IProps {
   currencies: ICurrency[];
 }
 
-const CurrenciesBalance: React.FC<Props> = ({ currencies }) => {
+const CurrenciesBalance: React.FC<IProps> = ({ currencies }) => {
   return (
     <StyledCurrenciesBalance>
       {currencies.map((currency) => (

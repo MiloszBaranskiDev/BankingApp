@@ -5,11 +5,11 @@ import { IMessage } from "interfaces/IMessage";
 
 import Message from "../elements/Message";
 
-interface Props {
+interface IProps {
   messages: IMessage[];
 }
 
-const Messages: React.FC<Props> = ({ messages }) => {
+const Messages: React.FC<IProps> = ({ messages }) => {
   const refMessages = useRef() as React.MutableRefObject<HTMLDivElement>;
 
   useEffect(() => {

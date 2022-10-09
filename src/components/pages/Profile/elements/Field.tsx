@@ -5,7 +5,7 @@ import StyledInput from "components/styled/StyledInput";
 
 import { IUserField } from "interfaces/IUserField";
 
-interface Props {
+interface IProps {
   label: string;
   type: string;
   value: string;
@@ -14,7 +14,7 @@ interface Props {
   hasError: boolean;
 }
 
-const Field: React.FC<Props> = ({
+const Field: React.FC<IProps> = ({
   label,
   type,
   value,

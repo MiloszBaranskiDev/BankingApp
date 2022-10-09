@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import Loader from "components/Loader";
 
-interface Props {
+interface IProps {
   amount?: string;
 }
 
-const TotalBalanceAmount: React.FC<Props> = ({ amount }) => {
+const TotalBalanceAmount: React.FC<IProps> = ({ amount }) => {
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {

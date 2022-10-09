@@ -3,11 +3,11 @@ import { NavLink } from "react-router-dom";
 
 import StyledButton from "components/styled/StyledButton";
 
-interface Props {
+interface IProps {
   setShowSummary: (arg0: boolean) => void;
 }
 
-const SummaryBtns: React.FC<Props> = ({ setShowSummary }) => {
+const SummaryBtns: React.FC<IProps> = ({ setShowSummary }) => {
   return (
     <StyledSummaryBtns>
       <StyledButton onClick={() => setShowSummary(false)}>

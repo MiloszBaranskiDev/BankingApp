@@ -6,7 +6,7 @@ import { ICurrency } from "interfaces/ICurrency";
 
 import StyledHeading from "components/styled/StyledHeading";
 
-interface Props {
+interface IProps {
   currencies: ICurrency[];
 }
 
@@ -24,7 +24,7 @@ interface IChartData {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Chart: React.FC<Props> = ({ currencies }) => {
+const Chart: React.FC<IProps> = ({ currencies }) => {
   const chartData: IChartData = {
     labels: currencies
       .filter((currency) => currency.balance! >= 0.01)

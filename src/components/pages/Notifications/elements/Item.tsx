@@ -1,14 +1,14 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-interface Props {
+interface IProps {
   id: string;
   title: string;
   date: string;
   read: boolean;
 }
 
-const Item: React.FC<Props> = ({ id, title, date, read }) => {
+const Item: React.FC<IProps> = ({ id, title, date, read }) => {
   return (
     <StyledItem>
       <NavLink to={`/notification/${id}`} className="notification">

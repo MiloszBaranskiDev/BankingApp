@@ -12,7 +12,7 @@ import Loader from "components/Loader";
 import StyledHeading from "components/styled/StyledHeading";
 import ChartDates from "../elements/ChartDates";
 
-interface Props {
+interface IProps {
   currencySymbol: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>;
 }
 
@@ -39,7 +39,7 @@ const calculateDate = (
   return date;
 };
 
-const Chart: React.FC<Props> = ({ currencySymbol }) => {
+const Chart: React.FC<IProps> = ({ currencySymbol }) => {
   const theme: any = useTheme();
 
   const [loading, setLoading] = useState<boolean>(true);

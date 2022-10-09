@@ -5,7 +5,7 @@ import GetTodayDate from "utils/GetTodayDate";
 import StyledLabel from "components/styled/StyledLabel";
 import StyledInput from "components/styled/StyledInput";
 
-interface Props {
+interface IProps {
   startDate: string;
   endDate: string;
   minStartDate: string;
@@ -15,7 +15,7 @@ interface Props {
   setEndDate: (arg0: string) => void;
 }
 
-const ChartDates: React.FC<Props> = ({
+const ChartDates: React.FC<IProps> = ({
   startDate,
   endDate,
   minStartDate,

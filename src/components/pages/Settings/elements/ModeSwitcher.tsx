@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 import { ESettingsKeys } from "enums/ESettingsKeys";
 
-interface Props {
+interface IProps {
   isLightMode: boolean;
   handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
-const ModeSwitcher: React.FC<Props> = ({
+const ModeSwitcher: React.FC<IProps> = ({
   isLightMode,
   handleSettingsChange,
 }) => {

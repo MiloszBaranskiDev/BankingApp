@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { ITransaction } from "interfaces/ITransaction";
 
-interface Props {
+interface IProps {
   transaction: ITransaction;
 }
 
-const SummaryDetails: React.FC<Props> = ({ transaction }) => {
+const SummaryDetails: React.FC<IProps> = ({ transaction }) => {
   return (
     <StyledSummaryDetails>
       <>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import { ESettingsKeys } from "enums/ESettingsKeys";
 
-interface Props {
+interface IProps {
   handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
 }
 
@@ -20,7 +20,7 @@ const colors: string[] = [
   "#786fa6",
 ];
 
-const Colors: React.FC<Props> = ({ handleSettingsChange }) => {
+const Colors: React.FC<IProps> = ({ handleSettingsChange }) => {
   return (
     <StyledColors>
       {colors.map((color) => (
