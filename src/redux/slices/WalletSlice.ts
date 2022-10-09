@@ -33,8 +33,15 @@ const initialState: IWallet = {
       title: "Holidays",
       currencySymbol: ECurrenciesSymbols.eur,
       targetAmount: 1000,
-      currentAmount: 0,
+      currentAmount: 725.5,
       id: "2r6aeb1d-4b4d-4bad-2bda-7b0d3b3dcb2d",
+    },
+    {
+      title: "Car",
+      currencySymbol: ECurrenciesSymbols.pln,
+      targetAmount: 40000,
+      currentAmount: 11350,
+      id: "7r1aeb6d-2b2d-1bad-5bda-3b0d3b3dcb2d",
     },
   ],
 };
