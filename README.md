@@ -8,5 +8,6 @@
 - emoji-picker-react
 - react-lorem-ipsum
 - react-hook-form
+- React Circular Progressbar
 - uuid
 - NBP Web API
