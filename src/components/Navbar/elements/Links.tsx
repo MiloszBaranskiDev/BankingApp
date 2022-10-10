@@ -1,18 +1,13 @@
-import { ReactElement } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-interface Props {
+import { INavLink } from "interfaces/INavLink";
+
+interface IProps {
   openLinks: boolean;
 }
 
-interface ILink {
-  to: string;
-  text: string;
-  icon: ReactElement;
-}
-
-const links: ILink[] = [
+const links: INavLink[] = [
   {
     to: "/",
     text: "Home",
@@ -45,7 +40,7 @@ const links: ILink[] = [
   },
 ];
 
-const Links: React.FC<Props> = ({ openLinks }) => {
+const Links: React.FC<IProps> = ({ openLinks }) => {
   return (
     <StyledLinks className={`${openLinks ? "open-links" : ""}`}>
       <ul>
@@ -80,7 +75,6 @@ const StyledLinks = styled.nav`
       align-items: center;
       justify-content: center;
       line-height: 36px;
-
       &:last-child {
         margin-right: 0;
       }
