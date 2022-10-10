@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import styled from "styled-components";
-import { ITransaction } from "interfaces/ITransaction";
 
-interface Props {
+interface IProps {
   top: string;
-  content: string | ITransaction;
+  content: string | ReactNode;
 }
 
-const Accordion: React.FC<Props> = ({ top, content }) => {
+const Accordion: React.FC<IProps> = ({ top, content }) => {
   const [open, setOpen] = useState<boolean>(false);
 
   return (
@@ -23,16 +22,8 @@ const Accordion: React.FC<Props> = ({ top, content }) => {
           {content}
         </StyledContent>
       ) : (
-        <StyledContent as={"ul"} className={open ? "show-content" : ""}>
-          {content.details.map((detail) => (
-            <li key={Object.values(detail)[0]}>
-              <p>
-                {Object.entries(detail).map(([key, value]) => (
-                  <span key={key}>{value}</span>
-                ))}
-              </p>
-            </li>
-          ))}
+        <StyledContent as={"div"} className={open ? "show-content" : ""}>
+          {content}
         </StyledContent>
       )}
     </StyledAccordion>
@@ -52,7 +43,7 @@ const StyledAccordion = styled.li`
     border-color: ${(props) => props.theme.colors.main};
   }
   &:first-child {
-    margin-top: 50px;
+    margin-top: 40px;
   }
 `;
 
