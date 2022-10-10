@@ -7,15 +7,15 @@ interface IProps {
 }
 
 const TotalBalanceAmount: React.FC<IProps> = ({ amount }) => {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    amount !== undefined ? setLoading(false) : setLoading(true);
+    amount !== undefined ? setIsLoading(false) : setIsLoading(true);
   }, [amount]);
 
   return (
     <>
-      {!loading ? (
+      {!isLoading ? (
         <StyledTotalBalanceAmount>
           ~{amount} PLN <span>+15%**</span>
         </StyledTotalBalanceAmount>

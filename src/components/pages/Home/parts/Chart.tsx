@@ -31,7 +31,7 @@ const Chart: React.FC = () => {
 
   const settings: ISettings = useSelector((state: RootState) => state.settings);
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [chartData, setChartData] = useState<ILineChartData>();
 
   const favouriteCurrency: ECurrenciesSymbols =
@@ -71,14 +71,14 @@ const Chart: React.FC = () => {
 
   useEffect(() => {
     chartData !== undefined && chartData !== null && chartData.labels.length > 0
-      ? setLoading(false)
-      : setLoading(true);
+      ? setIsLoading(false)
+      : setIsLoading(true);
   }, [chartData]);
 
   return (
     <StyledChart>
       <StyledHeading>{favouriteCurrency} last 30 days</StyledHeading>
-      {!loading && chartData !== undefined && chartData !== null ? (
+      {!isLoading && chartData !== undefined && chartData !== null ? (
         <LineChart chartData={chartData} />
       ) : (
         <Loader />

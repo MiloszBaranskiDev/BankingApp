@@ -42,7 +42,7 @@ const calculateDate = (
 const Chart: React.FC<IProps> = ({ currencySymbol }) => {
   const theme: any = useTheme();
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [chartData, setChartData] = useState<ILineChartData>(null as any);
 
   const [endDate, setEndDate] = useState<string>(GetTodayDate());
@@ -83,8 +83,8 @@ const Chart: React.FC<IProps> = ({ currencySymbol }) => {
 
   useEffect(() => {
     chartData !== undefined && chartData !== null && chartData.labels.length > 0
-      ? setLoading(false)
-      : setLoading(true);
+      ? setIsLoading(false)
+      : setIsLoading(true);
   }, [chartData]);
 
   return (
@@ -99,7 +99,7 @@ const Chart: React.FC<IProps> = ({ currencySymbol }) => {
         setStartDate={setStartDate}
         setEndDate={setEndDate}
       />
-      {!loading && chartData !== undefined && chartData !== null ? (
+      {!isLoading && chartData !== undefined && chartData !== null ? (
         <LineChart chartData={chartData} />
       ) : (
         <Loader />
