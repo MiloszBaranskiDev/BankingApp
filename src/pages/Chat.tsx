@@ -7,8 +7,8 @@ import GetRandomMessage from "utils/GetRandomMessage";
 import { IMessage } from "interfaces/IMessage";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
-import Messages from "./parts/Messages";
-import Controls from "./parts/Controls";
+import Messages from "components/pages/Chat/parts/Messages";
+import Controls from "components/pages/Chat/parts/Controls";
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<IMessage[]>([

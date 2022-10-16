@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
-import UserImage from "./parts/UserImage";
-import UserFields from "./parts/UserFields";
+import UserImage from "components/pages/Profile/parts/UserImage";
+import UserFields from "components/pages/Profile/parts/UserFields";
 
 const Profile: React.FC = () => {
   return (

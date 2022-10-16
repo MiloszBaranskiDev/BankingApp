@@ -5,12 +5,12 @@ import styled from "styled-components";
 import { IWallet } from "interfaces/IWallet";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
-import Chart from "./parts/Chart";
-import TotalBalance from "./parts/TotalBalance";
-import CurrenciesBalance from "./parts/CurrenciesBalance";
-import Incomes from "./parts/Incomes";
-import Expenses from "./parts/Expenses";
-import Goals from "./parts/Goals";
+import Chart from "components/pages/Wallet/parts/Chart";
+import TotalBalance from "components/pages/Wallet/parts/TotalBalance";
+import CurrenciesBalance from "components/pages/Wallet/parts/CurrenciesBalance";
+import Incomes from "components/pages/Wallet/parts/Incomes";
+import Expenses from "components/pages/Wallet/parts/Expenses";
+import Goals from "components/pages/Wallet/parts/Goals";
 
 const Wallet: React.FC = () => {
   const wallet: IWallet = useSelector((state: RootState) => state.wallet);

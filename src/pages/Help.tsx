@@ -1,5 +1,5 @@
-import Header from "./parts/Header";
-import Tiles from "./parts/Tiles";
+import Header from "components/pages/Help/parts/Header";
+import Tiles from "components/pages/Help/parts/Tiles";
 
 const Help: React.FC = () => {
   return (

@@ -8,8 +8,8 @@ import { Dispatch } from "@reduxjs/toolkit";
 
 import { INotification } from "interfaces/INotification";
 
-import Top from "./parts/Top";
-import Content from "./parts/Content";
+import Top from "components/pages/SingleNotification/parts/Top";
+import Content from "components/pages/SingleNotification/parts/Content";
 
 const SingleNotification: React.FC = () => {
   const dispatch: Dispatch = useDispatch();

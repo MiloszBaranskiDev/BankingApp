@@ -1,5 +1,5 @@
 import StyledPageTitle from "components/styled/StyledPageTitle";
-import List from "./parts/List";
+import List from "components/pages/Notifications/parts/List";
 
 const Notifications: React.FC = () => {
   return (

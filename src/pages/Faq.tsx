@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import StyledInput from "components/styled/StyledInput";
@@ -38,7 +39,16 @@ const faqData: IFaqData[] = [
 ];
 
 const Faq: React.FC = () => {
+  const [showError, setShowError] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>();
+
+  const faqList = React.useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    faqList.current?.childNodes.length === 0
+      ? setShowError(true)
+      : setShowError(false);
+  }, [inputValue]);
 
   return (
     <>
@@ -48,7 +58,7 @@ const Faq: React.FC = () => {
         type="text"
         placeholder="Enter your question to find the answer."
       />
-      <ul>
+      <ul ref={faqList}>
         {faqData
           .filter((faqItem) => {
             if (!inputValue) return true;
@@ -70,6 +80,9 @@ const Faq: React.FC = () => {
             />
           ))}
       </ul>
+      {showError && (
+        <p style={{ marginTop: 40 }}>No answer to this question was found.</p>
+      )}
     </>
   );
 };

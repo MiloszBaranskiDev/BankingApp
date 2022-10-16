@@ -8,8 +8,8 @@ import { ISettings } from "interfaces/ISettings";
 import { ESettingsKeys } from "enums/ESettingsKeys";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
-import Theme from "./parts/Theme";
-import General from "./parts/General";
+import Theme from "components/pages/Settings/parts/Theme";
+import General from "components/pages/Settings/parts/General";
 
 const Settings: React.FC = () => {
   const dispatch: Dispatch = useDispatch();

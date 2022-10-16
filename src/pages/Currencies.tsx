@@ -11,9 +11,9 @@ import GetCurrenciesPrices from "api/GetCurrenciesPrices";
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import StyledHeading from "components/styled/StyledHeading";
 import Loader from "components/Loader";
-import Tiles from "./parts/Tiles";
-import Swap from "./parts/Swap";
-import Chart from "./parts/Chart";
+import Tiles from "components/pages/Currencies/parts/Tiles";
+import Swap from "components/pages/Currencies/parts/Swap";
+import Chart from "components/pages/Currencies/parts/Chart";
 
 interface ILoadPrices {
   (currencies: ICurrency[]): Promise<void>;
@@ -28,7 +28,7 @@ const excludePLN = (currencies: ICurrency[]) => {
 const Currencies: React.FC = () => {
   const wallet: IWallet = useSelector((state: RootState) => state.wallet);
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currencies, setCurrencies] = useState<ICurrency[]>(
     wallet.currencies.map((currency) => currency)
   );
@@ -49,14 +49,14 @@ const Currencies: React.FC = () => {
   useEffect(() => {
     excludePLN(currencies)[excludePLN(currencies).length - 1].price !==
     undefined
-      ? setLoading(false)
-      : setLoading(true);
+      ? setIsLoading(false)
+      : setIsLoading(true);
   }, [currencies]);
 
   return (
     <>
       <StyledPageTitle>Currencies</StyledPageTitle>
-      {!loading ? (
+      {!isLoading ? (
         <>
           <Tiles currencies={excludePLN(currencies)} />
           {currencies.filter((currency) => currency.balance! >= 0.01).length >=
