@@ -1,14 +1,38 @@
 import styled from "styled-components";
 
-import FaqTile from "../elements/FaqTile";
-import ChatTile from "../elements/ChatTile";
+import { INavLink } from "interfaces/INavLink";
+
+import Tile from "../elements/Tile";
+
+const tiles: INavLink[] = [
+  {
+    to: "/faq",
+    text: "See answers to the most popular questions.",
+    icon: <i className="fas fa-question-circle"></i>,
+  },
+  {
+    to: "/chat",
+    text: "Describe your problem in chat.",
+    icon: <i className="fas fa-comment-dots"></i>,
+  },
+];
 
 const Tiles: React.FC = () => {
   return (
-    <StyledTiles>
-      <FaqTile />
-      <ChatTile />
-    </StyledTiles>
+    <>
+      {tiles.length > 0 && (
+        <StyledTiles>
+          {tiles.map((tile) => (
+            <Tile
+              key={tile.to}
+              to={tile.to}
+              text={tile.text}
+              icon={tile.icon}
+            />
+          ))}
+        </StyledTiles>
+      )}
+    </>
   );
 };
 
@@ -21,7 +45,7 @@ const StyledTiles = styled.div`
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     justify-content: space-between;
   }
-  a {
+  /* a {
     flex-basis: 100%;
     display: flex;
     flex-direction: column;
@@ -47,5 +71,5 @@ const StyledTiles = styled.div`
       margin-bottom: 16px;
       font-size: 60px;
     }
-  }
+  } */
 `;

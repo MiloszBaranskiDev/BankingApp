@@ -1,11 +1,11 @@
 import StyledPageTitle from "components/styled/StyledPageTitle";
-import Text from "../elements/Text";
+import Description from "../elements/Description";
 
 const Header: React.FC = () => {
   return (
     <header>
       <StyledPageTitle>Help</StyledPageTitle>
-      <Text />
+      <Description />
     </header>
   );
 };
