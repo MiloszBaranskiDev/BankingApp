@@ -14,7 +14,7 @@ const Emoji: React.FC<IProps> = ({
   showEmojiPicker,
   setShowEmojiPicker,
 }) => {
-  const handleEmoji = (e: any, emojiObject: { emoji: string }) => {
+  const handleEmoji = (e: any, emojiObject: { emoji: string }): void => {
     setInputValue(inputValue + emojiObject.emoji);
   };
 

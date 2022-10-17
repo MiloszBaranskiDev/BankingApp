@@ -10,7 +10,7 @@ const Restore: React.FC = () => {
   const dispatch: Dispatch = useDispatch();
   const restoreBtn: any = useRef();
 
-  const handleRestore = () => {
+  const handleRestore = (): void => {
     dispatch(restoreApp());
     restoreBtn.current.classList.add("restored");
     setTimeout(() => {

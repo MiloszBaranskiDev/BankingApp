@@ -22,15 +22,13 @@ const Field: React.FC<IProps> = ({
   setUpdatedUserData,
   hasError,
 }) => {
-  const handleChange = (value: string) => {
+  const handleChange = (value: string): void => {
     const updatedArr = currentUserData.map((field, i) => {
       if (i === currentUserData.findIndex((field) => field.label === label)) {
         return { ...field, value: value };
       }
-
       return field;
     });
-
     setUpdatedUserData(updatedArr);
   };
 

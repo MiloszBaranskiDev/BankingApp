@@ -1,4 +1,4 @@
-const GetCurrentHour = () => {
+const GetCurrentHour = (): string => {
   const date: Date = new Date();
 
   const currentHour: string =

@@ -12,7 +12,7 @@ const Remove: React.FC<IProps> = ({ id }) => {
   const dispatch: Dispatch = useDispatch();
   const navigate: NavigateFunction = useNavigate();
 
-  const removeHandler = (id: string) => {
+  const removeHandler = (id: string): void => {
     dispatch(removeNotification({ id }));
     navigate("/notifications");
   };

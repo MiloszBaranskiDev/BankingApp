@@ -16,7 +16,7 @@ const Summary: React.FC<IProps> = ({ setShowSummary }) => {
     (state: RootState) => state.transactions
   );
 
-  const transaction = [...transactions]
+  const transaction: ITransaction | undefined = [...transactions]
     .reverse()
     .find(
       (transaction) =>

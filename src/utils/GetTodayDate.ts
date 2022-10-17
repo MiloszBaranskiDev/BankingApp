@@ -1,4 +1,4 @@
-const GetTodayDate: () => string = () => {
+const GetTodayDate = (): string => {
   const date: Date = new Date();
 
   const year: string = String(date.getFullYear());

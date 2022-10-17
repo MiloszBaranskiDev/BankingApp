@@ -15,19 +15,17 @@ const ImageButtons: React.FC = () => {
   const userData: IUserField[] = useSelector((state: RootState) => state.user);
   const uploadInput: any = useRef();
 
-  const updateUserData = (path: string) => {
+  const updateUserData = (path: string): IUserField[] => {
     const updatedArr = userData.map((field, i) => {
       if (i === userData.findIndex((field) => field.label === "image")) {
         return { ...field, value: path };
       }
-
       return field;
     });
-
     return updatedArr;
   };
 
-  const handleUpload = () => {
+  const handleUpload = (): void => {
     uploadInput.current.click();
     uploadInput.current.addEventListener(
       "change",
@@ -41,7 +39,7 @@ const ImageButtons: React.FC = () => {
     );
   };
 
-  const handleRemove = () => {
+  const handleRemove = (): void => {
     dispatch(
       editUser({ updatedArr: updateUserData("/user_image_default.png") })
     );

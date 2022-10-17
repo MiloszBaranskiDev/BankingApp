@@ -1,9 +1,11 @@
 import { loremIpsum } from "react-lorem-ipsum";
+
 import GetCurrentHour from "utils/GetCurrentHour";
 import GetRandomId from "./GeRandomId";
+
 import { IMessage } from "interfaces/IMessage";
 
-const GetRandomMessage = () => {
+const GetRandomMessage = (): IMessage => {
   const randomMessage: IMessage = {
     text: String(
       loremIpsum({

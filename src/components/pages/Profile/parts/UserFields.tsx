@@ -26,11 +26,13 @@ const UserFields: React.FC = () => {
     setUpdatedUserData(userData);
   }, [userData]);
 
-  const handleSave = () => {
+  const handleSave = (): void => {
     if (!currentUserData.some((field) => field.value === "")) {
       setIndexesOfEmptyInputs([]);
       dispatch(editUser({ updatedArr: currentUserData }));
+
       saveBtn.current.classList.add("saved");
+
       setTimeout(() => {
         saveBtn.current.classList.remove("saved");
       }, 750);

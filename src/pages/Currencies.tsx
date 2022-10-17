@@ -19,7 +19,7 @@ interface ILoadPrices {
   (currencies: ICurrency[]): Promise<void>;
 }
 
-const excludePLN = (currencies: ICurrency[]) => {
+const excludePLN = (currencies: ICurrency[]): ICurrency[] => {
   return currencies.filter(
     (currency) => currency.symbol !== ECurrenciesSymbols.pln
   );

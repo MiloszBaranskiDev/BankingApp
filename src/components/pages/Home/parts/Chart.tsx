@@ -16,7 +16,7 @@ import StyledHeading from "components/styled/StyledHeading";
 import Loader from "components/Loader";
 import LineChart from "components/LineChart";
 
-const GetStartDate = (endDate: string, diff: number) => {
+const GetStartDate = (endDate: string, diff: number): string => {
   let startDate: Date | string = new Date(endDate);
 
   startDate.setDate(startDate.getDate() - diff);
@@ -41,7 +41,7 @@ const Chart: React.FC = () => {
     favouriteCurrency: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>,
     start: string,
     end: string
-  ) => {
+  ): Promise<void> => {
     const loadedPrices = await GetCurrencyHistoricalPrices(
       favouriteCurrency,
       start,
