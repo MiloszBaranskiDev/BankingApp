@@ -8,12 +8,12 @@ import StyledButton from "components/styled/StyledButton";
 import SwapArrows from "../elements/SwapArrows";
 import SwapCurrency from "../elements/SwapCurrency";
 
-enum SwapDirection {
+enum ESwapDirection {
   from = "from",
   to = "to",
 }
 
-enum SwapEvent {
+enum ESwapEvent {
   select = "select",
   input = "input",
 }
@@ -49,7 +49,7 @@ const Swap: React.FC<IProps> = ({ currencies }) => {
     console.log("button click");
   };
 
-  const autoConvertInputs = (direction: SwapDirection, event: SwapEvent) => {
+  const autoConvertInputs = (direction: ESwapDirection, event: ESwapEvent) => {
     let multiplier: number;
 
     const firstCurrency = currencies.find(
@@ -99,13 +99,13 @@ const Swap: React.FC<IProps> = ({ currencies }) => {
     };
 
     if (
-      (direction === SwapDirection.from && event === SwapEvent.input) ||
-      (direction === SwapDirection.to && event === SwapEvent.select)
+      (direction === ESwapDirection.from && event === ESwapEvent.input) ||
+      (direction === ESwapDirection.to && event === ESwapEvent.select)
     ) {
       updateTo();
     } else if (
-      (direction === SwapDirection.to && event === SwapEvent.input) ||
-      (direction === SwapDirection.from && event === SwapEvent.select)
+      (direction === ESwapDirection.to && event === ESwapEvent.input) ||
+      (direction === ESwapDirection.from && event === ESwapEvent.select)
     ) {
       updateFrom();
     }
@@ -118,19 +118,19 @@ const Swap: React.FC<IProps> = ({ currencies }) => {
   }, [swapFrom.amount, swapTo.amount]);
 
   useEffect(() => {
-    autoConvertInputs(SwapDirection.from, SwapEvent.input);
+    autoConvertInputs(ESwapDirection.from, ESwapEvent.input);
   }, [swapFrom.amount]);
 
   useEffect(() => {
-    autoConvertInputs(SwapDirection.to, SwapEvent.input);
+    autoConvertInputs(ESwapDirection.to, ESwapEvent.input);
   }, [swapTo.amount]);
 
   useEffect(() => {
-    autoConvertInputs(SwapDirection.from, SwapEvent.select);
+    autoConvertInputs(ESwapDirection.from, ESwapEvent.select);
   }, [swapFrom.symbol]);
 
   useEffect(() => {
-    autoConvertInputs(SwapDirection.to, SwapEvent.select);
+    autoConvertInputs(ESwapDirection.to, ESwapEvent.select);
   }, [swapTo.symbol]);
 
   console.log(buttonIsDisabled, swapFrom.amount, swapTo.amount);
@@ -153,7 +153,7 @@ const Swap: React.FC<IProps> = ({ currencies }) => {
             style={buttonIsDisabled ? { cursor: "not-allowed" } : {}}
             onClick={handleSwap}
           >
-            Submit
+            <i className="fas fa-check"></i>Submit
           </StyledButton>
         </StyledColumm>
         <SwapCurrency

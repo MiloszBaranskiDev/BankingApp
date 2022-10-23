@@ -2,7 +2,7 @@ import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 
 import { ITransaction } from "interfaces/ITransaction";
-import { TransactionCategory } from "enums/TransactionCategory";
+import { ETransactionCategory } from "enums/ETransactionCategory";
 
 const TotalIncomes: React.FC = () => {
   const transactions: ITransaction[] = useSelector(
@@ -10,7 +10,7 @@ const TotalIncomes: React.FC = () => {
   );
 
   //   transactions.forEach((transaction) => {
-  //     if (transaction.category === TransactionCategory.incoming) {
+  //     if (transaction.category === ETransactionCategory.incoming) {
   //       console.log(
   //         transaction.details.find(
   //           (detail) => detail.label.toLowerCase() === "amount"

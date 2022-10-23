@@ -16,21 +16,21 @@ interface IProps {
   currencySymbol: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>;
 }
 
-enum CalculateActions {
+enum ECalculateActions {
   add = "add",
   subtract = "subract",
 }
 
 const calculateDate = (
   comparedDate: string,
-  action: CalculateActions,
+  action: ECalculateActions,
   diff: number
 ) => {
   let date: Date | string = new Date(comparedDate);
 
-  if (action === CalculateActions.add) {
+  if (action === ECalculateActions.add) {
     date.setDate(date.getDate() + diff);
-  } else if (action === CalculateActions.subtract) {
+  } else if (action === ECalculateActions.subtract) {
     date.setDate(date.getDate() - diff);
   }
 
@@ -47,7 +47,7 @@ const Chart: React.FC<IProps> = ({ currencySymbol }) => {
 
   const [endDate, setEndDate] = useState<string>(GetTodayDate());
   const [startDate, setStartDate] = useState<string>(
-    calculateDate(endDate, CalculateActions.subtract, 180)
+    calculateDate(endDate, ECalculateActions.subtract, 180)
   );
 
   const [minStartDate, setMinStartDate] = useState<string>();
@@ -76,9 +76,9 @@ const Chart: React.FC<IProps> = ({ currencySymbol }) => {
 
   useEffect(() => {
     loadPrices(startDate, endDate);
-    setMinStartDate(calculateDate(endDate, CalculateActions.subtract, 360));
-    setMinEndDate(calculateDate(startDate, CalculateActions.add, 7));
-    setMaxStartDate(calculateDate(endDate, CalculateActions.subtract, 7));
+    setMinStartDate(calculateDate(endDate, ECalculateActions.subtract, 360));
+    setMinEndDate(calculateDate(startDate, ECalculateActions.add, 7));
+    setMaxStartDate(calculateDate(endDate, ECalculateActions.subtract, 7));
   }, [startDate, endDate]);
 
   useEffect(() => {
