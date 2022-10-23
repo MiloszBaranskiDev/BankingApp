@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 
+import { ETransactionCategory } from "enums/ETransactionCategory";
 import { ITransaction } from "interfaces/ITransaction";
 
 import SummaryDetails from "../elements/SummaryDetails";
@@ -19,8 +20,7 @@ const Summary: React.FC<IProps> = ({ setShowSummary }) => {
   const transaction: ITransaction | undefined = [...transactions]
     .reverse()
     .find(
-      (transaction) =>
-        transaction.category.toLowerCase() === "outgoing transfer"
+      (transaction) => transaction.category === ETransactionCategory.outgoing
     );
 
   return (
