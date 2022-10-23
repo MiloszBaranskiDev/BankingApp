@@ -64,7 +64,7 @@ const UserFields: React.FC = () => {
           </>
         )}
         <StyledButton ref={saveBtn} onClick={handleSave} as={"button"}>
-          Save changes
+          <i className="fas fa-check"></i>Save changes
         </StyledButton>
       </>
     </StyledUserFields>

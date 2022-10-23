@@ -27,7 +27,7 @@ const Goals: React.FC<IProps> = ({ goals }) => {
       </ul>
       <StyledButtonContainer>
         <StyledButton as={Link} to="/wallet">
-          See more
+          <i className="fas fa-search"></i>See more
         </StyledButton>
       </StyledButtonContainer>
     </StyledGoals>

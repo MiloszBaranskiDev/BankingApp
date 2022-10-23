@@ -50,10 +50,10 @@ const ImageButtons: React.FC = () => {
     <StyledImageButtons>
       <input ref={uploadInput} type="file" accept="image/*" hidden />
       <StyledButton onClick={handleUpload} as="button">
-        Upload new photo
+        <i className="fas fa-upload"></i>Upload new photo
       </StyledButton>
       <StyledButton onClick={handleRemove} as="button">
-        Remove
+        <i className="fas fa-trash"></i>Remove
       </StyledButton>
     </StyledImageButtons>
   );

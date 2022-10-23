@@ -28,7 +28,7 @@ const LastTransactions: React.FC<IProps> = ({ transactions }) => {
           </ul>
           <StyledButtonContainer>
             <StyledButton as={NavLink} to="/transactions">
-              See more
+              <i className="fas fa-search"></i>See more
             </StyledButton>
           </StyledButtonContainer>
         </StyledLastTransactions>

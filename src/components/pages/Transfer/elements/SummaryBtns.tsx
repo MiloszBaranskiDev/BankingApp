@@ -11,10 +11,10 @@ const SummaryBtns: React.FC<IProps> = ({ setShowSummary }) => {
   return (
     <StyledSummaryBtns>
       <StyledButton onClick={() => setShowSummary(false)}>
-        New transfer
+        <i className="fas fa-paper-plane"></i>New transfer
       </StyledButton>
       <StyledButton as={NavLink} to="/transactions">
-        Transactions
+        <i className="fas fa-hand-holding-usd"></i>Transactions
       </StyledButton>
     </StyledSummaryBtns>
   );
