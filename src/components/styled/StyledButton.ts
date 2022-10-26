@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 const StyledButton = styled.a`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   cursor: pointer;
   user-select: none;
@@ -15,6 +18,9 @@ const StyledButton = styled.a`
   border-radius: ${(props) => props.theme.radius};
   font-size: ${(props) => props.theme.typography.size_small};
   font-weight: ${(props) => props.theme.typography.weight_bold};
+  i {
+    margin-right: 6px;
+  }
   &:hover {
     border-radius: 0;
   }
