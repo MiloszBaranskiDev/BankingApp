@@ -7,6 +7,7 @@ import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";
 import { ILineChartData } from "interfaces/ILineChartData";
 import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
 
+import StyledTile from "components/styled/StyledTile";
 import LineChart from "components/LineChart";
 import Loader from "components/Loader";
 import StyledHeading from "components/styled/StyledHeading";
@@ -88,7 +89,7 @@ const Chart: React.FC<IProps> = ({ currencySymbol }) => {
   }, [chartData]);
 
   return (
-    <StyledChart>
+    <StyledTile as={StyledChart}>
       <StyledHeading>{currencySymbol}/PLN</StyledHeading>
       <ChartDates
         startDate={startDate}
@@ -104,7 +105,7 @@ const Chart: React.FC<IProps> = ({ currencySymbol }) => {
       ) : (
         <Loader />
       )}
-    </StyledChart>
+    </StyledTile>
   );
 };
 
@@ -112,10 +113,6 @@ export default Chart;
 
 const StyledChart = styled.div`
   margin-bottom: 24px;
-  background-color: ${(props) => props.theme.colors.bgc};
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  box-shadow: ${(props) => props.theme.shadow};
   h2 {
     text-transform: uppercase;
   }

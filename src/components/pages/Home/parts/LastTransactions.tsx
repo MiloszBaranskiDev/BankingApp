@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import { ITransaction } from "interfaces/ITransaction";
 
+import StyledTile from "components/styled/StyledTile";
 import StyledButton from "components/styled/StyledButton";
 import StyledHeading from "components/styled/StyledHeading";
 
@@ -14,7 +15,7 @@ const LastTransactions: React.FC<IProps> = ({ transactions }) => {
   return (
     <>
       {transactions.length > 0 && (
-        <StyledLastTransactions>
+        <StyledTile as={StyledLastTransactions}>
           <StyledHeading>Last transactions</StyledHeading>
           <ul>
             {transactions
@@ -31,7 +32,7 @@ const LastTransactions: React.FC<IProps> = ({ transactions }) => {
               <i className="fas fa-search"></i>See more
             </StyledButton>
           </StyledButtonContainer>
-        </StyledLastTransactions>
+        </StyledTile>
       )}
     </>
   );
@@ -43,10 +44,6 @@ const StyledLastTransactions = styled.div`
   margin: 16px 0;
   display: flex;
   flex-direction: column;
-  background-color: ${(props) => props.theme.colors.bgc};
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  box-shadow: ${(props) => props.theme.shadow};
   ul {
     margin-bottom: 14px;
     li {

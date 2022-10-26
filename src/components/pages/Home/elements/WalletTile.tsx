@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 
+import StyledTile from "components/styled/StyledTile";
 import StyledHeading from "components/styled/StyledHeading";
 
 interface IProps {
@@ -19,7 +20,7 @@ enum EHeading {
 
 const WalletTile: React.FC<IProps> = ({ heading, number }) => {
   return (
-    <StyledWalletTile>
+    <StyledTile as={StyledWalletTile}>
       <StyledHeading>{heading}</StyledHeading>
       <StyledNumber
         number={number}
@@ -27,7 +28,7 @@ const WalletTile: React.FC<IProps> = ({ heading, number }) => {
       >
         {heading.toLowerCase() !== EHeading.incomes ? number : "+" + number} PLN
       </StyledNumber>
-    </StyledWalletTile>
+    </StyledTile>
   );
 };
 
@@ -36,10 +37,6 @@ export default WalletTile;
 const StyledWalletTile = styled.div`
   flex-basis: 100%;
   margin-bottom: 16px;
-  background-color: ${(props) => props.theme.colors.bgc};
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  box-shadow: ${(props) => props.theme.shadow};
   &:last-child {
     margin-bottom: 0;
   }

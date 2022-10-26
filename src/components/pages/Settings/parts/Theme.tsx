@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ESettingsKeys } from "enums/ESettingsKeys";
 import { ISettings } from "interfaces/ISettings";
 
+import StyledTile from "components/styled/StyledTile";
 import StyledHeading from "components/styled/StyledHeading";
 import ModeSwitcher from "../elements/ModeSwitcher";
 import Colors from "../elements/Colors";
@@ -15,7 +16,7 @@ interface IProps {
 
 const Theme: React.FC<IProps> = ({ settings, handleSettingsChange }) => {
   return (
-    <StyledTheme>
+    <StyledTile as={StyledTheme}>
       <StyledHeading>Theme</StyledHeading>
       <ModeSwitcher
         isLightMode={settings[ESettingsKeys.isLightMode]}
@@ -26,7 +27,7 @@ const Theme: React.FC<IProps> = ({ settings, handleSettingsChange }) => {
         currentMainColor={settings[ESettingsKeys.mainColor]}
         handleSettingsChange={handleSettingsChange}
       />
-    </StyledTheme>
+    </StyledTile>
   );
 };
 
@@ -34,10 +35,6 @@ export default Theme;
 
 const StyledTheme = styled.div`
   margin-bottom: 16px;
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  background-color: ${(props) => props.theme.colors.bgc};
-  box-shadow: ${(props) => props.theme.shadow};
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     margin-bottom: 0;
     flex-basis: 49.3%;

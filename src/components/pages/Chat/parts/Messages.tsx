@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import { IMessage } from "interfaces/IMessage";
 
+import StyledTile from "components/styled/StyledTile";
 import Message from "../elements/Message";
 
 interface IProps {
@@ -17,7 +18,7 @@ const Messages: React.FC<IProps> = ({ messages }) => {
   }, [messages]);
 
   return (
-    <StyledMessages ref={refMessages}>
+    <StyledTile as={StyledMessages} ref={refMessages}>
       {messages.map((message) => (
         <Message
           text={message.text}
@@ -26,7 +27,7 @@ const Messages: React.FC<IProps> = ({ messages }) => {
           key={message.id}
         />
       ))}
-    </StyledMessages>
+    </StyledTile>
   );
 };
 
@@ -36,10 +37,6 @@ const StyledMessages = styled.div`
   margin-bottom: 30px;
   height: 360px;
   overflow-y: auto;
-  box-shadow: ${(props) => props.theme.shadow};
-  background-color: ${(props) => props.theme.colors.bgc};
-  border-radius: ${(props) => props.theme.radius};
-  padding: ${(props) => props.theme.tilePadding};
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     height: 420px;
   }

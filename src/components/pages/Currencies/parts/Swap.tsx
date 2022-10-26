@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
 import { ICurrency } from "interfaces/ICurrency";
 
+import StyledTile from "components/styled/StyledTile";
 import StyledButton from "components/styled/StyledButton";
 import SwapArrows from "../elements/SwapArrows";
 import SwapCurrency from "../elements/SwapCurrency";
@@ -136,7 +137,7 @@ const Swap: React.FC<IProps> = ({ currencies }) => {
   console.log(buttonIsDisabled, swapFrom.amount, swapTo.amount);
 
   return (
-    <StyledSwap>
+    <StyledTile as={StyledSwap}>
       <StyledBox>
         <SwapCurrency
           currencies={currencies}
@@ -164,7 +165,7 @@ const Swap: React.FC<IProps> = ({ currencies }) => {
           outgoing={false}
         />
       </StyledBox>
-    </StyledSwap>
+    </StyledTile>
   );
 };
 
@@ -172,10 +173,6 @@ export default Swap;
 
 const StyledSwap = styled.div`
   margin-bottom: 60px;
-  background-color: ${(props) => props.theme.colors.bgc};
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  box-shadow: ${(props) => props.theme.shadow};
 `;
 
 const StyledBox = styled.div`

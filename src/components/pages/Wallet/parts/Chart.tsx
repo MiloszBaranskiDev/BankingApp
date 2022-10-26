@@ -4,6 +4,7 @@ import { Doughnut } from "react-chartjs-2";
 
 import { ICurrency } from "interfaces/ICurrency";
 
+import StyledTile from "components/styled/StyledTile";
 import StyledHeading from "components/styled/StyledHeading";
 
 interface IProps {
@@ -54,7 +55,7 @@ const Chart: React.FC<IProps> = ({ currencies }) => {
   };
 
   return (
-    <StyledChart>
+    <StyledTile as={StyledChart}>
       <StyledHeading>Currencies</StyledHeading>
       {currencies.some((currency) => currency.balance! >= 0.01) ? (
         <Doughnut data={chartData} />
@@ -64,7 +65,7 @@ const Chart: React.FC<IProps> = ({ currencies }) => {
           currencies.
         </p>
       )}
-    </StyledChart>
+    </StyledTile>
   );
 };
 
@@ -72,10 +73,6 @@ export default Chart;
 
 const StyledChart = styled.div`
   flex-basis: 100%;
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  background-color: ${(props) => props.theme.colors.bgc};
-  box-shadow: ${(props) => props.theme.shadow};
   canvas {
     height: auto !important;
     width: 100% !important;

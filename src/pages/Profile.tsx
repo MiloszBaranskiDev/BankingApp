@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import StyledTile from "components/styled/StyledTile";
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import UserImage from "components/pages/Profile/parts/UserImage";
 import UserFields from "components/pages/Profile/parts/UserFields";
@@ -8,19 +7,12 @@ const Profile: React.FC = () => {
   return (
     <>
       <StyledPageTitle>Profile</StyledPageTitle>
-      <StyledProfile>
+      <StyledTile>
         <UserImage />
         <UserFields />
-      </StyledProfile>
+      </StyledTile>
     </>
   );
 };
 
 export default Profile;
-
-const StyledProfile = styled.div`
-  box-shadow: ${(props) => props.theme.shadow};
-  background-color: ${(props) => props.theme.colors.bgc};
-  border-radius: ${(props) => props.theme.radius};
-  padding: ${(props) => props.theme.tilePadding};
-`;

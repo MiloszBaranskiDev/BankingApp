@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import StyledTile from "components/styled/StyledTile";
 import StyledButton from "components/styled/StyledButton";
 import StyledHeading from "components/styled/StyledHeading";
 import GoalItem from "../elements/GoalItem";
@@ -13,7 +14,7 @@ interface IProps {
 
 const Goals: React.FC<IProps> = ({ goals }) => {
   return (
-    <StyledGoals>
+    <StyledTile as={StyledGoals}>
       <StyledHeading>Last goals</StyledHeading>
       <ul>
         {goals
@@ -30,7 +31,7 @@ const Goals: React.FC<IProps> = ({ goals }) => {
           <i className="fas fa-search"></i>See more
         </StyledButton>
       </StyledButtonContainer>
-    </StyledGoals>
+    </StyledTile>
   );
 };
 
@@ -40,10 +41,6 @@ const StyledGoals = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
-  background-color: ${(props) => props.theme.colors.bgc};
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  box-shadow: ${(props) => props.theme.shadow};
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     margin-bottom: 0;
     flex-basis: calc(50% - 8px);

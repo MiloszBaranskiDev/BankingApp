@@ -12,6 +12,7 @@ import { ESettingsKeys } from "enums/ESettingsKeys";
 import { ILineChartData } from "interfaces/ILineChartData";
 import { ISettings } from "interfaces/ISettings";
 
+import StyledTile from "components/styled/StyledTile";
 import StyledHeading from "components/styled/StyledHeading";
 import Loader from "components/Loader";
 import LineChart from "components/LineChart";
@@ -76,14 +77,14 @@ const Chart: React.FC = () => {
   }, [chartData]);
 
   return (
-    <StyledChart>
+    <StyledTile as={StyledChart}>
       <StyledHeading>{favouriteCurrency} last 30 days</StyledHeading>
       {!isLoading && chartData !== undefined && chartData !== null ? (
         <LineChart chartData={chartData} />
       ) : (
         <Loader />
       )}
-    </StyledChart>
+    </StyledTile>
   );
 };
 
@@ -91,10 +92,6 @@ export default Chart;
 
 const StyledChart = styled.div`
   margin: 16px 0;
-  background-color: ${(props) => props.theme.colors.bgc};
-  padding: ${(props) => props.theme.tilePadding};
-  border-radius: ${(props) => props.theme.radius};
-  box-shadow: ${(props) => props.theme.shadow};
   h2 {
     margin-bottom: 30px;
   }
