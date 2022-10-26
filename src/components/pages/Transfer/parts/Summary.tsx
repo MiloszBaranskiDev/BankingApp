@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { ETransactionCategory } from "enums/ETransactionCategory";
 import { ITransaction } from "interfaces/ITransaction";
 
+import StyledTile from "components/styled/StyledTile";
 import SummaryDetails from "../elements/SummaryDetails";
 import SummaryBtns from "../elements/SummaryBtns";
 
@@ -24,20 +25,16 @@ const Summary: React.FC<IProps> = ({ setShowSummary }) => {
     );
 
   return (
-    <StyledSummary>
+    <StyledTile as={StyledSummary}>
       <SummaryDetails transaction={transaction!} />
       <SummaryBtns setShowSummary={setShowSummary} />
-    </StyledSummary>
+    </StyledTile>
   );
 };
 
 export default Summary;
 
 const StyledSummary = styled.div`
-  box-shadow: ${(props) => props.theme.shadow};
-  border-radius: ${(props) => props.theme.radius};
-  background-color: ${(props) => props.theme.colors.bgc};
-  padding: ${(props) => props.theme.tilePadding};
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     width: 600px;
   }

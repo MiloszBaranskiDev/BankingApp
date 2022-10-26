@@ -15,12 +15,11 @@ const SummaryDetails: React.FC<IProps> = ({ transaction }) => {
             <span>{transaction.date}</span>
           </p>
         </li>
-        {transaction.details.map((detail) => (
-          <li key={Object.values(detail)[0]}>
+        {Object.entries(transaction.details).map(([key, value]) => (
+          <li key={key}>
             <p>
-              {Object.entries(detail).map(([key, value]) => (
-                <span key={key}>{value}</span>
-              ))}
+              <span>{key.split("_")[0]}</span>
+              <span>{value}</span>
             </p>
           </li>
         ))}
@@ -35,8 +34,8 @@ const StyledSummaryDetails = styled.ul`
   margin-bottom: 20px;
   li {
     line-height: 26px;
-    font-size: ${(props) => props.theme.typography.size_big};
     span:first-child {
+      text-transform: capitalize;
       margin-right: 12px;
       position: relative;
       font-weight: ${(props) => props.theme.typography.weight_bold};

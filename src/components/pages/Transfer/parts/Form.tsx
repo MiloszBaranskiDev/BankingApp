@@ -1,231 +1,204 @@
-import { useEffect, useState, useRef, MutableRefObject } from "react";
+import styled from "styled-components";
+import { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { RootState } from "redux/store";
-import { Dispatch } from "@reduxjs/toolkit";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { updateWalletCurrencies } from "redux/slices/WalletSlice";
 import { addTransaction } from "redux/slices/TransactionsSlice";
-import styled from "styled-components";
+import { Dispatch } from "@reduxjs/toolkit";
 
-import GetTodayDate from "utils/GetTodayDate";
 import GetRandomId from "utils/GeRandomId";
+import GetTodayDate from "utils/GetTodayDate";
 
-import { IWallet } from "interfaces/IWallet";
-
+import FieldError from "components/FieldError";
+import StyledTile from "components/styled/StyledTile";
+import StyledHeading from "components/styled/StyledHeading";
 import StyledLabel from "components/styled/StyledLabel";
 import StyledInput from "components/styled/StyledInput";
 import StyledSelect from "components/styled/StyledSelect";
 import StyledButton from "components/styled/StyledButton";
-import StyledHeading from "components/styled/StyledHeading";
+
+import { ICurrency } from "interfaces/ICurrency";
+import { IWallet } from "interfaces/IWallet";
+import { ETransferFields } from "enums/ETransferFields";
 import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { ETransactionCategory } from "enums/ETransactionCategory";
 
 interface IProps {
   setShowSummary: (arg0: boolean) => void;
 }
 
-interface IField {
-  label: string;
-  type: string;
-  isSelect?: boolean;
-  minLength?: number;
-  maxLength?: number;
+interface ITransferData {
+  title: string;
+  recipient: string;
+  account: number;
+  address: string;
+  currency_symbol: ECurrenciesSymbols;
+  amount: number;
 }
-
-interface IFormData {
-  label: string;
-  value: string | number;
-}
-
-const fields: IField[] = [
-  {
-    label: "Recipient",
-    type: "text",
-    maxLength: 80,
-  },
-  {
-    label: "Account No.",
-    type: "text",
-    maxLength: 28,
-  },
-  {
-    label: "Address",
-    type: "text",
-    maxLength: 80,
-  },
-  {
-    label: "Currency",
-    isSelect: true,
-    type: null as any,
-  },
-  {
-    label: "Amount",
-    type: "number",
-  },
-  {
-    label: "Title",
-    type: "text",
-    maxLength: 50,
-  },
-];
 
 const Form: React.FC<IProps> = ({ setShowSummary }) => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<ITransferData>();
+
   const dispatch: Dispatch = useDispatch();
 
-  const formRef: MutableRefObject<HTMLFormElement | null> = useRef(null);
+  const transferString: string = "transfer";
 
   const wallet: IWallet = useSelector((state: RootState) => state.wallet);
 
-  const [zeroBalance, setZeroBalance] = useState<boolean>(true);
-
-  const getDefaultCurrency = () => {
-    return wallet.currencies.find((currency) => currency.balance! >= 0.01);
+  const getDefaultCurrency = (): ICurrency | undefined => {
+    return wallet.currencies.find((currency) => currency.balance! >= 1);
   };
 
-  useEffect(() => {
-    if (getDefaultCurrency() === undefined) {
-      setZeroBalance(true);
-    } else {
-      setZeroBalance(false);
-    }
-  }, [wallet]);
+  const [currentCurrency, setCurrentCurrency] = useState<ICurrency>(
+    getDefaultCurrency()!
+  );
 
-  const initFormData: IFormData[] = [];
-  if (getDefaultCurrency() !== undefined) {
-    fields.forEach((field) => {
-      initFormData.push({
-        label: field.label,
-        value: field.label !== "Currency" ? "" : getDefaultCurrency()!.symbol,
-      });
-    });
-  }
-
-  const [formData, setFormData] = useState<IFormData[]>(initFormData);
-
-  const handleChange = (label: string, value: string | number) => {
-    let newFormData: IFormData[] = [...formData];
-    const index: number = formData.findIndex((item) => item.label === label);
-    const currentCurrency: string = formData
-      .find((item) => item.label === "Currency")!
-      .value.toString()!;
-
-    if (label === "Currency") {
-      newFormData[index].value = value;
-      newFormData.find((item) => item.label === "Amount")!.value = "";
-    } else if (label === "Amount") {
-      newFormData[index].value = Math.max(
-        0.01,
-        Math.min(
-          wallet.currencies.find((item) => item.symbol === currentCurrency)!
-            .balance!,
-          Number(value)
-        )
-      );
-    } else {
-      newFormData[index].value = value;
-    }
-
-    setFormData(newFormData);
+  const handleCurrencyChange = (currencySymbol: string): void => {
+    const selectedCurrency: ICurrency = wallet.currencies.find(
+      (currency) => currency.symbol === currencySymbol
+    )!;
+    setCurrentCurrency(selectedCurrency);
   };
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
-    e.preventDefault();
-    let canBeSubmited: boolean = true;
+  const handleTransferSubmit: SubmitHandler<ITransferData> = (transferData) => {
+    dispatch(
+      updateWalletCurrencies({
+        symbol: transferData.currency_symbol,
+        balance: currentCurrency.balance! - Number(transferData.amount),
+      })
+    );
 
-    formData.forEach((field, i: number) => {
-      const fieldElement: HTMLElement = formRef.current?.childNodes[i]
-        .lastChild as HTMLElement;
+    dispatch(
+      addTransaction({
+        category: ETransactionCategory.outgoing,
+        id: GetRandomId(),
+        date: GetTodayDate(),
+        details: transferData,
+      })
+    );
 
-      if (fieldElement.nodeName !== "SELECT") {
-        if (String(field.value).length > 0) {
-          fieldElement.classList.remove("field-error");
-        } else {
-          fieldElement.classList.add("field-error");
-          canBeSubmited = false;
-        }
-      }
-    });
-
-    if (canBeSubmited) {
-      const currencySymbol = formData
-        .find((item) => item.label === "Currency")!
-        .value.toString() as ECurrenciesSymbols;
-
-      const currencyBalance: number = wallet.currencies.find(
-        (item) => item.symbol === currencySymbol
-      )!.balance!;
-
-      const amount: number | string = formData.find(
-        (item) => item.label === "Amount"
-      )!.value;
-
-      dispatch(
-        updateWalletCurrencies({
-          symbol: currencySymbol,
-          balance: currencyBalance - Number(amount),
-        })
-      );
-
-      dispatch(
-        addTransaction({
-          category: "Outgoing transfer",
-          id: GetRandomId(),
-          date: GetTodayDate(),
-          details: formData.map((item) => ({ ...item })),
-        })
-      );
-
-      setShowSummary(true);
-    }
+    setShowSummary(true);
   };
 
   return (
     <>
-      {!zeroBalance && getDefaultCurrency() !== undefined ? (
-        <>
-          <StyledForm ref={formRef} onSubmit={(e) => handleSubmit(e)}>
-            <>
-              {fields.map((field, i: number) => (
-                <div className="transferField" key={field.label}>
-                  <StyledLabel htmlFor={field.label}>{field.label}</StyledLabel>
-                  {!field.isSelect ? (
-                    <StyledInput
-                      onChange={(e) =>
-                        handleChange(field.label, e.target.value)
-                      }
-                      value={formData[i].value}
-                      type={field.type}
-                      id={field.label}
-                      maxLength={field.maxLength && field.maxLength}
-                    />
-                  ) : (
-                    <StyledSelect
-                      onChange={(e) =>
-                        handleChange(field.label, e.target.value)
-                      }
-                      value={formData[i].value}
-                      id={field.label}
-                    >
-                      {wallet.currencies.map((currency) => (
-                        <option
-                          value={currency.symbol}
-                          disabled={currency.balance! >= 0.01 ? false : true}
-                          key={currency.symbol}
-                        >
-                          {`${currency.symbol} (balance: ${currency.balance} ${currency.symbol})`}
-                        </option>
-                      ))}
-                    </StyledSelect>
-                  )}
-                </div>
-              ))}
-              <StyledButton as={"button"} type="submit">
-                Send transfer
-              </StyledButton>
-            </>
-          </StyledForm>
-        </>
+      {getDefaultCurrency() !== undefined ? (
+        <StyledTile
+          as={StyledForm}
+          onSubmit={handleSubmit(handleTransferSubmit)}
+        >
+          <StyledFields>
+            <StyledField>
+              <StyledLabel htmlFor={transferString + ETransferFields.title}>
+                Title
+              </StyledLabel>
+              <StyledInput
+                id={transferString + ETransferFields.title}
+                minLength={5}
+                maxLength={50}
+                {...register("title", {
+                  required: true,
+                })}
+              />
+              {errors.title?.type === "required" && <FieldError />}
+            </StyledField>
+            <StyledField>
+              <StyledLabel htmlFor={transferString + ETransferFields.recipient}>
+                Recipient
+              </StyledLabel>
+              <StyledInput
+                id={transferString + ETransferFields.recipient}
+                minLength={2}
+                maxLength={80}
+                {...register("recipient", {
+                  required: true,
+                })}
+              />
+              {errors.recipient?.type === "required" && <FieldError />}
+            </StyledField>
+            <StyledField>
+              <StyledLabel htmlFor={transferString + ETransferFields.account}>
+                Account No.
+              </StyledLabel>
+              <StyledInput
+                id={transferString + ETransferFields.account}
+                type="number"
+                minLength={10}
+                maxLength={28}
+                {...register("account", {
+                  required: true,
+                })}
+              />
+              {errors.account?.type === "required" && <FieldError />}
+            </StyledField>
+            <StyledField>
+              <StyledLabel htmlFor={transferString + ETransferFields.address}>
+                Address
+              </StyledLabel>
+              <StyledInput
+                id={transferString + ETransferFields.address}
+                minLength={6}
+                maxLength={80}
+                {...register("address", {
+                  required: true,
+                })}
+              />
+              {errors.address?.type === "required" && <FieldError />}
+            </StyledField>
+            <StyledField>
+              <StyledLabel
+                htmlFor={transferString + ETransferFields.currencySymbol}
+              >
+                Currency
+              </StyledLabel>
+              <StyledSelect
+                id={transferString + ETransferFields.currencySymbol}
+                defaultValue={getDefaultCurrency()?.symbol}
+                {...register("currency_symbol", {
+                  required: true,
+                })}
+                onChange={(e) => handleCurrencyChange(e.target.value)}
+              >
+                {wallet.currencies.map((currency) => (
+                  <option
+                    key={currency.symbol}
+                    disabled={currency.balance! >= 1 ? false : true}
+                    value={currency.symbol}
+                  >
+                    {currency.symbol} (balance: {currency.balance})
+                  </option>
+                ))}
+              </StyledSelect>
+              {errors.currency_symbol?.type === "required" && <FieldError />}
+            </StyledField>
+            <StyledField>
+              <StyledLabel htmlFor={transferString + ETransferFields.amount}>
+                Amount
+              </StyledLabel>
+              <StyledInput
+                id={transferString + ETransferFields.amount}
+                type="number"
+                min={1}
+                max={currentCurrency.balance}
+                {...register("amount", {
+                  required: true,
+                })}
+              />
+              {errors.amount?.type === "required" && <FieldError />}
+            </StyledField>
+          </StyledFields>
+          <StyledButton as="button" type="submit">
+            <i className="fas fa-paper-plane"></i>Send transfer
+          </StyledButton>
+        </StyledTile>
       ) : (
         <StyledHeading>
-          You don't have the balance to make a transfer!
+          Your balance is too small to send a transfer.
         </StyledHeading>
       )}
     </>
@@ -235,28 +208,25 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
 export default Form;
 
 const StyledForm = styled.form`
-  box-shadow: ${(props) => props.theme.shadow};
-  border-radius: ${(props) => props.theme.radius};
-  background-color: ${(props) => props.theme.colors.bgc};
-  padding: ${(props) => props.theme.tilePadding};
+  button {
+    margin-top: 20px;
+  }
+`;
+
+const StyledFields = styled.div`
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    .transferField {
-      flex-basis: 49%;
-    }
   }
-  button {
-    margin-top: 20px;
+`;
+
+const StyledField = styled.div`
+  margin-bottom: 12px;
+  option:disabled {
+    color: ${(props) => props.theme.colors.red};
   }
-  .transferField {
-    margin-bottom: 12px;
-    .field-error {
-      border-color: ${(props) => props.theme.colors.red};
-    }
-    option:disabled {
-      color: ${(props) => props.theme.colors.red};
-    }
+  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+    flex-basis: 49%;
   }
 `;
