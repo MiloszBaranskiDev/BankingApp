@@ -69,9 +69,18 @@ export const WalletSlice = createSlice({
         id: id,
       });
     },
+
+    removeWalletGoal: (state, action: PayloadAction<{ id: string }>) => {
+      const { id } = action.payload;
+      return {
+        ...state,
+        goals: state.goals.filter((goal) => goal.id !== id),
+      };
+    },
   },
 });
 
-export const { updateWalletCurrencies, addWalletGoal } = WalletSlice.actions;
+export const { updateWalletCurrencies, addWalletGoal, removeWalletGoal } =
+  WalletSlice.actions;
 
 export default WalletSlice.reducer;
