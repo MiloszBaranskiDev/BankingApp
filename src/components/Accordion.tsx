@@ -73,19 +73,6 @@ const StyledContent = styled.p`
   opacity: 0;
   overflow: hidden;
   transition: all 0.3s;
-  li {
-    line-height: 26px;
-    span:first-child {
-      margin-right: 12px;
-      position: relative;
-      font-weight: ${(props) => props.theme.typography.weight_bold};
-      &::after {
-        content: ":";
-        position: absolute;
-        right: -5px;
-      }
-    }
-  }
   &.show-content {
     width: unset;
     height: auto;
