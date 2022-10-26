@@ -1,17 +1,17 @@
 import { Routes, Route } from "react-router-dom";
 
-import Home from "components/pages/Home/Home";
-import Wallet from "components/pages/Wallet/Wallet";
-import Transactions from "components/pages/Transactions/Transactions";
-import Transfer from "components/pages/Transfer/Transfer";
-import Currencies from "components/pages/Currencies/Currencies";
-import Help from "components/pages/Help/Help";
-import Settings from "components/pages/Settings/Settings";
-import Profile from "components/pages/Profile/Profile";
-import Faq from "components/pages/Faq/Faq";
-import Chat from "components/pages/Chat/Chat";
-import Notifications from "components/pages/Notifications/Notifications";
-import SingleNotification from "components/pages/SingleNotification/SingleNotification";
+import Home from "pages/Home";
+import Wallet from "pages/Wallet";
+import Transactions from "pages/Transactions";
+import Transfer from "pages/Transfer";
+import Currencies from "pages/Currencies";
+import Help from "pages/Help";
+import Settings from "pages/Settings";
+import Profile from "pages/Profile";
+import Faq from "pages/Faq";
+import Chat from "pages/Chat";
+import Notifications from "pages/Notifications";
+import SingleNotification from "pages/SingleNotification";
 
 const AppRouter: React.FC = () => {
   return (
