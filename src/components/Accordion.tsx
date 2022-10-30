@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useEffect } from "react";
 import styled from "styled-components";
 
 interface IProps {
@@ -7,22 +7,22 @@ interface IProps {
 }
 
 const Accordion: React.FC<IProps> = ({ top, content }) => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <StyledAccordion>
-      <StyledTop onClick={() => setOpen(!open)} role="button">
+      <StyledTop onClick={() => setIsOpen(!isOpen)} role="button">
         <i
-          className={open ? "fas fa-chevron-up reverse" : "fas fa-chevron-up"}
+          className={isOpen ? "fas fa-chevron-up reverse" : "fas fa-chevron-up"}
         ></i>
         {top}
       </StyledTop>
       {typeof content === "string" ? (
-        <StyledContent className={open ? "show-content" : ""}>
+        <StyledContent className={isOpen ? "show-content" : ""}>
           {content}
         </StyledContent>
       ) : (
-        <StyledContent as={"div"} className={open ? "show-content" : ""}>
+        <StyledContent as={"div"} className={isOpen ? "show-content" : ""}>
           {content}
         </StyledContent>
       )}
