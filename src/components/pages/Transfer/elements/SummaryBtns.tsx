@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 
 import StyledButton from "components/styled/StyledButton";
 
+import { ERoute } from "enums/ERoute";
+
 interface IProps {
   setShowSummary: (arg0: boolean) => void;
 }
@@ -13,7 +15,7 @@ const SummaryBtns: React.FC<IProps> = ({ setShowSummary }) => {
       <StyledButton onClick={() => setShowSummary(false)}>
         <i className="fas fa-paper-plane"></i>New transfer
       </StyledButton>
-      <StyledButton as={NavLink} to="/transactions">
+      <StyledButton as={NavLink} to={ERoute.transactions}>
         <i className="fas fa-hand-holding-usd"></i>Transactions
       </StyledButton>
     </StyledSummaryBtns>

@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
+import { ERoute } from "enums/ERoute";
+
 interface IProps {
   id: string;
   title: string;
@@ -11,7 +13,7 @@ interface IProps {
 const Item: React.FC<IProps> = ({ id, title, date, read }) => {
   return (
     <StyledItem>
-      <NavLink to={`/notification/${id}`} className="notification">
+      <NavLink to={`${ERoute.notification}${id}`} className="notification">
         <div className={`icon ${!read ? "new" : ""}`}>
           <i className="fas fa-bell"></i>
         </div>

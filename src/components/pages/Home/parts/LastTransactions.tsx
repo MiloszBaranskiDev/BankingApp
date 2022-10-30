@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
+import { ERoute } from "enums/ERoute";
 import { ITransaction } from "interfaces/ITransaction";
 
 import StyledTile from "components/styled/StyledTile";
@@ -28,7 +29,7 @@ const LastTransactions: React.FC<IProps> = ({ transactions }) => {
               ))}
           </ul>
           <StyledButtonContainer>
-            <StyledButton as={NavLink} to="/transactions">
+            <StyledButton as={NavLink} to={ERoute.transactions}>
               <i className="fas fa-search"></i>See more
             </StyledButton>
           </StyledButtonContainer>

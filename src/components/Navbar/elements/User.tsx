@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import HandleClickOutside from "helpers/HandleClickOutside";
+
+import { ERoute } from "enums/ERoute";
 import { IUserField } from "interfaces/IUserField";
 
 const User: React.FC = () => {
@@ -49,19 +51,19 @@ const User: React.FC = () => {
           </div>
           <ul>
             <li>
-              <NavLink to="/profile">
+              <NavLink to={ERoute.profile}>
                 <i className="fas fa-user"></i>
                 Profile
               </NavLink>
             </li>
             <li>
-              <NavLink to="/notifications">
+              <NavLink to={ERoute.notifications}>
                 <i className="fas fa-bell"></i>
                 Notifications
               </NavLink>
             </li>
             <li>
-              <NavLink to="/settings">
+              <NavLink to={ERoute.settings}>
                 <i className="fas fa-cog"></i>
                 Settings
               </NavLink>

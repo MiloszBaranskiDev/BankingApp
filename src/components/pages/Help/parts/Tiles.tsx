@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
+import { ERoute } from "enums/ERoute";
 import { INavLink } from "interfaces/INavLink";
 
 import Tile from "../elements/Tile";
 
 const tiles: INavLink[] = [
   {
-    to: "/faq",
+    to: ERoute.faq,
     text: "See answers to the most popular questions.",
     icon: <i className="fas fa-question-circle"></i>,
   },
   {
-    to: "/chat",
+    to: ERoute.chat,
     text: "Describe your problem in chat.",
     icon: <i className="fas fa-comment-dots"></i>,
   },

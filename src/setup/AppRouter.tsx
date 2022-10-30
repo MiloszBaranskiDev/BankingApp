@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
+import { ERoute } from "enums/ERoute";
+
 import Home from "pages/Home";
 import Wallet from "pages/Wallet";
 import Transactions from "pages/Transactions";
@@ -17,18 +19,21 @@ const AppRouter: React.FC = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/wallet" element={<Wallet />} />
-        <Route path="/currencies" element={<Currencies />} />
-        <Route path="/transfer" element={<Transfer />} />
-        <Route path="/transactions" element={<Transactions />} />
-        <Route path="/help" element={<Help />} />
-        <Route path="/settings" element={<Settings />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/chat" element={<Chat />} />
-        <Route path="/notifications" element={<Notifications />} />
-        <Route path="/notification/:id" element={<SingleNotification />} />
+        <Route path={ERoute.home} element={<Home />} />
+        <Route path={ERoute.wallet} element={<Wallet />} />
+        <Route path={ERoute.currencies} element={<Currencies />} />
+        <Route path={ERoute.transfer} element={<Transfer />} />
+        <Route path={ERoute.transactions} element={<Transactions />} />
+        <Route path={ERoute.help} element={<Help />} />
+        <Route path={ERoute.settings} element={<Settings />} />
+        <Route path={ERoute.profile} element={<Profile />} />
+        <Route path={ERoute.faq} element={<Faq />} />
+        <Route path={ERoute.chat} element={<Chat />} />
+        <Route path={ERoute.notifications} element={<Notifications />} />
+        <Route
+          path={ERoute.notification + ":id"}
+          element={<SingleNotification />}
+        />
       </Routes>
     </>
   );

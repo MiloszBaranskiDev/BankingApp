@@ -6,6 +6,7 @@ import StyledButton from "components/styled/StyledButton";
 import StyledHeading from "components/styled/StyledHeading";
 import GoalItem from "../elements/GoalItem";
 
+import { ERoute } from "enums/ERoute";
 import { IGoal } from "interfaces/IGoal";
 
 interface IProps {
@@ -27,7 +28,7 @@ const Goals: React.FC<IProps> = ({ goals }) => {
           ))}
       </ul>
       <StyledButtonContainer>
-        <StyledButton as={Link} to="/wallet">
+        <StyledButton as={Link} to={ERoute.wallet}>
           <i className="fas fa-search"></i>See more
         </StyledButton>
       </StyledButtonContainer>

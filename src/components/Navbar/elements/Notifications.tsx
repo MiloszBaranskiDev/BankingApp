@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 import HandleClickOutside from "helpers/HandleClickOutside";
 
+import { ERoute } from "enums/ERoute";
 import { INotification } from "interfaces/INotification";
 
 import StyledButton from "components/styled/StyledButton";
@@ -62,7 +63,7 @@ const Notifications: React.FC = () => {
                     .map((notification) => (
                       <li key={notification.id}>
                         <NavLink
-                          to={`/notification/${notification.id}`}
+                          to={`${ERoute.notification}${notification.id}`}
                           className="notification"
                         >
                           <div
@@ -97,7 +98,7 @@ const Notifications: React.FC = () => {
             </>
             {notifications.length > 0 && (
               <div className="notifications__bottom">
-                <StyledButton as={NavLink} to="/notifications">
+                <StyledButton as={NavLink} to={ERoute.notifications}>
                   Read all notifications
                 </StyledButton>
               </div>

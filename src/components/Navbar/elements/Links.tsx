@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+import { ERoute } from "enums/ERoute";
 import { INavLink } from "interfaces/INavLink";
 
 interface IProps {
@@ -9,33 +10,33 @@ interface IProps {
 
 const links: INavLink[] = [
   {
-    to: "/",
+    to: ERoute.home,
     text: "Home",
     icon: <i className="fas fa-home"></i>,
   },
   {
-    to: "/wallet",
-    text: "Wallet",
+    to: ERoute.wallet,
+    text: ERoute.wallet,
     icon: <i className="fas fa-wallet"></i>,
   },
   {
-    to: "/currencies",
-    text: "Currencies",
+    to: ERoute.currencies,
+    text: ERoute.currencies,
     icon: <i className="fas fa-coins"></i>,
   },
   {
-    to: "/transfer",
-    text: "Transfer",
+    to: ERoute.transfer,
+    text: ERoute.transfer,
     icon: <i className="fas fa-paper-plane"></i>,
   },
   {
-    to: "/transactions",
-    text: "Transactions",
+    to: ERoute.transactions,
+    text: ERoute.transactions,
     icon: <i className="fas fa-hand-holding-usd"></i>,
   },
   {
-    to: "/help",
-    text: "Help",
+    to: ERoute.help,
+    text: ERoute.help,
     icon: <i className="fas fa-headset"></i>,
   },
 ];
@@ -51,7 +52,7 @@ const Links: React.FC<IProps> = ({ openLinks }) => {
               to={link.to}
             >
               {link.icon}
-              {link.text}
+              {link.to !== ERoute.home ? link.text.substring(1) : link.text}
             </NavLink>
           </li>
         ))}
@@ -82,6 +83,7 @@ const StyledLinks = styled.nav`
         margin-right: 7px;
       }
       a {
+        text-transform: capitalize;
         font-size: ${(props) => props.theme.typography.size_big};
         font-weight: ${(props) => props.theme.typography.weight_bold};
         transition: color 0.3s;

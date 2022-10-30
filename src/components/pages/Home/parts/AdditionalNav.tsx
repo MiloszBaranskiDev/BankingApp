@@ -1,48 +1,49 @@
 import styled from "styled-components";
 
+import { ERoute } from "enums/ERoute";
 import { INavLink } from "interfaces/INavLink";
 
 import NavTile from "../elements/NavTile";
 
 const navTiles: INavLink[] = [
   {
-    to: "/wallet",
-    text: "Wallet",
+    to: ERoute.wallet,
+    text: ERoute.wallet,
     icon: <i className="fas fa-wallet"></i>,
   },
   {
-    to: "/currencies",
-    text: "Currencies",
+    to: ERoute.currencies,
+    text: ERoute.currencies,
     icon: <i className="fas fa-coins"></i>,
   },
   {
-    to: "/transfer",
-    text: "Transfer",
+    to: ERoute.transfer,
+    text: ERoute.transfer,
     icon: <i className="fas fa-paper-plane"></i>,
   },
   {
-    to: "/transactions",
-    text: "Transactions",
+    to: ERoute.transactions,
+    text: ERoute.transactions,
     icon: <i className="fas fa-hand-holding-usd"></i>,
   },
   {
-    to: "/help",
-    text: "Help",
+    to: ERoute.help,
+    text: ERoute.help,
     icon: <i className="fas fa-headset"></i>,
   },
   {
-    to: "/notifications",
-    text: "Notifications",
+    to: ERoute.notifications,
+    text: ERoute.notifications,
     icon: <i className="fas fa-bell"></i>,
   },
   {
-    to: "/profile",
-    text: "Profile",
+    to: ERoute.profile,
+    text: ERoute.profile,
     icon: <i className="fas fa-user"></i>,
   },
   {
-    to: "/settings",
-    text: "Settings",
+    to: ERoute.settings,
+    text: ERoute.settings,
     icon: <i className="fas fa-cog"></i>,
   },
 ];
