@@ -8,7 +8,7 @@ import DefaultTheme from "./DefaultTheme";
 
 import ScrollToTop from "helpers/ScrollToTop";
 
-import { ESettingsKeys } from "enums/ESettingsKeys";
+import { ESettingsKey } from "enums/ESettingsKey";
 import { ISettings } from "interfaces/ISettings";
 
 import StyledWrapper from "components/styled/StyledWrapper";
@@ -24,15 +24,15 @@ const App: React.FC = () => {
       ...theme,
       colors: {
         ...theme.colors,
-        main: settings[ESettingsKeys.mainColor] as any,
-        bgc: settings[ESettingsKeys.isLightMode]
+        main: settings[ESettingsKey.mainColor] as any,
+        bgc: settings[ESettingsKey.isLightMode]
           ? ("white" as any)
           : ("#1c1f27" as any),
-        bgc_dark: settings[ESettingsKeys.isLightMode]
+        bgc_dark: settings[ESettingsKey.isLightMode]
           ? ("#f7f9fb" as any)
           : ("#24282e" as any),
       },
-      shadow: settings[ESettingsKeys.isLightMode]
+      shadow: settings[ESettingsKey.isLightMode]
         ? "rgb(58 53 65 / 10%) 0px 2px 10px 0px"
         : "rgb(200 200 200 / 10%) 0px 2px 10px 0px",
     });

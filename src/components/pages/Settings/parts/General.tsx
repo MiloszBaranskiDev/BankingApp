@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { ESettingsKeys } from "enums/ESettingsKeys";
+import { ESettingsKey } from "enums/ESettingsKey";
 import { ISettings } from "interfaces/ISettings";
 
 import StyledTile from "components/styled/StyledTile";
@@ -10,7 +10,7 @@ import Restore from "../elements/Restore";
 
 interface IProps {
   settings: ISettings;
-  handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
+  handleSettingsChange: (key: ESettingsKey, value: string | boolean) => void;
 }
 
 const General: React.FC<IProps> = ({ settings, handleSettingsChange }) => {
@@ -18,7 +18,7 @@ const General: React.FC<IProps> = ({ settings, handleSettingsChange }) => {
     <StyledTile as={StyledGeneral}>
       <StyledHeading>General</StyledHeading>
       <FavouriteCurrency
-        favouriteCurrency={settings[ESettingsKeys.favouriteCurrency]}
+        favouriteCurrency={settings[ESettingsKey.favouriteCurrency]}
         handleSettingsChange={handleSettingsChange}
       />
       <Restore />

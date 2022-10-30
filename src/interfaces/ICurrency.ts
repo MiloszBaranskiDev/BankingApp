@@ -1,7 +1,7 @@
-import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
 
 export interface ICurrency {
-  symbol: ECurrenciesSymbols;
+  symbol: ECurrencySymbol;
   balance?: number;
   price?: number;
 }

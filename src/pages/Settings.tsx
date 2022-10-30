@@ -5,7 +5,7 @@ import { updateSettings } from "redux/slices/SettingsSlice";
 import styled from "styled-components";
 
 import { ISettings } from "interfaces/ISettings";
-import { ESettingsKeys } from "enums/ESettingsKeys";
+import { ESettingsKey } from "enums/ESettingsKey";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import Theme from "components/pages/Settings/parts/Theme";
@@ -15,10 +15,7 @@ const Settings: React.FC = () => {
   const dispatch: Dispatch = useDispatch();
   const settings: ISettings = useSelector((state: RootState) => state.settings);
 
-  const handleSettingsChange = (
-    key: ESettingsKeys,
-    value: string | boolean
-  ) => {
+  const handleSettingsChange = (key: ESettingsKey, value: string | boolean) => {
     dispatch(updateSettings({ key: key, value: value }));
   };
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { ESettingsKeys } from "enums/ESettingsKeys";
+import { ESettingsKey } from "enums/ESettingsKey";
 import { ISettings } from "interfaces/ISettings";
 
 import StyledTile from "components/styled/StyledTile";
@@ -11,7 +11,7 @@ import CustomColor from "../elements/CustomColor";
 
 interface IProps {
   settings: ISettings;
-  handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
+  handleSettingsChange: (key: ESettingsKey, value: string | boolean) => void;
 }
 
 const Theme: React.FC<IProps> = ({ settings, handleSettingsChange }) => {
@@ -19,12 +19,12 @@ const Theme: React.FC<IProps> = ({ settings, handleSettingsChange }) => {
     <StyledTile as={StyledTheme}>
       <StyledHeading>Theme</StyledHeading>
       <ModeSwitcher
-        isLightMode={settings[ESettingsKeys.isLightMode]}
+        isLightMode={settings[ESettingsKey.isLightMode]}
         handleSettingsChange={handleSettingsChange}
       />
       <Colors handleSettingsChange={handleSettingsChange} />
       <CustomColor
-        currentMainColor={settings[ESettingsKeys.mainColor]}
+        currentMainColor={settings[ESettingsKey.mainColor]}
         handleSettingsChange={handleSettingsChange}
       />
     </StyledTile>

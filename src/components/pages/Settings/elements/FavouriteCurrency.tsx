@@ -4,13 +4,13 @@ import StyledSelect from "components/styled/StyledSelect";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 
-import { ESettingsKeys } from "enums/ESettingsKeys";
-import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { ESettingsKey } from "enums/ESettingsKey";
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
 import { IWallet } from "interfaces/IWallet";
 
 interface IProps {
-  favouriteCurrency: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>;
-  handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
+  favouriteCurrency: Exclude<ECurrencySymbol, ECurrencySymbol.pln>;
+  handleSettingsChange: (key: ESettingsKey, value: string | boolean) => void;
 }
 
 const FavouriteCurrency: React.FC<IProps> = ({
@@ -24,13 +24,13 @@ const FavouriteCurrency: React.FC<IProps> = ({
       <p>Currency whose chart will be shown on the home page</p>
       <StyledSelect
         onChange={(e) =>
-          handleSettingsChange(ESettingsKeys.favouriteCurrency, e.target.value)
+          handleSettingsChange(ESettingsKey.favouriteCurrency, e.target.value)
         }
         value={favouriteCurrency}
       >
         {wallet.currencies.map((currency) => (
           <React.Fragment key={currency.symbol}>
-            {currency.symbol !== ECurrenciesSymbols.pln && (
+            {currency.symbol !== ECurrencySymbol.pln && (
               <option value={currency.symbol}>{currency.symbol}</option>
             )}
           </React.Fragment>

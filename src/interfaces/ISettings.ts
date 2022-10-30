@@ -1,13 +1,13 @@
-import { ESettingsKeys } from "enums/ESettingsKeys";
-import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { ESettingsKey } from "enums/ESettingsKey";
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
 
 export interface ISettings {
-  [ESettingsKeys.isLightMode]: boolean;
-  [ESettingsKeys.mainColor]: string;
-  [ESettingsKeys.bgcColor]: string;
-  [ESettingsKeys.bgcDarkColor]: string;
-  [ESettingsKeys.favouriteCurrency]: Exclude<
-    ECurrenciesSymbols,
-    ECurrenciesSymbols.pln
+  [ESettingsKey.isLightMode]: boolean;
+  [ESettingsKey.mainColor]: string;
+  [ESettingsKey.bgcColor]: string;
+  [ESettingsKey.bgcDarkColor]: string;
+  [ESettingsKey.favouriteCurrency]: Exclude<
+    ECurrencySymbol,
+    ECurrencySymbol.pln
   >;
 }

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import { ESettingsKeys } from "enums/ESettingsKeys";
+import { ESettingsKey } from "enums/ESettingsKey";
 
 interface IProps {
   isLightMode: boolean;
-  handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
+  handleSettingsChange: (key: ESettingsKey, value: string | boolean) => void;
 }
 
 const ModeSwitcher: React.FC<IProps> = ({
@@ -14,13 +14,13 @@ const ModeSwitcher: React.FC<IProps> = ({
   return (
     <StyledModeSwitcher>
       <button
-        onClick={() => handleSettingsChange(ESettingsKeys.isLightMode, true)}
+        onClick={() => handleSettingsChange(ESettingsKey.isLightMode, true)}
         className={`${isLightMode ? "active" : ""}`}
       >
         Light
       </button>
       <button
-        onClick={() => handleSettingsChange(ESettingsKeys.isLightMode, false)}
+        onClick={() => handleSettingsChange(ESettingsKey.isLightMode, false)}
         className={`${!isLightMode ? "active" : ""}`}
       >
         Dark

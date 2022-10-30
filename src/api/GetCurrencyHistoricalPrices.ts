@@ -1,7 +1,7 @@
-import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
 
 const GetCurrencyHistoricalPrices = async (
-  currencySymbol: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>,
+  currencySymbol: Exclude<ECurrencySymbol, ECurrencySymbol.pln>,
   start: string,
   end: string
 ) => {

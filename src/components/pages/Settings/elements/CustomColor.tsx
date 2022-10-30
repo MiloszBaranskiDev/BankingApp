@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-import { ESettingsKeys } from "enums/ESettingsKeys";
+import { ESettingsKey } from "enums/ESettingsKey";
 
 interface IProps {
   currentMainColor: string;
-  handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
+  handleSettingsChange: (key: ESettingsKey, value: string | boolean) => void;
 }
 
 const CustomColor: React.FC<IProps> = ({
@@ -17,7 +17,7 @@ const CustomColor: React.FC<IProps> = ({
       <StyledColorInput
         defaultValue={currentMainColor}
         onBlur={(e) =>
-          handleSettingsChange(ESettingsKeys.mainColor, e.target.value)
+          handleSettingsChange(ESettingsKey.mainColor, e.target.value)
         }
         type="color"
       />

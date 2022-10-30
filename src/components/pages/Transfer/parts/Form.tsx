@@ -20,8 +20,8 @@ import StyledButton from "components/styled/StyledButton";
 
 import { ICurrency } from "interfaces/ICurrency";
 import { IWallet } from "interfaces/IWallet";
-import { ETransferFields } from "enums/ETransferFields";
-import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { ETransferField } from "enums/ETransferField";
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
 import { ETransactionCategory } from "enums/ETransactionCategory";
 
 interface IProps {
@@ -33,7 +33,7 @@ interface ITransferData {
   recipient: string;
   account: number;
   address: string;
-  currency_symbol: ECurrenciesSymbols;
+  currency_symbol: ECurrencySymbol;
   amount: number;
 }
 
@@ -94,11 +94,11 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
         >
           <StyledFields>
             <StyledField>
-              <StyledLabel htmlFor={transferString + ETransferFields.title}>
+              <StyledLabel htmlFor={transferString + ETransferField.title}>
                 Title
               </StyledLabel>
               <StyledInput
-                id={transferString + ETransferFields.title}
+                id={transferString + ETransferField.title}
                 minLength={5}
                 maxLength={50}
                 {...register("title", {
@@ -108,11 +108,11 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
               {errors.title?.type === "required" && <FieldError />}
             </StyledField>
             <StyledField>
-              <StyledLabel htmlFor={transferString + ETransferFields.recipient}>
+              <StyledLabel htmlFor={transferString + ETransferField.recipient}>
                 Recipient
               </StyledLabel>
               <StyledInput
-                id={transferString + ETransferFields.recipient}
+                id={transferString + ETransferField.recipient}
                 minLength={2}
                 maxLength={80}
                 {...register("recipient", {
@@ -122,11 +122,11 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
               {errors.recipient?.type === "required" && <FieldError />}
             </StyledField>
             <StyledField>
-              <StyledLabel htmlFor={transferString + ETransferFields.account}>
+              <StyledLabel htmlFor={transferString + ETransferField.account}>
                 Account No.
               </StyledLabel>
               <StyledInput
-                id={transferString + ETransferFields.account}
+                id={transferString + ETransferField.account}
                 type="number"
                 minLength={10}
                 maxLength={28}
@@ -137,11 +137,11 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
               {errors.account?.type === "required" && <FieldError />}
             </StyledField>
             <StyledField>
-              <StyledLabel htmlFor={transferString + ETransferFields.address}>
+              <StyledLabel htmlFor={transferString + ETransferField.address}>
                 Address
               </StyledLabel>
               <StyledInput
-                id={transferString + ETransferFields.address}
+                id={transferString + ETransferField.address}
                 minLength={6}
                 maxLength={80}
                 {...register("address", {
@@ -152,12 +152,12 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
             </StyledField>
             <StyledField>
               <StyledLabel
-                htmlFor={transferString + ETransferFields.currencySymbol}
+                htmlFor={transferString + ETransferField.currencySymbol}
               >
                 Currency
               </StyledLabel>
               <StyledSelect
-                id={transferString + ETransferFields.currencySymbol}
+                id={transferString + ETransferField.currencySymbol}
                 defaultValue={getDefaultCurrency()?.symbol}
                 {...register("currency_symbol", {
                   required: true,
@@ -177,11 +177,11 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
               {errors.currency_symbol?.type === "required" && <FieldError />}
             </StyledField>
             <StyledField>
-              <StyledLabel htmlFor={transferString + ETransferFields.amount}>
+              <StyledLabel htmlFor={transferString + ETransferField.amount}>
                 Amount
               </StyledLabel>
               <StyledInput
-                id={transferString + ETransferFields.amount}
+                id={transferString + ETransferField.amount}
                 type="number"
                 min={1}
                 max={currentCurrency.balance}

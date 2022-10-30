@@ -3,42 +3,42 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ICurrency } from "interfaces/ICurrency";
 import { IGoal } from "interfaces/IGoal";
 import { IWallet } from "interfaces/IWallet";
-import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
 
 const initialState: IWallet = {
   currencies: [
     {
-      symbol: ECurrenciesSymbols.pln,
+      symbol: ECurrencySymbol.pln,
       balance: 4500,
     },
     {
-      symbol: ECurrenciesSymbols.eur,
+      symbol: ECurrencySymbol.eur,
       balance: 1337,
     },
     {
-      symbol: ECurrenciesSymbols.usd,
+      symbol: ECurrencySymbol.usd,
       balance: 440,
     },
     {
-      symbol: ECurrenciesSymbols.gbp,
+      symbol: ECurrencySymbol.gbp,
       balance: 280.08,
     },
     {
-      symbol: ECurrenciesSymbols.chf,
+      symbol: ECurrencySymbol.chf,
       balance: 99.12,
     },
   ],
   goals: [
     {
       title: "Holidays",
-      currencySymbol: ECurrenciesSymbols.eur,
+      currencySymbol: ECurrencySymbol.eur,
       targetAmount: 1000,
       currentAmount: 725.5,
       id: "2r6aeb1d-4b4d-4bad-2bda-7b0d3b3dcb2d",
     },
     {
       title: "Car",
-      currencySymbol: ECurrenciesSymbols.pln,
+      currencySymbol: ECurrencySymbol.pln,
       targetAmount: 40000,
       currentAmount: 11350,
       id: "7r1aeb6d-2b2d-1bad-5bda-3b0d3b3dcb2d",

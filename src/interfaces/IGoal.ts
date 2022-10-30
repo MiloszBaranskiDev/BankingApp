@@ -1,8 +1,8 @@
-import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
 
 export interface IGoal {
   title: string;
-  currencySymbol: ECurrenciesSymbols;
+  currencySymbol: ECurrencySymbol;
   targetAmount: number;
   currentAmount: number;
   id: string;

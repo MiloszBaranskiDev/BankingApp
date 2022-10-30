@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-import { ESettingsKeys } from "enums/ESettingsKeys";
+import { ESettingsKey } from "enums/ESettingsKey";
 
 interface IProps {
-  handleSettingsChange: (key: ESettingsKeys, value: string | boolean) => void;
+  handleSettingsChange: (key: ESettingsKey, value: string | boolean) => void;
 }
 
 interface IColorProps {
@@ -27,7 +27,7 @@ const Colors: React.FC<IProps> = ({ handleSettingsChange }) => {
         <StyledColor
           key={color}
           bgcColor={color}
-          onClick={() => handleSettingsChange(ESettingsKeys.mainColor, color)}
+          onClick={() => handleSettingsChange(ESettingsKey.mainColor, color)}
         />
       ))}
     </StyledColors>

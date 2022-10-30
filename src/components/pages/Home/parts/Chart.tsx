@@ -7,8 +7,8 @@ import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";
 
 import GetTodayDate from "utils/GetTodayDate";
 
-import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
-import { ESettingsKeys } from "enums/ESettingsKeys";
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
+import { ESettingsKey } from "enums/ESettingsKey";
 import { ILineChartData } from "interfaces/ILineChartData";
 import { ISettings } from "interfaces/ISettings";
 
@@ -35,11 +35,11 @@ const Chart: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [chartData, setChartData] = useState<ILineChartData>();
 
-  const favouriteCurrency: ECurrenciesSymbols =
-    settings[ESettingsKeys.favouriteCurrency];
+  const favouriteCurrency: ECurrencySymbol =
+    settings[ESettingsKey.favouriteCurrency];
 
   const loadPrices = async (
-    favouriteCurrency: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>,
+    favouriteCurrency: Exclude<ECurrencySymbol, ECurrencySymbol.pln>,
     start: string,
     end: string
   ): Promise<void> => {

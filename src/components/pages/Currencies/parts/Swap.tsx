@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
-import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
 import { ICurrency } from "interfaces/ICurrency";
 
 import StyledTile from "components/styled/StyledTile";
@@ -37,7 +37,7 @@ const Swap: React.FC<IProps> = ({ currencies }) => {
   });
 
   const [swapTo, setSwapTo] = useState<ISwapData>({
-    symbol: ECurrenciesSymbols.usd,
+    symbol: ECurrencySymbol.usd,
     amount: 0,
   });
 
@@ -134,7 +134,7 @@ const Swap: React.FC<IProps> = ({ currencies }) => {
     autoConvertInputs(ESwapDirection.to, ESwapEvent.select);
   }, [swapTo.symbol]);
 
-  console.log(buttonIsDisabled, swapFrom.amount, swapTo.amount);
+  // console.log(buttonIsDisabled, swapFrom.amount, swapTo.amount);
 
   return (
     <StyledTile as={StyledSwap}>
