@@ -30,12 +30,7 @@ const Wallet: React.FC = () => {
           <Incomes />
           <Expenses />
         </StyledColumn>
-        <Goals
-          goals={wallet.goals}
-          currenciesSymbols={wallet.currencies.map(
-            (currency) => currency.symbol
-          )}
-        />
+        <Goals goals={wallet.goals} currencies={wallet.currencies} />
       </StyledBox>
     </>
   );
