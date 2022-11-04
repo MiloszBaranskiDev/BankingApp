@@ -5,8 +5,9 @@ import GetTodayDate from "utils/GetTodayDate";
 import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";
 
 import { ILineChartData } from "interfaces/ILineChartData";
-import { ECurrenciesSymbols } from "enums/ECurrenciesSymbols";
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
 
+import ApiError from "components/ApiError";
 import StyledTile from "components/styled/StyledTile";
 import LineChart from "components/LineChart";
 import Loader from "components/Loader";
@@ -14,7 +15,7 @@ import StyledHeading from "components/styled/StyledHeading";
 import ChartDates from "../elements/ChartDates";
 
 interface IProps {
-  currencySymbol: Exclude<ECurrenciesSymbols, ECurrenciesSymbols.pln>;
+  currencySymbol: Exclude<ECurrencySymbol, ECurrencySymbol.pln>;
 }
 
 enum ECalculateActions {
@@ -44,6 +45,7 @@ const Chart: React.FC<IProps> = ({ currencySymbol }) => {
   const theme: any = useTheme();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [showError, setShowError] = useState<boolean>(false);
   const [chartData, setChartData] = useState<ILineChartData>(null as any);
 
   const [endDate, setEndDate] = useState<string>(GetTodayDate());
@@ -62,30 +64,38 @@ const Chart: React.FC<IProps> = ({ currencySymbol }) => {
       end
     );
 
-    setChartData({
-      labels: loadedPrices!,
-      datasets: [
-        {
-          borderWidth: 1,
-          borderColor: theme.colors.main,
-          backgroundColor: theme.colors.main,
-          data: loadedPrices!,
-        },
-      ],
-    });
+    if (loadedPrices === undefined) {
+      setShowError(true);
+      setIsLoading(false);
+    } else {
+      setChartData({
+        labels: loadedPrices!,
+        datasets: [
+          {
+            borderWidth: 1,
+            borderColor: theme.colors.main,
+            backgroundColor: theme.colors.main,
+            data: loadedPrices!,
+          },
+        ],
+      });
+    }
   };
 
   useEffect(() => {
     loadPrices(startDate, endDate);
-    setMinStartDate(calculateDate(endDate, ECalculateActions.subtract, 360));
-    setMinEndDate(calculateDate(startDate, ECalculateActions.add, 7));
-    setMaxStartDate(calculateDate(endDate, ECalculateActions.subtract, 7));
+    setMinStartDate(calculateDate(endDate, ECalculateActions.subtract, 354));
+    setMinEndDate(calculateDate(startDate, ECalculateActions.add, 14));
+    setMaxStartDate(calculateDate(endDate, ECalculateActions.subtract, 14));
   }, [startDate, endDate]);
 
   useEffect(() => {
-    chartData !== undefined && chartData !== null && chartData.labels.length > 0
-      ? setIsLoading(false)
-      : setIsLoading(true);
+    if (chartData !== null) {
+      chartData.labels !== undefined &&
+      !chartData.datasets.some((obj) => obj.data === undefined)
+        ? setIsLoading(false)
+        : setIsLoading(true);
+    }
   }, [chartData]);
 
   return (
@@ -100,11 +110,9 @@ const Chart: React.FC<IProps> = ({ currencySymbol }) => {
         setStartDate={setStartDate}
         setEndDate={setEndDate}
       />
-      {!isLoading && chartData !== undefined && chartData !== null ? (
-        <LineChart chartData={chartData} />
-      ) : (
-        <Loader />
-      )}
+      {isLoading && <Loader />}
+      {!isLoading && showError ? <ApiError /> : null}
+      {!isLoading && !showError ? <LineChart chartData={chartData} /> : null}
     </StyledTile>
   );
 };
@@ -119,6 +127,7 @@ const StyledChart = styled.div`
   canvas {
     margin-top: 30px;
   }
+
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     display: flex;
     flex-wrap: wrap;
