@@ -3,4 +3,6 @@ export enum ETransactionCategory {
   incoming = "Incoming transfer",
   swap = "Currency swap",
   goalCancel = "Cancel goal",
+  goalDeposit = "Goal deposit",
+  goalWithdraw = "Goal withdraw",
 }
