@@ -2,6 +2,7 @@ import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 
+import { ICurrencyRate } from "interfaces/ICurrencyRate";
 import { IWallet } from "interfaces/IWallet";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
@@ -12,26 +13,35 @@ import Incomes from "components/pages/Wallet/parts/Incomes";
 import Expenses from "components/pages/Wallet/parts/Expenses";
 import Goals from "components/pages/Wallet/parts/Goals";
 
-const Wallet: React.FC = () => {
+interface IProps {
+  currenciesRates: ICurrencyRate[];
+}
+
+const Wallet: React.FC<IProps> = ({ currenciesRates }) => {
   const wallet: IWallet = useSelector((state: RootState) => state.wallet);
 
   return (
     <>
       <StyledPageTitle>Wallet</StyledPageTitle>
-      <StyledBox>
-        <StyledColumn>
-          <TotalBalance currencies={wallet.currencies} />
-          <CurrenciesBalance currencies={wallet.currencies} />
-        </StyledColumn>
-        <StyledColumn>
-          <Chart currencies={wallet.currencies} />
-        </StyledColumn>
-        <StyledColumn>
-          <Incomes />
-          <Expenses />
-        </StyledColumn>
-        <Goals goals={wallet.goals} currencies={wallet.currencies} />
-      </StyledBox>
+      <>
+        <StyledBox>
+          <StyledColumn>
+            <TotalBalance
+              currencies={wallet.currencies}
+              currenciesRates={currenciesRates}
+            />
+            <CurrenciesBalance currencies={wallet.currencies} />
+          </StyledColumn>
+          <StyledColumn>
+            <Chart currencies={wallet.currencies} />
+          </StyledColumn>
+          <StyledColumn>
+            <Incomes />
+            <Expenses />
+          </StyledColumn>
+          <Goals goals={wallet.goals} currencies={wallet.currencies} />
+        </StyledBox>
+      </>
     </>
   );
 };

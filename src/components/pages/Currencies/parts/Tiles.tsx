@@ -1,21 +1,26 @@
 import styled from "styled-components";
 
 import { ICurrency } from "interfaces/ICurrency";
+import { ICurrencyRate } from "interfaces/ICurrencyRate";
 
 import StyledHeading from "components/styled/StyledHeading";
 import Tile from "../elements/Tile";
 
 interface IProps {
+  currenciesRates: ICurrencyRate[];
   currencies: ICurrency[];
 }
 
-const Tiles: React.FC<IProps> = ({ currencies }) => {
+const Tiles: React.FC<IProps> = ({ currenciesRates, currencies }) => {
   return (
     <StyledTiles>
       <StyledHeading>Exchange rates</StyledHeading>
       {currencies.map((currency: ICurrency) => (
         <Tile
-          price={currency.price}
+          price={
+            currenciesRates.find((item) => item.symbol === currency.symbol)!
+              .price
+          }
           symbol={currency.symbol}
           key={currency.symbol}
         />
