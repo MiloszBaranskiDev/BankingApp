@@ -8,16 +8,60 @@ import DefaultTheme from "./DefaultTheme";
 
 import ScrollToTop from "helpers/ScrollToTop";
 
+import GetCurrenciesPrices from "api/GetCurrenciesPrices";
+
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
+import { ICurrencyRate } from "interfaces/ICurrencyRate";
+import { IWallet } from "interfaces/IWallet";
 import { ESettingsKey } from "enums/ESettingsKey";
 import { ISettings } from "interfaces/ISettings";
 
+import ApiError from "components/ApiError";
+import LoaderBig from "components/LoaderBig";
 import StyledWrapper from "components/styled/StyledWrapper";
 import Navbar from "components/Navbar/Navbar";
 import Footer from "components/Footer";
 
 const App: React.FC = () => {
   const settings: ISettings = useSelector((state: RootState) => state.settings);
+  const wallet: IWallet = useSelector((state: RootState) => state.wallet);
+
   const [theme, setTheme] = useState(DefaultTheme);
+
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [showError, setShowError] = useState<boolean>(false);
+  const [currenciesRates, setCurrenciesRates] = useState<ICurrencyRate[]>();
+
+  const loadCurrenciesRates = async (): Promise<void> => {
+    const loadedCurrenciesRates = await GetCurrenciesPrices(
+      wallet.currencies.filter(
+        (currency) => currency.symbol !== ECurrencySymbol.pln
+      )
+    );
+
+    if (loadedCurrenciesRates === undefined) {
+      setShowError(true);
+      setIsLoading(false);
+    } else {
+      setCurrenciesRates(loadedCurrenciesRates);
+    }
+  };
+
+  useEffect(() => {
+    loadCurrenciesRates();
+  }, []);
+
+  useEffect(() => {
+    if (
+      currenciesRates !== null &&
+      currenciesRates !== undefined &&
+      currenciesRates.length > 0
+    ) {
+      setIsLoading(false);
+    } else {
+      setIsLoading(true);
+    }
+  }, [currenciesRates]);
 
   useEffect(() => {
     setTheme({
@@ -42,12 +86,18 @@ const App: React.FC = () => {
     <BrowserRouter>
       <div className="App" style={{ backgroundColor: theme.colors.bgc_dark! }}>
         <ThemeProvider theme={theme}>
-          <ScrollToTop />
-          <Navbar />
-          <StyledWrapper>
-            <AppRouter />
-          </StyledWrapper>
-          <Footer />
+          {isLoading && <LoaderBig />}
+          {!isLoading && showError ? <ApiError /> : null}
+          {!isLoading && !showError ? (
+            <>
+              <ScrollToTop />
+              <Navbar />
+              <StyledWrapper>
+                <AppRouter currenciesRates={currenciesRates!} />
+              </StyledWrapper>
+              <Footer />
+            </>
+          ) : null}
         </ThemeProvider>
       </div>
     </BrowserRouter>

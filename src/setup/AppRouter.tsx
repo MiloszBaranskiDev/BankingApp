@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import { ERoute } from "enums/ERoute";
+import { ICurrencyRate } from "interfaces/ICurrencyRate";
 
 import Home from "pages/Home";
 import Wallet from "pages/Wallet";
@@ -15,13 +16,26 @@ import Chat from "pages/Chat";
 import Notifications from "pages/Notifications";
 import SingleNotification from "pages/SingleNotification";
 
-const AppRouter: React.FC = () => {
+interface IProps {
+  currenciesRates: ICurrencyRate[];
+}
+
+const AppRouter: React.FC<IProps> = ({ currenciesRates }) => {
   return (
     <>
       <Routes>
-        <Route path={ERoute.home} element={<Home />} />
-        <Route path={ERoute.wallet} element={<Wallet />} />
-        <Route path={ERoute.currencies} element={<Currencies />} />
+        <Route
+          path={ERoute.home}
+          element={<Home currenciesRates={currenciesRates} />}
+        />
+        <Route
+          path={ERoute.wallet}
+          element={<Wallet currenciesRates={currenciesRates} />}
+        />
+        <Route
+          path={ERoute.currencies}
+          element={<Currencies currenciesRates={currenciesRates} />}
+        />
         <Route path={ERoute.transfer} element={<Transfer />} />
         <Route path={ERoute.transactions} element={<Transactions />} />
         <Route path={ERoute.help} element={<Help />} />
