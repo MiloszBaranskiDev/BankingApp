@@ -1,7 +1,7 @@
 import { RotatingLines } from "react-loader-spinner";
 import styled, { useTheme } from "styled-components";
 
-const Loader: React.FC = () => {
+const LoaderSmall: React.FC = () => {
   const theme: any = useTheme();
 
   return (
@@ -11,7 +11,7 @@ const Loader: React.FC = () => {
   );
 };
 
-export default Loader;
+export default LoaderSmall;
 
 const StyledLoader = styled.div`
   width: 100%;
