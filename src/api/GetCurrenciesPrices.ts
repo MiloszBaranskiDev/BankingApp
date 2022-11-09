@@ -16,7 +16,7 @@ const GetCurrenciesPrices = async (currencies: ICurrency[]) => {
 
     return currencies.map((currency, i) => {
       return {
-        ...currency,
+        symbol: currency.symbol,
         price: prices[i].rates[0].mid,
       };
     });
