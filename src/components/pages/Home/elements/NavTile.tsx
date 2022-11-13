@@ -12,7 +12,7 @@ const NavTile: React.FC<IProps> = ({ navTile }) => {
     <StyledNavTile>
       <Link to={navTile.to}>
         {navTile.icon}
-        {navTile.text}
+        {navTile.text.substring(1)}
       </Link>
     </StyledNavTile>
   );
@@ -26,6 +26,7 @@ const StyledNavTile = styled.li`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    text-transform: capitalize;
     transition: background-color 0.3s;
     font-size: ${(props) => props.theme.typography.size_big};
     font-weight: ${(props) => props.theme.typography.weight_bold};
