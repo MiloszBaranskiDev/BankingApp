@@ -21,7 +21,8 @@ const Summary: React.FC<IProps> = ({ setShowSummary }) => {
   const transaction: ITransaction | undefined = [...transactions]
     .reverse()
     .find(
-      (transaction) => transaction.category === ETransactionCategory.outgoing
+      (transaction) =>
+        transaction.category === ETransactionCategory.outgoingTransfer
     );
 
   return (
