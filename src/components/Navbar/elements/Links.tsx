@@ -108,7 +108,8 @@ const StyledLinks = styled.nav`
     background-color: ${(props) => props.theme.colors.bgc};
     &.open-links {
       transform: unset;
-      height: 275px;
+      height: auto;
+      padding-bottom: 20px;
       opacity: 1;
       z-index: 5;
     }
