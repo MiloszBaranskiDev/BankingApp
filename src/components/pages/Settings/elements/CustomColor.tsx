@@ -32,4 +32,5 @@ const StyledColorInput = styled.input`
   border: 1px solid ${(props) => props.theme.colors.bgc_dark};
   background: ${(props) => props.theme.colors.bgc_dark};
   height: 35px;
+  width: 35px;
 `;
