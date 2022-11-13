@@ -1,9 +1,10 @@
 import { ECurrencySymbol } from "enums/ECurrencySymbol";
+import { EGoalKey } from "enums/EGoalKey";
 
 export interface IGoal {
-  title: string;
-  currencySymbol: ECurrencySymbol;
-  targetAmount: number;
-  currentAmount: number;
-  id: string;
+  [EGoalKey.title]: string;
+  [EGoalKey.currencySymbol]: ECurrencySymbol;
+  [EGoalKey.targetAmount]: number;
+  [EGoalKey.currentAmount]: number;
+  [EGoalKey.id]: string;
 }
