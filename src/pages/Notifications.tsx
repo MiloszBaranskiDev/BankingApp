@@ -1,11 +1,11 @@
 import StyledPageTitle from "components/styled/StyledPageTitle";
-import List from "components/pages/Notifications/parts/List";
+import NotificationsList from "components/pages/Notifications/parts/NotificationsList";
 
 const Notifications: React.FC = () => {
   return (
     <>
       <StyledPageTitle>Notifications</StyledPageTitle>
-      <List />
+      <NotificationsList />
     </>
   );
 };
