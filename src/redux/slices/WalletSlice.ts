@@ -53,7 +53,7 @@ export const WalletSlice = createSlice({
     updateWalletCurrencies: (state, action: PayloadAction<ICurrency>) => {
       const { symbol, balance } = action.payload;
       const index: number = state.currencies.findIndex(
-        (item) => item.symbol === symbol
+        (currency) => currency.symbol === symbol
       );
       state.currencies[index].balance = balance;
     },
@@ -64,10 +64,18 @@ export const WalletSlice = createSlice({
       state.goals.push({
         title: title,
         currencySymbol: currencySymbol,
-        targetAmount: Number(targetAmount),
-        currentAmount: Number(currentAmount),
+        targetAmount: targetAmount,
+        currentAmount: currentAmount,
         id: id,
       });
+    },
+
+    updateGoal: (state, action: PayloadAction<IGoal>) => {
+      const goal = action.payload;
+      const index: number = state.goals.findIndex(
+        (item) => item.id === goal.id
+      );
+      state.goals[index] = goal;
     },
 
     removeWalletGoal: (state, action: PayloadAction<{ id: string }>) => {
@@ -80,7 +88,11 @@ export const WalletSlice = createSlice({
   },
 });
 
-export const { updateWalletCurrencies, addWalletGoal, removeWalletGoal } =
-  WalletSlice.actions;
+export const {
+  updateWalletCurrencies,
+  addWalletGoal,
+  updateGoal,
+  removeWalletGoal,
+} = WalletSlice.actions;
 
 export default WalletSlice.reducer;
