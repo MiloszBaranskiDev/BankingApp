@@ -3,9 +3,9 @@ import { useSelector } from "react-redux";
 
 import { INotification } from "interfaces/INotification";
 
-import Item from "../elements/Item";
+import NotificationItem from "../elements/NotificationItem";
 
-const List: React.FC = () => {
+const NotificationsList: React.FC = () => {
   const notifications: INotification[] = useSelector(
     (state: RootState) => state.notifications
   );
@@ -18,7 +18,7 @@ const List: React.FC = () => {
             .slice(0)
             .reverse()
             .map((notification) => (
-              <Item
+              <NotificationItem
                 key={notification.id}
                 id={notification.id}
                 title={notification.title}
@@ -34,4 +34,4 @@ const List: React.FC = () => {
   );
 };
 
-export default List;
+export default NotificationsList;

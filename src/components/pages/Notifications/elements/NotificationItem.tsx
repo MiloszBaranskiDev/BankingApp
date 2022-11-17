@@ -10,7 +10,7 @@ interface IProps {
   read: boolean;
 }
 
-const Item: React.FC<IProps> = ({ id, title, date, read }) => {
+const NotificationItem: React.FC<IProps> = ({ id, title, date, read }) => {
   return (
     <StyledItem>
       <NavLink to={`${ERoute.notification}${id}`} className="notification">
@@ -24,7 +24,7 @@ const Item: React.FC<IProps> = ({ id, title, date, read }) => {
   );
 };
 
-export default Item;
+export default NotificationItem;
 
 const StyledItem = styled.li`
   margin-bottom: 20px;
