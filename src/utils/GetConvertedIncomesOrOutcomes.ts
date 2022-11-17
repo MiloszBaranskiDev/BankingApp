@@ -23,7 +23,7 @@ const GetConvertedIncomesOrOutcomes = (
             )?.price!);
     });
 
-  return result;
+  return Number(result.toFixed(2));
 };
 
 export default GetConvertedIncomesOrOutcomes;
