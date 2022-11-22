@@ -2,12 +2,19 @@ import {
   configureStore,
   combineReducers,
   getDefaultMiddleware,
+  CombinedState,
+  AnyAction,
 } from "@reduxjs/toolkit";
 import TransactionsSlice from "./slices/TransactionsSlice";
 import UserSlice from "./slices/UserSlice";
 import WalletSlice from "./slices/WalletSlice";
 import NotificationsSlice from "./slices/NotificationsSlice";
 import SettingsSlice from "./slices/SettingsSlice";
+import { INotification } from "interfaces/INotification";
+import { ISettings } from "interfaces/ISettings";
+import { ITransaction } from "interfaces/ITransaction";
+import { IUserField } from "interfaces/IUserField";
+import { IWallet } from "interfaces/IWallet";
 
 const combinedReducer = combineReducers({
   user: UserSlice,
@@ -17,7 +24,18 @@ const combinedReducer = combineReducers({
   settings: SettingsSlice,
 });
 
-const rootReducer = (state: any, action: any) => {
+const rootReducer = (
+  state:
+    | CombinedState<{
+        user: IUserField[];
+        wallet: IWallet;
+        transactions: ITransaction[];
+        notifications: INotification[];
+        settings: ISettings;
+      }>
+    | undefined,
+  action: AnyAction
+) => {
   if (action.type === "SettingsSlice/restoreApp") {
     state = undefined;
   }

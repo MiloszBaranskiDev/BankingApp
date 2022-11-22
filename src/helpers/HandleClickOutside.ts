@@ -8,7 +8,7 @@ const HandleClickOutside = (
     (arg0: boolean): void;
   }
 ) => {
-  const handleClickOutside = (e: any) => {
+  const handleClickOutside = (e: Event) => {
     if (show && ref.current && !ref.current.contains(e.target)) {
       setShow(false);
     }

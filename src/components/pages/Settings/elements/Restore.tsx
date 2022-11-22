@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React from "react";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { restoreApp } from "redux/slices/SettingsSlice";
@@ -7,8 +7,9 @@ import styled from "styled-components";
 import StyledButton from "components/styled/StyledButton";
 
 const Restore: React.FC = () => {
+  const restoreBtn =
+    React.useRef() as React.MutableRefObject<HTMLButtonElement>;
   const dispatch: Dispatch = useDispatch();
-  const restoreBtn: any = useRef();
 
   const handleRestore = (): void => {
     dispatch(restoreApp());

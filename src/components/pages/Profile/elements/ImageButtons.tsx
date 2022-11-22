@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { useRef } from "react";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { editUser } from "redux/slices/UserSlice";
+import React from "react";
 
 import { IUserField } from "interfaces/IUserField";
 
@@ -13,7 +13,8 @@ import StyledButton from "components/styled/StyledButton";
 const ImageButtons: React.FC = () => {
   const dispatch: Dispatch = useDispatch();
   const userData: IUserField[] = useSelector((state: RootState) => state.user);
-  const uploadInput: any = useRef();
+  const uploadInput =
+    React.useRef() as React.MutableRefObject<HTMLInputElement>;
 
   const updateUserData = (path: string): IUserField[] => {
     const updatedArr = userData.map((field, i) => {
@@ -26,24 +27,23 @@ const ImageButtons: React.FC = () => {
   };
 
   const handleUpload = (): void => {
-    uploadInput.current.click();
-    uploadInput.current.addEventListener(
-      "change",
-      (e: { target: { files: (Blob | MediaSource)[] } }) => {
-        dispatch(
-          editUser({
-            updatedArr: updateUserData(URL.createObjectURL(e.target.files[0])),
-          })
-        );
-      }
-    );
+    uploadInput.current?.click();
+    uploadInput.current?.addEventListener("change", (e: Event) => {
+      const target = e.target as HTMLInputElement;
+      const file: File = (target.files as FileList)[0];
+      dispatch(
+        editUser({
+          updatedArr: updateUserData(URL.createObjectURL(file)),
+        })
+      );
+    });
   };
 
   const handleRemove = (): void => {
     dispatch(
       editUser({ updatedArr: updateUserData("/user_image_default.png") })
     );
-    uploadInput.current.value = "";
+    uploadInput.current!.value = "";
   };
 
   return (

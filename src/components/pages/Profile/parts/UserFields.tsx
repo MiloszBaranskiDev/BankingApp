@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -12,7 +13,7 @@ import StyledButton from "components/styled/StyledButton";
 import Field from "../elements/Field";
 
 const UserFields: React.FC = () => {
-  const saveBtn: any = useRef();
+  const saveBtn = React.useRef() as React.MutableRefObject<HTMLButtonElement>;
   const dispatch: Dispatch = useDispatch();
   const userData: IUserField[] = useSelector((state: RootState) => state.user);
 
@@ -31,10 +32,10 @@ const UserFields: React.FC = () => {
       setIndexesOfEmptyInputs([]);
       dispatch(editUser({ updatedArr: currentUserData }));
 
-      saveBtn.current.classList.add("saved");
+      saveBtn.current?.classList.add("saved");
 
       setTimeout(() => {
-        saveBtn.current.classList.remove("saved");
+        saveBtn.current?.classList.remove("saved");
       }, 750);
     } else {
       currentUserData.forEach((field, i: number) => {
