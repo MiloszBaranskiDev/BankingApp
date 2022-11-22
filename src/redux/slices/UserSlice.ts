@@ -11,7 +11,7 @@ const initialState: IUserField[] = [
   {
     label: "e-mail",
     type: "email",
-    value: "john@email.com",
+    value: "john@example.com",
   },
   {
     label: "phone",
