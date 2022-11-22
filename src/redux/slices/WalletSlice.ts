@@ -70,7 +70,7 @@ export const WalletSlice = createSlice({
       });
     },
 
-    updateGoal: (state, action: PayloadAction<IGoal>) => {
+    updateWalletGoal: (state, action: PayloadAction<IGoal>) => {
       const goal = action.payload;
       const index: number = state.goals.findIndex(
         (item) => item.id === goal.id
@@ -91,7 +91,7 @@ export const WalletSlice = createSlice({
 export const {
   updateWalletCurrencies,
   addWalletGoal,
-  updateGoal,
+  updateWalletGoal,
   removeWalletGoal,
 } = WalletSlice.actions;
 
