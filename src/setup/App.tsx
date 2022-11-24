@@ -15,6 +15,9 @@ import { ICurrencyRate } from "interfaces/ICurrencyRate";
 import { IWallet } from "interfaces/IWallet";
 import { ESettingsKey } from "enums/ESettingsKey";
 import { ISettings } from "interfaces/ISettings";
+import { ITheme } from "interfaces/ITheme";
+import { EThemeKey } from "enums/EThemeKey";
+import { EThemeColorKey } from "enums/EThemeColorKey";
 
 import ApiError from "components/ApiError";
 import LoaderBig from "components/LoaderBig";
@@ -26,7 +29,7 @@ const App: React.FC = () => {
   const settings: ISettings = useSelector((state: RootState) => state.settings);
   const wallet: IWallet = useSelector((state: RootState) => state.wallet);
 
-  const [theme, setTheme] = useState(DefaultTheme);
+  const [theme, setTheme] = useState<ITheme>(DefaultTheme);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [showError, setShowError] = useState<boolean>(false);
@@ -66,17 +69,17 @@ const App: React.FC = () => {
   useEffect(() => {
     setTheme({
       ...theme,
-      colors: {
-        ...theme.colors,
-        main: settings[ESettingsKey.mainColor] as any,
-        bgc: settings[ESettingsKey.isLightMode]
-          ? ("white" as any)
-          : ("#1c1f27" as any),
-        bgc_dark: settings[ESettingsKey.isLightMode]
-          ? ("#f7f9fb" as any)
-          : ("#24282e" as any),
+      [EThemeKey.colors]: {
+        ...theme[EThemeKey.colors],
+        [EThemeColorKey.main]: settings[ESettingsKey.mainColor],
+        [EThemeColorKey.bgc]: settings[ESettingsKey.isLightMode]
+          ? "white"
+          : "#1c1f27",
+        [EThemeColorKey.bgc_dark]: settings[ESettingsKey.isLightMode]
+          ? "#f7f9fb"
+          : "#24282e",
       },
-      shadow: settings[ESettingsKey.isLightMode]
+      [EThemeKey.shadow]: settings[ESettingsKey.isLightMode]
         ? "rgb(58 53 65 / 10%) 0px 2px 10px 0px"
         : "rgb(200 200 200 / 10%) 0px 2px 10px 0px",
     });
@@ -84,7 +87,12 @@ const App: React.FC = () => {
 
   return (
     <BrowserRouter>
-      <div className="App" style={{ backgroundColor: theme.colors.bgc_dark! }}>
+      <div
+        className="App"
+        style={{
+          backgroundColor: theme.colors.bgc_dark!,
+        }}
+      >
         <ThemeProvider theme={theme}>
           {isLoading && <LoaderBig />}
           {!isLoading && showError ? <ApiError /> : null}
