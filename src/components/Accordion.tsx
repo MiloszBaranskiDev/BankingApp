@@ -22,7 +22,7 @@ const Accordion: React.FC<IProps> = ({ top, content }) => {
           {content}
         </StyledContent>
       ) : (
-        <StyledContent as={"div"} className={isOpen ? "show-content" : ""}>
+        <StyledContent as="div" className={isOpen ? "show-content" : ""}>
           {content}
         </StyledContent>
       )}
