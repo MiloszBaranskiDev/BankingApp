@@ -1,11 +1,13 @@
 import { RotatingLines } from "react-loader-spinner";
 import styled, { useTheme } from "styled-components";
 
+import { ITheme } from "interfaces/ITheme";
+
 import StyledHeading from "./styled/StyledHeading";
 import StyledWrapper from "./styled/StyledWrapper";
 
 const LoaderBig: React.FC = () => {
-  const theme: any = useTheme();
+  const theme = useTheme() as ITheme;
 
   return (
     <StyledWrapper>

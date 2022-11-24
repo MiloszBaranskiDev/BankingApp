@@ -1,6 +1,7 @@
 import styled, { useTheme } from "styled-components";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { ITheme } from "interfaces/ITheme";
 
 interface IProps {
   text: string;
@@ -8,7 +9,7 @@ interface IProps {
 }
 
 const CircularBar: React.FC<IProps> = ({ text, value }) => {
-  const theme: any = useTheme();
+  const theme = useTheme() as ITheme;
 
   return (
     <StyledCircularBar>

@@ -7,6 +7,7 @@ import GetCurrencyHistoricalPrices from "api/GetCurrencyHistoricalPrices";
 
 import GetTodayDate from "utils/GetTodayDate";
 
+import { ITheme } from "interfaces/ITheme";
 import { ECurrencySymbol } from "enums/ECurrencySymbol";
 import { ESettingsKey } from "enums/ESettingsKey";
 import { ILineChartData } from "interfaces/ILineChartData";
@@ -14,7 +15,7 @@ import { ISettings } from "interfaces/ISettings";
 
 import StyledTile from "components/styled/StyledTile";
 import StyledHeading from "components/styled/StyledHeading";
-import Loader from "components/Loader";
+import LoaderSmall from "components/LoaderSmall";
 import LineChart from "components/LineChart";
 
 const GetStartDate = (endDate: string, diff: number): string => {
@@ -28,7 +29,7 @@ const GetStartDate = (endDate: string, diff: number): string => {
 };
 
 const Chart: React.FC = () => {
-  const theme: any = useTheme();
+  const theme = useTheme() as ITheme;
 
   const settings: ISettings = useSelector((state: RootState) => state.settings);
 
@@ -82,7 +83,7 @@ const Chart: React.FC = () => {
       {!isLoading && chartData !== undefined && chartData !== null ? (
         <LineChart chartData={chartData} />
       ) : (
-        <Loader />
+        <LoaderSmall />
       )}
     </StyledTile>
   );

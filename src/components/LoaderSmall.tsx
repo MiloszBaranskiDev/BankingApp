@@ -1,9 +1,10 @@
 import { RotatingLines } from "react-loader-spinner";
 import styled, { useTheme } from "styled-components";
 
-const LoaderSmall: React.FC = () => {
-  const theme: any = useTheme();
+import { ITheme } from "interfaces/ITheme";
 
+const LoaderSmall: React.FC = () => {
+  const theme = useTheme() as ITheme;
   return (
     <StyledLoader>
       <RotatingLines width="60" strokeColor={theme.colors.main} />
