@@ -25,7 +25,7 @@ const initialState: IWallet = {
     },
     {
       symbol: ECurrencySymbol.chf,
-      balance: 99.12,
+      balance: 120.12,
     },
   ],
   goals: [
