@@ -1,6 +1,7 @@
 import {
   configureStore,
   combineReducers,
+  // eslint-disable-next-line
   getDefaultMiddleware,
   CombinedState,
   AnyAction,
