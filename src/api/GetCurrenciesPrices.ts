@@ -1,3 +1,4 @@
+import { ECurrencySymbol } from "enums/ECurrencySymbol";
 import { ICurrency } from "interfaces/ICurrency";
 
 const GetCurrenciesPrices = async (currencies: ICurrency[]) => {
@@ -16,7 +17,10 @@ const GetCurrenciesPrices = async (currencies: ICurrency[]) => {
 
     return currencies.map((currency, i) => {
       return {
-        symbol: currency.symbol,
+        symbol: currency.symbol as Exclude<
+          ECurrencySymbol,
+          ECurrencySymbol.pln
+        >,
         price: prices[i].rates[0].mid,
       };
     });
