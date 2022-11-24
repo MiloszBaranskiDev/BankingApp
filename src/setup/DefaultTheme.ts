@@ -1,9 +1,11 @@
-const DefaultTheme = {
+import { ITheme } from "interfaces/ITheme";
+
+const DefaultTheme: ITheme = {
   isLight: true,
   colors: {
-    main: null,
-    bgc: null,
-    bgc_dark: null,
+    main: null as any,
+    bgc: null as any,
+    bgc_dark: null as any,
     green: "#44bd32",
     red: "#eb4d4b",
     typography: "#a6afc0",
