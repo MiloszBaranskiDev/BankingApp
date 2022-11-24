@@ -5,9 +5,10 @@
 - React Router
 - Chart.js
 - Styled Components
-- emoji-picker-react
-- react-lorem-ipsum
-- react-hook-form
+- Emoji Picker React
+- React Lorem Ipsum
+- React Hook Form
+- React-Calendar
 - React Circular Progressbar
 - uuid
 - NBP Web API
