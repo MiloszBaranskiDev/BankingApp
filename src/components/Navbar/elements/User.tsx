@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Location, useLocation } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -51,22 +51,22 @@ const User: React.FC = () => {
           </div>
           <ul>
             <li>
-              <NavLink to={ERoute.profile}>
+              <Link to={ERoute.profile}>
                 <i className="fas fa-user"></i>
                 Profile
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink to={ERoute.notifications}>
+              <Link to={ERoute.notifications}>
                 <i className="fas fa-bell"></i>
                 Notifications
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink to={ERoute.settings}>
+              <Link to={ERoute.settings}>
                 <i className="fas fa-cog"></i>
                 Settings
-              </NavLink>
+              </Link>
             </li>
           </ul>
         </StyledUserMenu>

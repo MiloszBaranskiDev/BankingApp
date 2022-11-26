@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { ERoute } from "enums/ERoute";
 
 const Logo: React.FC = () => {
   return (
-    <StyledLogo as={NavLink} to={ERoute.home}>
+    <StyledLogo as={Link} to={ERoute.home}>
       <i className="fas fa-wallet"></i>
       BankingApp
     </StyledLogo>

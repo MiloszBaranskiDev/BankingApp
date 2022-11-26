@@ -1,9 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-import { INavLink } from "interfaces/INavLink";
+import { IRouteLink } from "interfaces/IRouteLink";
 
-const Tile: React.FC<INavLink> = ({ to, text, icon }) => {
+const Tile: React.FC<IRouteLink> = ({ to, text, icon }) => {
   return (
     <StyledTile to={to}>
       {icon}
@@ -14,7 +14,7 @@ const Tile: React.FC<INavLink> = ({ to, text, icon }) => {
 
 export default Tile;
 
-const StyledTile = styled(NavLink)`
+const StyledTile = styled(Link)`
   flex-basis: 100%;
   display: flex;
   flex-direction: column;

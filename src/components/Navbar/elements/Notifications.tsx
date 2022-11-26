@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Location, useLocation } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RootState } from "redux/store";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -62,7 +62,7 @@ const Notifications: React.FC = () => {
                     .slice(0, 3)
                     .map((notification) => (
                       <li key={notification.id}>
-                        <NavLink
+                        <Link
                           to={`${ERoute.notification}${notification.id}`}
                           className="notification"
                         >
@@ -86,7 +86,7 @@ const Notifications: React.FC = () => {
                           <p className="notification__date">
                             {notification.date}
                           </p>
-                        </NavLink>
+                        </Link>
                       </li>
                     ))}
                 </ul>
@@ -98,7 +98,7 @@ const Notifications: React.FC = () => {
             </>
             {notifications.length > 0 && (
               <div className="notifications__bottom">
-                <StyledButton as={NavLink} to={ERoute.notifications}>
+                <StyledButton as={Link} to={ERoute.notifications}>
                   Read all notifications
                 </StyledButton>
               </div>
