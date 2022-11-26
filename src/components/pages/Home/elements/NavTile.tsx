@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { INavLink } from "interfaces/INavLink";
+import { IRouteLink } from "interfaces/IRouteLink";
 
 interface IProps {
-  navTile: INavLink;
+  navTile: IRouteLink;
 }
 
 const NavTile: React.FC<IProps> = ({ navTile }) => {

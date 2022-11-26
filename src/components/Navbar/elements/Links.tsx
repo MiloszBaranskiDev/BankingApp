@@ -2,13 +2,13 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import { ERoute } from "enums/ERoute";
-import { INavLink } from "interfaces/INavLink";
+import { IRouteLink } from "interfaces/IRouteLink";
 
 interface IProps {
   openLinks: boolean;
 }
 
-const links: INavLink[] = [
+const links: IRouteLink[] = [
   {
     to: ERoute.home,
     text: "Home",

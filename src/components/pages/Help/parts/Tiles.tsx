@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 import { ERoute } from "enums/ERoute";
-import { INavLink } from "interfaces/INavLink";
+import { IRouteLink } from "interfaces/IRouteLink";
 
 import Tile from "../elements/Tile";
 
-const tiles: INavLink[] = [
+const tiles: IRouteLink[] = [
   {
     to: ERoute.faq,
     text: "See answers to the most popular questions.",

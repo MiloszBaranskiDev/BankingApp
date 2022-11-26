@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-interface Props {
+interface IProps {
   reverseSwap: () => void;
 }
 
-const SwapArrows: React.FC<Props> = ({ reverseSwap }) => {
+const SwapArrows: React.FC<IProps> = ({ reverseSwap }) => {
   return (
-    <StyledSwapArrows onClick={reverseSwap}>
+    <StyledSwapArrows type="button" onClick={reverseSwap}>
       <i className="fas fa-exchange-alt"></i>
     </StyledSwapArrows>
   );

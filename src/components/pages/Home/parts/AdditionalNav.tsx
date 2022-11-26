@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 import { ERoute } from "enums/ERoute";
-import { INavLink } from "interfaces/INavLink";
+import { IRouteLink } from "interfaces/IRouteLink";
 
 import NavTile from "../elements/NavTile";
 
-const navTiles: INavLink[] = [
+const navTiles: IRouteLink[] = [
   {
     to: ERoute.wallet,
     text: ERoute.wallet,
