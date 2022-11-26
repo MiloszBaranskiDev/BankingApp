@@ -1,6 +1,6 @@
 import { ECurrencySymbol } from "enums/ECurrencySymbol";
 
 export interface ICurrencyRate {
-  symbol: ECurrencySymbol;
+  symbol: Exclude<ECurrencySymbol, ECurrencySymbol.pln>;
   price: number;
 }
