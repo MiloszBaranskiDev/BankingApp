@@ -8,7 +8,7 @@
 - Emoji Picker React
 - React Lorem Ipsum
 - React Hook Form
-- React-Calendar
+- React-Date-Picker
 - React Circular Progressbar
 - uuid
 - NBP Web API
