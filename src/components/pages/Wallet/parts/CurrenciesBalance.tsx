@@ -14,7 +14,7 @@ const CurrenciesBalance: React.FC<IProps> = ({ currencies }) => {
       {currencies.map((currency) => (
         <CurrencyBalance
           symbol={currency.symbol}
-          amount={currency.balance!}
+          amount={Number(currency.balance!.toFixed(2))}
           key={currency.symbol}
         />
       ))}
