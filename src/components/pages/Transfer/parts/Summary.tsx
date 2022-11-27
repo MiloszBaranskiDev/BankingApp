@@ -39,7 +39,4 @@ const StyledSummary = styled.div`
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     width: 600px;
   }
-  a {
-    margin-bottom: 8px;
-  }
 `;
