@@ -27,7 +27,9 @@ export default SummaryBtns;
 const StyledSummaryBtns = styled.div`
   display: flex;
   justify-content: space-between;
+  button,
   a {
     flex-basis: 49%;
+    margin-bottom: 8px;
   }
 `;
