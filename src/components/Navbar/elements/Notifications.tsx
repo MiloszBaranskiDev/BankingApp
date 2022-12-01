@@ -16,6 +16,7 @@ const Notifications: React.FC = () => {
   const notifications: INotification[] = useSelector(
     (state: RootState) => state.notifications
   );
+
   const submenuRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const location: Location = useLocation();
   const [showNotifications, setShowNotifications] = useState<boolean>(false);
