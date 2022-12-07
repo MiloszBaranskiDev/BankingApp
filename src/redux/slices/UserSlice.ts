@@ -1,42 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { IUserField } from "interfaces/IUserField";
+import { IUser } from "interfaces/IUser";
+import { EUserKey } from "enums/EUserKey";
 
-const initialState: IUserField[] = [
-  {
-    label: "login",
-    type: "text",
-    value: "John",
-  },
-  {
-    label: "e-mail",
-    type: "email",
-    value: "john@example.com",
-  },
-  {
-    label: "phone",
-    type: "number",
-    value: "123456789",
-  },
-  {
-    label: "address",
-    type: "text",
-    value: "Lorem address",
-  },
-  {
-    label: "image",
-    type: null as any,
-    value: "/user_image.webp",
-  },
-];
+const initialState: IUser = {
+  [EUserKey.name]: "John Smith",
+  [EUserKey.email]: "john@example.com",
+  [EUserKey.phone]: "123456789",
+  [EUserKey.address]: "Lorem address 13",
+  [EUserKey.image]: "/user_image.webp",
+};
 
 export const UserSlice = createSlice({
   name: "UserSlice",
   initialState,
   reducers: {
-    editUser: (state, action: PayloadAction<{ updatedArr: IUserField[] }>) => {
-      const { updatedArr } = action.payload;
-      return (state = updatedArr);
+    editUser: (state, action: PayloadAction<{ updatedUser: IUser }>) => {
+      const { updatedUser } = action.payload;
+      return (state = updatedUser);
     },
   },
 });

@@ -7,25 +7,17 @@ import styled from "styled-components";
 
 import HandleClickOutside from "helpers/HandleClickOutside";
 
+import { IUser } from "interfaces/IUser";
+import { EUserKey } from "enums/EUserKey";
 import { ERoute } from "enums/ERoute";
-import { IUserField } from "interfaces/IUserField";
 
 const User: React.FC = () => {
   const submenuRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const location: Location = useLocation();
+
+  const user: IUser = useSelector((state: RootState) => state.user);
+
   const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
-
-  const userFields: IUserField[] = useSelector(
-    (state: RootState) => state.user
-  );
-
-  const userLogin: string = userFields.find(
-    (item) => item.label === "login"
-  )!.value;
-
-  const imagePath: string = userFields.find(
-    (item) => item.label === "image"
-  )!.value;
 
   useEffect(() => {
     HandleClickOutside(submenuRef, showUserMenu, setShowUserMenu);
@@ -40,13 +32,13 @@ const User: React.FC = () => {
       <StyledIcon
         onClick={() => setShowUserMenu((showUserMenu) => !showUserMenu)}
         style={{
-          backgroundImage: `url(${imagePath})`,
+          backgroundImage: `url(${user[EUserKey.image]})`,
         }}
       />
       {showUserMenu ? (
         <StyledUserMenu>
           <div className="top">
-            <h3>{userLogin}</h3>
+            <h3>{user[EUserKey.name]}</h3>
             <p>Bank account</p>
           </div>
           <ul>

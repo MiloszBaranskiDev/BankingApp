@@ -14,7 +14,7 @@ import SettingsSlice from "./slices/SettingsSlice";
 import { INotification } from "interfaces/INotification";
 import { ISettings } from "interfaces/ISettings";
 import { ITransaction } from "interfaces/ITransaction";
-import { IUserField } from "interfaces/IUserField";
+import { IUser } from "interfaces/IUser";
 import { IWallet } from "interfaces/IWallet";
 
 const combinedReducer = combineReducers({
@@ -28,7 +28,7 @@ const combinedReducer = combineReducers({
 const rootReducer = (
   state:
     | CombinedState<{
-        user: IUserField[];
+        user: IUser;
         wallet: IWallet;
         transactions: ITransaction[];
         notifications: INotification[];

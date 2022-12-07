@@ -1,72 +1,113 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { editUser } from "redux/slices/UserSlice";
 import styled from "styled-components";
 
-import { IUserField } from "interfaces/IUserField";
+import { IUser } from "interfaces/IUser";
+import { EUserKey } from "enums/EUserKey";
 
 import StyledButton from "components/styled/StyledButton";
-import Field from "../elements/Field";
+import StyledLabel from "components/styled/StyledLabel";
+import StyledInput from "components/styled/StyledInput";
+import FieldError from "components/FieldError";
 
 const UserFields: React.FC = () => {
-  const saveBtn = React.useRef() as React.MutableRefObject<HTMLButtonElement>;
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<IUser>();
+
   const dispatch: Dispatch = useDispatch();
-  const userData: IUserField[] = useSelector((state: RootState) => state.user);
 
-  const [indexesOfEmptyInputs, setIndexesOfEmptyInputs] = useState<number[]>(
-    []
-  );
-  const [currentUserData, setUpdatedUserData] =
-    useState<IUserField[]>(userData);
+  const user: IUser = useSelector((state: RootState) => state.user);
 
-  useEffect(() => {
-    setUpdatedUserData(userData);
-  }, [userData]);
-
-  const handleSave = (): void => {
-    if (!currentUserData.some((field) => field.value === "")) {
-      setIndexesOfEmptyInputs([]);
-      dispatch(editUser({ updatedArr: currentUserData }));
-
-      saveBtn.current?.classList.add("saved");
-
-      setTimeout(() => {
-        saveBtn.current?.classList.remove("saved");
-      }, 750);
-    } else {
-      currentUserData.forEach((field, i: number) => {
-        field.value === "" && setIndexesOfEmptyInputs((old) => [...old, i]);
-      });
+  const handleUserFields: SubmitHandler<IUser> = (formData) => {
+    const updatedUser: IUser = { ...formData, [EUserKey.image]: user.image };
+    if (JSON.stringify(user) !== JSON.stringify(updatedUser)) {
+      dispatch(editUser({ updatedUser: updatedUser }));
     }
   };
 
   return (
     <StyledUserFields>
       <>
-        {userData.length > 0 && (
-          <>
-            {userData.map((field: IUserField, i: number) => (
-              <Field
-                key={field.label}
-                label={field.label}
-                type={field.type}
-                value={field.value}
-                hasError={indexesOfEmptyInputs.some(
-                  (emptyInputIndex) => emptyInputIndex === i
-                )}
-                currentUserData={currentUserData}
-                setUpdatedUserData={setUpdatedUserData}
-              />
-            ))}
-          </>
-        )}
-        <StyledButton ref={saveBtn} onClick={handleSave} as={"button"}>
-          <i className="fas fa-check"></i>Save changes
-        </StyledButton>
+        <form onSubmit={handleSubmit(handleUserFields)}>
+          <div>
+            <StyledLabel htmlFor={"user-field-" + EUserKey.name}>
+              {EUserKey.name}
+            </StyledLabel>
+            <StyledInput
+              id={"user-field-" + EUserKey.name}
+              type="text"
+              minLength={4}
+              maxLength={30}
+              defaultValue={user.name}
+              {...register(`${EUserKey.name}`, {
+                required: true,
+              })}
+            />
+            {errors.name?.type === "required" && <FieldError />}
+          </div>
+          <div>
+            <StyledLabel htmlFor={"user-field-" + EUserKey.email}>
+              {EUserKey.email}
+            </StyledLabel>
+            <StyledInput
+              id={"user-field-" + EUserKey.email}
+              type="email"
+              defaultValue={user.email}
+              {...register(`${EUserKey.email}`, {
+                required: true,
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Entered value does not match email format",
+                },
+              })}
+            />
+            {errors.email?.type === "required" && <FieldError />}
+            {errors.email && <FieldError text={errors.email.message} />}
+          </div>
+          <div>
+            <StyledLabel htmlFor={"user-field-" + EUserKey.phone}>
+              {EUserKey.phone}
+            </StyledLabel>
+            <StyledInput
+              id={"user-field-" + EUserKey.phone}
+              type="text"
+              minLength={9}
+              maxLength={9}
+              defaultValue={user.phone}
+              {...register(`${EUserKey.phone}`, {
+                required: true,
+              })}
+            />
+            {errors.phone?.type === "required" && <FieldError />}
+          </div>
+          <div>
+            <StyledLabel htmlFor={"user-field-" + EUserKey.address}>
+              {EUserKey.address}
+            </StyledLabel>
+            <StyledInput
+              id={"user-field-" + EUserKey.address}
+              type="text"
+              minLength={5}
+              maxLength={60}
+              defaultValue={user.address}
+              {...register(`${EUserKey.address}`, {
+                required: true,
+              })}
+            />
+            {errors.address?.type === "required" && <FieldError />}
+          </div>
+          <StyledButton type="submit">
+            <i className="fas fa-check"></i>Save changes
+          </StyledButton>
+        </form>
       </>
     </StyledUserFields>
   );
@@ -76,16 +117,24 @@ export default UserFields;
 
 const StyledUserFields = styled.div`
   margin-top: 30px;
-  @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  button {
-    margin-top: 16px;
-    transition: all 0.3s;
-    &.saved {
-      background-color: ${(props) => props.theme.colors.green};
+  form {
+    @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      div {
+        flex-basis: 49%;
+      }
+    }
+    input {
+      margin-bottom: 20px;
+    }
+    button {
+      margin-top: 16px;
+      transition: all 0.3s;
+      &.saved {
+        background-color: ${(props) => props.theme.colors.green};
+      }
     }
   }
 `;

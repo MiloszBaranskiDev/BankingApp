@@ -6,34 +6,28 @@ import { RootState } from "redux/store";
 import { editUser } from "redux/slices/UserSlice";
 import React from "react";
 
-import { IUserField } from "interfaces/IUserField";
-
 import StyledButton from "components/styled/StyledButton";
+
+import { IUser } from "interfaces/IUser";
+import { EUserKey } from "enums/EUserKey";
 
 const ImageButtons: React.FC = () => {
   const dispatch: Dispatch = useDispatch();
-  const userData: IUserField[] = useSelector((state: RootState) => state.user);
+
+  const user: IUser = useSelector((state: RootState) => state.user);
+
   const uploadInput =
     React.useRef() as React.MutableRefObject<HTMLInputElement>;
-
-  const updateUserData = (path: string): IUserField[] => {
-    const updatedArr = userData.map((field, i) => {
-      if (i === userData.findIndex((field) => field.label === "image")) {
-        return { ...field, value: path };
-      }
-      return field;
-    });
-    return updatedArr;
-  };
 
   const handleUpload = (): void => {
     uploadInput.current?.click();
     uploadInput.current?.addEventListener("change", (e: Event) => {
       const target = e.target as HTMLInputElement;
       const file: File = (target.files as FileList)[0];
+
       dispatch(
         editUser({
-          updatedArr: updateUserData(URL.createObjectURL(file)),
+          updatedUser: { ...user, [EUserKey.image]: URL.createObjectURL(file) },
         })
       );
     });
@@ -41,18 +35,21 @@ const ImageButtons: React.FC = () => {
 
   const handleRemove = (): void => {
     dispatch(
-      editUser({ updatedArr: updateUserData("/user_image_default.png") })
+      editUser({
+        updatedUser: { ...user, [EUserKey.image]: "/user_image_default.png" },
+      })
     );
+
     uploadInput.current!.value = "";
   };
 
   return (
     <StyledImageButtons>
       <input ref={uploadInput} type="file" accept="image/*" hidden />
-      <StyledButton onClick={handleUpload} as="button">
+      <StyledButton onClick={handleUpload}>
         <i className="fas fa-upload"></i>Upload new photo
       </StyledButton>
-      <StyledButton onClick={handleRemove} as="button">
+      <StyledButton onClick={handleRemove}>
         <i className="fas fa-trash"></i>Remove
       </StyledButton>
     </StyledImageButtons>
@@ -62,6 +59,7 @@ const ImageButtons: React.FC = () => {
 export default ImageButtons;
 
 const StyledImageButtons = styled.div`
+  flex-basis: calc(100% - 112px);
   display: flex;
   flex-direction: column;
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
