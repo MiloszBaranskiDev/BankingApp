@@ -64,13 +64,15 @@ const UserFields: React.FC = () => {
               {...register(`${EUserKey.email}`, {
                 required: true,
                 pattern: {
-                  value: /\S+@\S+\.\S+/,
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                   message: "Entered value does not match email format",
                 },
               })}
             />
             {errors.email?.type === "required" && <FieldError />}
-            {errors.email && <FieldError text={errors.email.message} />}
+            {errors.email?.message && (
+              <FieldError text={errors.email?.message} />
+            )}
           </div>
           <div>
             <StyledLabel htmlFor={"user-field-" + EUserKey.phone}>
