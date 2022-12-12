@@ -1,7 +1,15 @@
 import styled from "styled-components";
 
-const FieldError: React.FC = (): JSX.Element => {
-  return <StyledFieldError>This field is required.</StyledFieldError>;
+interface IFieldError {
+  text?: string;
+}
+
+const FieldError: React.FC<IFieldError> = ({ text }): JSX.Element => {
+  return (
+    <StyledFieldError>
+      {text ? text : "This field is required."}
+    </StyledFieldError>
+  );
 };
 
 export default FieldError;
