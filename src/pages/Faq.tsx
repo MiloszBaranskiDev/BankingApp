@@ -52,7 +52,7 @@ const Faq: React.FC = () => {
 
   return (
     <>
-      <StyledPageTitle>Faq</StyledPageTitle>
+      <StyledPageTitle>FAQ</StyledPageTitle>
       <StyledInput
         onChange={(e) => setInputValue(e.target.value)}
         type="text"
