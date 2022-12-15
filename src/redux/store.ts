@@ -11,11 +11,16 @@ import UserSlice from "./slices/UserSlice";
 import WalletSlice from "./slices/WalletSlice";
 import NotificationsSlice from "./slices/NotificationsSlice";
 import SettingsSlice from "./slices/SettingsSlice";
+
 import { INotification } from "interfaces/INotification";
 import { ISettings } from "interfaces/ISettings";
 import { ITransaction } from "interfaces/ITransaction";
 import { IUser } from "interfaces/IUser";
 import { IWallet } from "interfaces/IWallet";
+
+enum ELocalstorageKey {
+  key = "reduxState",
+}
 
 const combinedReducer = combineReducers({
   user: UserSlice,
@@ -44,9 +49,31 @@ const rootReducer = (
   return combinedReducer(state, action);
 };
 
-export const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => [...getDefaultMiddleware()],
+const savedState = localStorage.getItem(ELocalstorageKey.key);
+
+const loadStore = () => {
+  let store;
+
+  if (savedState) {
+    store = configureStore({
+      reducer: rootReducer,
+      preloadedState: JSON.parse(savedState),
+      middleware: (getDefaultMiddleware) => [...getDefaultMiddleware()],
+    });
+  } else {
+    store = configureStore({
+      reducer: rootReducer,
+      middleware: (getDefaultMiddleware) => [...getDefaultMiddleware()],
+    });
+  }
+
+  return store;
+};
+
+export const store = loadStore();
+
+store.subscribe(() => {
+  localStorage.setItem(ELocalstorageKey.key, JSON.stringify(store.getState()));
 });
 
 export type RootState = ReturnType<typeof store.getState>;
