@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledButton = styled.a`
+const StyledButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,11 +13,14 @@ const StyledButton = styled.a`
   padding: 12px 18px;
   outline: none;
   border: none;
-  transition: border-radius 0.3s;
+  transition: all 0.3s;
   background-color: ${(props) => props.theme.colors.main};
   border-radius: ${(props) => props.theme.radius};
   font-size: ${(props) => props.theme.typography.size_small};
   font-weight: ${(props) => props.theme.typography.weight_bold};
+  &.success {
+    background-color: ${(props) => props.theme.colors.green};
+  }
   i {
     margin-right: 6px;
   }
