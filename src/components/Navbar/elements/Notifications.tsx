@@ -43,7 +43,7 @@ const Notifications: React.FC = () => {
       >
         <i className="fas fa-bell"></i>
       </StyledIcon>
-      {showNotifications ? (
+      {showNotifications && (
         <StyledNotifications>
           <div className="notifications">
             <div className="notifications__top">
@@ -106,7 +106,7 @@ const Notifications: React.FC = () => {
             )}
           </div>
         </StyledNotifications>
-      ) : null}
+      )}
     </StyledContainer>
   );
 };
