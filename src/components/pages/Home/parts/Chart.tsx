@@ -13,6 +13,7 @@ import { ESettingsKey } from "enums/ESettingsKey";
 import { ILineChartData } from "interfaces/ILineChartData";
 import { ISettings } from "interfaces/ISettings";
 
+import ApiError from "components/ApiError";
 import StyledTile from "components/styled/StyledTile";
 import StyledHeading from "components/styled/StyledHeading";
 import LoaderSmall from "components/LoaderSmall";
@@ -34,6 +35,7 @@ const Chart: React.FC = () => {
   const settings: ISettings = useSelector((state: RootState) => state.settings);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [showError, setShowError] = useState<boolean>(false);
   const [chartData, setChartData] = useState<ILineChartData>();
 
   const favouriteCurrency: ECurrencySymbol =
@@ -50,17 +52,22 @@ const Chart: React.FC = () => {
       end
     );
 
-    setChartData({
-      labels: loadedPrices!,
-      datasets: [
-        {
-          borderWidth: 1,
-          borderColor: theme.colors.main,
-          backgroundColor: theme.colors.main,
-          data: loadedPrices!,
-        },
-      ],
-    });
+    if (loadedPrices === undefined) {
+      setShowError(true);
+      setIsLoading(false);
+    } else {
+      setChartData({
+        labels: loadedPrices!,
+        datasets: [
+          {
+            borderWidth: 1,
+            borderColor: theme.colors.main,
+            backgroundColor: theme.colors.main,
+            data: loadedPrices!,
+          },
+        ],
+      });
+    }
   };
 
   useEffect(() => {
@@ -69,6 +76,7 @@ const Chart: React.FC = () => {
       GetStartDate(GetTodayDate(), 30),
       GetTodayDate()
     );
+    // eslint-disable-next-line
   }, [theme]);
 
   useEffect(() => {
@@ -80,11 +88,9 @@ const Chart: React.FC = () => {
   return (
     <StyledTile as={StyledChart}>
       <StyledHeading>{favouriteCurrency} last 30 days</StyledHeading>
-      {!isLoading && chartData !== undefined && chartData !== null ? (
-        <LineChart chartData={chartData} />
-      ) : (
-        <LoaderSmall />
-      )}
+      {isLoading && <LoaderSmall />}
+      {!isLoading && showError ? <ApiError /> : null}
+      {!isLoading && !showError ? <LineChart chartData={chartData!} /> : null}
     </StyledTile>
   );
 };
