@@ -11,20 +11,28 @@ interface IProps {
 }
 
 const GoalItem: React.FC<IProps> = ({ goal }) => {
+  const collectedPercentage: number = GetCollectedPercentage(
+    goal.currentAmount,
+    goal.targetAmount
+  );
+
   return (
     <StyledGoalItem>
       <CircularBar
         text={
-          GetCollectedPercentage(goal.currentAmount, goal.targetAmount).toFixed(
-            2
-          ) + "%"
+          collectedPercentage < 100 ? collectedPercentage.toFixed(2) + "%" : "✓"
         }
-        value={GetCollectedPercentage(goal.currentAmount, goal.targetAmount)}
+        value={collectedPercentage}
+        completed={collectedPercentage >= 100}
       />
       <p>{goal.title}</p>
       <span className="horizontalDivider">|</span>
       <p>
-        {goal.currentAmount} / {goal.targetAmount} {goal.currencySymbol}
+        <span style={{ wordBreak: "break-all" }}>
+          {goal.currentAmount} / {goal.targetAmount}
+        </span>
+        &nbsp;
+        {goal.currencySymbol}
       </p>
     </StyledGoalItem>
   );
