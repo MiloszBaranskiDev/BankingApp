@@ -11,12 +11,11 @@ interface IProps {
 const AccordionContent: React.FC<IProps> = ({ transaction }) => {
   return (
     <StyledAccordionContent>
-      {transaction.details.map((detail) => (
-        <li key={Object.values(detail)[0]}>
+      {Object.entries(transaction.details).map(([key, value]) => (
+        <li key={key}>
           <p>
-            {Object.entries(detail).map(([key, value]) => (
-              <span key={key}>{value}</span>
-            ))}
+            <span>{key.split("_")[0]}</span>
+            <span>{value}</span>
           </p>
         </li>
       ))}
@@ -42,6 +41,7 @@ const StyledAccordionContent = styled.ul`
   li {
     line-height: 26px;
     span:first-child {
+      text-transform: capitalize;
       margin-right: 12px;
       position: relative;
       font-weight: ${(props) => props.theme.typography.weight_bold};
