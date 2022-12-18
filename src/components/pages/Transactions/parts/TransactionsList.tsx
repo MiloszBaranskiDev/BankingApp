@@ -9,7 +9,7 @@ interface IProps {
 const TransactionsList: React.FC<IProps> = ({ transactions }) => {
   return (
     <>
-      {transactions.length > 0 && (
+      {transactions.length > 0 ? (
         <ul>
           {transactions
             .slice(0)
@@ -21,6 +21,8 @@ const TransactionsList: React.FC<IProps> = ({ transactions }) => {
               />
             ))}
         </ul>
+      ) : (
+        <p>You don't have any transactions yet.</p>
       )}
     </>
   );
