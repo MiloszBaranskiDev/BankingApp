@@ -35,7 +35,7 @@ const User: React.FC = () => {
           backgroundImage: `url(${user[EUserKey.image]})`,
         }}
       />
-      {showUserMenu ? (
+      {showUserMenu && (
         <StyledUserMenu>
           <div className="top">
             <h3>{user[EUserKey.name]}</h3>
@@ -62,7 +62,7 @@ const User: React.FC = () => {
             </li>
           </ul>
         </StyledUserMenu>
-      ) : null}
+      )}
     </StyledContainer>
   );
 };
@@ -102,6 +102,7 @@ const StyledUserMenu = styled.div`
   box-shadow: ${(props) => props.theme.shadow};
   .top {
     padding: 14px;
+    word-wrap: break-word;
     border-bottom: 2px solid ${(props) => props.theme.colors.bgc_dark};
     p {
       font-size: ${(props) => props.theme.typography.size_small};
