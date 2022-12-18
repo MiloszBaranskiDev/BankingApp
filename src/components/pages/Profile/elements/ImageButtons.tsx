@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 import { editUser } from "redux/slices/UserSlice";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import StyledButton from "components/styled/StyledButton";
 
@@ -13,8 +13,9 @@ import { EUserKey } from "enums/EUserKey";
 
 const ImageButtons: React.FC = () => {
   const dispatch: Dispatch = useDispatch();
-
   const user: IUser = useSelector((state: RootState) => state.user);
+
+  const [image, setImage] = useState<string | ArrayBuffer | null>();
 
   const uploadInput =
     React.useRef() as React.MutableRefObject<HTMLInputElement>;
@@ -24,12 +25,12 @@ const ImageButtons: React.FC = () => {
     uploadInput.current?.addEventListener("change", (e: Event) => {
       const target = e.target as HTMLInputElement;
       const file: File = (target.files as FileList)[0];
+      const reader: FileReader = new FileReader();
 
-      dispatch(
-        editUser({
-          updatedUser: { ...user, [EUserKey.image]: URL.createObjectURL(file) },
-        })
-      );
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
     });
   };
 
@@ -39,9 +40,18 @@ const ImageButtons: React.FC = () => {
         updatedUser: { ...user, [EUserKey.image]: "/user_image_default.png" },
       })
     );
-
     uploadInput.current!.value = "";
   };
+
+  useEffect(() => {
+    if (image) {
+      dispatch(
+        editUser({
+          updatedUser: { ...user, [EUserKey.image]: String(image) },
+        })
+      );
+    }
+  }, [image]);
 
   return (
     <StyledImageButtons>
