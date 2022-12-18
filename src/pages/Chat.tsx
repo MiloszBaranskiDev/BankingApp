@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import { loremIpsum } from "react-lorem-ipsum";
 
+import GetRandomId from "utils/GeRandomId";
 import GetCurrentHour from "utils/GetCurrentHour";
-import GetRandomMessage from "utils/GetRandomMessage";
 
 import { IMessage } from "interfaces/IMessage";
 
@@ -9,6 +10,23 @@ import StyledTile from "components/styled/StyledTile";
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import Messages from "components/pages/Chat/parts/Messages";
 import Controls from "components/pages/Chat/parts/Controls";
+
+const getRandomMessage = (): IMessage => {
+  const randomMessage: IMessage = {
+    text: String(
+      loremIpsum({
+        p: 1,
+        avgSentencesPerParagraph: 1,
+        avgWordsPerSentence: Math.floor(Math.random() * (30 - 3 + 1) + 3),
+      })
+    ),
+    hour: GetCurrentHour(),
+    user: false,
+    id: GetRandomId(),
+  };
+
+  return randomMessage;
+};
 
 const Chat: React.FC = () => {
   const [messages, setMessages] = useState<IMessage[]>([
@@ -21,9 +39,9 @@ const Chat: React.FC = () => {
   ]);
 
   useEffect(() => {
-    if (messages.length > 1 && messages[messages.length - 1].user === true) {
+    if (messages.length > 1 && messages[messages.length - 1].user) {
       const timer = setTimeout(() => {
-        setMessages([...messages, GetRandomMessage()]);
+        setMessages([...messages, getRandomMessage()]);
       }, 850);
       return () => clearTimeout(timer);
     }
