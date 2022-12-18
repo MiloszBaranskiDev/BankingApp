@@ -22,7 +22,7 @@ const Restore: React.FC = () => {
   return (
     <StyledRestore>
       <p>Restore app to default data and settings</p>
-      <StyledButton as="button" ref={restoreBtn} onClick={handleRestore}>
+      <StyledButton ref={restoreBtn} onClick={handleRestore}>
         <i className="fas fa-redo-alt"></i>Restore
       </StyledButton>
     </StyledRestore>
