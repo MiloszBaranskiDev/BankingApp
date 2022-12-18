@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import { IWallet } from "interfaces/IWallet";
 import { ITransaction } from "interfaces/ITransaction";
+import { ICurrencyRate } from "interfaces/ICurrencyRate";
 
 import StyledPageTitle from "components/styled/StyledPageTitle";
 import Chart from "components/pages/Home/parts/Chart";
@@ -12,7 +13,11 @@ import LastTransactions from "components/pages/Home/parts/LastTransactions";
 import AdditionalNav from "components/pages/Home/parts/AdditionalNav";
 import Goals from "components/pages/Home/parts/Goals";
 
-const Home: React.FC = () => {
+interface IProps {
+  currenciesRates: ICurrencyRate[];
+}
+
+const Home: React.FC<IProps> = ({ currenciesRates }) => {
   const wallet: IWallet = useSelector((state: RootState) => state.wallet);
 
   const transactions: ITransaction[] = useSelector(
@@ -23,7 +28,8 @@ const Home: React.FC = () => {
     <>
       <StyledPageTitle>Home</StyledPageTitle>
       <WalletTiles
-        currenciesSymbols={wallet.currencies.map((currency) => currency.symbol)}
+        currencies={wallet.currencies}
+        currenciesRates={currenciesRates}
         transactions={transactions}
       />
       <StyledRow>
@@ -31,7 +37,7 @@ const Home: React.FC = () => {
         <LastTransactions transactions={transactions} />
       </StyledRow>
       <StyledRow>
-        {wallet.goals.length > 0 && <Goals goals={wallet.goals} />}
+        <Goals goals={wallet.goals} />
         <AdditionalNav />
       </StyledRow>
     </>
