@@ -1,12 +1,18 @@
 import styled from "styled-components";
 
 interface IProps {
+  canBeReversed: boolean;
   reverseSwap: () => void;
 }
 
-const SwapArrows: React.FC<IProps> = ({ reverseSwap }) => {
+const SwapArrows: React.FC<IProps> = ({ canBeReversed, reverseSwap }) => {
   return (
-    <StyledSwapArrows type="button" onClick={reverseSwap}>
+    <StyledSwapArrows
+      type="button"
+      disabled={!canBeReversed}
+      style={{ cursor: !canBeReversed ? "not-allowed" : "pointer" }}
+      onClick={reverseSwap}
+    >
       <i className="fas fa-exchange-alt"></i>
     </StyledSwapArrows>
   );
