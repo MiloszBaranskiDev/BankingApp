@@ -10,6 +10,8 @@ import { Dispatch } from "@reduxjs/toolkit";
 import GetRandomId from "utils/GeRandomId";
 import GetTodayDate from "utils/GetTodayDate";
 
+import PreventDotInInput from "helpers/PreventDotInInput";
+
 import FieldError from "components/FieldError";
 import StyledTile from "components/styled/StyledTile";
 import StyledHeading from "components/styled/StyledHeading";
@@ -18,9 +20,10 @@ import StyledInput from "components/styled/StyledInput";
 import StyledSelect from "components/styled/StyledSelect";
 import StyledButton from "components/styled/StyledButton";
 
+import { ETransationType } from "enums/ETransactionType";
 import { ICurrency } from "interfaces/ICurrency";
 import { IWallet } from "interfaces/IWallet";
-import { ETransferField } from "enums/ETransferField";
+import { ETransferKey } from "enums/ETransferKey";
 import { ECurrencySymbol } from "enums/ECurrencySymbol";
 import { ETransactionCategory } from "enums/ETransactionCategory";
 
@@ -69,13 +72,16 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
     dispatch(
       updateWalletCurrencies({
         symbol: transferData.currency_symbol,
-        balance: currentCurrency.balance! - Number(transferData.amount),
+        balance: currentCurrency.balance! - transferData.amount,
       })
     );
 
     dispatch(
       addTransaction({
-        category: ETransactionCategory.outgoing,
+        type: ETransationType.outcome,
+        category: ETransactionCategory.outgoingTransfer,
+        currencySymbol: transferData.currency_symbol,
+        amount: transferData.amount,
         id: GetRandomId(),
         date: GetTodayDate(),
         details: transferData,
@@ -94,57 +100,58 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
         >
           <StyledFields>
             <StyledField>
-              <StyledLabel htmlFor={transferString + ETransferField.title}>
+              <StyledLabel htmlFor={transferString + ETransferKey.title}>
                 Title
               </StyledLabel>
               <StyledInput
-                id={transferString + ETransferField.title}
+                id={transferString + ETransferKey.title}
                 minLength={5}
                 maxLength={50}
-                {...register("title", {
+                {...register(`${ETransferKey.title}`, {
                   required: true,
                 })}
               />
               {errors.title?.type === "required" && <FieldError />}
             </StyledField>
             <StyledField>
-              <StyledLabel htmlFor={transferString + ETransferField.recipient}>
+              <StyledLabel htmlFor={transferString + ETransferKey.recipient}>
                 Recipient
               </StyledLabel>
               <StyledInput
-                id={transferString + ETransferField.recipient}
+                id={transferString + ETransferKey.recipient}
                 minLength={2}
                 maxLength={80}
-                {...register("recipient", {
+                {...register(`${ETransferKey.recipient}`, {
                   required: true,
                 })}
               />
               {errors.recipient?.type === "required" && <FieldError />}
             </StyledField>
             <StyledField>
-              <StyledLabel htmlFor={transferString + ETransferField.account}>
+              <StyledLabel htmlFor={transferString + ETransferKey.account}>
                 Account No.
               </StyledLabel>
               <StyledInput
-                id={transferString + ETransferField.account}
+                id={transferString + ETransferKey.account}
                 type="number"
                 minLength={10}
                 maxLength={28}
-                {...register("account", {
+                {...register(`${ETransferKey.account}`, {
                   required: true,
                 })}
+                onKeyDown={(e) => PreventDotInInput(e)}
               />
               {errors.account?.type === "required" && <FieldError />}
             </StyledField>
             <StyledField>
-              <StyledLabel htmlFor={transferString + ETransferField.address}>
+              <StyledLabel htmlFor={transferString + ETransferKey.address}>
                 Address
               </StyledLabel>
               <StyledInput
-                id={transferString + ETransferField.address}
+                id={transferString + ETransferKey.address}
                 minLength={6}
                 maxLength={80}
-                {...register("address", {
+                {...register(`${ETransferKey.address}`, {
                   required: true,
                 })}
               />
@@ -152,14 +159,14 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
             </StyledField>
             <StyledField>
               <StyledLabel
-                htmlFor={transferString + ETransferField.currencySymbol}
+                htmlFor={transferString + ETransferKey.currencySymbol}
               >
                 Currency
               </StyledLabel>
               <StyledSelect
-                id={transferString + ETransferField.currencySymbol}
+                id={transferString + ETransferKey.currencySymbol}
                 defaultValue={getDefaultCurrency()?.symbol}
-                {...register("currency_symbol", {
+                {...register(`${ETransferKey.currencySymbol}`, {
                   required: true,
                 })}
                 onChange={(e) => handleCurrencyChange(e.target.value)}
@@ -177,22 +184,25 @@ const Form: React.FC<IProps> = ({ setShowSummary }) => {
               {errors.currency_symbol?.type === "required" && <FieldError />}
             </StyledField>
             <StyledField>
-              <StyledLabel htmlFor={transferString + ETransferField.amount}>
+              <StyledLabel htmlFor={transferString + ETransferKey.amount}>
                 Amount
               </StyledLabel>
               <StyledInput
-                id={transferString + ETransferField.amount}
+                id={transferString + ETransferKey.amount}
                 type="number"
+                step="0.01"
                 min={1}
                 max={currentCurrency.balance}
-                {...register("amount", {
+                {...register(`${ETransferKey.amount}`, {
+                  valueAsNumber: true,
                   required: true,
                 })}
+                onKeyDown={(e) => PreventDotInInput(e)}
               />
               {errors.amount?.type === "required" && <FieldError />}
             </StyledField>
           </StyledFields>
-          <StyledButton as="button" type="submit">
+          <StyledButton type="submit">
             <i className="fas fa-paper-plane"></i>Send transfer
           </StyledButton>
         </StyledTile>
