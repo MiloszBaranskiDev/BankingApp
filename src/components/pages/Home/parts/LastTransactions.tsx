@@ -15,26 +15,30 @@ interface IProps {
 const LastTransactions: React.FC<IProps> = ({ transactions }) => {
   return (
     <>
-      {transactions.length > 0 && (
-        <StyledTile as={StyledLastTransactions}>
-          <StyledHeading>Last transactions</StyledHeading>
-          <ul>
-            {transactions
-              .slice(-5)
-              .reverse()
-              .map((transaction) => (
-                <li key={transaction.id}>
-                  - {transaction.category + " / " + transaction.date}
-                </li>
-              ))}
-          </ul>
-          <StyledButtonContainer>
-            <StyledButton as={NavLink} to={ERoute.transactions}>
-              <i className="fas fa-search"></i>See more
-            </StyledButton>
-          </StyledButtonContainer>
-        </StyledTile>
-      )}
+      <StyledTile as={StyledLastTransactions}>
+        {transactions.length > 0 ? (
+          <>
+            <StyledHeading>Last transactions</StyledHeading>
+            <ul>
+              {transactions
+                .slice(-5)
+                .reverse()
+                .map((transaction) => (
+                  <li key={transaction.id}>
+                    - {transaction.category + " / " + transaction.date}
+                  </li>
+                ))}
+            </ul>
+            <StyledButtonContainer>
+              <StyledButton as={NavLink} to={ERoute.transactions}>
+                <i className="fas fa-search"></i>See more
+              </StyledButton>
+            </StyledButtonContainer>
+          </>
+        ) : (
+          <p>You don't have any transactions yet.</p>
+        )}
+      </StyledTile>
     </>
   );
 };
