@@ -1,33 +1,29 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
+import { ETransationType } from "enums/ETransactionType";
+
+import StyledTotalAmount from "components/styled/StyledTotalAmount";
 import StyledTile from "components/styled/StyledTile";
 import StyledHeading from "components/styled/StyledHeading";
 
 interface IProps {
   heading: string;
-  number: number;
+  transactionType: ETransationType;
+  amount: number;
 }
 
-interface IBtnProps {
-  number: number;
-  defaultStyle: boolean;
-}
-
-enum EHeading {
-  balance = "balance",
-  incomes = "incomes",
-}
-
-const WalletTile: React.FC<IProps> = ({ heading, number }) => {
+const WalletTile: React.FC<IProps> = ({ heading, transactionType, amount }) => {
   return (
     <StyledTile as={StyledWalletTile}>
       <StyledHeading>{heading}</StyledHeading>
-      <StyledNumber
-        number={number}
-        defaultStyle={heading.toLowerCase() === EHeading.balance}
+      <StyledTotalAmount
+        amount={amount}
+        defaultStyle={transactionType === null ? true : false}
       >
-        {heading.toLowerCase() !== EHeading.incomes ? number : "+" + number} PLN
-      </StyledNumber>
+        <span>~{amount}</span>
+        PLN
+      </StyledTotalAmount>
+      <p>* Converted into PLN</p>
     </StyledTile>
   );
 };
@@ -40,31 +36,14 @@ const StyledWalletTile = styled.div`
   &:last-child {
     margin-bottom: 0;
   }
+  p:last-child {
+    font-size: ${(props) => props.theme.typography.size_small};
+  }
   @media (min-width: ${(props) => props.theme.breakpoints.tablet}) {
     flex-basis: calc(50% - 8px);
   }
   @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
     flex-basis: calc(33.33% - 8px);
     margin-bottom: 0;
-  }
-`;
-
-const StyledNumber = styled.p<IBtnProps>`
-  word-break: break-all;
-  font-size: ${(props) => props.theme.typography.size_extra_big};
-  font-weight: ${(props) => props.theme.typography.weight_bold};
-  ${({ number, defaultStyle }) =>
-    !defaultStyle
-      ? number > 0
-        ? css`
-            color: ${(props) => props.theme.colors.green};
-          `
-        : css`
-            color: ${(props) => props.theme.colors.red};
-          `
-      : null}
-
-  @media (min-width: ${(props) => props.theme.breakpoints.mobile_big}) {
-    font-size: ${(props) => props.theme.typography.size_title};
   }
 `;
