@@ -20,6 +20,7 @@ export default CurrencyBalance;
 
 const StyledCurrencyBalance = styled.div`
   flex-basis: 48.5%;
+  width: 48.5%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,6 +38,7 @@ const StyledCurrencyBalance = styled.div`
     font-weight: ${(props) => props.theme.typography.weight_bold};
     span {
       &:first-child {
+        word-break: break-all;
         margin-right: 4px;
       }
     }
@@ -56,7 +58,8 @@ const StyledCurrencyBalance = styled.div`
   }
   @media (min-width: ${(props) => props.theme.breakpoints.desktop}) {
     flex-basis: 18.5%;
-    padding: 0;
+    width: 18.5%;
+    padding: 4px;
     margin-bottom: 0;
     &:last-child {
       flex-grow: unset;
