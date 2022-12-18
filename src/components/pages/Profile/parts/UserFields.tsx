@@ -15,12 +15,16 @@ import StyledLabel from "components/styled/StyledLabel";
 import StyledInput from "components/styled/StyledInput";
 import FieldError from "components/FieldError";
 
+import AnimateButton from "helpers/AnimateButton";
+
 const UserFields: React.FC = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<IUser>();
+
+  const saveBtn = React.useRef() as React.MutableRefObject<HTMLButtonElement>;
 
   const dispatch: Dispatch = useDispatch();
 
@@ -30,6 +34,7 @@ const UserFields: React.FC = () => {
     const updatedUser: IUser = { ...formData, [EUserKey.image]: user.image };
     if (JSON.stringify(user) !== JSON.stringify(updatedUser)) {
       dispatch(editUser({ updatedUser: updatedUser }));
+      AnimateButton(saveBtn);
     }
   };
 
@@ -106,7 +111,7 @@ const UserFields: React.FC = () => {
             />
             {errors.address?.type === "required" && <FieldError />}
           </div>
-          <StyledButton type="submit">
+          <StyledButton ref={saveBtn} type="submit">
             <i className="fas fa-check"></i>Save changes
           </StyledButton>
         </form>
@@ -133,10 +138,6 @@ const StyledUserFields = styled.div`
     }
     button {
       margin-top: 16px;
-      transition: all 0.3s;
-      &.saved {
-        background-color: ${(props) => props.theme.colors.green};
-      }
     }
   }
 `;
