@@ -15,7 +15,10 @@ const Settings: React.FC = () => {
   const dispatch: Dispatch = useDispatch();
   const settings: ISettings = useSelector((state: RootState) => state.settings);
 
-  const handleSettingsChange = (key: ESettingsKey, value: string | boolean) => {
+  const handleSettingsChange = (
+    key: ESettingsKey,
+    value: string | boolean
+  ): void => {
     dispatch(updateSettings({ key: key, value: value }));
   };
 
