@@ -6,9 +6,12 @@ interface IAmountProps {
 }
 
 const StyledTotalAmount = styled.p<IAmountProps>`
-  word-break: break-all;
-  font-size: ${(props) => props.theme.typography.size_extra_big};
+  font-size: ${(props) => props.theme.typography.size_title};
   font-weight: ${(props) => props.theme.typography.weight_bold};
+  span {
+    word-break: break-all;
+    margin-right: 6px;
+  }
   ${({ amount, defaultStyle }) =>
     !defaultStyle
       ? amount > 0
@@ -19,10 +22,6 @@ const StyledTotalAmount = styled.p<IAmountProps>`
             color: ${(props) => props.theme.colors.red};
           `
       : null}
-
-  @media (min-width: ${(props) => props.theme.breakpoints.mobile_big}) {
-    font-size: ${(props) => props.theme.typography.size_title};
-  }
 `;
 
 export default StyledTotalAmount;
