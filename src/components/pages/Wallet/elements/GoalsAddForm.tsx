@@ -6,9 +6,12 @@ import { Dispatch } from "@reduxjs/toolkit";
 
 import GetRandomId from "utils/GeRandomId";
 
+import { EGoalKey } from "enums/EGoalKey";
 import { EGoalField } from "enums/EGoalField";
 import { IGoal } from "interfaces/IGoal";
 import { ECurrencySymbol } from "enums/ECurrencySymbol";
+
+import PreventDotInInput from "helpers/PreventDotInInput";
 
 import FieldError from "components/FieldError";
 import StyledLabel from "components/styled/StyledLabel";
@@ -45,7 +48,7 @@ const GoalsAddForm: React.FC<IProps> = ({ currenciesSymbols }) => {
           id={EGoalField.title + "-add"}
           minLength={2}
           maxLength={60}
-          {...register("title", {
+          {...register(`${EGoalKey.title}`, {
             required: true,
           })}
         />
@@ -58,7 +61,7 @@ const GoalsAddForm: React.FC<IProps> = ({ currenciesSymbols }) => {
         <StyledSelect
           id={EGoalField.currencySymbol + "-add"}
           defaultValue={currenciesSymbols[0]}
-          {...register("currencySymbol", {
+          {...register(`${EGoalKey.currencySymbol}`, {
             required: true,
           })}
         >
@@ -77,20 +80,20 @@ const GoalsAddForm: React.FC<IProps> = ({ currenciesSymbols }) => {
         <StyledInput
           id={EGoalField.targetAmount + "-add"}
           type="number"
+          step="0.01"
           min={50}
           max={10000000}
-          {...register("targetAmount", {
+          {...register(`${EGoalKey.targetAmount}`, {
             valueAsNumber: true,
             required: true,
           })}
+          onKeyDown={(e) => PreventDotInInput(e)}
         />
         {errors.targetAmount?.type === "required" && <FieldError />}
       </>
-      <StyledButtons>
-        <StyledButton as="button" type="submit">
-          <i className="fas fa-check"></i>Save
-        </StyledButton>
-      </StyledButtons>
+      <StyledButton type="submit">
+        <i className="fas fa-check"></i>Save
+      </StyledButton>
     </StyledGoalsForm>
   );
 };
@@ -103,15 +106,7 @@ const StyledGoalsForm = styled.form`
   select {
     margin-bottom: 12px;
   }
-`;
-
-const StyledButtons = styled.div`
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
   button {
-    &:first-child {
-      margin-right: 10px;
-    }
+    margin: 20px 0;
   }
 `;
