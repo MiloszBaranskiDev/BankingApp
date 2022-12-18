@@ -16,22 +16,28 @@ interface IProps {
 const Goals: React.FC<IProps> = ({ goals }) => {
   return (
     <StyledTile as={StyledGoals}>
-      <StyledHeading>Last goals</StyledHeading>
-      <ul>
-        {goals
-          .slice(-2)
-          .reverse()
-          .map((goal) => (
-            <li key={goal.id}>
-              <GoalItem key={goal.id} goal={goal} />
-            </li>
-          ))}
-      </ul>
-      <StyledButtonContainer>
-        <StyledButton as={Link} to={ERoute.wallet}>
-          <i className="fas fa-search"></i>See more
-        </StyledButton>
-      </StyledButtonContainer>
+      {goals.length > 0 ? (
+        <>
+          <StyledHeading>Last goals</StyledHeading>
+          <ul>
+            {goals
+              .slice(-2)
+              .reverse()
+              .map((goal) => (
+                <li key={goal.id}>
+                  <GoalItem key={goal.id} goal={goal} />
+                </li>
+              ))}
+          </ul>
+          <StyledButtonContainer>
+            <StyledButton as={Link} to={ERoute.wallet}>
+              <i className="fas fa-search"></i>See more
+            </StyledButton>
+          </StyledButtonContainer>
+        </>
+      ) : (
+        <p>You don't have any goals yet.</p>
+      )}
     </StyledTile>
   );
 };
