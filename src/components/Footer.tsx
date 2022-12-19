@@ -12,6 +12,7 @@ const Footer: React.FC = () => {
               <a
                 href="https://github.com/MiloszBaranskiDev/BankingApp"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Repository
               </a>
@@ -20,6 +21,7 @@ const Footer: React.FC = () => {
               <a
                 href="https://miloszbaranskidev.github.io/my-website/"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Contact
               </a>
