@@ -2,6 +2,8 @@
 
 Demo of a banking application whose parts are fully connected to each other. The application uses exchange rates from the API.
 
+[Live demo](https://react-banking-app.netlify.app)
+
 ## Stack
 
 - React with TypeScript
